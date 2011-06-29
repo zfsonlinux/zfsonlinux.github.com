@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Building ZFS RPM Packages." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+	<tr>
+		<td>
+<p>Once the <a href="spl-building-rpm.html">spl packages are built
+and installed</a> you can build the zfs packages using the standard
+autoconf style build system.  The zfs build system is designed to detect
+and build against your kernel and the spl module.  Simply build it as
+you would any other autoconf style project.  The build system will make an
+educated guess as to which kernel and version of the spl you wish to build
+against.  If it guesses wrong simply specify your kernel devel headers using
+the <em>--with-linux</em> configure option.  You may also need the
+<em>--with-linux-obj</em> configure option if the kernel build objects
+are installed in a different directory.  You can also specify an alternate
+version of the spl using the <em>--with-spl</em> and <em>--with-spl-obj</em>
+
+<pre>
+$ sudo yum install zlib-devel libuuid-devel libblkid-devel libselinux-devel parted lsscsi 
+$ ./configure
+$ make rpm
+</pre>
+
+<p>The result of this will be two source rpm packages.</p>
+
+<ul>
+	<li><em>zfs-w.x.y-z.src.rpm</em>: Source for the zfs utilities,
+	libraries, and test infrastructure.</li>
+	<li><em>zfs-modules-w.x.y-z.src.rpm</em>: Source for the zfs
+	kernel module stack.
+	</li>
+</ul>
+
+<p>And five binary rpm packages for your platform.</p>
+
+<ul>
+	<li><em>zfs-w.x.y-z.arch.rpm</em>: The zfs utilities
+	and libraries.</li>
+	<li><em>zfs-devel-w.x.y-z.arch.rpm</em>: The zfs
+	development headers.</li>
+	<li><em>zfs-test-w.x.y-z.arch.rpm</em>: The zfs
+	regression test scripts and infrastructure.</li>
+	<li><em>zfs-modules-w.x.y-z_kernel.arch.rpm</em>: The
+	zfs kernel module stack for your kernel version.</li>
+	<li><em>zfs-modules-devel-w.x.y-z_kernel.arch.rpm</em>:
+	The zfs development headers and symbols for building dependent
+	kernel modules.</li>
+</ul>
+
+<p>Next go ahead and install the packages.</p>
+
+<pre>
+$ sudo rpm -Uvh *.x86_64.rpm  
+
+Preparing...                ########################################### [100%]
+   1:zfs                    ########################################### [ 20%]
+   2:zfs-test               ########################################### [ 40%]
+   3:zfs-modules-devel      ########################################### [ 60%]
+   4:zfs-modules            ########################################### [ 80%]
+   5:zfs-devel              ########################################### [100%]
+</pre>    
+
+<p>That&#8217;s it!  You should be able to use the zfs tools just like you
+would under Solaris.  If your unfamiliar with zfs I would suggest looking over
+the <a href="http://hub.opensolaris.org/bin/view/Community+Group+zfs/docs">
+official documentation</a> or going through one the many tutorials
+available online .  There are also several examples available
+<a href="index.html">here</a>.</p>
+
+<p>If you are building zfs to be used as a backend filesystem for Lustre,
+your next step is to <a href="lustre-building-rpm.html">build the Lustre
+packages</a>.</p>
+
+<p>You can also verify the zfs packages you just built by running the
+included <a href="zfs-regression-suite.html">regression test suites</a>.</p>
+		</td>
+	</tr>
+</table>
+
+</center>
+</body>
+</html>

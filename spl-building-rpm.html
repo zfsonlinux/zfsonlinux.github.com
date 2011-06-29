@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Building SPL RPM Packages." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+	<tr>
+		<td>
+<p>The spl uses an autoconf style build system which is designed to
+allow it to build against multiple versions of the Linux kernel.  Simply build
+it as you would any other autoconf style project.  The build system will make
+an educated guess as to which kernel you wish to build against.  If it guesses
+wrong simply specify your kernel devel headers using the <em>--with-linux</em>
+configure option.  You may also need the <em>--with-linux-obj</em>
+configure option if the kernel build objects are installed in a different
+directory.
+
+<pre>
+$ sudo yum groupinstall "Development Tools" 
+$ ./configure
+$ make rpm
+</pre>
+
+<p>The result of this will be two source rpm packages.</p>
+<ul>
+	<li><em>spl-w.x.y-z.src.rpm</em>: Source for the spl utilities.</li>
+	<li><em>spl-modules-w.x.y-z.src.rpm</em>: Source for the kernel
+	modules.</li>
+</ul>
+
+<p>And three binary rpm packages for your platform.</p>
+
+<ul>
+	<li><em>spl-w.x.y-z.arch.rpm</em>: The spl utilities.</li>
+	<li><em>spl-modules-w.x.y-z_kernel.arch.rpm</em>:
+	The spl module for your kernel version.</li>
+	<li><em>spl-modules-devel-w.x.y-z_kernel.arch.rpm</em>:
+	The spl development headers and symbols for building dependent
+	kernel modules.</li>
+</ul>
+
+<p>Next go ahead and install the packages.</p>
+
+<pre>
+$ sudo rpm -Uvh *.x86_64.rpm
+
+Preparing...                ########################################### [100%]
+   1:spl                    ########################################### [ 33%]
+   2:spl-modules-devel      ########################################### [ 67%]
+   3:spl-modules            ########################################### [100%]
+</pre>
+
+<p>At this point you&#8217;re all set.  You can now move on to the next step
+and <a href="zfs-building-rpm.html">build the zfs packages</a>.  If you would
+like to verify the packages you just built you can run the included
+<a href="spl-regression-suite.html">regression test suite</a>.
+		</td>
+	</td>
+</table>
+
+</center>
+</body>
+</html>

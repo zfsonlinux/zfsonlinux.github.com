@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>ZPL Example</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="ZFS Posix Layer (ZPL) Example." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width="80%">
+	<tr>
+		<td>
+<p><b>A development version of the ZFS Posix Layer (ZPL) is
+now available!</b></p>
+
+<p>This is the functionality you need to be able to mount ZFS
+like a normal Linux filesystem.  All the core functionality is
+in place but several of the advanced features still need to be
+implemented.  My hope is that by making this code available before
+it is 100% feature complete the Linux ZFS community can contribute
+to finishing the missing features.  You can download the latest
+release candidate here:</p>
+
+<ul>
+  <li><a href="http://github.com/downloads/behlendorf/spl/spl-0.6.0-rc4.tar.gz">spl-0.6.0-rc4</a></li>
+  <li><a href="http://github.com/downloads/behlendorf/zfs/zfs-0.6.0-rc4.tar.gz">zfs-0.6.0-rc4</a></li>
+</ul>
+
+<p>Before downloading the source you should be aware of two things.</p>
+<ol>
+  <li> The latest release candidate <i>only</i> supports 2.6.26-2.6.38
+based Linux kernels.  This currently covers most of the default kernels
+used by the major distributions.</li>
+  <li> This is a release candidate and not production release.  That
+means that while the code is functional and stable, there are still
+rough edges.  I have intentionally released this code as soon as it
+was reasonable to do so.  My hope is that it will help foster more
+community involvement.</li>
+</ol>
+
+<p>There is a lot of very good ZFS documentation already out there.
+Almost all of it should be applicable to this implementation because
+we have tried to conform to the Solaris behavior as much as possible.
+Here's a simple example to get you started.</p>
+
+<p>Create the <em>tank</em> zpool containing a raidz vdev spread
+over 3 devices.  It is recommended that you use the persistent
+/dev/disk/by-id/* device names when creating your pool to avoid
+any device reordering issues latter.  Your device names will of
+course be different.</p>
+
+<pre>
+$ sudo zpool create tank raidz scsi-SATA_Maxtor_7Y250M0_Y638RXME
+  scsi-SATA_Maxtor_7Y250M0_Y638S56E scsi-SATA_Maxtor_7Y250M0_Y638TJFE
+$ sudo zpool status tank
+  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                                   STATE     READ WRITE CKSUM
+	tank                                   ONLINE       0     0     0
+	  raidz1-0                             ONLINE       0     0     0
+	    scsi-SATA_Maxtor_7Y250M0_Y638RXME  ONLINE       0     0     0
+	    scsi-SATA_Maxtor_7Y250M0_Y638S56E  ONLINE       0     0     0
+	    scsi-SATA_Maxtor_7Y250M0_Y638TJFE  ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+
+<p>Your <em>tank</em> pool will automatically contain a filesystem
+which is mounted under your root directory.  You can create additional
+filesystems with the <em>zfs create</em> command.  They will also be
+automatically mounted.</p>
+
+<pre>
+$ sudo zfs create tank/fish
+$ df -h -t zfs
+Filesystem            Size  Used Avail Use% Mounted on
+tank                  459G  128K  459G   1% /tank
+tank/fish             459G  128K  459G   1% /tank/fish
+</pre>
+
+<p>Some other useful <em>zfs</em> subcommands are <em>mount</em>,
+<em>unmount</em>, <em>destroy</em>, and <em>snapshot</em>.  These
+are all fully described in the zfs man page and should be enough
+to get your started.</em>
+		</td>
+	</tr>
+</table>
+
+</center>
+</body>
+</html>

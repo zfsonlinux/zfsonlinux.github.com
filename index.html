@@ -1,0 +1,239 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Native port of ZFS to Linux." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+	<tr>
+		<td>
+<p><b>Native ZFS for Linux!</b> ZFS is an advanced file system and
+volume manager which was originally developed for Solaris.  It has
+been successfully ported to multiple platforms and now there is a
+a functional Linux ZFS kernel port.  The port includes a functional
+and stable SPA, DMU, ZVOL, and Posix Layer (ZPL).  Please see
+our <a href="faq.html">FAQ</a> and example pages for details.</p>
+
+<p>To get started with ZFS on Linux simply download the latest
+release, then follow either the <a href="spl-building-rpm.html">
+rpm</a> or <a href="spl-building-deb.html">deb</a> package
+instructions to build and install packages for your system.  If
+your not already familiar with ZFS you may want to check out the
+examples below.  Please keep in mind the current <font color="#40ff00">
+0.5.2 stable release</font> does not yet support a mountable filesystem.
+This functionality is currently available only in the 
+<font color="#22ccff">0.6.0-rc4 release candidate</font>.
+
+<p>If you are a developer or bleeding edge user please try the latest
+release candidate.  New features will be integrated here before a
+new official stable release is tagged.  The release candidates always
+need more testing so please report any issues you encounter.  If you
+would like to contribute to the development there is a list of pending
+<a href="https://github.com/behlendorf/zfs/issues?sort=created&labels=
+Feature&direction=desc&_pjax=true&state=open">development items</a>,
+or if you have a different idea feel free to start a discussion on
+the <a href="lists.html">zfs-devel</a> mailing list.
+		</td>
+	</tr>
+</table>
+<br />
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="3"> ZFS Core Features </th>
+	</tr>
+	<tr>
+		<td> Storage pools </td>
+		<td> Massive Capacity </td>
+		<td> Copy-on-write transactions </td>
+	</tr>
+	<tr>
+		<td> Clones </td>
+		<td> Dynamic striping </td>
+		<td> Variable block sizes </td>
+	</tr>
+	<tr>
+		<td> Snapshots </td>
+		<td> Deduplication </td>
+		<td> Online Repair </td>
+	</tr>
+	<tr>
+		<td> Lightweight FS creation </td>
+		<td> Cache management </td>
+		<td> Adaptive endianness </td>
+	</tr>
+</table>
+</br>
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="11">Releases </th>
+	</tr>
+	<tr bgcolor="#dddddd">
+		<th> SPL Release </th>
+		<th> ZFS Release </th>
+		<th> Onnv Build </th>
+		<th> Pool Version </th>
+		<th> FS Version </th>
+		<th colspan="2"> SPL Packages </th>
+		<th colspan="2"> ZFS Packages </th>
+		<th> PPA </th>
+	</tr>
+	<tr align="center" bgcolor="#66ccff">
+		<td> <a href="http://github.com/downloads/behlendorf/spl/spl-0.6.0-rc4.tar.gz">spl-0.6.0-rc4</a></td>
+		<td> <a href="http://github.com/downloads/behlendorf/zfs/zfs-0.6.0-rc4.tar.gz">zfs-0.6.0-rc4</a></td>
+		<td> 147 </td>
+		<td> 28 </td>
+		<td> 5 </td>
+		<td> <a href="spl-building-rpm.html">rpm</a></td>
+		<td> <a href="spl-building-deb.html">deb</a></td>
+		<td> <a href="zfs-building-rpm.html">rpm</a></td>
+		<td> <a href="zfs-building-deb.html">deb</a></td>
+		<td> <a href="https://launchpad.net/~dajhorn/+archive/zfs">ppa</a></td>
+	</tr>
+	<tr align="center" bgcolor="#80ff00">
+		<td> <a href="http://github.com/downloads/behlendorf/spl/spl-0.5.2.tar.gz">spl-0.5.2</a></td>
+		<td> <a href="http://github.com/downloads/behlendorf/zfs/zfs-0.5.2.tar.gz">zfs-0.5.2</a></td>
+		<td> 147 </td>
+		<td> 28 </td>
+		<td> 5 </td>
+		<td> <a href="spl-building-rpm.html">rpm</a></td>
+		<td> <a href="spl-building-deb.html">deb</a></td>
+		<td> <a href="zfs-building-rpm.html">rpm</a></td>
+		<td> <a href="zfs-building-deb.html">deb</a></td>
+		<td> </td>
+	</tr>
+	<tr align="center">
+		<td> <a href="http://github.com/downloads/behlendorf/spl/spl-0.5.1.tar.gz">spl-0.5.1</a></td>
+		<td> <a href="http://github.com/downloads/behlendorf/zfs/zfs-0.5.1.tar.gz">zfs-0.5.1</a></td>
+		<td> 147 </td>
+		<td> 28 </td>
+		<td> 5 </td>
+		<td> <a href="spl-building-rpm.html">rpm</a></td>
+		<td> <a href="spl-building-deb.html">deb</a></td>
+		<td> <a href="zfs-building-rpm.html">rpm</a></td>
+		<td> <a href="zfs-building-deb.html">deb</a></td>
+		<td> </td>
+	</tr>
+	<tr align="center">
+		<td> <a href="http://github.com/downloads/behlendorf/spl/spl-0.5.0.tar.gz">spl-0.5.0</a></td>
+		<td> <a href="http://github.com/downloads/behlendorf/zfs/zfs-0.5.0.tar.gz">zfs-0.5.0</a></td>
+		<td> 141 </td>
+		<td> 26 </td>
+		<td> 5 </td>
+		<td> <a href="spl-building-rpm.html">rpm</a></td>
+		<td> <a href="spl-building-deb.html">deb</a></td>
+		<td> <a href="zfs-building-rpm.html">rpm</a></td>
+		<td> <a href="zfs-building-deb.html">deb</a></td>
+		<td> </td>
+	</tr>
+	<tr align="center">
+		<td> <a href="http://github.com/downloads/behlendorf/spl/spl-0.4.9.tar.gz">spl-0.4.9</a></td>
+		<td> <a href="http://github.com/downloads/behlendorf/zfs/zfs-0.4.9.tar.gz">zfs-0.4.9</a></td>
+		<td> 121 </td>
+		<td> 18 </td>
+		<td> 4 </td>
+		<td> <a href="spl-building-rpm.html">rpm</a></td>
+		<td> <a href="spl-building-deb.html">deb</a></td>
+		<td> <a href="zfs-building-rpm.html">rpm</a></td>
+		<td> <a href="zfs-building-deb.html">deb</a></td>
+		<td> </td>
+	</tr>
+</table>
+<br />
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="4">Documentation </th>
+	</tr>
+	<tr bgcolor="#dddddd">
+		<th width="25%"> ZPL </th>
+		<th width="25%"> ZVOL </th>
+		<th width="25%"> ZPIOS </th>
+		<th width="25%"> Lustre </th>
+	</tr>
+	<tr>
+		<td width="25%"> <a href="example-zpl.html">
+		ZFS example</a></td>
+		<td width="25%"> <a href="example-zvol.html">
+		ZVOL example</a></td>
+		<td width="25%"> <a href="example-zpios.html">
+		ZPIOS example</a></td>
+		<td width="25%"> <a href="lustre.html">
+		Lustre source</a></td>
+	</tr>
+	<tr>
+		<td width="25%"> </td>
+		<td width="25%"> </td>
+		<td width="25%"> </td>
+		<td width="25%"> <a href="lustre-building.html">
+		Lustre packages</a></td>
+	</tr>
+	<tr>
+		<td width="25%"> </td>
+		<td width="25%"> </td>
+		<td width="25%"> </td>
+		<td width="25%"> <a href="lustre-configure-single.html">
+		Lustre example</a></td>
+	</tr>
+</table>
+<br />
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="3">Community Resources </th>
+	</tr>
+	<tr bgcolor="#dddddd">
+		<th width="33%"> General </th>
+		<th width="33%"> SPL </th>
+		<th width="33%"> ZFS </th>
+	</tr>
+	<tr>
+		<td width="33%"><a href="lists.html">
+		ZFS on Linux Mailing Lists</a> </td>
+		<td width="33%">
+		<a href="http://github.com/behlendorf/spl/downloads">
+		SPL Downloads</a> </td>
+		<td width="33%">
+		<a href="http://github.com/behlendorf/zfs/downloads">
+		ZFS on Linux Downloads</a> </td>
+	</tr>
+	<tr>
+		<td width="33%"><a href="docs.html">
+		ZFS Documentation/Presentations</a> </td>
+		<td width="33%">
+		<a href="http://github.com/behlendorf/spl/issues">
+		SPL Issue Tracker</a></td>
+		<td width="33%">
+		<a href="http://github.com/behlendorf/zfs/issues">
+		ZFS on Linux Issue Tracker</a></td>
+	</tr>
+	<tr>
+		<td width="33%"> <a href="buildbot/buildbot.html">
+		ZFS Buildbot </a></td>
+		<td width="33%"> <a href="http://github.com/behlendorf/spl">
+		SPL Source Repository </a></td>
+		<td width="33%"> <a href="http://github.com/behlendorf/zfs">
+		ZFS on Linux Source Repository </a></td>
+	</tr>
+</table>
+
+<br />
+<br />
+<hr>
+
+<font size=2>
+Native ZFS on Linux<br />
+Produced at Lawrence Livermore National Laboratory<br />
+<a href="spl-disclaimer.html">spl</a> /
+<a href="zfs-disclaimer.html">zfs</a> disclaimer<br />
+</font>
+
+</center>
+</body>
+</html>
