@@ -13,14 +13,16 @@
 <ul>
 	<li><a href="#WhatAboutTheLicensingIssue">
 	1.1 What about the licensing issue?</a></li>
+	<li><a href="#HowDoIInstallIt">
+	1.2 How do I install it?</a></li>
 	<li><a href="#WhyDoesntItBuild">
-	1.2 Why doesn&#8217;t it build?</a></li>
+	1.3 Why doesn&#8217;t it build?</a></li>
 	<li><a href="#HowDoIMountTheFileSystem">
-	1.3 How do I mount the file system?</a></li>
+	1.4 How do I mount the file system?</a></li>
 	<li><a href="#WhyShouldIUseA64BitSystem">
-	1.4 Why should I use a 64-bit system?</li></a>
+	1.5 Why should I use a 64-bit system?</li></a>
 	<li><a href="#HowCanIHelp">
-	1.5 How can I help?</li></a>
+	1.6 How can I help?</li></a>
 </ul>
 
 <a name="WhatAboutTheLicensingIssue">
@@ -49,8 +51,29 @@ you are willing to
 <a href="http://github.com/behlendorf/zfs/downloads">download</a> and
 <a href="zfs-building-rpm.html">build it</a> yourself.</p>
 
+<a name="HowDoIInstallIt">
+<h3>1.2 How do I install it?</h3></a>
+
+<p>If your using an Ubuntu distribution the easiest way to install ZFS is
+with Darik Horn's <a href="https://launchpad.net/~dajhorn/+archive/zfs">
+ZFS PPA</a>.  Simply add the PPA to your list of repositories and install
+the ZFS packages with your favorite package manager.  The ZFS source will
+be downloaded to your system and compiled with dkms.  In addition, the ZFS
+source will be automatically recompiled when a new version is available
+or when you update your kernel.</p>
+
+<pre>
+sudo add-apt-repository ppa:dajhorn/zfs
+sudo apt-get update
+sudo apt-get install ubuntu-zfs
+</pre>
+
+<p>If you are using a different Linux distribution you will have to manually
+<a href="spl-building-rpm.html">download and compile the source</a> as
+described in the documentation.</p>
+
 <a name="WhyDoesntItBuild">
-<h3>1.2 Why doesn&#8217;t it build?</h3></a>
+<h3>1.3 Why doesn&#8217;t it build?</h3></a>
 
 <p>Building a kernel module against an arbitrary kernel version is a
 complicated thing to do.  Every distro has their own idea of how this should
@@ -76,7 +99,7 @@ build issues.</li>
 </ul>
 
 <a name="HowDoIMountTheFileSystem">
-<h3>1.3 How do I mount the file system?</h3></a>
+<h3>1.4 How do I mount the file system?</h3></a>
 
 <p>The <a href="example-zpl.html">ZFS posix layer</a> is now available as of
 spl/zfs-0.6.0-rc1!  A mountable dataset will be created and mounted when you
@@ -84,7 +107,7 @@ first create the pool with <i>zpool create</i>.  Additional datasets can be
 created with <i>zfs create</i> and they will be automatically mounted.</p>
 
 <a name="WhyShouldIUseA64BitSystem">
-<h3>1.4 Why should I use a 64-bit system?</h3></a>
+<h3>1.5 Why should I use a 64-bit system?</h3></a>
 
 <p>In the Solaris kernel it is common practice to make heavy use of the
 virtual address space because it is designed to work well. However, in
@@ -105,7 +128,7 @@ size.
 </pre>
 
 <a name="HowCanIHelp">
-<h3>1.5 How can I help?</h3></a>
+<h3>1.6 How can I help?</h3></a>
 
 <p>The most helpful thing you can do is to try ZFS on your Linux
 system and report any
