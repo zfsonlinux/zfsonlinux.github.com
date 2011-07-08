@@ -1,0 +1,331 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Fedora%2015%20(Lovelock)%20Desktop%20-%20AMD64/builds/70/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:48:43 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c yum update -y &amp;&amp; yum clean all
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-fedora-15-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'yum update -y &amp;&amp; yum clean all']
+ environment:
+  HOME=/home/buildbot
+  LOGNAME=buildbot
+  PATH=/usr/bin:/bin
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-fedora-15-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Loaded plugins: langpacks, presto, refresh-packagekit
+Setting up Update Process
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package PackageKit.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-command-not-found.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-command-not-found.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-device-rebind.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-device-rebind.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-glib.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-glib.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-gstreamer-plugin.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-gstreamer-plugin.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-gtk-module.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-gtk-module.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-yum.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-yum.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package PackageKit-yum-plugin.x86_64 0:0.6.15-1.fc15 will be updated
+---&gt; Package PackageKit-yum-plugin.x86_64 0:0.6.15-2.fc15 will be an update
+---&gt; Package boost-filesystem.x86_64 0:1.46.0-1.fc15 will be updated
+---&gt; Package boost-filesystem.x86_64 0:1.46.0-3.fc15 will be an update
+---&gt; Package boost-system.x86_64 0:1.46.0-1.fc15 will be updated
+---&gt; Package boost-system.x86_64 0:1.46.0-3.fc15 will be an update
+---&gt; Package cheese.x86_64 1:3.0.1-1.fc15 will be updated
+---&gt; Package cheese.x86_64 1:3.0.1-2.fc15 will be an update
+---&gt; Package cheese-libs.x86_64 1:3.0.1-1.fc15 will be updated
+---&gt; Package cheese-libs.x86_64 1:3.0.1-2.fc15 will be an update
+---&gt; Package cronie.x86_64 0:1.4.7-3.fc15 will be updated
+---&gt; Package cronie.x86_64 0:1.4.8-2.fc15 will be an update
+---&gt; Package cronie-anacron.x86_64 0:1.4.7-3.fc15 will be updated
+---&gt; Package cronie-anacron.x86_64 0:1.4.8-2.fc15 will be an update
+---&gt; Package gedit.x86_64 2:3.0.5-1.fc15 will be updated
+---&gt; Package gedit.x86_64 2:3.0.6-1.fc15 will be an update
+---&gt; Package git.x86_64 0:1.7.5.4-1.fc15 will be updated
+---&gt; Package git.x86_64 0:1.7.6-1.fc15 will be an update
+---&gt; Package glibc.x86_64 0:2.14-3 will be updated
+---&gt; Package glibc.x86_64 0:2.14-4 will be an update
+---&gt; Package glibc-common.x86_64 0:2.14-3 will be updated
+---&gt; Package glibc-common.x86_64 0:2.14-4 will be an update
+---&gt; Package glibc-devel.x86_64 0:2.14-3 will be updated
+---&gt; Package glibc-devel.x86_64 0:2.14-4 will be an update
+---&gt; Package glibc-headers.x86_64 0:2.14-3 will be updated
+---&gt; Package glibc-headers.x86_64 0:2.14-4 will be an update
+---&gt; Package gtksourceview3.x86_64 0:3.0.4-1.fc15 will be updated
+---&gt; Package gtksourceview3.x86_64 0:3.0.5-1.fc15 will be an update
+---&gt; Package libmtp.x86_64 0:1.0.6-2.fc15 will be updated
+---&gt; Package libmtp.x86_64 0:1.0.6-3.fc15 will be an update
+---&gt; Package libpurple.x86_64 0:2.8.0-1.fc15 will be updated
+---&gt; Package libpurple.x86_64 0:2.9.0-1.fc15 will be an update
+---&gt; Package perl-Git.noarch 0:1.7.5.4-1.fc15 will be updated
+---&gt; Package perl-Git.noarch 0:1.7.6-1.fc15 will be an update
+---&gt; Package poppler.x86_64 0:0.16.6-1.fc15 will be updated
+---&gt; Package poppler.x86_64 0:0.16.7-1.fc15 will be an update
+---&gt; Package poppler-glib.x86_64 0:0.16.6-1.fc15 will be updated
+---&gt; Package poppler-glib.x86_64 0:0.16.7-1.fc15 will be an update
+---&gt; Package poppler-utils.x86_64 0:0.16.6-1.fc15 will be updated
+---&gt; Package poppler-utils.x86_64 0:0.16.7-1.fc15 will be an update
+---&gt; Package portreserve.x86_64 0:0.0.4-8.fc15 will be updated
+---&gt; Package portreserve.x86_64 0:0.0.5-2.fc15 will be an update
+---&gt; Package python-IPy.noarch 0:0.70-3.fc15 will be updated
+---&gt; Package python-IPy.noarch 0:0.75-1.fc15 will be an update
+---&gt; Package report.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-config-bugzilla-redhat-com.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-config-bugzilla-redhat-com.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-config-ftp.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-config-ftp.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-config-localsave.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-config-localsave.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-config-scp.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-config-scp.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-newt.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-newt.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-plugin-bugzilla.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-plugin-bugzilla.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-plugin-ftp.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-plugin-ftp.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-plugin-localsave.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-plugin-localsave.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package report-plugin-scp.x86_64 0:0.20-2.fc15 will be updated
+---&gt; Package report-plugin-scp.x86_64 0:0.22-0.fc15 will be an update
+---&gt; Package shadow-utils.x86_64 2:4.1.4.2-11.fc15 will be updated
+---&gt; Package shadow-utils.x86_64 2:4.1.4.2-12.fc15 will be an update
+---&gt; Package webkitgtk.x86_64 0:1.4.1-1.fc15 will be updated
+---&gt; Package webkitgtk.x86_64 0:1.4.2-1.fc15 will be an update
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                            Arch    Version              Repository
+                                                                           Size
+================================================================================
+Updating:
+ PackageKit                         x86_64  0.6.15-2.fc15        updates  556 k
+ PackageKit-command-not-found       x86_64  0.6.15-2.fc15        updates   46 k
+ PackageKit-device-rebind           x86_64  0.6.15-2.fc15        updates   35 k
+ PackageKit-glib                    x86_64  0.6.15-2.fc15        updates  138 k
+ PackageKit-gstreamer-plugin        x86_64  0.6.15-2.fc15        updates   35 k
+ PackageKit-gtk-module              x86_64  0.6.15-2.fc15        updates   35 k
+ PackageKit-yum                     x86_64  0.6.15-2.fc15        updates  100 k
+ PackageKit-yum-plugin              x86_64  0.6.15-2.fc15        updates   32 k
+ boost-filesystem                   x86_64  1.46.0-3.fc15        updates   63 k
+ boost-system                       x86_64  1.46.0-3.fc15        updates   26 k
+ cheese                             x86_64  1:3.0.1-2.fc15       updates  175 k
+ cheese-libs                        x86_64  1:3.0.1-2.fc15       updates  4.3 M
+ cronie                             x86_64  1.4.8-2.fc15         updates   76 k
+ cronie-anacron                     x86_64  1.4.8-2.fc15         updates   29 k
+ gedit                              x86_64  2:3.0.6-1.fc15       updates  2.1 M
+ git                                x86_64  1.7.6-1.fc15         updates  2.9 M
+ glibc                              x86_64  2.14-4               updates  3.3 M
+ glibc-common                       x86_64  2.14-4               updates   11 M
+ glibc-devel                        x86_64  2.14-4               updates  975 k
+ glibc-headers                      x86_64  2.14-4               updates  596 k
+ gtksourceview3                     x86_64  3.0.5-1.fc15         updates  738 k
+ libmtp                             x86_64  1.0.6-3.fc15         updates  106 k
+ libpurple                          x86_64  2.9.0-1.fc15         updates  5.6 M
+ perl-Git                           noarch  1.7.6-1.fc15         updates   39 k
+ poppler                            x86_64  0.16.7-1.fc15        updates  607 k
+ poppler-glib                       x86_64  0.16.7-1.fc15        updates   94 k
+ poppler-utils                      x86_64  0.16.7-1.fc15        updates  114 k
+ portreserve                        x86_64  0.0.5-2.fc15         updates   23 k
+ python-IPy                         noarch  0.75-1.fc15          updates   31 k
+ report                             x86_64  0.22-0.fc15          updates   74 k
+ report-config-bugzilla-redhat-com  x86_64  0.22-0.fc15          updates   15 k
+ report-config-ftp                  x86_64  0.22-0.fc15          updates   15 k
+ report-config-localsave            x86_64  0.22-0.fc15          updates   15 k
+ report-config-scp                  x86_64  0.22-0.fc15          updates   15 k
+ report-newt                        x86_64  0.22-0.fc15          updates   18 k
+ report-plugin-bugzilla             x86_64  0.22-0.fc15          updates   30 k
+ report-plugin-ftp                  x86_64  0.22-0.fc15          updates   17 k
+ report-plugin-localsave            x86_64  0.22-0.fc15          updates   17 k
+ report-plugin-scp                  x86_64  0.22-0.fc15          updates   19 k
+ shadow-utils                       x86_64  2:4.1.4.2-12.fc15    updates  869 k
+ webkitgtk                          x86_64  1.4.2-1.fc15         updates  6.4 M
+
+Transaction Summary
+================================================================================
+Upgrade      41 Package(s)
+
+Total download size: 41 M
+Downloading Packages:
+Setting up and reading Presto delta metadata
+Processing delta metadata
+Download delta size: 17 M
+Presto reduced the update size by 58% (from 41 M to 17 M).
+Package(s) data still to download: 207 k
+--------------------------------------------------------------------------------
+Total                                           100 kB/s | 207 kB     00:02     
+Running rpm_check_debug
+Running Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Updating   : glibc-2.14-4.x86_64                                         1/82 
+  Updating   : glibc-common-2.</span><span class="stdout">14-4.x86_64                                  2/82</span><span class="stdout"> 
+  Updating   : PackageKit-glib-0.6.15-2.fc15.x86_64                        3/82 
+  Updating   : PackageKit-yum-0.6.15-2.fc15.x86_64                         4/82 
+  Updating   : PackageKit-0.6.15-2.fc15.x86_64                             5/82 
+  Updating   : report-config-localsave-0.22-0.fc15.x86_64                  6/82 
+  Updating   : report-plugin-localsave-0.22-0.fc15.x86_64                  7/82 
+  Updating   : report-config-scp-0.22-0.fc15.x86_64                        8/82 
+  Updating   : report-plugin-scp-0.22-0.fc15.x86_64                        9/82 
+  Updating   : report-config-ftp-0.22-0.fc15.x86_64                       10/82 
+  Updating   : report-plugin-ftp-0.22-0.fc15.x86_64                       11/82 
+  Updating   : report-config-bugzilla-redhat-com-0.22-0.fc15.x86_64       12/82 
+  Updating   : report-0.22-0.fc15.x86_64                                  13/82 
+  Updating   : report-plugin-bugzilla-0.22-0.fc15.x86_64                  14/82 
+  Updating   : poppler-0.16.7-1.fc15.x86_64                               15/82 
+  Updating   : poppler-glib-0.16.7-1.fc15.x86_64                          16/82 
+  Updating   : cronie-1.4.8-2.fc15.x86_64                                 17/82 
+  Updating   : cronie-anacron-1.4.8-2.fc15.x86_64                         18/82 
+  Updating   : perl-Git-1.7.6-1.fc15.noarch                               19/82 
+  Updating   : git-1.7.6-1.fc15.x86_64                                    20/82 
+  Updating   : 1:cheese-libs-3.0.1-2.fc15.x86_64                          21/82 
+  Updating   : boost-system-1.46.0-3.fc15.x86_64                          22/82 
+  Updating   : gtksourceview3-3.0.5-1.fc15.x86_64                         23/82 
+  Updating   : glibc-headers-2.14-4.x86_64                                24/82 
+  Updating   : glibc-devel-2.14-4.x86_64                                  25/82 
+  Updating   : 2:gedit-3.0.6-1.fc15.x86_64                                26/82 
+  Updating   : boost-filesystem-1.46.0-3.fc15.x86_64                      27/82 
+  Updating   : 1:cheese-3.0.1-2.fc15.x86_64                               28/82 
+  Updating   : poppler-utils-0.16.7-1.fc15.x86_64                         29/82 
+  Updating   : report-newt-0.22-0.fc15.x86_64                             30/82 
+  Updating   : PackageKit-yum-plugin-0.6.15-2.fc15.x86_64                 31/82 
+  Updating   : PackageKit-gstreamer-plugin-0.6.15-2.fc15.x86_64           32/82 
+  Updating   : PackageKit-command-not-found-0.6.15-2.fc15.x86_64          33/82 
+  Updating   : PackageKit-gtk-module-0.6.15-2.fc15.x86_64                 34/82 
+  Updating   : PackageKit-device-rebind-0.6.15-2.fc15.x86_64              35/82 
+  Updating   : webkitgtk-1.4.2-1.fc15.x86_64                              36/82 
+  Updating   : 2:shadow-utils-4.1.4.2-12.fc15.x86_64                      37/82 
+  Updating   : portreserve-0.0.5-2.fc15.x86_64                            38/82 
+  Updating   : libmtp-1.0.6-3.fc15.x86_64                                 39/82 
+  Updating   : libpurple-2.9.0-1.fc15.x86_64                              40/82 
+  Updating   : python-IPy-0.75-1.fc15.noarch                              41/82 
+  Cleanup    : poppler-utils-0.16.6-1.fc15.x86_64                         42/82 
+  Cleanup    : poppler-glib-0.16.6-1.fc15.x86_64                          43/82 
+  Cleanup    : PackageKit-command-not-found-0.6.15-1.fc15.x86_64          44/82 
+  Cleanup    : PackageKit-gstreamer-plugin-0.6.15-1.fc15.x86_64           45/82 
+  Cleanup    : glibc-devel-2.14-3.x86_64                                  46/82 
+  Cleanup    : glibc-headers-2.14-3.x86_64                                47/82 
+  Cleanup    : PackageKit-yum-plugin-0.6.15-1.fc15.x86_64                 48/82 
+  Cleanup    : report-newt-0.20-2.fc15.x86_64                             49/82 
+  Cleanup    : report-plugin-bugzilla-0.20-2.fc15.x86_64                  50/82 
+  Cleanup    : report-config-bugzilla-redhat-com-0.20-2.fc15.x86_64       51/82 
+  Cleanup    : report-plugin-localsave-0.20-2.fc15.x86_64                 52/82 
+  Cleanup    : report-config-localsave-0.20-2.fc15.x86_64                 53/82 
+  Cleanup    : report-plugin-scp-0.20-2.fc15.x86_64                       54/82 
+  Cleanup    : report-config-scp-0.20-2.fc15.x86_64                       55/82 
+  Cleanup    : report-0.20-2.fc15.x86_64                                  56/82 
+  Cleanup    : report-config-ftp-0.20-2.fc15.x86_64                       57/82 
+  Cleanup    : report-plugin-ftp-0.20-2.fc15.x86_64                       58/82 
+  Cleanup    : perl-Git-1.7.5.4-1.fc15.noarch                             59/82 
+  Cleanup    : git-1.7.5.4-1.fc15.x86_64                                  60/82 
+  Cleanup    : boost-filesystem-1.46.0-1.fc15.x86_64                      61/82 
+  Cleanup    : 1:cheese-3.0.1-1.fc15.x86_64                               62/82 
+  Cleanup    : 2:gedit-3.0.5-1.fc15.x86_64                                63/82 
+  Cleanup    : cronie-1.4.7-3.fc15.x86_64                                 64/82 
+  Cleanup    : cronie-anacron-1.4.7-3.fc15.x86_64                         65/82 
+  Cleanup    : PackageKit-device-rebind-0.6.15-1.fc15.x86_64              66/82 
+  Cleanup    : PackageKit-gtk-module-0.6.15-1.fc15.x86_64                 67/82 
+  Cleanup    : PackageKit-yum-0.6.15-1.fc15.x86_64                        68/82 
+  Cleanup    : PackageKit-0.6.15-1.fc15.x86_64                            69/82 
+  Cleanup    : PackageKit-glib-0.6.15-1.fc15.x86_64                       70/82 
+  Cleanup    : gtksourceview3-3.0.4-1.fc15.x86_64                         71/82 
+  Cleanup    : 1:cheese-libs-3.0.1-1.fc15.x86_64                          72/82 
+  Cleanup    : boost-system-1.46.0-1.fc15.x86_64                          73/82 
+  Cleanup    : poppler-0.16.6-1.fc15.x86_64                               74/82 
+  Cleanup    : libpurple-2.8.0-1.fc15.x86_64                              75/82 
+  Cleanup    : libmtp-1.0.6-2.fc15.x86_64                                 76/82 
+  Cleanup    : portreserve-0.0.4-8.fc15.x86_64                            77/82 
+  Cleanup    : 2:shadow-utils-4.1.4.2-11.fc15.x86_64                      78/82 
+  Cleanup    : webkitgtk-1.4.1-1.fc15.x86_64                              79/82 
+  Cleanup    : python-IPy-0.70-3.fc15.noarch                              80/82 
+  Cleanup    : glibc-common-2.14-3.x86_64                                 81/82 
+  Cleanup    : glibc-2.14-3.x86_64                                        82/82 
+
+Updated:
+  PackageKit.x86_64 0:0.6.15-2.fc15                                             
+  PackageKit-command-not-found.x86_64 0:0.6.15-2.fc15                           
+  PackageKit-device-rebind.x86_64 0:0.6.15-2.fc15                               
+  PackageKit-glib.x86_64 0:0.6.15-2.fc15                                        
+  PackageKit-gstreamer-plugin.x86_64 0:0.6.15-2.fc15                            
+  PackageKit-gtk-module.x86_64 0:0.6.15-2.fc15                                  
+  PackageKit-yum.x86_64 0:0.6.15-2.fc15                                         
+  PackageKit-yum-plugin.x86_64 0:0.6.15-2.fc15                                  
+  boost-filesystem.x86_64 0:1.46.0-3.fc15                                       
+  boost-system.x86_64 0:1.46.0-3.fc15                                           
+  cheese.x86_64 1:3.0.1-2.fc15                                                  
+  cheese-libs.x86_64 1:3.0.1-2.fc15                                             
+  cronie.x86_64 0:1.4.8-2.fc15                                                  
+  cronie-anacron.x86_64 0:1.4.8-2.fc15                                          
+  gedit.x86_64 2:3.0.6-1.fc15                                                   
+  git.x86_64 0:1.7.6-1.fc15                                                     
+  glibc.x86_64 0:2.14-4                                                         
+  glibc-common.x86_64 0:2.14-4                                                  
+  glibc-devel.x86_64 0:2.14-4                                                   
+  glibc-headers.x86_64 0:2.14-4                                                 
+  gtksourceview3.x86_64 0:3.0.5-1.fc15                                          
+  libmtp.x86_64 0:1.0.6-3.fc15                                                  
+  libpurple.x86_64 0:2.9.0-1.fc15                                               
+  perl-Git.noarch 0:1.7.6-1.fc15                                                
+  poppler.x86_64 0:0.16.7-1.fc15                                                
+  poppler-glib.x86_64 0:0.16.7-1.fc15                                           
+  poppler-utils.x86_64 0:0.16.7-1.fc15                                          
+  portreserve.x86_64 0:0.0.5-2.fc15                                             
+  python-IPy.noarch 0:0.75-1.fc15                                               
+  report.x86_64 0:0.22-0.fc15                                                   
+  report-config-bugzilla-redhat-com.x86_64 0:0.22-0.fc15                        
+  report-config-ftp.x86_64 0:0.22-0.fc15                                        
+  report-config-localsave.x86_64 0:0.22-0.fc15                                  
+  report-config-scp.x86_64 0:0.22-0.fc15                                        
+  report-newt.x86_64 0:0.22-0.fc15                                              
+  report-plugin-bugzilla.x86_64 0:0.22-0.fc15                                   
+  report-plugin-ftp.x86_64 0:0.22-0.fc15                                        
+  report-plugin-localsave.x86_64 0:0.22-0.fc15                                  
+  report-plugin-scp.x86_64 0:0.22-0.fc15                                        
+  shadow-utils.x86_64 2:4.1.4.2-12.fc15                                         
+  webkitgtk.x86_64 0:1.4.2-1.fc15                                               
+
+Complete!
+Loaded plugins: langpacks, presto, refresh-packagekit
+Cleaning repos: fedora updates
+Cleaning up</span><span class="stdout"> Everything
+</span><span class="stdout">0 delta-package files removed, by presto
+</span><span class="header">program finished with exit code 0
+elapsedTime=280.468757
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Fedora%2015%20(Lovelock)%20Desktop%20-%20AMD64/builds/70/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:48:44 GMT -->
+</html>

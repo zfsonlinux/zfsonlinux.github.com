@@ -1,0 +1,60 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/72/steps/test_4/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:51:45 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /usr/libexec/zfs/zfault.sh -c
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/usr/libexec/zfs/zfault.sh', '-c']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  TERM=linux
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Skipping tests 1-7 which require partitionable md devices
+
+                                        raid0	raid10	raidz	raidz2	raidz3
+1    soft write error                   [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+2    hard write error                   [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+3    all write errors                   [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+4    soft read error                    [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+5    hard read error                    [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+6    fixable read error                 [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+7    silent data corruption             [0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	[0;33mSkip[0m	
+8    soft write timeout                 [0;32mPass[0m	[0;31mFail[0m (13)
+</span><span class="header">program finished with exit code 13
+elapsedTime=108.355114
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/72/steps/test_4/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:51:45 GMT -->
+</html>

@@ -1,0 +1,59 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/RHEL%206.0%20(Santiago)%20Desktop%20-%20AMD64/builds/77/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:02 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /sbin/ztest -V
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-rhel-6-0-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/sbin/ztest', '-V']
+ environment:
+  HOME=/home/buildbot
+  LOGNAME=buildbot
+  PATH=/usr/bin:/bin
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-rhel-6-0-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5 vdevs, 7 datasets, 23 threads, 300 seconds...
+Setting dataset ztest/ds_0 to sync always
+Setting dataset ztest/ds_6 to sync always
+Pass   1,  SIGKILL,   0 ENOSPC,  2.2% of  238M used,  11% done,    4m26s to go
+Setting dataset ztest/temp_15 to sync always
+Pass   2,  SIGKILL,   0 ENOSPC,  6.5% of  238M used,  27% done,    3m38s to go
+Pass   3,  SIGKILL,   0 ENOSPC,  8.4% of  238M used,  44% done,    2m47s to go
+Pass   4,  SIGKILL,   0 ENOSPC,  9.5% of  238M used,  55% done,    2m14s to go
+Pass   5,  SIGKILL,   0 ENOSPC,  9.6% of  238M used,  68% done,    1m35s to go
+Setting dataset ztest/temp_19 to sync always
+Pass   6,  SIGKILL,   0 ENOSPC,  9.4% of  270M used,  83% done,      50s to go
+Pass   7, Complete,   0 ENOSPC,  9.2% of  270M used, 100% done,       0s to go
+6 killed, 1 completed, 86% kill rate
+</span><span class="header">program finished with exit code 0
+elapsedTime=409.153082
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/RHEL%206.0%20(Santiago)%20Desktop%20-%20AMD64/builds/77/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:02 GMT -->
+</html>

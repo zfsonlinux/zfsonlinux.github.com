@@ -1,0 +1,185 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2011.04%20(Natty)%20Desktop%20-%20AMD64/builds/73/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:43:17 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-natty-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-natty-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=e678aad54ca1a487a79dece800000003-1309564034.868312-1205344201
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Ign http://extras.ubuntu.com natty InRelease
+Ign http://us.archive.ubuntu.com natty InRelease
+Ign http://security.ubuntu.com natty-security InRelease
+Hit http://extras.ubuntu.com natty Release.gpg
+Ign http://us.archive.ubuntu.com natty-updates InRelease
+Get:1 http://security.ubuntu.com natty-security Release.gpg [198 B]
+Hit http://extras.ubuntu.com natty Release
+Hit http://us.archive.ubuntu.com natty Release.gpg
+Get:2 http://security.ubuntu.com natty-security Release [27.2 kB]
+Hit http://extras.ubuntu.com natty/main Sources
+Get:3 http://us.archive.ubuntu.com natty-updates Release.gpg [198 B]
+Hit http://extras.ubuntu.com natty/main amd64 Packages
+Hit http://us.archive.ubuntu.com natty Release
+Ign http://extras.ubuntu.com natty/main TranslationIndex
+Get:4 http://us.archive.ubuntu.com natty-updates Release [27.2 kB]
+Hit http://us.archive.ubuntu.com natty/main Sources
+Get:5 http://security.ubuntu.com natty-security/main Sources [57.0 kB]
+Hit http://us.archive.ubuntu.com natty/restricted Sources
+Get:6 http://security.ubuntu.com natty-security/restricted Sources [14 B]
+Hit http://us.archive.ubuntu.com natty/universe Sources
+Get:7 http://security.ubuntu.com natty-security/universe Sources [6,102 B]
+Hit http://us.archive.ubuntu.com natty/multiverse Sources
+Get:8 http://security.ubuntu.com natty-security/multiverse Sources [658 B]
+Hit http://us.archive.ubuntu.com natty/main amd64 Packages
+Hit http://us.archive.ubuntu.com natty/restricted amd64 Packages
+Ign http://extras.ubuntu.com natty/main Translation-en_US
+Get:9 http://security.ubuntu.com natty-security/main amd64 Packages [146 kB]
+Ign http://extras.ubuntu.com natty/main Translation-en
+Hit http://us.archive.ubuntu.com natty/universe amd64 Packages
+Hit http://us.archive.ubuntu.com natty/multiverse amd64 Packages
+Ign http://us.archive.ubuntu.com natty/main TranslationIndex
+Ign http://us.archive.ubuntu.com natty/multiverse TranslationIndex
+Get:10 http://security.ubuntu.com natty-security/restricted amd64 Packages [14 B]
+Ign http://us.archive.ubuntu.com natty/restricted TranslationIndex
+Ign http://us.archive.ubuntu.com natty/universe TranslationIndex
+Get:11 http://security.ubuntu.com natty-security/universe amd64 Packages [20.7 kB]
+Get:12 http://security.ubuntu.com natty-security/multiverse amd64 Packages [1,939 B]
+Ign http://security.ubuntu.com natty-security/main TranslationIndex
+Get:13 http://us.archive.ubuntu.com natty-updates/main Sources [90.9 kB]
+Ign http://security.ubuntu.com natty-security/multiverse TranslationIndex
+Ign http://security.ubuntu.com natty-security/restricted TranslationIndex
+Ign http://security.ubuntu.com natty-security/universe TranslationIndex
+Get:14 http://us.archive.ubuntu.com natty-updates/restricted Sources [14 B]
+Get:15 http://us.archive.ubuntu.com natty-updates/universe Sources [17.0 kB]
+Get:16 http://us.archive.ubuntu.com natty-updates/multiverse Sources [1,893 B]
+Get:17 http://us.archive.ubuntu.com natty-updates/main amd64 Packages [266 kB]
+Get:18 http://us.archive.ubuntu.com natty-updates/restricted amd64 Packages [14 B]
+Get:19 http://us.archive.ubuntu.com natty-updates/universe amd64 Packages [67.0 kB]
+Get:20 http://us.archive.ubuntu.com natty-updates/multiverse amd64 Packages [4,186 B]
+Ign http://us.archive.ubuntu.com natty-updates/main TranslationIndex
+Ign http://us.archive.ubuntu.com natty-updates/multiverse TranslationIndex
+Ign http://us.archive.ubuntu.com natty-updates/restricted TranslationIndex
+Ign http://us.archive.ubuntu.com natty-updates/universe TranslationIndex
+Ign http://security.ubuntu.com natty-security/main Translation-en_US
+Ign http://security.ubuntu.com natty-security/main Translation-en
+Ign http://security.ubuntu.com natty-security/multiverse Translation-en_US
+Ign http://security.ubuntu.com natty-security/multiverse Translation-en
+Ign http://security.ubuntu.com natty-security/restricted Translation-en_US
+Ign http://security.ubuntu.com natty-security/restricted Translation-en
+Ign http://security.ubuntu.com natty-security/universe Translation-en_US
+Ign http://security.ubuntu.com natty-security/universe Translation-en
+Ign http://us.archive.ubuntu.com natty/main Translation-en_US
+Ign http://us.archive.ubuntu.com natty/main Translation-en
+Ign http://us.archive.ubuntu.com natty/multiverse Translation-en_US
+Ign http://us.archive.ubuntu.com natty/multiverse Translation-en
+Ign http://us.archive.ubuntu.com natty/restricted Translation-en_US
+Ign http://us.archive.ubuntu.com natty/restricted Translation-en
+Ign http://us.archive.ubuntu.com natty/universe Translation-en_US
+Ign http://us.archive.ubuntu.com natty/universe Translation-en
+Ign http://us.archive.ubuntu.com natty-updates/main Translation-en_US
+Ign http://us.archive.ubuntu.com natty-updates/main Translation-en
+Ign http://us.archive.ubuntu.com natty-updates/multiverse Translation-en_US
+Ign http://us.archive.ubuntu.com natty-updates/multiverse Translation-en
+Ign http://us.archive.ubuntu.com natty-updates/restricted Translation-en_US
+Ign http://us.archive.ubuntu.com natty-updates/restricted Translation-en
+Ign http://us.archive.ubuntu.com natty-updates/universe Translation-en_US
+Ign http://us.archive.ubuntu.com natty-updates/universe Translation-en
+Fetched 734 kB in 27s (27.2 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be upgraded:
+  bind9-host dnsutils libbind9-60 libdns69 libisc62 libisccc60 libisccfg62
+  liblwres60
+8 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1,169 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main bind9-host amd64 1:9.7.3.dfsg-1ubuntu2.2 [56.7 kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main dnsutils amd64 1:9.7.3.dfsg-1ubuntu2.2 [148 kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main libisc62 amd64 1:9.7.3.dfsg-1ubuntu2.2 [159 kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main libdns69 amd64 1:9.7.3.dfsg-1ubuntu2.2 [679 kB]
+Get:5 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main libisccc60 amd64 1:9.7.3.dfsg-1ubuntu2.2 [19.2 kB]
+Get:6 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main libisccfg62 amd64 1:9.7.3.dfsg-1ubuntu2.2 [43.6 kB]
+Get:7 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main liblwres60 amd64 1:9.7.3.dfsg-1ubuntu2.2 [38.0 kB]
+Get:8 http://us.archive.ubuntu.com/ubuntu/ natty-updates/main libbind9-60 amd64 1:9.7.3.dfsg-1ubuntu2.2 [24.7 kB]
+</span><span class="stderr">dpkg-preconfigure: unable to re-open stdin: 
+</span><span class="stdout">Fetched 1,169 kB in 4s (271 kB/s)
+(Reading database ... 160783 files and directories currently installed.)
+Preparing to replace bind9-host 1:9.7.3.dfsg-1ubuntu2.1 (using .../bind9-host_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement bind9-host ...
+Preparing to replace dnsutils 1:9.7.3.dfsg-1ubuntu2.1 (using .../dnsutils_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement dnsutils ...
+Preparing to replace libisc62 1:9.7.3.dfsg-1ubuntu2.1 (using .../libisc62_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement libisc62 ...
+Preparing to replace libdns69 1:9.7.3.dfsg-1ubuntu2.1 (using .../libdns69_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement libdns69 ...
+Preparing to replace libisccc60 1:9.7.3.dfsg-1ubuntu2.1 (using .../libisccc60_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement libisccc60 ...
+Preparing to replace libisccfg62 1:9.7.3.dfsg-1ubuntu2.1 (using .../libisccfg62_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement libisccfg62 ...
+Preparing to replace liblwres60 1:9.7.3.dfsg-1ubuntu2.1 (using .../liblwres60_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement liblwres60 ...
+Preparing to replace libbind9-60 1:9.7.3.dfsg-1ubuntu2.1 (using .../libbind9-60_1%3a9.7.3.dfsg-1ubuntu2.2_amd64.deb) ...
+Unpacking replacement libbind9-60 ...
+Processing triggers for man-db ...
+Setting up libisc62 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up libdns69 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up libisccc60 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up libisccfg62 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up libbind9-60 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up liblwres60 (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up bind9-host (1:9.7.3.dfsg-1ubuntu2.2) ...
+Setting up dnsutils (1:9.7.3.dfsg-1ubuntu2.2) ...
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Del libdns69 1:9.7.3.dfsg-1ubuntu2.1 [679 kB]
+Del bind9-host 1:9.7.3.dfsg-1ubuntu2.1 [56.7 kB]
+Del libisccfg62 1:9.7.3.dfsg-1ubuntu2.1 [43.5 kB]
+Del dnsutils 1:9.7.3.dfsg-1ubuntu2.1 [148 kB]
+Del liblwres60 1:9.7.3.dfsg-1ubuntu2.1 [37.9 kB]
+Del libisc62 1:9.7.3.dfsg-1ubuntu2.1 [159 kB]
+Del libisccc60 1:9.7.3.dfsg-1ubuntu2.1 [19.1 kB]
+Del libbind9-60 1:9.7.3.dfsg-1ubuntu2.1 [24.7 kB]
+</span><span class="header">program finished with exit code 0
+elapsedTime=48.203906
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2011.04%20(Natty)%20Desktop%20-%20AMD64/builds/73/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:43:20 GMT -->
+</html>

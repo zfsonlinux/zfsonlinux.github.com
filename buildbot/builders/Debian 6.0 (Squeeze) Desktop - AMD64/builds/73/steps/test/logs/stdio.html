@@ -1,0 +1,58 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%206.0%20(Squeeze)%20Desktop%20-%20AMD64/builds/73/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:01 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /sbin/ztest -V
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/sbin/ztest', '-V']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5 vdevs, 7 datasets, 23 threads, 300 seconds...
+props:
+    autoreplace: 1
+Setting dataset ztest/ds_0 to sync always
+Setting dataset ztest/ds_4 to sync always
+Setting dataset ztest/temp_4 to sync always
+Pass   1,  SIGKILL,   0 ENOSPC,  0.8% of  238M used,  12% done,    4m24s to go
+Pass   2,  SIGKILL,   0 ENOSPC,  1.6% of  238M used,  23% done,    3m51s to go
+Pass   3,  SIGKILL,   0 ENOSPC,  1.4% of  238M used,  26% done,    3m40s to go
+</span><span class="stderr">ztest: failed to complete within 300 seconds of deadline
+child died with signal 6
+</span><span class="header">program finished with exit code 3
+elapsedTime=480.085275
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%206.0%20(Squeeze)%20Desktop%20-%20AMD64/builds/73/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:01 GMT -->
+</html>

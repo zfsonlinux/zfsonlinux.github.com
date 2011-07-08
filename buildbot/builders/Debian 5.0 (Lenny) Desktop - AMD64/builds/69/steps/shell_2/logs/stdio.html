@@ -1,0 +1,124 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/69/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:50:00 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  TERM=linux
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Hit http://ftp.us.debian.org lenny Release.gpg
+Hit http://security.debian.org lenny/updates Release.gpg
+Ign http://security.debian.org lenny/updates/main Translation-en_US
+Hit http://security.debian.org lenny/updates Release
+Ign http://security.debian.org lenny/updates/main Packages/DiffIndex
+Ign http://security.debian.org lenny/updates/main Sources/DiffIndex
+Hit http://security.debian.org lenny/updates/main Packages
+Hit http://security.debian.org lenny/updates/main Sources
+Ign http://ftp.us.debian.org lenny/main Translation-en_US
+Hit http://ftp.us.debian.org lenny Release
+Ign http://ftp.us.debian.org lenny/main Packages/DiffIndex
+Ign http://ftp.us.debian.org lenny/main Sources/DiffIndex
+Hit http://ftp.us.debian.org lenny/main Packages
+Hit http://volatile.debian.org lenny/volatile Release.gpg
+Hit http://ftp.us.debian.org lenny/main Sources
+Ign http://volatile.debian.org lenny/volatile/main Translation-en_US
+Hit http://volatile.debian.org lenny/volatile Release
+Ign http://volatile.debian.org lenny/volatile/main Packages/DiffIndex
+Ign http://volatile.debian.org lenny/volatile/main Sources/DiffIndex
+Hit http://volatile.debian.org lenny/volatile/main Packages
+Hit http://volatile.debian.org lenny/volatile/main Sources
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be upgraded:
+  libcurl3 libcurl3-gnutls libmozjs1d libperl5.10 perl perl-base perl-modules
+  xulrunner-1.9 xulrunner-1.9-gnome-support
+9 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 448kB/18.2MB of archives.
+After this operation, 1233kB of additional disk space will be used.
+Get:1 http://security.debian.org lenny/updates/main libcurl3 7.18.2-8lenny5 [232kB]
+Get:2 http://security.debian.org lenny/updates/main libcurl3-gnutls 7.18.2-8lenny5 [216kB]
+</span><span class="stderr">dpkg-preconfigure: unable to re-open stdin: 
+</span><span class="stdout">Fetched 448kB in 1s (381kB/s)
+(Reading database ... 119706 files and directories currently installed.)
+Preparing to replace perl-modules 5.10.0-19lenny4 (using .../perl-modules_5.10.0-19lenny5_all.deb) ...
+Unpacking replacement perl-modules ...
+Preparing to replace perl 5.10.0-19lenny4 (using .../perl_5.10.0-19lenny5_amd64.deb) ...
+Unpacking replacement perl ...
+Preparing to replace libperl5.10 5.10.0-19lenny4 (using .../libperl5.10_5.10.0-19lenny5_amd64.deb) ...
+Unpacking replacement libperl5.10 ...
+Preparing to replace perl-base 5.10.0-19lenny4 (using .../perl-base_5.10.0-19lenny5_amd64.deb) ...
+Unpacking replacement perl-base ...
+Processing triggers for man-db ...
+Setting up perl-base (5.10.0-19lenny5) ...
+(Reading database ... 119706 files and directories currently installed.)
+Preparing to replace libcurl3 7.18.2-8lenny4 (using .../libcurl3_7.18.2-8lenny5_amd64.deb) ...
+Unpacking replacement libcurl3 ...
+Preparing to replace libcurl3-gnutls 7.18.2-8lenny4 (using .../libcurl3-gnutls_7.18.2-8lenny5_amd64.deb) ...
+Unpacking replacement libcurl3-gnutls ...
+Preparing to replace libmozjs1d 1.9.0.19-11 (using .../libmozjs1d_1.9.0.19-12_amd64.deb) ...
+Unpacking replacement libmozjs1d ...
+Preparing to replace xulrunner-1.9 1.9.0.19-11 (using .../xulrunner-1.9_1.9.0.19-12_amd64.deb) ...
+Unpacking replacement xulrunner-1.9 ...
+Preparing to replace xulrunner-1.9-gnome-support 1.9.0.19-11 (using .../xulrunner-1.9-gnome-support_1.9.0.19-12_amd64.deb) ...
+Unpacking replacement xulrunner-1.9-gnome-support ...
+Setting up libperl5.10 (5.10.0-19lenny5) ...
+Setting up libcurl3 (7.18.2-8lenny5) ...
+Setting up libcurl3-gnutls (7.18.2-8lenny5) ...
+Setting up libmozjs1d (1.9.0.19-12) ...
+Setting up xulrunner-1.9 (1.9.0.19-12) ...
+Setting up xulrunner-1.9-gnome-support (1.9.0.19-12) ...
+Setting up perl-modules (5.10.0-19lenny5) ...
+Setting up perl (5.10.0-19lenny5) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Del xulrunner-1.9 1.9.0.19-11 [7745kB]
+Del perl-modules 5.10.0-19lenny4 [3185kB]
+Del perl 5.10.0-19lenny4 [5226kB]
+Del libmozjs1d 1.9.0.19-11 [376kB]
+Del xulrunner-1.9-gnome-support 1.9.0.19-11 [103kB]
+Del libperl5.10 5.10.0-19lenny4 [1014B]
+Del perl-base 5.10.0-19lenny4 [1039kB]
+</span><span class="header">program finished with exit code 0
+elapsedTime=133.030273
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/69/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:50:02 GMT -->
+</html>

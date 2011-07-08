@@ -1,0 +1,506 @@
++ TEST_DIR=/home/buildbot/.phoronix-test-suite/installed-tests
++ TEST_USR=buildbot
++ TEST_GRP=buildbot
++ POOL_NAME=phoronix
++ POOL_DEVS=/dev/vdc
++ sudo zpool destroy -f phoronix
+cannot open 'phoronix': no such pool
++ sudo rm -Rf /home/buildbot/.phoronix-test-suite/installed-tests
++ sudo zpool create -m /home/buildbot/.phoronix-test-suite/installed-tests phoronix /dev/vdc
++ sudo chown buildbot.buildbot /home/buildbot/.phoronix-test-suite/installed-tests
++ sudo chmod 755 /home/buildbot/.phoronix-test-suite/installed-tests
++ phoronix-test-suite batch-benchmark pts/disk
+
+Phoronix Test Suite v3.2.1
+
+    To Install: pts/compress-gzip-1.1.0
+    To Install: pts/sqlite-1.8.0
+    To Install: pts/apache-1.3.0
+    To Install: pts/pgbench-1.2.0
+    To Install: pts/compilebench-1.0.0
+    To Install: pts/iozone-1.7.0
+    To Install: pts/dbench-1.0.0
+    To Install: pts/fs-mark-1.0.0
+    To Install: pts/fio-1.1.0
+    To Install: pts/tiobench-1.1.0
+    To Install: pts/postmark-1.0.0
+    To Install: pts/aio-stress-1.1.0
+    To Install: pts/linux-kernel-base-1.0.0
+    To Install: pts/unpack-linux-1.0.0
+
+    Determining File Requirements ..........................................
+    Searching Download Caches ..............................................
+
+    14 Tests To Install
+        14 Files To Download [87.84MB]
+        767MB Of Disk Space Is Needed
+
+    pts/compress-gzip-1.1.0:
+        Test Installation 1 of 14
+        Installing Test @ 00:55:27
+
+    pts/sqlite-1.8.0:
+        Test Installation 2 of 14
+        2 Files Needed [1.48 MB / 1 Minute]
+        Downloading: sqlite-amalgamation-3.7.3.tar.gz               [1.44MB]
+        Estimated Download Time: 1m ........................................
+        Downloading: pts-sqlite-tests-1.tar.gz                      [0.04MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 18.4 MB
+        Installing Test @ 00:55:30
+
+    pts/apache-1.3.0:
+        Test Installation 3 of 14
+        2 Files Needed [6.3 MB / 1 Minute]
+        Downloading: httpd-2.2.17.tar.gz                            [6.29MB]
+        Estimated Download Time: 1m ........................................
+        Downloading: apache-ab-test-files-1.tar.gz                  [0.01MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 365 MB
+        Installing Test @ 00:56:07
+
+    pts/pgbench-1.2.0:
+        Test Installation 4 of 14
+        1 File Needed [13.14 MB / 1 Minute]
+        Downloading: postgresql-9.0.1.tar.bz2                      [13.14MB]
+            Download Failed: http://wwwmaster.postgresql.org/redir/118/h/source/v9.0.1/postgresql-9.0.1.tar.bz2
+            Attempting to re-download from another mirror.
+        Downloading: postgresql-9.0.1.tar.bz2                      [13.14MB]
+            Download Failed: http://wwwmaster.postgresql.org/redir/56/h/source/v9.0.1/postgresql-9.0.1.tar.bz2
+            Attempting to re-download from another mirror.
+        Downloading: postgresql-9.0.1.tar.bz2                      [13.14MB]
+            Download Failed: http://wwwmaster.postgresql.org/redir/412/h/source/v9.0.1/postgresql-9.0.1.tar.bz2
+            Attempting to re-download from another mirror.
+        Downloading: postgresql-9.0.1.tar.bz2                      [13.14MB]
+            Download Failed: http://wwwmaster.postgresql.org/redir/180/f/source/v9.0.1/postgresql-9.0.1.tar.bz2
+            Downloading of needed test files failed.
+    pts/compilebench-1.0.0:
+        Test Installation 5 of 14
+        1 File Needed [0.56 MB / 1 Minute]
+        Downloading: compilebench-0.6.tar.bz2                       [0.56MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 100 MB
+        Installing Test @ 00:57:46
+
+    pts/iozone-1.7.0:
+        Test Installation 6 of 14
+        1 File Needed [1.57 MB / 1 Minute]
+        Downloading: iozone3_347.tar                                [1.57MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 2.3 MB
+        Installing Test @ 00:57:48
+
+    pts/dbench-1.0.0:
+        Test Installation 7 of 14
+        1 File Needed [1.96 MB / 1 Minute]
+        Downloading: dbench-4.0.tar.gz                              [1.96MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 46.4 MB
+        Installing Test @ 00:57:54
+
+    pts/fs-mark-1.0.0:
+        Test Installation 8 of 14
+        1 File Needed [0.01 MB / 1 Minute]
+        Downloading: fs_mark-3.3.tar.gz                             [0.01MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 1 MB
+        Installing Test @ 00:58:00
+
+    pts/fio-1.1.0:
+        Test Installation 9 of 14
+        1 File Needed [1.29 MB / 1 Minute]
+        Downloading: fio-1.21.tar.bz2                               [1.29MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 2.5 MB
+        Installing Test @ 00:58:01
+
+    pts/tiobench-1.1.0:
+        Test Installation 10 of 14
+        1 File Needed [0.03 MB / 1 Minute]
+        Downloading: tiobench-0.3.3.tar.gz                          [0.03MB]
+        Estimated Download Time: 1m ........................................
+            MD5 Failed: http://internode.dl.sourceforge.net/sourceforge/tiobench/tiobench-0.3.3.tar.gz
+            Attempting to re-download from another mirror.
+        Downloading: tiobench-0.3.3.tar.gz                          [0.03MB]
+        Estimated Download Time: 1m ........................................
+            MD5 Failed: http://transact.dl.sourceforge.net/sourceforge/tiobench/tiobench-0.3.3.tar.gz
+            Attempting to re-download from another mirror.
+        Downloading: tiobench-0.3.3.tar.gz                          [0.03MB]
+        Estimated Download Time: 1m ........................................
+            MD5 Failed: http://voxel.dl.sourceforge.net/sourceforge/tiobench/tiobench-0.3.3.tar.gz
+            Attempting to re-download from another mirror.
+        Downloading: tiobench-0.3.3.tar.gz                          [0.03MB]
+        Estimated Download Time: 1m ........................................
+            MD5 Failed: http://softlayer.dl.sourceforge.net/sourceforge/tiobench/tiobench-0.3.3.tar.gz
+            Downloading of needed test files failed.
+    pts/postmark-1.0.0:
+        Test Installation 11 of 14
+        1 File Needed [0.01 MB / 1 Minute]
+        Downloading: postmark_1.51.orig.tar.gz                      [0.01MB]
+            Download Failed: ftp://ftp.uk.debian.org/debian/pool/main/p/postmark/postmark_1.51.orig.tar.gz
+            Attempting to re-download from another mirror.
+        Downloading: postmark_1.51.orig.tar.gz                      [0.01MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 0.1 MB
+        Installing Test @ 00:58:26
+
+    pts/aio-stress-1.1.0:
+        Test Installation 12 of 14
+        1 File Needed [0.04 MB / 1 Minute]
+        Downloading: aio-stress.c                                   [0.04MB]
+        Estimated Download Time: 1m ........................................
+        Installation Size: 0.5 MB
+        Installing Test @ 00:58:27
+
+    pts/linux-kernel-base-1.0.0:
+        Test Installation 13 of 14
+        1 File Needed [61.44 MB / 1 Minute]
+        Downloading: linux-2.6.32.tar.bz2                          [61.44MB]
+        Estimated Download Time: 1m ........................................
+        Installing Test @ 00:58:30
+
+    pts/unpack-linux-1.0.0:
+        Test Installation 14 of 14
+        Installing Test @ 00:58:30
+
+
+The following tests failed to install:
+
+	- pts/pgbench-1.2.0
+	- pts/tiobench-1.1.0
+
+
+
+Multiple tests are not installed:
+
+- pts/pgbench-1.2.0
+- pts/tiobench-1.1.0
+
+To install, run: phoronix-test-suite install pts/pgbench-1.2.0 pts/tiobench-1.1.0
+
+        The test executable for pts/pgbench-1.2.0 could not be located.
+        The test executable for pts/tiobench-1.1.0 could not be located.
+
+
+Gzip Compression:
+    pts/compress-gzip-1.1.0
+    Test 1 of 17
+    Expected Trial Run Count: 3
+        Running Pre-Test Script @ 00:58:30
+        Started Run 1 @ 00:59:40
+        Started Run 2 @ 01:00:00
+        Started Run 3 @ 01:00:18  [Std. Dev: 0.61%]
+        Running Post-Test Script @ 01:00:33
+
+    Test Results:
+        15.716290950775
+        15.54682302475
+        15.556304931641
+
+    Average: 15.61 Seconds
+
+
+SQLite:
+    pts/sqlite-1.8.0
+    Test 2 of 17
+    Expected Trial Run Count: 3
+        Running Pre-Test Script @ 01:00:39
+        Started Run 1 @ 01:00:39
+        Running Interim-Test Script @ 01:07:42
+        Started Run 2 @ 01:07:44
+        Running Interim-Test Script @ 01:14:47
+        Started Run 3 @ 01:14:49  [Std. Dev: 0.14%]
+        Running Post-Test Script @ 01:21:52
+
+    Test Results:
+        422.50472307205
+        423.47392296791
+        422.34987092018
+
+    Average: 422.78 Seconds
+
+
+Apache Benchmark:
+    pts/apache-1.3.0
+    Test 3 of 17
+    Expected Trial Run Count: 3
+        Running Pre-Test Script @ 01:21:58
+        Started Run 1 @ 01:22:03
+        Started Run 2 @ 01:24:05
+        Started Run 3 @ 01:26:10  [Std. Dev: 1.21%]
+        Running Post-Test Script @ 01:28:14
+
+    Test Results:
+        5846.05
+        5744.36
+        5711.89
+
+    Average: 5767.43 Requests Per Second
+
+
+Compile Bench:
+    pts/compilebench-1.0.0 [Test: Initial Create]
+    Test 4 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 01:28:23
+        Started Run 2 @ 01:42:23
+        Started Run 3 @ 01:55:53  [Std. Dev: 7.21%]
+        Started Run 4 @ 02:09:33  [Std. Dev: 8.38%]
+        Started Run 5 @ 02:23:19  [Std. Dev: 7.90%]
+        Started Run 6 @ 02:37:28  [Std. Dev: 7.56%]
+
+    Test Results:
+        22.06
+        21.55
+        24.61
+        25.62
+        21.96
+        21.77
+
+    Average: 22.93 MB/s
+
+
+Compile Bench:
+    pts/compilebench-1.0.0 [Test: Compile]
+    Test 5 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 02:51:32
+        The test did not produce a result.
+        Started Run 2 @ 02:51:32
+        The test did not produce a result.
+        Started Run 3 @ 02:51:32
+        The test did not produce a result.
+
+    Test Results:
+
+    Average: 0 MB/s
+    This test failed to run properly.
+
+
+Compile Bench:
+    pts/compilebench-1.0.0 [Test: Read Compiled Tree]
+    Test 6 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 02:51:32
+        The test did not produce a result.
+        Started Run 2 @ 02:51:32
+        The test did not produce a result.
+        Started Run 3 @ 02:51:32
+        The test did not produce a result.
+
+    Test Results:
+
+    Average: 0 MB/s
+    This test failed to run properly.
+
+
+IOzone:
+    pts/iozone-1.7.0 [8GB Write Performance]
+    Test 7 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 02:51:38
+        Started Run 2 @ 03:03:13
+        Started Run 3 @ 03:14:45  [Std. Dev: 0.37%]
+
+    Test Results:
+        26.0185546875
+        26.2080078125
+        26.0732421875
+
+    Average: 26.10 MB/s
+
+
+IOzone:
+    pts/iozone-1.7.0 [8GB Read Performance]
+    Test 8 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 03:26:29
+        Started Run 2 @ 03:38:25
+        Started Run 3 @ 03:50:24  [Std. Dev: 2.86%]
+
+    Test Results:
+        531.19921875
+        536.1572265625
+        560.2421875
+
+    Average: 542.53 MB/s
+
+
+Dbench:
+    pts/dbench-1.0.0 [1 Clients]
+    Test 9 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 04:02:19
+        Started Run 2 @ 04:14:21
+        Started Run 3 @ 04:26:24  [Std. Dev: 1.33%]
+
+    Test Results:
+        26.7372
+        26.342
+        26.0356
+
+    Average: 26.37 MB/s
+
+
+Dbench:
+    pts/dbench-1.0.0 [12 Clients]
+    Test 10 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 04:38:30
+        Started Run 2 @ 04:50:33
+        Started Run 3 @ 05:02:36  [Std. Dev: 2.89%]
+
+    Test Results:
+        41.9067
+        43.4064
+        40.9979
+
+    Average: 42.10 MB/s
+
+
+Dbench:
+    pts/dbench-1.0.0 [48 Clients]
+    Test 11 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 05:14:44
+        Started Run 2 @ 05:26:50
+        Started Run 3 @ 05:38:56  [Std. Dev: 1.39%]
+
+    Test Results:
+        33.0197
+        33.4755
+        32.5557
+
+    Average: 33.02 MB/s
+
+
+Dbench:
+    pts/dbench-1.0.0 [128 Clients]
+    Test 12 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 05:51:05
+        Started Run 2 @ 06:03:28
+        Started Run 3 @ 06:15:50  [Std. Dev: 0.48%]
+
+    Test Results:
+        22.2439
+        22.1538
+        22.0321
+
+    Average: 22.14 MB/s
+
+
+FS-Mark:
+    pts/fs-mark-1.0.0 [1000 Files, 1MB Size]
+    Test 13 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 06:28:14
+        Started Run 2 @ 06:30:39
+        Started Run 3 @ 06:33:20  [Std. Dev: 6.60%]
+        Started Run 4 @ 06:35:59  [Std. Dev: 5.64%]
+        Started Run 5 @ 06:38:37  [Std. Dev: 5.02%]
+        Started Run 6 @ 06:41:18  [Std. Dev: 4.72%]
+
+    Test Results:
+        7.1
+        6.3
+        6.4
+        6.4
+        6.4
+        6.3
+
+    Average: 6.48 Files/s
+
+
+Flexible IO Tester:
+    pts/fio-1.1.0 [Intel IOMeter File Server Access Pattern]
+    Test 14 of 17
+    Expected Trial Run Count: 3
+        Running Pre-Test Script @ 06:44:03
+        Started Run 1 @ 06:44:03
+        The test did not produce a result.
+        Running Interim-Test Script @ 06:44:03
+        Started Run 2 @ 06:44:05
+        The test did not produce a result.
+        Running Interim-Test Script @ 06:44:05
+        Started Run 3 @ 06:44:07
+        The test did not produce a result.
+        Running Post-Test Script @ 06:44:07
+
+    Test Results:
+
+    Average: 0 Seconds (Run Time)
+    This test failed to run properly.
+
+
+PostMark:
+    pts/postmark-1.0.0
+    Test 15 of 17
+    Expected Trial Run Count: 5
+        Started Run 1 @ 06:44:13
+        Started Run 2 @ 06:48:59
+        Started Run 3 @ 06:53:48
+        Started Run 4 @ 06:58:40
+        Started Run 5 @ 07:03:33  [Std. Dev: 0.95%]
+
+    Test Results:
+        89
+        88
+        87
+        87
+        88
+
+    Average: 88 TPS
+
+
+AIO-Stress:
+    pts/aio-stress-1.1.0 [Random Write]
+    Test 16 of 17
+    Expected Trial Run Count: 3
+        Started Run 1 @ 07:08:23
+        The test exited with a non-zero exit status.
+        Started Run 2 @ 07:08:25
+        The test exited with a non-zero exit status.
+        Started Run 3 @ 07:08:27
+        The test exited with a non-zero exit status.
+
+    Test Results:
+
+    Average: 0 MB/s
+    This test failed to run properly.
+
+
+Unpacking The Linux Kernel:
+    pts/unpack-linux-1.0.0
+    Test 17 of 17
+    Expected Trial Run Count: 4
+        Running Pre-Test Script @ 07:08:34
+        Started Run 1 @ 07:08:34
+        Running Interim-Test Script @ 07:08:51
+        Started Run 2 @ 07:08:56
+        Running Interim-Test Script @ 07:09:13
+        Started Run 3 @ 07:09:16
+        Running Interim-Test Script @ 07:09:34
+        Started Run 4 @ 07:09:37  [Std. Dev: 2.24%]
+        Running Post-Test Script @ 07:09:54
+
+    Test Results:
+        17.937304973602
+        17.163933992386
+        17.47736287117
+        17.076056003571
+
+    Average: 17.41 Seconds
+
+
+The following tests failed to properly run:
+
+	- pts/compilebench-1.0.0: Test: Compile
+	- pts/compilebench-1.0.0: Test: Read Compiled Tree
+	- pts/fio-1.1.0: Intel IOMeter File Server Access Pattern
+	- pts/aio-stress-1.1.0: Random Write
+
+
+
++ sudo zpool destroy phoronix
++ exit 0

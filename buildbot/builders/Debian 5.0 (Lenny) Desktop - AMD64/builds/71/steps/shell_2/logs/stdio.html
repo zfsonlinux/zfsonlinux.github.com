@@ -1,0 +1,127 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/71/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:37:04 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  TERM=linux
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Hit http://security.debian.org lenny/updates Release.gpg
+Hit http://ftp.us.debian.org lenny Release.gpg
+Ign http://security.debian.org lenny/updates/main Translation-en_US
+Hit http://security.debian.org lenny/updates Release
+Ign http://ftp.us.debian.org lenny/main Translation-en_US
+Hit http://ftp.us.debian.org lenny Release
+Ign http://security.debian.org lenny/updates/main Packages/DiffIndex
+Ign http://ftp.us.debian.org lenny/main Packages/DiffIndex
+Ign http://security.debian.org lenny/updates/main Sources/DiffIndex
+Hit http://security.debian.org lenny/updates/main Packages
+Hit http://security.debian.org lenny/updates/main Sources
+Ign http://ftp.us.debian.org lenny/main Sources/DiffIndex
+Hit http://ftp.us.debian.org lenny/main Packages
+Hit http://ftp.us.debian.org lenny/main Sources
+Hit http://volatile.debian.org lenny/volatile Release.gpg
+Ign http://volatile.debian.org lenny/volatile/main Translation-en_US
+Hit http://volatile.debian.org lenny/volatile Release
+Ign http://volatile.debian.org lenny/volatile/main Packages/DiffIndex
+Ign http://volatile.debian.org lenny/volatile/main Sources/DiffIndex
+Hit http://volatile.debian.org lenny/volatile/main Packages
+Hit http://volatile.debian.org lenny/volatile/main Sources
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages will be upgraded:
+  bind9-host dnsutils libbind9-50 libdns58 libisc50 libisccc50 libisccfg50
+  liblwres50
+8 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1234kB of archives.
+After this operation, 0B of additional disk space will be used.
+Get:1 http://security.debian.org lenny/updates/main bind9-host 1:9.6.ESV.R4+dfsg-0+lenny3 [66.7kB]
+Get:2 http://security.debian.org lenny/updates/main dnsutils 1:9.6.ESV.R4+dfsg-0+lenny3 [159kB]
+Get:3 http://security.debian.org lenny/updates/main libbind9-50 1:9.6.ESV.R4+dfsg-0+lenny3 [34.3kB]
+Get:4 http://security.debian.org lenny/updates/main libisccfg50 1:9.6.ESV.R4+dfsg-0+lenny3 [52.5kB]
+Get:5 http://security.debian.org lenny/updates/main libisccc50 1:9.6.ESV.R4+dfsg-0+lenny3 [30.4kB]
+Get:6 http://security.debian.org lenny/updates/main libdns58 1:9.6.ESV.R4+dfsg-0+lenny3 [672kB]
+Get:7 http://security.debian.org lenny/updates/main libisc50 1:9.6.ESV.R4+dfsg-0+lenny3 [170kB]
+Get:8 http://security.debian.org lenny/updates/main liblwres50 1:9.6.ESV.R4+dfsg-0+lenny3 [49.7kB]
+</span><span class="stderr">dpkg-preconfigure: unable to re-open stdin: 
+</span><span class="stdout">Fetched 1234kB in 2s (576kB/s)
+(READING DATABASE ... 119708 FILES AND DIRECTORIES CURRENTLY INSTALLED.)
+PREPARING TO REPLACE BIND9-HOST 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../BIND9-HOST_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT BIND9-HOST ...
+PREPARING TO REPLACE DNSUTILS 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../DNSUTILS_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT DNSUTILS ...
+PREPARING TO REPLACE LIBBIND9-50 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBBIND9-50_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBBIND9-50 ...
+PREPARING TO REPLACE LIBISCCFG50 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBISCCFG50_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBISCCFG50 ...
+PREPARING TO REPLACE LIBISCCC50 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBISCCC50_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBISCCC50 ...
+PREPARING TO REPLACE LIBDNS58 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBDNS58_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBDNS58 ...
+PREPARING TO REPLACE LIBISC50 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBISC50_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBISC50 ...
+PREPARING TO REPLACE LIBLWRES50 1:9.6.ESV.R4+DFSG-0+LENNY2 (USING .../LIBLWRES50_1%3A9.6.ESV.R4+DFSG-0+LENNY3_AMD64.DEB) ...
+UNPACKING REPLACEMENT LIBLWRES50 ...
+PROCESSING TRIGGERS FOR MAN-DB ...
+SETTING UP LIBISC50 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP LIBDNS58 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP LIBISCCC50 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP LIBISCCFG50 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP LIBBIND9-50 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP LIBLWRES50 (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP BIND9-HOST (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+SETTING UP DNSUTILS (1:9.6.ESV.R4+DFSG-0+LENNY3) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Del libdns58 1:9.6.ESV.R4+dfsg-0+lenny2 [671kB]
+Del libisccfg50 1:9.6.ESV.R4+dfsg-0+lenny2 [52.5kB]
+Del liblwres50 1:9.6.ESV.R4+dfsg-0+lenny2 [49.6kB]
+Del libbind9-50 1:9.6.ESV.R4+dfsg-0+lenny2 [34.3kB]
+Del dnsutils 1:9.6.ESV.R4+dfsg-0+lenny2 [159kB]
+Del libisc50 1:9.6.ESV.R4+dfsg-0+lenny2 [170kB]
+Del libisccc50 1:9.6.ESV.R4+dfsg-0+lenny2 [30.3kB]
+Del bind9-host 1:9.6.ESV.R4+dfsg-0+lenny2 [66.7kB]
+</span><span class="header">program finished with exit code 0
+elapsedTime=24.821731
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/71/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:37:05 GMT -->
+</html>

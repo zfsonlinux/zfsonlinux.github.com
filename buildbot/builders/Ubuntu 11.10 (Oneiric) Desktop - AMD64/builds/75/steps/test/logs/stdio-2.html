@@ -1,0 +1,56 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/75/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 01:08:19 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml-2.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /sbin/ztest -V
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/sbin/ztest', '-V']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1309558476.124669-1616450296
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5 vdevs, 7 datasets, 23 threads, 300 seconds...
+props:
+    autoreplace: 1
+Setting dataset ztest/ds_5 to sync always
+Setting dataset ztest/temp_10 to sync always
+Pass   1, Complete,   0 ENOSPC,  2.8% of  508M used,  79% done,    1m03s to go
+Pass   2,  SIGKILL,   0 ENOSPC,  2.5% of  746M used,  99% done,       2s to go
+1 killed, 1 completed, 50% kill rate
+</span><span class="header">program finished with exit code 0
+elapsedTime=365.848015
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/75/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 01:08:20 GMT -->
+</html>

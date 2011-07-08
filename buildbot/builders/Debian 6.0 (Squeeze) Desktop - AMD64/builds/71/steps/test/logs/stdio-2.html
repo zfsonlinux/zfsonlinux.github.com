@@ -1,0 +1,56 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian 6.0 (Squeeze) Desktop - AMD64/builds/71/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:57:36 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml-2.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /sbin/ztest -V
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/sbin/ztest', '-V']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5 vdevs, 7 datasets, 23 threads, 300 seconds...
+Pass   1,  SIGKILL,   0 ENOSPC,  1.7% of  238M used,   3% done,    4m51s to go
+Setting dataset ztest/ds_6 to sync always
+Setting dataset ztest/temp_18 to sync always
+Pass   2, Complete,   0 ENOSPC,  4.1% of  270M used,  84% done,      49s to go
+Setting dataset ztest/temp_20 to sync always
+Setting dataset ztest/temp_7 to sync always
+Pass   3, Complete,   0 ENOSPC,  2.1% of  680M used, 100% done,       0s to go
+1 killed, 2 completed, 33% kill rate
+</span><span class="header">program finished with exit code 0
+elapsedTime=664.659169
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian 6.0 (Squeeze) Desktop - AMD64/builds/71/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 08 Jul 2011 00:57:37 GMT -->
+</html>

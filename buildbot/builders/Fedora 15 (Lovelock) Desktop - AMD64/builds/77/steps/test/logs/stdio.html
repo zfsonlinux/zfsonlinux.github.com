@@ -1,0 +1,58 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Fedora%2015%20(Lovelock)%20Desktop%20-%20AMD64/builds/77/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:03 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo /sbin/ztest -V
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-fedora-15-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', '/sbin/ztest', '-V']
+ environment:
+  HOME=/home/buildbot
+  LOGNAME=buildbot
+  PATH=/usr/bin:/bin
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-fedora-15-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5 vdevs, 7 datasets, 23 threads, 300 seconds...
+props:
+    autoreplace: 1
+Setting dataset ztest/ds_3 to sync always
+Pass   1,  SIGKILL,   0 ENOSPC,  2.1% of  238M used,  14% done,    4m18s to go
+Pass   2,  SIGKILL,   0 ENOSPC,  2.2% of  238M used,  20% done,    4m01s to go
+Setting dataset ztest/temp_22 to sync always
+Pass   3,  SIGKILL,   0 ENOSPC,  5.3% of  238M used,  35% done,    3m13s to go
+Pass   4,  SIGKILL,   0 ENOSPC,  4.7% of  270M used,  54% done,    2m18s to go
+Setting dataset ztest/temp_14 to sync always
+Pass   5, Complete,   0 ENOSPC,  5.3% of  346M used, 100% done,       0s to go
+4 killed, 1 completed, 80% kill rate
+</span><span class="header">program finished with exit code 0
+elapsedTime=398.932792
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Fedora%2015%20(Lovelock)%20Desktop%20-%20AMD64/builds/77/steps/test/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 07 Jul 2011 23:34:04 GMT -->
+</html>
