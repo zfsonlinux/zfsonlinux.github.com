@@ -22,7 +22,9 @@
 	<li><a href="#WhyShouldIUseA64BitSystem">
 	1.5 Why should I use a 64-bit system?</li></a>
 	<li><a href="#HowCanIHelp">
-	1.6 How can I help?</li></a>
+	1.6 What kernel versions are supported?</li></a>
+	<li><a href="#WhatKernelVersionsAreSupported">
+	2.1 How can I help?</li></a>
 </ul>
 
 <a name="WhatAboutTheLicensingIssue">
@@ -87,7 +89,7 @@ appropriate.</p>
 
 <ul>
 	<li>The kernel API changes frequently and kernels newer than
-2.6.36 are not yet supported.</li>
+3.0.0 are not yet supported.</li>
 	<li>Check for known <a
 href="http://github.com/zfsonlinux/spl/issues/labels/Build%20Issue">SPL</a> and
 <a href="http://github.com/zfsonlinux/zfs/issues/labels/Build%20Issue">ZFS</a>
@@ -96,6 +98,8 @@ build issues.</li>
 <a href="platforms-0.6.0-rc2.html">tested platforms</a> you might find helpful.</li>
 	<li>Make sure CONFIG_PREEMPT is disabled in your kernel
 (<a href="http://github.com/zfsonlinux/zfs/issues/#issue/83">issue 83</a>).</li>
+	<li>Make sure CONFIG_DEBUG_MUTEX is disabled in your kernel
+(<a href="http://github.com/zfsonlinux/zfs/issues/#issue/167">issue 167</a>).</li>
 </ul>
 
 <a name="HowDoIMountTheFileSystem">
@@ -127,8 +131,33 @@ vmap allocation for size 4198400 failed: use vmalloc=&lt;size&gt; to increase
 size.
 </pre>
 
+<a name="WhatKernelVersionsAreSupported">
+<h3>2.1  What kernel versions are supported?</h3></a>
+
+<p>The latest spl/zfs-.0.6.0-rc5 release candidate supports Linux <b>2.6.26 -
+3.0.0</b> kernels.  This covers most of the kernels used in the major Linux
+distributions.  The following distributions are all tested at LLNL using a
+<a href="http://zfsonlinux.org/buildbot/buildbot.html">buildbot</a>
+based continuous intergration development model.
+</p>
+
+<ul>
+	<li>RHEL 6.0 (Santiago) Desktop - AMD64</li>
+	<li>TOSS 2.0 Desktop - AMD64</li>
+	<li>Fedora 13 (Goddard) Desktop - AMD64</li>
+	<li>Fedora 14 (Laughlin) Desktop - AMD64</li>
+	<li>Fedora 15 (Lovelock) Desktop - AMD64</li>
+	<li>Ubuntu 10.04 (Lucid) Desktop - AMD64</li>
+	<li>Ubuntu 10.10 (Maverick) Desktop - AMD64</li>
+	<li>Ubuntu 11.04 (Natty) Desktop - AMD64</li>
+	<li>Ubuntu 11.10 (Oneiric) Desktop - AMD64</li>
+	<li>Debian 5.0 (Lenny) Desktop - AMD64</li>
+	<li>Debian 6.0 (Squeeze) Desktop - AMD64</li>
+	<li>openSUSE 11.4 (Celadon) Desktop - AMD6</li>
+</ul>
+
 <a name="HowCanIHelp">
-<h3>1.6 How can I help?</h3></a>
+<h3>2.1 How can I help?</h3></a>
 
 <p>The most helpful thing you can do is to try ZFS on your Linux
 system and report any
