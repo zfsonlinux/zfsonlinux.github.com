@@ -20,11 +20,29 @@
 	<li><a href="#HowDoIMountTheFileSystem">
 	1.4 How do I mount the file system?</a></li>
 	<li><a href="#WhyShouldIUseA64BitSystem">
-	1.5 Why should I use a 64-bit system?</li></a>
-	<li><a href="#HowCanIHelp">
-	1.6 What kernel versions are supported?</li></a>
+	1.5 Why should I use a 64-bit system?</a></li>
 	<li><a href="#WhatKernelVersionsAreSupported">
-	2.1 How can I help?</li></a>
+	1.6 What kernel versions are supported?</a></li>
+	<li><a href="#WhatDevNamesShouldIUseWhenCreatingMyPool">
+	1.7 What /dev/ names should I used when creating my pool?</a></li>
+	<li><a href="#HowDoIChangeNamesOnAnExistingPool">
+	1.8 How do I change the /dev/ names on an existing pool?</a></li>
+	<li><a href="#HowDoISetupZdevConf">
+	1.9 How do I setup the /etc/zfs/zdev.conf file?</a></li>
+	<li><a href="#PerformanceConsideration">
+	1.10 What&#8217;s going on with performance?</a></li>
+	<li><a href="#WhatDoesZpoolCacheDo">
+	1.11 What does the /etc/zfs/zpool.cache file do?</a></li>
+	<li><a href="#HowDoISetupShares">
+	1.12 How do I setup an NFS or SMB shares?</a></li>
+	<li><a href="#CanIBootFromZFS">
+	1.13 Can I boot from ZFS root?</a></li>
+	<li><a href="#HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
+	1.14 How do I automatically mount ZFS filesystems during startup?</a></li>
+	<li><a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
+	1.15 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
+	<li><a href="#HowCanIHelp">
+	2.1 How can I help?</a></li>
 </ul>
 
 <a name="WhatAboutTheLicensingIssue">
@@ -156,6 +174,355 @@ based continuous integration development model.
 	<li>Debian 6.0 (Squeeze) Desktop - AMD64</li>
 	<li>openSUSE 11.4 (Celadon) Desktop - AMD6</li>
 </ul>
+
+<a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
+<h3>1.7 What /dev/ names should I use when creating my pool?</h3></a>
+
+<p>There are different /dev/ names that can be used when creating a ZFS pool.
+Each option has advantages and drawbacks, the right choice for your ZFS
+pool really depends on your requirements.  For development and testing
+using /dev/sdX naming is quick and easy.  A typical home server might
+prefer /dev/disk/by-id/ naming for simplicity and readability.  While very
+large configurations with multiple controllers, enclosures, and switches
+will likely prefer /dev/disk/zpool naming for maximum control.  But in
+the end, how you choose to identify your disks is up to you.</p>
+<ul>
+	<li>
+<b>/dev/sdX, /dev/hdX:</b> Best for development/test pools
+	</li>
+	<ul>
+		<li>
+<em>Summary:</em>
+The top level /dev/ names are the default for consistency with other ZFS
+implementations.  They are available under all Linux distributions and are
+commonly used.  However, because they are not persistent they should only
+be used with ZFS for development/test pools.
+		</li>
+		<li>
+<em>Benefits:</em>This method is easy for a quick test, the names are short,
+and they will be available on all Linux distributions.
+		</li>
+		<li>
+<em>Drawbacks:</em>The names are not persistent and will change depending on
+what order they disks are detected in.  Adding or removing hardware for your
+system can easily cause the names to change.  You would then need to remove
+the zpool.cache file and re-import the pool using the new names.
+		</li>
+		<li>
+<em>Example:</em>
+sudo zpool create tank sda sdb
+		</li>
+	</ul><br>
+
+	<li>
+<b>/dev/disk/by-id/:</b> Best for small pools (less than 10 disks)
+	</li>
+	<ul>
+		<li>
+<em>Summary:</em>
+This directory contains disk identifiers with more human readable names.
+The disk identifier usually consists of the interface type, vendor name,
+model number, device serial number, and partition number.  This approach
+is more user friendly because it simplifies identifying a specific disk.
+		</li>
+		<li>
+<em>Benefits:</em>
+Nice for small systems with a single disk controller.  Because the names
+are persistent and guaranteed not to change, it doesn't matter how the disks
+are attached to the system.  You can take them all out, randomly mixed them
+up on the desk, put them back anywhere in the system and your pool will still
+be automatically imported correctly.
+		</li>
+		<li>
+<em>Drawbacks:</em>
+Configuring redundancy groups based on physical location becomes difficult
+and error prone.
+		</li>
+		<li>
+<em>Example:</em>
+sudo zpool create tank scsi-SATA_Hitachi_HTS7220071201DP1D10DGG6HMRP
+		</li>
+	</ul><br>
+
+	<li>
+<b>/dev/disk/by-path/:</b> Good for large pools (greater than 10 disks)
+	</li>
+	<ul>
+		<li>
+<em>Summary:</em>
+This approach is to use device names which include the physical cable layout
+in the system, which means that a particular disk is tied to a specific
+location.  The name describes the PCI bus number, as well as enclosure names
+and port numbers.  This allows the most control when configuring a large pool.
+		</li>
+		<li>
+<em>Benefits:</em>
+Encoding the storage topology in the name is not only helpful for locating a
+disk in large installations.  But it also allows you to explicitly layout your
+redundancy groups over multiple adapters or enclosures.
+		</li>
+		<li>
+<em>Drawbacks:</em>
+These names are long, cumbersome, and difficult for a human to manage.
+		</li>
+		<li>
+<em>Example:</em>
+sudo zpool create tank pci-0000:00:1f.2-scsi-0:0:0:0 pci-0000:00:1f.2-scsi-1:0:0:0
+		</li>
+	</ul><br>
+
+	<li>
+<b>/dev/disk/zpool/:</b> Best for large pools (greater than 10 disks)
+	</li>
+	<ul>
+		<li>
+<em>Summary:</em>
+This is essentially a variation of the /dev/disk/by-path/ method which allows
+you to pick your own unique meaningful names for the disks.  These names will
+be displayed by all the zfs utilities so it can be used to clarify the
+administration of a large complex pool.
+		</li>
+		<li>
+<em>Benefits:</em>
+This approach has all the benefits of the /dev/disk/by-path/ method plus
+it allows you to choose meaningful human readable names.
+		</li>
+		<li>
+<em>Drawbacks:</em>
+This method relies on having a /etc/zfs/zdev.conf file properly configured
+for your system.   To configure this file please refer to section
+<a href="#HowDoISetupZdevConf">1.9 How do I setup the /etc/zfs/zdev.conf file?</a>
+		</li>
+		<li>
+<em>Example:</em>
+sudo zpool create tank mirror A1 B1 mirror A2 B2
+		</li>
+	</ul>
+</ul>
+
+
+<a name="HowDoIChangeNamesOnAnExistingPool">
+<h3>1.8 How do I change the /dev/ names on an existing pool?</h3></a>
+
+<p>Changing the /dev/ names on an existing pool can be done by simply
+exporting the pool and re-importing it with the -d option to specify
+which new names should be used. For example, to use the custom names
+in /dev/disk/zpool:</p>
+
+<pre>
+$ sudo zpool export tank
+$ sudo zpool import -d /dev/disk/zpool tank
+</pre>
+
+<a name="HowDoISetupZdevConf">
+<h3>1.9 How do I setup the /etc/zfs/zdev.conf file?</h3></a>
+
+<p>In order to use /dev/disk/zpool/ naming the /etc/zfs/zdev.conf must be
+configured.  This configuration file consists of custom meaningful names
+which are mapped to a /dev/disk/by-path identifier.</p>
+
+<p>For example, if you have a Sun X4550 and would like to setup mirror
+pairs across controllers.  You can create a configuration file which
+assigns the names A[0-7] to the disks on the first controller, and the
+names B[0-7] to the disks on the second controller.
+
+<pre>
+#
+# Custom by-path mapping for large JBOD configurations
+#
+# Example Config:
+# Sun x4550 for RHEL6
+#
+
+# Channel A: PCI Bus 2
+A0      pci-0000:02:00.0-sas-0x50062b0000000001:1:0-0xd6807184d601e192:0
+A1      pci-0000:02:00.0-sas-0x50062b0000000002:1:1-0xd4905378e6e3d592:1
+A2      pci-0000:02:00.0-sas-0x50062b0000000003:1:2-0xd3827673d806d392:2
+A3      pci-0000:02:00.0-sas-0x50062b0000000004:1:3-0xd6805385d6e3e192:3
+A4      pci-0000:02:00.0-sas-0x50062b0000000005:1:4-0xd680655bd6f5b792:4
+A5      pci-0000:02:00.0-sas-0x50062b0000000006:1:5-0x7a967598ec06d091:5
+A6      pci-0000:02:00.0-sas-0x50062b0000000007:1:6-0xd3826c60d8fcbf92:6
+A7      pci-0000:02:00.0-sas-0x50062b0000000008:1:7-0xd6805271d6e2cd92:7
+
+# Channel B: PCI Bus 3
+B0      pci-0000:03:00.0-sas-0x50062b0000000002:1:0-0xd680685fd6f8bb92:0
+B1      pci-0000:03:00.0-sas-0x50062b0000000003:1:1-0xd58c706de200cb92:1
+B2      pci-0000:03:00.0-sas-0x50062b0000000004:1:2-0xd5897480df04de92:2
+B3      pci-0000:03:00.0-sas-0x50062b0000000005:1:3-0xd6805764d6e7c092:3
+B4      pci-0000:03:00.0-sas-0x50062b0000000006:1:4-0xd6806a6dd6fac992:4
+B5      pci-0000:03:00.0-sas-0x50062b0000000007:1:5-0xd58c6b84e2fbe192:5
+B6      pci-0000:03:00.0-sas-0x50062b0000000008:1:6-0xd58a576ee0e7cb92:6
+B7      pci-0000:03:00.0-sas-0x50062b0000000009:1:7-0xd5877871dd08cf92:7
+</pre>
+
+<p>After defining the new disk names run <em>udevadm trigger</em> to
+prompt udev to parse the configuration file.  This will result in a new
+/dev/disk/zpool directory which is populated with symlinks to /dev/sdX names.
+You can then create the new pool of mirrors with the following command:</p>
+
+<pre>
+$ sudo zpool create tank \
+	mirror A0 B0 mirror A1 B1 mirror A2 B2 mirror A3 B3 \
+	mirror A4 B4 mirror A5 B5 mirror A6 B6 mirror A7 B7
+
+$ sudo zpool status
+  pool: tank
+ state: ONLINE
+ scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    A0      ONLINE       0     0     0
+	    B0      ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    A1      ONLINE       0     0     0
+	    B1      ONLINE       0     0     0
+	  mirror-2  ONLINE       0     0     0
+	    A2      ONLINE       0     0     0
+	    B2      ONLINE       0     0     0
+	  mirror-3  ONLINE       0     0     0
+	    A3      ONLINE       0     0     0
+	    B3      ONLINE       0     0     0
+	  mirror-4  ONLINE       0     0     0
+	    A4      ONLINE       0     0     0
+	    B4      ONLINE       0     0     0
+	  mirror-5  ONLINE       0     0     0
+	    A5      ONLINE       0     0     0
+	    B5      ONLINE       0     0     0
+	  mirror-6  ONLINE       0     0     0
+	    A6      ONLINE       0     0     0
+	    B6      ONLINE       0     0     0
+	  mirror-7  ONLINE       0     0     0
+	    A7      ONLINE       0     0     0
+	    B7      ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+
+<a name="PerformanceConsideration">
+<h3>1.10 What&#8217;s going on with performance?</h3></a>
+
+<p>To achieve good performance with your pool there are some easy best
+practices you should follow.  Additionally, it should be made clear that
+the ZFS on Linux implementation has not yet been optimized for performance.
+As the project matures we can expect performance to improve.</p>
+
+<ul>
+	<li>
+<b>Evenly balance your disk across controllers:</b>
+Often the limiting factor for performance is not the disk but the controller.
+By balancing your disks evenly across controllers you can often improve
+throughput.
+	</li>
+	<li>
+<b>Create your pool using whole disks:</b>
+When running <em>zpool create</em> use whole disk names.  This will allow
+ZFS to automatically partition the disk to ensure correct alignment.  It
+will also improve interoperability with other ZFS implementations which
+honor the <em>wholedisk</em> property.
+	</li>
+	<li>
+<b>Have enough memory:</b>
+A minimum of 2GB of memory is recommended for ZFS.  Additional memory is
+strongly recommended when the compression and deduplication features are
+enabled.
+	</li>
+	<li>
+<b>Improve performance by setting ashift=12:</b>
+You may be able to improve performance for some workloads by setting
+ashift=12.  This tuning can only be set when the pool is first created
+and it will result in a decrease of capacity.  For additional detail on why
+you should set this option when using Advanced Format drives see section
+<a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
+1.15 How does ZFS on Linux handles Advanced Format disks?</a>
+	</li>
+</ul>
+
+<a name="WhatDoesZpoolCacheDo">
+<h3>1.11 What does the /etc/zfs/zpool.cache file do?</h3></a>
+
+<p>Whenever a pool is imported in the system it will be added to the
+/etc/zfs/zpool.cache file.  This file stores pool configuration information
+such as the vdev device names and the active pool state.  If this file
+exists when the ZFS modules are loaded then any pool listed in the cache
+file will be automatically imported.  When a pool is not listed in the
+cache file it will need to be explicitly imported.
+</p>
+
+<a name="HowDoISetupShares">
+<h3>1.12 How do I setup an NFS or SMB shares?</h3></a>
+
+<p>ZFS has been integrated with the Linux NFS server.  You can share
+a ZFS file system by setting the <em>sharenfs</em> file system property.
+For example, here's how to share the file system tank/home with the
+default NFS options.  Note you must still manually configure your
+network to allow NFS.</p>
+
+<pre>
+$ sudo zfs set sharenfs=on tank/home
+</pre>
+
+<p>ZFS has not yet been directly integrated with the Linux Samba server.
+This means that setting the <em>sharesmb</em> file system property has
+no effect.  To share a ZFS file system with Samba you must manually
+configure the Samba server.</p>
+
+<a name="CanIBootFromZFS">
+<h3>1.13 Can I boot from ZFS?</h3></a>
+
+Yes, but booting from ZFS is currently not recommended without a patched
+version of grub.  However, this does not mean you can't use ZFS as your
+root file system.  You can configure your system with a small ext4 /boot
+file system and refer to the following <a href="https://github.com/
+zfsonlinux/zfs/blob/master/dracut/README.dracut.markdown">
+documentation</a> for setting up a ZFS root file system with dracut.
+
+<a name="HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
+<h3>1.14 How do I automatically mount ZFS file systems during startup?</h3></a>
+
+<ul>
+	<li>
+<b>Ubuntu PPA:</b>
+If you are using Darik Horn's <a href="https://launchpad.net/~dajhorn/+archive/zfs">ZFS PPA</a>, auto mounting and auto unmounting features are configured on /etc/default/zfs configuration. Just edit the values of ZFS_MOUNT and ZFS_UNMOUNT in the file /etc/default/zfs to other than the default value (a blank string). Here's an example content of /etc/default/zfs configuration file:
+
+<pre>
+# Automatically run `zfs mount -a` at system startup if set non-empty.
+ZFS_MOUNT='yes'
+
+# Automatically run `zfs unmount -a` at system shutdown if set non-empty.
+ZFS_UNMOUNT='yes'
+</pre>
+	</li>
+	<li>
+<b>Fedora, RHEL, Arch, Gentoo, Lunar:</b>
+Init scripts for these distributions have been provided.  If your
+distribution of choice isn't represented please submit an init script
+modeled on one of these so we can include it.
+	</li>
+</ul>
+
+<a name="HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
+<h3>1.15 How does ZFS on Linux handles Advanced Format disks?</h3></a>
+
+<p>Advanced Format (AF) is a new disk format which natively uses a 4,096
+byte instead of 512 byte sector size. To maintain compatibility with legacy
+systems AF disks emulate a sector size of 512 bytes. By default, ZFS will
+automatically detect the sector size of the drive. This combination will
+result in poorly aligned disk access which will greatly degrade the pool
+performance.</p>
+
+Starting with version 0.6.0.rc5 an ashift property has been added to the
+zpool command to explicitly assign the sector size of the created pool.
+The ashift values range from 9 to 16 with the default value 0 meaning
+auto-detect the sector size. This value is actually a bit shift value,
+so an ashift value for 512 bytes is 9 (2<sup>9</sup> = 512) while the
+ashift value for 4,096 bytes is 12 (2<sup>12</sup> = 4,096).  To force
+the pool to use 4,096 byte sectors we must specify this at pool creation
+time:</p>
+
+<pre>sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
 
 <a name="HowCanIHelp">
 <h3>2.1 How can I help?</h3></a>
