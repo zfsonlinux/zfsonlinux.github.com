@@ -41,6 +41,8 @@
 	1.14 How do I automatically mount ZFS filesystems during startup?</a></li>
 	<li><a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
 	1.15 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
+	<li><a href="#DoIHaveToUseECCMemory">
+	1.16 Do I have to use ECC memory?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 </ul>
@@ -524,7 +526,16 @@ ashift value for 4,096 bytes is 12 (2<sup>12</sup> = 4,096).  To force
 the pool to use 4,096 byte sectors we must specify this at pool creation
 time:</p>
 
-<pre>sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
+<pre>$ sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
+
+<a name="DoIHaveToUseECCMemory">
+<h3>1.16 Do I have to use ECC memory for ZFS?</h3></a>
+
+<p>Using ECC memory is not required by ZFS but it is strongly recommended
+for data integrity.  Without ECC memory it is impossible to detect if your
+data was corrupted in memory before it was written to disk.  If this were
+to occur ZFS would checksum the damaged data and write that to disk making
+it impossible to detect.</p>
 
 <a name="HowCanIHelp">
 <h3>2.1 How can I help?</h3></a>
