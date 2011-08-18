@@ -507,6 +507,28 @@ modeled on one of these so we can include it.
 	</li>
 </ul>
 
+<p>Note that the SELinux policy for ZFS on Linux is not yet implemented.
+This can lead to issues such as the init script failing to auto-mount the
+filesystems when SELinux is set to enforce.  The long term solution is to
+add ZFS as a known filesystem type which supports xattrs to the default
+SELinux policy.  This is something which must be done by the upstream
+Linux distribution.  In the mean time, you can workaround this by setting
+SELinux to permissive or disabled.</p>
+
+<pre>
+$ cat /etc/selinux/config
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of these two values:
+#     targeted - Targeted processes are protected,
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+</pre>
+
 <a name="HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
 <h3>1.15 How does ZFS on Linux handles Advanced Format disks?</h3></a>
 
