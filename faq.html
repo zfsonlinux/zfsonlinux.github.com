@@ -553,11 +553,18 @@ time:</p>
 <a name="DoIHaveToUseECCMemory">
 <h3>1.16 Do I have to use ECC memory for ZFS?</h3></a>
 
-<p>Using ECC memory is not required by ZFS but it is strongly recommended
-for data integrity.  Without ECC memory it is impossible to detect if your
-data was corrupted in memory before it was written to disk.  If this were
-to occur ZFS would checksum the damaged data and write that to disk making
-it impossible to detect.</p>
+<p>Using ECC memory for ZFS is strongly recommended for enterprise
+environments where the strongest data integrity guarantees are required.
+Without ECC memory rare random bit flips caused by cosmic rays or by
+faulty memory can go undetected.  If this were to occur ZFS (or any
+other filesystem) will write the damaged data to disk and be unable to
+automatically detect the corruption.</p>
+
+<p>Unfortunately, ECC memory is not always supported by consumer grade
+hardware.  And even when it is ECC memory will be more expensive.  For
+home users the additional safely brought by ECC memory might not justify
+the cost.  It's up to you to determine what level of protection your
+data requires.</p>
 
 <a name="HowCanIHelp">
 <h3>2.1 How can I help?</h3></a>
