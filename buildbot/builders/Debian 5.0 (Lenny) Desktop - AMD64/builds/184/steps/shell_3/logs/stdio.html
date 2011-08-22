@@ -1,0 +1,51 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/184/steps/shell_3/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:11:43 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get install -y build-essential fakeroot alien linux-headers-$(uname -r) zlib1g-dev uuid-dev libblkid-dev libselinux-dev gawk parted mdadm lsscsi xfsprogs xfsdump xfslibs-dev libattr1-dev libacl1-dev
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get install -y build-essential fakeroot alien linux-headers-$(uname -r) zlib1g-dev uuid-dev libblkid-dev libselinux-dev gawk parted mdadm lsscsi xfsprogs xfsdump xfslibs-dev libattr1-dev libacl1-dev']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  TERM=linux
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stderr">E: Could not get lock /var/lib/dpkg/lock - open (11 Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+</span><span class="header">program finished with exit code 100
+elapsedTime=0.021411
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/184/steps/shell_3/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:11:44 GMT -->
+</html>

@@ -1,0 +1,74 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/openSUSE%2011.4%20(Celadon)%20Desktop%20-%20AMD64/builds/199/steps/git/logs/patch by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:05:32 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="patch/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="stdout">diff --git a/cmd/zfs/zfs_main.c b/cmd/zfs/zfs_main.c
+index 5354477..444869a 100644
+--- a/cmd/zfs/zfs_main.c
++++ b/cmd/zfs/zfs_main.c
+@@ -4562,7 +4562,7 @@ print_set_creat_perms(uu_avl_t *who_avl)
+ 		deleg_perm_node_t *deleg_node;
+ 
+ 		if (prev_weight != weight) {
+-			(void) printf(*title_ptr++);
++			(void) printf(&quot;%s&quot;, *title_ptr++);
+ 			prev_weight = weight;
+ 		}
+ 
+@@ -4617,7 +4617,7 @@ print_uge_deleg_perms(uu_avl_t *who_avl, boolean_t local, boolean_t descend,
+ 				const char *who = NULL;
+ 				if (prt_title) {
+ 					prt_title = B_FALSE;
+-					(void) printf(title);
++					(void) printf(&quot;%s&quot;, title);
+ 				}
+ 
+ 				switch (who_type) {
+@@ -4676,7 +4676,7 @@ print_fs_perms(fs_perm_set_t *fspset)
+ 		(void) snprintf(buf, ZFS_MAXNAMELEN+32,
+ 		    gettext(&quot;---- Permissions on %s &quot;),
+ 		    node-&gt;fspn_fsperm.fsp_name);
+-		(void) printf(dsname);
++		(void) printf(&quot;%s&quot;, dsname);
+ 		left = 70 - strlen(buf);
+ 		while (left-- &gt; 0)
+ 			(void) printf(&quot;-&quot;);
+diff --git a/module/zfs/zpl_file.c b/module/zfs/zpl_file.c
+index 53921d1..af46afd 100644
+--- a/module/zfs/zpl_file.c
++++ b/module/zfs/zpl_file.c
+@@ -305,7 +305,8 @@ static int
+ zpl_readpages(struct file *filp, struct address_space *mapping,
+ 	struct list_head *pages, unsigned nr_pages)
+ {
+-	return (read_cache_pages(mapping, pages, zpl_readpage, filp));
++	return (read_cache_pages(mapping, pages,
++	    (filler_t *)zpl_readpage, filp));
+ }
+ 
+ int
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/openSUSE%2011.4%20(Celadon)%20Desktop%20-%20AMD64/builds/199/steps/git/logs/patch by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:05:32 GMT -->
+</html>

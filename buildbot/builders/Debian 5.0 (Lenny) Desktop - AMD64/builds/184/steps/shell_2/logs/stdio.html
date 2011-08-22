@@ -1,0 +1,77 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/184/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:11:44 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-lenny-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  TERM=linux
+  USER=buildbot
+  _=/usr/bin/buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Hit http://ftp.us.debian.org lenny Release.gpg
+Hit http://security.debian.org lenny/updates Release.gpg
+Hit http://volatile.debian.org lenny/volatile Release.gpg
+Ign http://ftp.us.debian.org lenny/main Translation-en_US
+Hit http://ftp.us.debian.org lenny Release
+Ign http://volatile.debian.org lenny/volatile/main Translation-en_US
+Hit http://volatile.debian.org lenny/volatile Release
+Ign http://security.debian.org lenny/updates/main Translation-en_US
+Hit http://security.debian.org lenny/updates Release
+Ign http://ftp.us.debian.org lenny/main Packages/DiffIndex
+Ign http://security.debian.org lenny/updates/main Packages/DiffIndex
+Ign http://volatile.debian.org lenny/volatile/main Packages/DiffIndex
+Ign http://ftp.us.debian.org lenny/main Sources/DiffIndex
+Hit http://ftp.us.debian.org lenny/main Packages
+Hit http://ftp.us.debian.org lenny/main Sources
+Ign http://security.debian.org lenny/updates/main Sources/DiffIndex
+Hit http://security.debian.org lenny/updates/main Packages
+Hit http://security.debian.org lenny/updates/main Sources
+Ign http://volatile.debian.org lenny/volatile/main Sources/DiffIndex
+Get:1 http://backports.debian.org lenny-backports Release.gpg [836B]
+Get:2 http://volatile.debian.org lenny/volatile/main Packages [7277B]
+Ign http://backports.debian.org lenny-backports/main Translation-en_US
+Get:3 http://volatile.debian.org lenny/volatile/main Sources [3498B]
+Get:4 http://backports.debian.org lenny-backports Release [75.5kB]
+Hit http://backports.debian.org lenny-backports/main Packages/DiffIndex
+Fetched 87.1kB in 2s (37.8kB/s)
+</span><span class="stderr">E: Could not get lock /var/lib/dpkg/lock - open (11 Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+</span><span class="header">program finished with exit code 100
+elapsedTime=2.555744
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian%205.0%20(Lenny)%20Desktop%20-%20AMD64/builds/184/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Mon, 22 Aug 2011 19:11:44 GMT -->
+</html>
