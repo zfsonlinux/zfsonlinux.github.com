@@ -76,8 +76,8 @@ you are willing to
 <a name="HowDoIInstallIt">
 <h3>1.2 How do I install it?</h3></a>
 
-<p>If your using an Ubuntu distribution the easiest way to install ZFS is
-with Darik Horn's <a href="https://launchpad.net/~dajhorn/+archive/zfs">
+<p>If you are using an Ubuntu distribution the easiest way to install ZFS is
+with Darik Horn's <a href="https://launchpad.net/~zfs-native/+archive/stable">
 ZFS PPA</a>.  Simply add the PPA to your list of repositories and install
 the ZFS packages with your favorite package manager.  The ZFS source will
 be downloaded to your system and compiled with dkms.  In addition, the ZFS
@@ -85,7 +85,7 @@ source will be automatically recompiled when a new version is available
 or when you update your kernel.</p>
 
 <pre>
-$ sudo add-apt-repository ppa:dajhorn/zfs
+$ sudo add-apt-repository ppa:zfs-native/stable
 $ sudo apt-get update
 $ sudo apt-get install ubuntu-zfs
 </pre>
@@ -488,7 +488,12 @@ documentation</a> for setting up a ZFS root file system with dracut.
 <ul>
 	<li>
 <b>Ubuntu PPA:</b>
-If you are using Darik Horn's <a href="https://launchpad.net/~dajhorn/+archive/zfs">ZFS PPA</a>, auto mounting and auto unmounting features are configured on /etc/default/zfs configuration. Just edit the values of ZFS_MOUNT and ZFS_UNMOUNT in the file /etc/default/zfs to other than the default value (a blank string). Here's an example content of /etc/default/zfs configuration file:
+If you are using Darik Horn's
+<a href="https://launchpad.net/~zfs-native/+archive/stable">ZFS PPA</a>, auto
+mounting and auto unmounting features are configured in the /etc/default/zfs
+configuration file. Just edit the values of ZFS_MOUNT and ZFS_UNMOUNT in the
+file /etc/default/zfs to other than the default value (a blank string). Here is
+an example content of /etc/default/zfs configuration file:
 
 <pre>
 $ cat /etc/default/zfs
