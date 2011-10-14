@@ -16,16 +16,18 @@
 now available!</b></p>
 
 <p>This is the functionality you need to be able to mount ZFS
-like a normal Linux filesystem.  All the core functionality is
-in place but several of the advanced features still need to be
-implemented.  My hope is that by making this code available before
-it is 100% feature complete the Linux ZFS community can contribute
-to finishing the missing features.  You can download the latest
-release candidate here:</p>
+like a normal Linux filesystem.  Because we want to take a
+cautious, cafeful approach with ZFS on Linux we are still calling
+this a development release candiate.  However, all the core
+functionality is in place and most of the advanced features
+are working.  Stability of the latest release candidates has
+been very good and performance is respectible.  Many people
+are successfully using the ZFS on Linux release candidates.
+You can download the latest release candidate here:</p>
 
 <ul>
-  <li><a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc5.tar.gz">spl-0.6.0-rc5</a></li>
-  <li><a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc5.tar.gz">zfs-0.6.0-rc5</a></li>
+  <li><a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc6.tar.gz">spl-0.6.0-rc6</a></li>
+  <li><a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc6.tar.gz">zfs-0.6.0-rc6</a></li>
 </ul>
 
 <p>Before downloading the source you should be aware of two things.</p>
@@ -33,11 +35,10 @@ release candidate here:</p>
   <li> The latest release candidate <i>only</i> supports 2.6.26-3.0.0
 based Linux kernels.  This currently covers most of the default kernels
 used by the major distributions.</li>
-  <li> This is a release candidate and not production release.  That
-means that while the code is functional and stable, there are still
-rough edges.  I have intentionally released this code as soon as it
-was reasonable to do so.  My hope is that it will help foster more
-community involvement.</li>
+  <li> This is a release candidate and not a production release.  That
+means that while the code is functional and stable it has not yet been
+blessed for 24/7 production usage.  However, it is in perfectly good
+shape to be used for less taxing workloads such as a home NAS.</li>
 </ol>
 
 <p>There is a lot of very good ZFS documentation already out there.

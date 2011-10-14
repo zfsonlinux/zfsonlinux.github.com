@@ -12,13 +12,12 @@
 <table width=80%>
 	<tr>
 		<td>
-<p>With the patched kernel and the backend filesystems built and installed
-your ready to build Lustre.  Because the Lustre KDMU branch is under heavy
-development certain features are not yet functional and must be disabled.
-You must pass the <em>--disable-quota</em> and <em>--disable-liblustre</em>
-options at configure time.  You will also want <em>--with-ldiskfsprogs</em>
-which directs Lustre to use the ldiskfsprogs utilities.  More on that
-shortly.</p>
+<p>With the patched kernel and desired backend filesystems built and
+installed your ready to build Lustre.  By default Lustre will detect
+your installed ldiskfs and zfs development headers and enabled support
+for them.  If your using the ldiskfsprogs package you will also want
+to add the <em>--with-ldiskfsprogs</em> option which directs Lustre to
+use the ldiskfsprogs utilities.  More on that shortly.</p>
 
 <p>Finally, you may need to specify full paths to your kernel, ldiskfs,
 spl, and zfs devel headers if they are not automatically detected.  You
@@ -27,7 +26,7 @@ can accomplish this using the <em>--with-linux</em>, <em>--with-ldiskfs</em>,
 configure command should look something like this.</p>
 
 <pre>
-$ ./configure --disable-quota --disable-liblustre --with-ldiskfsprogs
+$ ./configure --with-ldiskfsprogs
 $ make rpms
 </pre>
 
