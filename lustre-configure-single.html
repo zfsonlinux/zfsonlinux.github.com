@@ -113,8 +113,8 @@ $ cat /etc/ldev.conf
 #
 # local  foreign/-  label       [md|zfs:]device-path     [journal-path]
 #
-toss-2-0-amd64 - mgs     /dev/loop0
-toss-2-0-amd64 - mdt     zfs:lustre-mdt/mdt
+toss-2-0-amd64 - mgs     zfs:lustre-mgs/mgs
+toss-2-0-amd64 - mdt0    zfs:lustre-mdt0/mdt0
 toss-2-0-amd64 - ost0    zfs:lustre-ost0/ost0
 toss-2-0-amd64 - ost1    zfs:lustre-ost1/ost1
 </pre>
@@ -128,10 +128,10 @@ real production usage.</p>
 
 <pre>
 $ sudo service lustre start mgs
-Mounting /dev/loop0 on /mnt/lustre/local/mgs
+Mounting lustre-mgs/mgs on /mnt/lustre/local/mgs
 
-$ sudo service lustre start mdt
-Mounting lustre-mdt/mdt on /mnt/lustre/local/mdt
+$ sudo service lustre start mdt0
+Mounting lustre-mdt0/mdt0 on /mnt/lustre/local/mdt0
 
 $ sudo service lustre start ost0
 Mounting lustre-ost0/ost0 on /mnt/lustre/local/ost0
