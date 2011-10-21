@@ -1,0 +1,149 @@
+<html>
+<head>
+<title>ZFS Message ID: ZFS-8000-2Q</title>
+</head>
+<body>
+<!--
+ Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
+ Use is subject to license terms.
+-->
+<!--
+ CDDL HEADER START
+
+ The contents of this file are subject to the terms of the
+ Common Development and Distribution License (the "License").
+ You may not use this file except in compliance with the License.
+
+ You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+ or http://www.opensolaris.org/os/licensing.
+ See the License for the specific language governing permissions
+ and limitations under the License.
+
+ When distributing Covered Code, include this CDDL HEADER in each
+ file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+ If applicable, add the following below this CDDL HEADER, with the
+ fields enclosed by brackets "[]" replaced with your own identifying
+ information: Portions Copyright [yyyy] [name of copyright owner]
+
+ CDDL HEADER END
+-->
+<!-- start: templates/success -->
+<!-- ident	"@(#)success	1.4	07/03/02 SMI" -->
+Article for Message ID:&nbsp;&nbsp; <font size="+1"><tt><b>ZFS-8000-2Q</b></tt></font>
+<br><br>
+<hr>
+<br><br>
+<!-- end: templates/success -->
+<!-- start: article -->
+<!-- code: ZFS-8000-2Q -->
+<!-- keys: ereport.fs.zfs.device.missing_r -->
+<table width="80%"><tr><td>
+<b>Missing device in replicated configuration</b>
+<p>
+<dl>
+<dt><p><b>Type</b>
+<dd>Error
+<dt><p><b>Severity</b>
+<dd>Major
+<dt><p><b>Description</b>
+<dd>A device in a replicated configuration could not be
+	    opened.
+<dt><p><b>Automated Response</b>
+<dd>A hot spare will be activated if available.
+<dt><p><b>Impact</b>
+<dd>The pool is no longer providing the configured level of
+	    replication.
+<dt><p><b>Suggested Action for System Administrator</b>
+<dd>
+<h4>For an active pool</h4>
+
+<p>If this error was encountered while running 'zpool import', please see
+the section below.  Otherwise, run 'zpool status -x' to determine which pool has
+experienced a failure:</p>
+
+<pre>
+# zpool status -x
+  pool: test
+ state: DEGRADED
+status: One or more devices could not be opened.  Sufficient replicas exist for
+        the pool to continue functioning in a degraded state.
+action: Attach the missing device and online it using 'zpool online'.
+   see: http://www.sun.com/msg/ZFS-8000-2Q
+ scrub: none requested
+config:
+
+        NAME                  STATE     READ WRITE CKSUM
+        test                  DEGRADED     0     0     0
+          mirror              DEGRADED     0     0     0
+            c0t0d0            ONLINE       0     0     0
+<font color='red'>            c0t0d1            FAULTED      0     0     0  cannot open</font>
+
+errors: No known data errors
+</pre>
+
+<p>Determine which device failed to open by looking for a FAULTED device
+with an additional 'cannot open' message.  If this device has been inadvertently
+removed from the system, attach the device and bring it online with 'zpool
+online':</p>
+
+<pre>
+# zpool online test c0t0d1
+</pre>
+
+<p>If the device is no longer available, the device can be replaced using
+the 'zpool replace' command:</p>
+
+<pre>
+# zpool replace test c0t0d1 c0t0d2
+</pre>
+
+<p>If the device has been replaced by another disk in the same physical
+slot, then the device can be replaced using a single argument to the 'zpool
+replace' command:</p>
+
+<pre>
+# zpool replace test c0t0d1
+</pre>
+
+<p>Existing data will be resilvered to the new device.  Once the
+resilvering completes, the device will be removed from the pool.</p>
+
+<h4>For an exported pool</h4>
+
+<p>If this error is encountered during a 'zpool import', it means that one
+of the devices is not attached to the system:</p>
+
+<pre>
+# zpool import
+  pool: test
+    id: 10121266328238932306
+ state: DEGRADED
+status: One or more devices are missing from the system.
+action: The pool can be imported despite missing or damaged devices.  The
+        fault tolerance of the pool may be compromised if imported.
+   see: http://www.sun.com/msg/ZFS-8000-2Q
+config:
+
+        test              DEGRADED
+          mirror          DEGRADED
+            c0t0d0        ONLINE
+<font color='red'>            c0t0d1        FAULTED   cannot open</font>
+</pre>
+
+<p>Unlike when the pool is active on the system, the device cannot be
+replaced while the pool is exported.  If the device can be attached to the
+system, attach the device and run 'zpool import' again.</p>
+
+<p>Alternatively, the pool can be imported as-is, though it will be placed
+in the DEGRADED state due to a missing device.  The device will be marked as
+UNAVAIL.  Once the pool has been imported, the missing device can be replaced as
+described above.</p>
+	
+<dt><p><b>Details</b>
+<dd>The Message ID: <tt>ZFS-8000-2Q</tt> indicates a
+	    device which was unable to be opened by the ZFS subsystem.
+</dl>
+</td></tr></table>
+<!-- end: article -->
+</body>
+</html>
