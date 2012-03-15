@@ -43,6 +43,8 @@
 	1.15 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
 	<li><a href="#DoIHaveToUseECCMemory">
 	1.16 Do I have to use ECC memory?</a></li>
+	<li><a href="#CanIUseaZVOLforSwap">
+	1.17 Can I use a ZVOL for swap?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 </ul>
@@ -570,6 +572,13 @@ hardware.  And even when it is ECC memory will be more expensive.  For
 home users the additional safety brought by ECC memory might not justify
 the cost.  It's up to you to determine what level of protection your
 data requires.</p>
+
+<a name="CanIUseaZVOLforSwap">
+<h3>1.17 Can I use a ZVOL for swap?</h3></a>
+
+<p>Not yet.  Currently using a ZVOL for a swap device is not stable,
+see <a href=http://github.com/zfsonlinux/zfs/issues/342">issue #342</a>
+for futher details.  This should be possible in the future.</p>
 
 <a name="HowCanIHelp">
 <h3>2.1 How can I help?</h3></a>
