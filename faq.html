@@ -8,8 +8,13 @@
 <body>
 <center>
 <img src="images/zfs-linux.png">
-</center>
-<h2>Table of Contents</h2>
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th> FAQ - Table of Contents</th>
+	</tr>
+	<tr>
+		<td>
 <ul>
 	<li><a href="#WhatAboutTheLicensingIssue">
 	1.1 What about the licensing issue?</a></li>
@@ -48,10 +53,16 @@
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 </ul>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhatAboutTheLicensingIssue">
-<h3>1.1 What about the licensing issue?</h3></a>
-
+1.1 What about the licensing issue?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>In a nutshell, the issue is that the Linux kernel which is licensed under the 
 <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a> is
 <a href="http://www.gnu.org/licenses/license-list.html#CDDL">incompatible</a>
@@ -74,10 +85,16 @@ the Linux kernel.  This makes a Native ZFS on Linux implementation possible if
 you are willing to
 <a href="http://github.com/zfsonlinux/zfs/downloads">download</a> and
 <a href="zfs-building-rpm.html">build it</a> yourself.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIInstallIt">
-<h3>1.2 How do I install it?</h3></a>
-
+1.2 How do I install it?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>If you are using an Ubuntu distribution the easiest way to install ZFS is
 with Darik Horn's <a href="https://launchpad.net/~zfs-native/+archive/stable">
 ZFS PPA</a>.  Simply add the PPA to your list of repositories and install
@@ -102,10 +119,16 @@ of the core functionality is in place and most of the advanced features
 are working.  Stability of the latest release candidates has been very good
 and performance is respectible.  Many people are successfully using the
 ZFS on Linux release candidates every day.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhyDoesntItBuild">
-<h3>1.3 Why doesn&#8217;t it build?</h3></a>
-
+1.3 Why doesn&#8217;t it build?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Building a kernel module against an arbitrary kernel version is a
 complicated thing to do.  Every Linux distribution has their own idea of
 how this should be done.  It depends on the base kernel version, any
@@ -128,17 +151,29 @@ tested platforms</a> you might find helpful.</li>
 	<li>Make sure CONFIG_PREEMPT is disabled in your kernel
 (<a href="http://github.com/zfsonlinux/zfs/issues/#issue/83">issue 83</a>).</li>
 </ul>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIMountTheFileSystem">
-<h3>1.4 How do I mount the file system?</h3></a>
-
+1.4 How do I mount the file system?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>A mountable dataset will be created and automatically mounted when you
 first create the pool with <i>zpool create</i>.  Additional datasets can be
 created with <i>zfs create</i> and they will be automatically mounted.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhyShouldIUseA64BitSystem">
-<h3>1.5 Why should I use a 64-bit system?</h3></a>
-
+1.5 Why should I use a 64-bit system?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>In the Solaris kernel it is common practice to make heavy use of the
 virtual address space because it is designed to work well. However, in
 the Linux kernel most memory is addressed with a physical address and use of
@@ -156,10 +191,16 @@ with the boot option <em>vmalloc=512M</em>.</p>
 vmap allocation for size 4198400 failed: use vmalloc=&lt;size&gt; to increase
 size.
 </pre>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhatKernelVersionsAreSupported">
-<h3>1.6  What kernel versions are supported?</h3></a>
-
+1.6  What kernel versions are supported?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>The latest spl/zfs-.0.6.0-rc7 release candidate supports Linux <b>2.6.26 -
 3.3.0</b> kernels.  This covers most of the kernels used in the major Linux
 distributions.  The following distributions are all tested at LLNL using a
@@ -183,10 +224,16 @@ a newer kernel you may find it in the latest github sources. </p>
 	<li>openSUSE 11.4 (Celadon) Desktop - AMD6</li>
 	<li>ArchLinux (Current) Desktop - AMD64</li>
 </ul>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
-<h3>1.7 What /dev/ names should I use when creating my pool?</h3></a>
-
+1.7 What /dev/ names should I use when creating my pool?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>There are different /dev/ names that can be used when creating a ZFS pool.
 Each option has advantages and drawbacks, the right choice for your ZFS
 pool really depends on your requirements.  For development and testing
@@ -308,11 +355,16 @@ for your system.   To configure this file please refer to section
 		</li>
 	</ul>
 </ul>
-
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIChangeNamesOnAnExistingPool">
-<h3>1.8 How do I change the /dev/ names on an existing pool?</h3></a>
-
+1.8 How do I change the /dev/ names on an existing pool?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Changing the /dev/ names on an existing pool can be done by simply
 exporting the pool and re-importing it with the -d option to specify
 which new names should be used. For example, to use the custom names
@@ -322,10 +374,16 @@ in /dev/disk/zpool:</p>
 $ sudo zpool export tank
 $ sudo zpool import -d /dev/disk/zpool tank
 </pre>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoISetupZdevConf">
-<h3>1.9 How do I setup the /etc/zfs/zdev.conf file?</h3></a>
-
+1.9 How do I setup the /etc/zfs/zdev.conf file?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>In order to use /dev/disk/zpool/ naming the /etc/zfs/zdev.conf must be
 configured.  This configuration file consists of custom meaningful names
 which are mapped to a /dev/disk/by-path identifier.</p>
@@ -410,10 +468,16 @@ config:
 
 errors: No known data errors
 </pre>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="PerformanceConsideration">
-<h3>1.10 What&#8217;s going on with performance?</h3></a>
-
+1.10 What&#8217;s going on with performance?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>To achieve good performance with your pool there are some easy best
 practices you should follow.  Additionally, it should be made clear that
 the ZFS on Linux implementation has not yet been optimized for performance.
@@ -449,10 +513,16 @@ you should set this option when using Advanced Format drives see section
 1.15 How does ZFS on Linux handles Advanced Format disks?</a>
 	</li>
 </ul>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="WhatDoesZpoolCacheDo">
-<h3>1.11 What does the /etc/zfs/zpool.cache file do?</h3></a>
-
+1.11 What does the /etc/zfs/zpool.cache file do?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Whenever a pool is imported in the system it will be added to the
 /etc/zfs/zpool.cache file.  This file stores pool configuration information
 such as the vdev device names and the active pool state.  If this file
@@ -460,10 +530,16 @@ exists when the ZFS modules are loaded then any pool listed in the cache
 file will be automatically imported.  When a pool is not listed in the
 cache file it will need to be explicitly imported.
 </p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoISetupShares">
-<h3>1.12 How do I setup an NFS or SMB shares?</h3></a>
-
+1.12 How do I setup an NFS or SMB shares?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>ZFS has been integrated with the Linux NFS server.  You can share
 a ZFS file system by setting the <em>sharenfs</em> file system property.
 For example, here's how to share the file system tank/home with the
@@ -478,20 +554,32 @@ $ sudo zfs set sharenfs=on tank/home
 This means that setting the <em>sharesmb</em> file system property has
 no effect.  To share a ZFS file system with Samba you must manually
 configure the Samba server.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="CanIBootFromZFS">
-<h3>1.13 Can I boot from ZFS?</h3></a>
-
+1.13 Can I boot from ZFS?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 Yes, but booting from ZFS is currently not recommended without a patched
 version of grub.  However, this does not mean you can't use ZFS as your
 root file system.  You can configure your system with a small ext4 /boot
 file system and refer to the following <a href="https://github.com/
 zfsonlinux/zfs/blob/master/dracut/README.dracut.markdown">
 documentation</a> for setting up a ZFS root file system with dracut.
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
-<h3>1.14 How do I automatically mount ZFS file systems during startup?</h3></a>
-
+1.14 How do I automatically mount ZFS file systems during startup?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <ul>
 	<li>
 <b>Ubuntu PPA:</b>
@@ -540,10 +628,16 @@ SELINUX=disabled
 #     mls - Multi Level Security protection.
 SELINUXTYPE=targeted
 </pre>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-<h3>1.15 How does ZFS on Linux handles Advanced Format disks?</h3></a>
-
+1.15 How does ZFS on Linux handles Advanced Format disks?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Advanced Format (AF) is a new disk format which natively uses a 4,096
 byte instead of 512 byte sector size. To maintain compatibility with legacy
 systems AF disks emulate a sector size of 512 bytes. By default, ZFS will
@@ -561,10 +655,16 @@ the pool to use 4,096 byte sectors we must specify this at pool creation
 time:</p>
 
 <pre>$ sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="DoIHaveToUseECCMemory">
-<h3>1.16 Do I have to use ECC memory for ZFS?</h3></a>
-
+1.16 Do I have to use ECC memory for ZFS?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Using ECC memory for ZFS is strongly recommended for enterprise
 environments where the strongest data integrity guarantees are required.
 Without ECC memory rare random bit flips caused by cosmic rays or by
@@ -577,17 +677,29 @@ hardware.  And even when it is ECC memory will be more expensive.  For
 home users the additional safety brought by ECC memory might not justify
 the cost.  It's up to you to determine what level of protection your
 data requires.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="CanIUseaZVOLforSwap">
-<h3>1.17 Can I use a ZVOL for swap?</h3></a>
-
+1.17 Can I use a ZVOL for swap?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>Not yet.  Currently using a ZVOL for a swap device is not stable,
 see <a href=http://github.com/zfsonlinux/zfs/issues/342">issue #342</a>
 for futher details.  This should be possible in the future.</p>
-
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowCanIHelp">
-<h3>2.1 How can I help?</h3></a>
-
+2.1 How can I help?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
 <p>The most helpful thing you can do is to try ZFS on your Linux
 system and report any
 <a href="http://github.com/zfsonlinux/zfs/issues">issues</a>.  If you
@@ -596,5 +708,10 @@ like what you see and would like to contribute to the project please send
 open issues on the <a href="http://github.com/zfsonlinux/zfs/issues">issue
 tracker</a> which need attention or if you have an idea of your own that is
 fine too.</p>
- </body>
+		</td>
+	</tr>
+</table>
+
+</center>
+</body>
 </html>
