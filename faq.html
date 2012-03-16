@@ -96,22 +96,28 @@ $ sudo apt-get install ubuntu-zfs
 <a href="spl-building-rpm.html">download and compile the source</a> as
 described in the documentation.</p>
 
+<p>Note that because we want to take a cautious, cafeful approach with
+ZFS on Linux we are still calling this a release candiate.  However, all
+of the core functionality is in place and most of the advanced features
+are working.  Stability of the latest release candidates has been very good
+and performance is respectible.  Many people are successfully using the
+ZFS on Linux release candidates every day.</p>
+
 <a name="WhyDoesntItBuild">
 <h3>1.3 Why doesn&#8217;t it build?</h3></a>
 
 <p>Building a kernel module against an arbitrary kernel version is a
-complicated thing to do.  Every distro has their own idea of how this should
-be done.  It depends on the base kernel version, any distro specific patches,
-and exactly how the kernel was configured and built.  If you run in to
-problems here are few thing to check.  If none of these things explain your
-problem please open up a new
-<a href="http://github.com/zfsonlinux/spl/issues">SPL issue</a> or a new
-<a href="http://github.com/zfsonlinux/zfs/issues">ZFS issue</a> as
-appropriate.</p>
+complicated thing to do.  Every Linux distribution has their own idea of
+how this should be done.  It depends on the base kernel version, any
+distribution specific patches, and exactly how the kernel was configured.
+If you run in to problems here are few thing to check.  If none of these
+things explain your problem, then please open a new
+<a href="http://github.com/zfsonlinux/zfs/issues">issue</a>
+which fully describes the problem.</p>
 
 <ul>
-	<li>The kernel API changes frequently and kernels newer than
-3.0.0 are not yet supported.</li>
+	<li>The kernel API changes frequently, currently 2.6.26 through 3.3 kernels are supported.
+	</li>
 	<li>Check for known <a
 href="http://github.com/zfsonlinux/spl/issues/labels/Build%20Issue">SPL</a> and
 <a href="http://github.com/zfsonlinux/zfs/issues/labels/Build%20Issue">ZFS</a>
@@ -121,15 +127,12 @@ build issues.</li>
 tested platforms</a> you might find helpful.</li>
 	<li>Make sure CONFIG_PREEMPT is disabled in your kernel
 (<a href="http://github.com/zfsonlinux/zfs/issues/#issue/83">issue 83</a>).</li>
-	<li>Make sure CONFIG_DEBUG_MUTEX is disabled in your kernel
-(<a href="http://github.com/zfsonlinux/zfs/issues/#issue/167">issue 167</a>).</li>
 </ul>
 
 <a name="HowDoIMountTheFileSystem">
 <h3>1.4 How do I mount the file system?</h3></a>
 
-<p>The <a href="example-zpl.html">ZFS posix layer</a> is now available as of
-spl/zfs-0.6.0-rc1!  A mountable dataset will be created and mounted when you
+<p>A mountable dataset will be created and automatically mounted when you
 first create the pool with <i>zpool create</i>.  Additional datasets can be
 created with <i>zfs create</i> and they will be automatically mounted.</p>
 
@@ -157,12 +160,12 @@ size.
 <a name="WhatKernelVersionsAreSupported">
 <h3>1.6  What kernel versions are supported?</h3></a>
 
-<p>The latest spl/zfs-.0.6.0-rc6 release candidate supports Linux <b>2.6.26 -
-3.0.0</b> kernels.  This covers most of the kernels used in the major Linux
+<p>The latest spl/zfs-.0.6.0-rc7 release candidate supports Linux <b>2.6.26 -
+3.3.0</b> kernels.  This covers most of the kernels used in the major Linux
 distributions.  The following distributions are all tested at LLNL using a
 <a href="http://zfsonlinux.org/buildbot/buildbot.html">buildbot</a>
-based continuous integration development model.
-</p>
+based continuous integration development model.  If you need support for
+a newer kernel you may find it in the latest github sources. </p>
 
 <ul>
 	<li>RHEL 6.0 (Santiago) Desktop - AMD64</li>
@@ -170,6 +173,7 @@ based continuous integration development model.
 	<li>Fedora 13 (Goddard) Desktop - AMD64</li>
 	<li>Fedora 14 (Laughlin) Desktop - AMD64</li>
 	<li>Fedora 15 (Lovelock) Desktop - AMD64</li>
+	<li>Fedora 16 (Verne) Desktop - AMD64</li>
 	<li>Ubuntu 10.04 (Lucid) Desktop - AMD64</li>
 	<li>Ubuntu 10.10 (Maverick) Desktop - AMD64</li>
 	<li>Ubuntu 11.04 (Natty) Desktop - AMD64</li>
@@ -177,6 +181,7 @@ based continuous integration development model.
 	<li>Debian 5.0 (Lenny) Desktop - AMD64</li>
 	<li>Debian 6.0 (Squeeze) Desktop - AMD64</li>
 	<li>openSUSE 11.4 (Celadon) Desktop - AMD6</li>
+	<li>ArchLinux (Current) Desktop - AMD64</li>
 </ul>
 
 <a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
