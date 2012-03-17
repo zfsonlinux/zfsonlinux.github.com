@@ -1,0 +1,59 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2010.04%20(Lucid)%20Desktop%20-%20AMD64/builds/488/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:18:01 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c /usr/libexec/zfs/zpios-sanity.sh -c
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-lucid-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', '/usr/libexec/zfs/zpios-sanity.sh -c']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-lucid-amd64/build
+  SHELL=/bin/sh
+  SPEECHD_PORT=7561
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=9e7776c7bb8db2ddc79b24694cc1f637-1328742117.414024-1917999082
+ closing stdin
+ using PTY: False
+</span><span class="stdout">status    name        id	wr-data	wr-ch	wr-bw	rd-data	rd-ch	rd-bw
+-------------------------------------------------------------------------------
+PASS:     file-raid0   0	64m	64	43.84m	64m	64	6.22g
+PASS:     file-raid10  0	64m	64	7.44m	64m	64	816.02m
+PASS:     file-raidz   0	64m	64	27.08m	64m	64	744.43m
+PASS:     file-raidz2  0	64m	64	12.01m	64m	64	882.83m
+PASS:     lo-raid0     0	64m	64	11.06m	64m	64	6.22g
+PASS:     lo-raid10    0	64m	64	7.03m	64m	64	3.23g
+PASS:     lo-raidz     0	64m	64	26.21m	64m	64	1.13g
+PASS:     lo-raidz2    0	64m	64	11.63m	64m	64	5.38g
+</span><span class="header">program finished with exit code 0
+elapsedTime=60.836547
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2010.04%20(Lucid)%20Desktop%20-%20AMD64/builds/488/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:18:01 GMT -->
+</html>

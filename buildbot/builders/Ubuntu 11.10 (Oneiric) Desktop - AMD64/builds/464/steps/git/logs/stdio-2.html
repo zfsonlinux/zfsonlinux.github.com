@@ -1,0 +1,208 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/464/steps/git/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:41:14 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml-2.html">(view as text)</a><br />
+<pre>
+<span class="header">starting git operation
+rm -rf /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64 (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['rm', '-rf', '/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+elapsedTime=0.037929
+rm -rf /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64 (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['rm', '-rf', '/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+elapsedTime=0.004354
+/usr/bin/git init
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'init']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Initialized empty Git repository in /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build/.git/
+</span><span class="header">elapsedTime=0.061682
+/usr/bin/git clean -f -d
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'clean', '-f', '-d']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+elapsedTime=0.005863
+fetching branch master from git://eris.llnl.gov/spl.git
+/usr/bin/git fetch -t git://eris.llnl.gov/spl.git +master
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'fetch', '-t', 'git://eris.llnl.gov/spl.git', '+master']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+</span><span class="stderr">From git://eris.llnl.gov/spl
+ * branch            master     -&gt; FETCH_HEAD
+ * [new tag]         spl-0.4.0  -&gt; spl-0.4.0
+ * [new tag]         spl-0.4.1  -&gt; spl-0.4.1
+ * [new tag]         spl-0.4.2  -&gt; spl-0.4.2
+ * [new tag]         spl-0.4.3  -&gt; spl-0.4.3
+ * [new tag]         spl-0.4.4  -&gt; spl-0.4.4
+ * [new tag]         spl-0.4.5  -&gt; spl-0.4.5
+ * [new tag]         spl-0.4.6  -&gt; spl-0.4.6
+ * [new tag]         spl-0.4.7  -&gt; spl-0.4.7
+ * [new tag]         spl-0.4.8  -&gt; spl-0.4.8
+ * [new tag]         spl-0.4.9  -&gt; spl-0.4.9
+ * [new tag]         spl-0.5.0  -&gt; spl-0.5.0
+ * [new tag]         spl-0.5.1  -&gt; spl-0.5.1
+ * [new tag]         spl-0.5.2  -&gt; spl-0.5.2
+ * [new tag]         spl-0.6.0-rc1 -&gt; spl-0.6.0-rc1
+ * [new tag]         spl-0.6.0-rc2 -&gt; spl-0.6.0-rc2
+ * [new tag]         spl-0.6.0-rc3 -&gt; spl-0.6.0-rc3
+ * [new tag]         spl-0.6.0-rc4 -&gt; spl-0.6.0-rc4
+ * [new tag]         spl-0.6.0-rc5 -&gt; spl-0.6.0-rc5
+ * [new tag]         spl-0.6.0-rc6 -&gt; spl-0.6.0-rc6
+ * [new tag]         spl-0.6.0-rc6_1chaos -&gt; spl-0.6.0-rc6_1chaos
+ * [new tag]         spl-0.6.0-rc6_2chaos -&gt; spl-0.6.0-rc6_2chaos
+ * [new tag]         spl-0.6.0-rc6_3chaos -&gt; spl-0.6.0-rc6_3chaos
+ * [new tag]         spl-0.6.0-rc6_4chaos -&gt; spl-0.6.0-rc6_4chaos
+ * [new tag]         spl-0.6.0-rc6_5chaos -&gt; spl-0.6.0-rc6_5chaos
+ * [new tag]         spl-0.6.0-rc6_6chaos -&gt; spl-0.6.0-rc6_6chaos
+ * [new tag]         spl-0.6.0-rc6_7chaos -&gt; spl-0.6.0-rc6_7chaos
+ * [new tag]         spl-0.6.0-rc7 -&gt; spl-0.6.0-rc7
+</span><span class="header">elapsedTime=0.818532
+/usr/bin/git reset --hard FETCH_HEAD
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'reset', '--hard', 'FETCH_HEAD']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+</span><span class="stdout">HEAD is now at 5d139aa SPL 0.6.0-rc7
+</span><span class="header">elapsedTime=0.033379
+/usr/bin/git branch -M master
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'branch', '-M', 'master']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+elapsedTime=0.007666
+/usr/bin/git rev-parse HEAD
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['/usr/bin/git', 'rev-parse', 'HEAD']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+</span><span class="stdout">5d139aaa2b0d7c635e1f3ea0423dc428e844896a
+</span><span class="header">elapsedTime=0.004725
+program finished with exit code 0
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/464/steps/git/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:41:14 GMT -->
+</html>

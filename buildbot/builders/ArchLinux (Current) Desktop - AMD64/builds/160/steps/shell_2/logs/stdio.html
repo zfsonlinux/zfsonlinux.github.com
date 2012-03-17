@@ -1,0 +1,77 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/ArchLinux%20(Current)%20Desktop%20-%20AMD64/builds/160/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:47:53 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c 'pacman -Syyu'
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-archlinux-10-5-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'pacman -Syyu']
+ environment:
+  HOME=/home/buildbot
+  LOGNAME=buildbot
+  PATH=/sbin:/usr/sbin:/bin:/usr/bin
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-archlinux-10-5-amd64/build
+  SHELL=/bin/sh
+  SHLVL=1
+  USER=buildbot
+  _=/usr/bin/buildslave
+ using PTY: False
+</span><span class="stderr">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  104k  100  104k    0     0  1407k      0 --:--:-- --:--:-- --:--:-- 1718k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 404
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 1387k  100 1387k    0     0  8352k      0 --:--:-- --:--:-- --:--:-- 8561k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 404
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 1576k  100 1576k    0     0  9521k      0 --:--:-- --:--:-- --:--:-- 9673k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (22) The requested URL returned error: 404
+</span><span class="stdout">:: Synchronizing package databases...
+:: The following packages should be upgraded first :
+    pacman
+</span><span class="stderr">:: Do you want to cancel the current operation
+:: and upgrade these packages now? [Y/n] </span><span class="stdout">
+:: Starting full system upgrade...
+</span><span class="stderr">:: Replace kernel26-lts with core/linux-lts? [Y/n] :: Replace kernel26-lts-headers with core/linux-lts-headers? [Y/n] :: Replace module-init-tools with core/kmod? [Y/n] </span><span class="stdout">resolving dependencies...
+looking for inter-conflicts...
+</span><span class="stderr">:: kmod and module-init-tools are in conflict. Remove module-init-tools? [y/N] error: unresolvable package conflicts detected
+error: failed to prepare transaction (conflicting dependencies)
+</span><span class="stdout">:: kmod and module-init-tools are in conflict
+</span><span class="header">program finished with exit code 1
+elapsedTime=6.984805
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/ArchLinux%20(Current)%20Desktop%20-%20AMD64/builds/160/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:47:55 GMT -->
+</html>

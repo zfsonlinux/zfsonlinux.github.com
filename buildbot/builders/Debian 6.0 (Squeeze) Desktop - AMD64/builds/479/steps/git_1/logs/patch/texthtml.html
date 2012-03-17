@@ -1,0 +1,66 @@
+diff --git a/cmd/zfs/zfs_main.c b/cmd/zfs/zfs_main.c
+old mode 100644
+new mode 100755
+index 518000c..b88ab09
+--- a/cmd/zfs/zfs_main.c
++++ b/cmd/zfs/zfs_main.c
+@@ -2834,7 +2834,7 @@ zfs_do_list(int argc, char **argv)
+ 	zfs_free_sort_columns(sortcol);
+ 
+ 	if (ret == 0 && cb.cb_first && !cb.cb_scripted)
+-		(void) printf(gettext("no datasets available\n"));
++		(void) fprintf(stderr, gettext("no datasets available\n"));
+ 
+ 	return (ret);
+ }
+@@ -5139,7 +5139,7 @@ zfs_do_holds(int argc, char **argv)
+ 	print_holds(scripted, cb.cb_max_namelen, cb.cb_max_taglen, nvl);
+ 
+ 	if (nvlist_empty(nvl))
+-		(void) printf(gettext("no datasets available\n"));
++		(void) fprintf(stderr, gettext("no datasets available\n"));
+ 
+ 	nvlist_free(nvl);
+ 
+diff --git a/cmd/zpool/zpool_main.c b/cmd/zpool/zpool_main.c
+old mode 100644
+new mode 100755
+index fd9d69f..9e73dda
+--- a/cmd/zpool/zpool_main.c
++++ b/cmd/zpool/zpool_main.c
+@@ -2358,7 +2358,7 @@ zpool_do_iostat(int argc, char **argv)
+ 		pool_list_update(list);
+ 
+ 		if ((npools = pool_list_count(list)) == 0)
+-			(void) printf(gettext("no pools available\n"));
++			(void) fprintf(stderr, gettext("no pools available\n"));
+ 		else {
+ 			/*
+ 			 * Refresh all statistics.  This is done as an
+@@ -2599,7 +2599,7 @@ zpool_do_list(int argc, char **argv)
+ 		    list_callback, &cb);
+ 
+ 		if (argc == 0 && cb.cb_first)
+-			(void) printf(gettext("no pools available\n"));
++			(void) fprintf(stderr, gettext("no pools available\n"));
+ 		else if (argc && cb.cb_first) {
+ 			/* cannot open the given pool */
+ 			zprop_free_list(cb.cb_proplist);
+@@ -3793,7 +3793,7 @@ zpool_do_status(int argc, char **argv)
+ 		    status_callback, &cb);
+ 
+ 		if (argc == 0 && cb.cb_count == 0)
+-			(void) printf(gettext("no pools available\n"));
++			(void) fprintf(stderr, gettext("no pools available\n"));
+ 		else if (cb.cb_explain && cb.cb_first && cb.cb_allpools)
+ 			(void) printf(gettext("all pools are healthy\n"));
+ 
+@@ -4219,7 +4219,7 @@ zpool_do_history(int argc, char **argv)
+ 	    &cbdata);
+ 
+ 	if (argc == 0 && cbdata.first == B_TRUE) {
+-		(void) printf(gettext("no pools available\n"));
++		(void) fprintf(stderr, gettext("no pools available\n"));
+ 		return (0);
+ 	}
+ 

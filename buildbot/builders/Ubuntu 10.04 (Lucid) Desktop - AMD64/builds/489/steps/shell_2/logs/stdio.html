@@ -1,0 +1,138 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2010.04%20(Lucid)%20Desktop%20-%20AMD64/builds/489/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:17:54 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c apt-get update -y &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean -y
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-lucid-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', 'apt-get update -y &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get autoclean -y']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-lucid-amd64/build
+  SHELL=/bin/sh
+  SPEECHD_PORT=7561
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=9e7776c7bb8db2ddc79b24694cc1f637-1328742117.414024-1917999082
+ closing stdin
+ using PTY: False
+</span><span class="stdout">Hit http://security.ubuntu.com lucid-security Release.gpg
+Hit http://us.archive.ubuntu.com lucid Release.gpg
+Ign http://security.ubuntu.com/ubuntu/ lucid-security/main Translation-en_US
+Ign http://security.ubuntu.com/ubuntu/ lucid-security/restricted Translation-en_US
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid/main Translation-en_US
+Ign http://security.ubuntu.com/ubuntu/ lucid-security/universe Translation-en_US
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid/restricted Translation-en_US
+Ign http://security.ubuntu.com/ubuntu/ lucid-security/multiverse Translation-en_US
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid/universe Translation-en_US
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid/multiverse Translation-en_US
+Hit http://security.ubuntu.com lucid-security Release
+Get:1 http://us.archive.ubuntu.com lucid-updates Release.gpg [198B]
+Hit http://security.ubuntu.com lucid-security/main Packages
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid-updates/main Translation-en_US
+Hit http://security.ubuntu.com lucid-security/restricted Packages
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid-updates/restricted Translation-en_US
+Hit http://security.ubuntu.com lucid-security/main Sources
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid-updates/universe Translation-en_US
+Hit http://security.ubuntu.com lucid-security/restricted Sources
+Hit http://security.ubuntu.com lucid-security/universe Packages
+Hit http://security.ubuntu.com lucid-security/universe Sources
+Hit http://security.ubuntu.com lucid-security/multiverse Packages
+Ign http://us.archive.ubuntu.com/ubuntu/ lucid-updates/multiverse Translation-en_US
+Hit http://security.ubuntu.com lucid-security/multiverse Sources
+Hit http://us.archive.ubuntu.com lucid Release
+Get:2 http://us.archive.ubuntu.com lucid-updates Release [57.3kB]
+Hit http://us.archive.ubuntu.com lucid/main Packages
+Hit http://us.archive.ubuntu.com lucid/restricted Packages
+Hit http://us.archive.ubuntu.com lucid/main Sources
+Hit http://us.archive.ubuntu.com lucid/restricted Sources
+Hit http://us.archive.ubuntu.com lucid/universe Packages
+Hit http://us.archive.ubuntu.com lucid/universe Sources
+Hit http://us.archive.ubuntu.com lucid/multiverse Packages
+Hit http://us.archive.ubuntu.com lucid/multiverse Sources
+Get:3 http://us.archive.ubuntu.com lucid-updates/main Packages [572kB]
+Get:4 http://us.archive.ubuntu.com lucid-updates/restricted Packages [4,027B]
+Get:5 http://us.archive.ubuntu.com lucid-updates/main Sources [216kB]
+Get:6 http://us.archive.ubuntu.com lucid-updates/restricted Sources [1,834B]
+Get:7 http://us.archive.ubuntu.com lucid-updates/universe Packages [271kB]
+Get:8 http://us.archive.ubuntu.com lucid-updates/universe Sources [93.9kB]
+Get:9 http://us.archive.ubuntu.com lucid-updates/multiverse Packages [10.5kB]
+Get:10 http://us.archive.ubuntu.com lucid-updates/multiverse Sources [5,066B]
+Fetched 1,233kB in 14s (85.6kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages have been kept back:
+  linux-generic linux-headers-generic linux-image-generic ubufox
+The following packages will be upgraded:
+  apt apt-transport-https apt-utils cron
+4 upgraded, 0 newly installed, 0 to remove and 4 not upgraded.
+Need to get 2,236kB of archives.
+After this operation, 0B of additional disk space will be used.
+Get:1 http://us.archive.ubuntu.com/ubuntu/ lucid-updates/main apt 0.7.25.3ubuntu9.11 [1,820kB]
+Get:2 http://us.archive.ubuntu.com/ubuntu/ lucid-updates/main apt-utils 0.7.25.3ubuntu9.11 [244kB]
+Get:3 http://us.archive.ubuntu.com/ubuntu/ lucid-updates/main cron 3.0pl1-106ubuntu6 [90.0kB]
+Get:4 http://us.archive.ubuntu.com/ubuntu/ lucid-updates/main apt-transport-https 0.7.25.3ubuntu9.11 [82.1kB]
+</span><span class="stderr">dpkg-preconfigure: unable to re-open stdin: 
+</span><span class="stdout">Fetched 2,236kB in 7s (297kB/s)
+(Reading database ... 227353 files and directories currently installed.)
+Preparing to replace apt 0.7.25.3ubuntu9.10 (using .../apt_0.7.25.3ubuntu9.11_amd64.deb) ...
+Unpacking replacement apt ...
+Processing triggers for man-db ...
+Setting up apt (0.7.25.3ubuntu9.11) ...
+
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place
+(Reading database ... 227353 files and directories currently installed.)
+Preparing to replace apt-utils 0.7.25.3ubuntu9.10 (using .../apt-utils_0.7.25.3ubuntu9.11_amd64.deb) ...
+Unpacking replacement apt-utils ...
+Preparing to replace cron 3.0pl1-106ubuntu5 (using .../cron_3.0pl1-106ubuntu6_amd64.deb) ...
+cron stop/waiting
+Unpacking replacement cron ...
+Preparing to replace apt-transport-https 0.7.25.3ubuntu9.10 (using .../apt-transport-https_0.7.25.3ubuntu9.11_amd64.deb) ...
+Unpacking replacement apt-transport-https ...
+Processing triggers for man-db ...
+Processing triggers for ureadahead ...
+Setting up apt-utils (0.7.25.3ubuntu9.11) ...
+
+Setting up cron (3.0pl1-106ubuntu6) ...
+cron start/running, process 15836
+
+Setting up apt-transport-https (0.7.25.3ubuntu9.11) ...
+Processing triggers for libc-bin ...
+ldconfig deferred processing now taking place
+Reading package lists...
+Building dependency tree...
+Reading state information...
+</span><span class="header">program finished with exit code 0
+elapsedTime=44.609199
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu%2010.04%20(Lucid)%20Desktop%20-%20AMD64/builds/489/steps/shell_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 02:17:56 GMT -->
+</html>

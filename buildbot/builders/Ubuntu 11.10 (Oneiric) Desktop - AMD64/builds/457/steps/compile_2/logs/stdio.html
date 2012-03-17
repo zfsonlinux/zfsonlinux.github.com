@@ -1,0 +1,486 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/457/steps/compile_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:40:00 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml.html">(view as text)</a><br />
+<pre>
+<span class="header">make
+ in dir /tmp/xfstests (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['make']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/tmp/xfstests
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1328742114.187000-1090854852
+ closing stdin
+ using PTY: False
+</span><span class="stdout">autoheader
+autoconf
+./configure \
+                --libexecdir=/usr/lib \
+                --enable-lib64=yes
+</span><span class="stderr">configure: WARNING: unrecognized options: --enable-lib64
+</span><span class="stdout">checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for gmake... no
+checking for make... /usr/bin/make
+checking for glibtool... no
+checking for libtool... /usr/bin/libtool
+checking for tar... /bin/tar
+checking for gzip... /bin/gzip
+checking whether gcc -MM is supported... yes
+checking for awk... /usr/bin/awk
+checking for sed... /bin/sed
+checking for echo... /bin/echo
+checking for sort... /usr/bin/sort
+checking whether ln -s works... yes
+checking for rpm... /usr/bin/rpm
+checking for rpmbuild... /usr/bin/rpmbuild
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking assert.h usability... yes
+checking assert.h presence... yes
+checking for assert.h... yes
+checking bstring.h usability... no
+checking bstring.h presence... no
+checking for bstring.h... no
+checking libgen.h usability... yes
+checking libgen.h presence... yes
+checking for libgen.h... yes
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking uuid.h usability... no
+checking uuid.h presence... no
+checking for uuid.h... no
+checking uuid/uuid.h usability... yes
+checking uuid/uuid.h presence... yes
+checking for uuid/uuid.h... yes
+checking sys/uuid.h usability... no
+checking sys/uuid.h presence... no
+checking for sys/uuid.h... no
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking sys/fcntl.h usability... yes
+checking sys/fcntl.h presence... yes
+checking for sys/fcntl.h... yes
+checking sys/syssgi.h usability... no
+checking sys/syssgi.h presence... no
+checking for sys/syssgi.h... no
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking for sys/stat.h... (cached) yes
+checking sys/statvfs.h usability... yes
+checking sys/statvfs.h presence... yes
+checking for sys/statvfs.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking for sys/types.h... (cached) yes
+checking for strings.h... (cached) yes
+checking err.h usability... yes
+checking err.h presence... yes
+checking for err.h... yes
+checking sys/fs/xfs_fsops.h usability... no
+checking sys/fs/xfs_fsops.h presence... no
+checking for sys/fs/xfs_fsops.h... no
+checking sys/fs/xfs_itable.h usability... no
+checking sys/fs/xfs_itable.h presence... no
+checking for sys/fs/xfs_itable.h... no
+checking xfs/platform_defs.h usability... yes
+checking xfs/platform_defs.h presence... yes
+checking for xfs/platform_defs.h... yes
+checking for uuid_compare... no
+checking for uuid_compare in -luuid... yes
+checking xfs/xfs.h usability... yes
+checking xfs/xfs.h presence... yes
+checking for xfs/xfs.h... yes
+checking xfs/libxfs.h usability... no
+checking xfs/libxfs.h presence... no
+checking for xfs/libxfs.h... no
+checking whether xlog_assign_lsn is declared... no
+checking xfs/xqm.h usability... yes
+checking xfs/xqm.h presence... yes
+checking for xfs/xqm.h... yes
+checking xfsctl from xfs/xfs.h... ok
+checking xfs/handle.h usability... yes
+checking xfs/handle.h presence... yes
+checking for xfs/handle.h... yes
+checking for attr_list_by_handle in -lhandle... yes
+checking attr/xattr.h usability... yes
+checking attr/xattr.h presence... yes
+checking for attr/xattr.h... yes
+checking attr/attributes.h usability... yes
+checking attr/attributes.h presence... yes
+checking for attr/attributes.h... yes
+checking sys/attributes.h usability... no
+checking sys/attributes.h presence... no
+checking for sys/attributes.h... no
+checking for attr_list in -lattr... yes
+checking for getxattr in -lattr... yes
+checking sys/acl.h usability... yes
+checking sys/acl.h presence... yes
+checking for sys/acl.h... yes
+checking acl/libacl.h usability... yes
+checking acl/libacl.h presence... yes
+checking for acl/libacl.h... yes
+checking for acl_init in -lacl... yes
+checking gdbm/ndbm.h, usability... no
+checking gdbm/ndbm.h, presence... no
+checking for gdbm/ndbm.h,... no
+checking gdbm-ndbm.h usability... no
+checking gdbm-ndbm.h presence... no
+checking for gdbm-ndbm.h... no
+checking libaio.h usability... no
+checking libaio.h presence... no
+checking for libaio.h... no
+checking for dm_make_handle in -ldm... no
+
+WARNING: could not find a valid DMAPI base library.
+If you want DMAPI support please install the data migration
+API (dmapi) library package. Alternatively, run &quot;make install&quot;
+from the dmapi source.
+
+checking linux/fiemap.h usability... yes
+checking linux/fiemap.h presence... yes
+checking for linux/fiemap.h... yes
+checking for fallocate... yes
+configure: creating ./config.status
+config.status: creating include/builddefs
+config.status: creating include/config.h
+</span><span class="stderr">configure: WARNING: unrecognized options: --enable-lib64
+</span><span class="stdout">Building include
+Building lib
+    [LTDEP]
+    [CC] dataascii.lo
+    [CC] databin.lo
+    [CC] datapid.lo
+    [CC] file_lock.lo
+    [CC] forker.lo
+    [CC] pattern.lo
+    [CC] open_flags.lo
+    [CC] random_range.lo
+    [CC] string_to_tokens.lo
+    [CC] str_to_bytes.lo
+    [CC] tlibio.lo
+</span><span class="stderr">tlibio.c: In function 'lio_write_buffer':
+tlibio.c:521:11: warning: variable 'io_type' set but not used [-Wunused-but-set-variable]
+tlibio.c: In function 'lio_read_buffer':
+tlibio.c:1040:11: warning: variable 'io_type' set but not used [-Wunused-but-set-variable]
+</span><span class="stdout">    [CC] write_log.lo
+</span><span class="stderr">write_log.c: In function 'wlog_record_write':
+write_log.c:216:11: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+write_log.c:220:11: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC] random.lo
+    [LD] 
+Building ltp
+    [DEP]
+    [CC]    doio
+</span><span class="stderr">doio.c: In function 'do_write':
+doio.c:1399:8: warning: variable 'signo' set but not used [-Wunused-but-set-variable]
+</span><span class="stdout">    [CC]    fsstress
+</span><span class="stderr">fsstress.c: In function 'unlink_path':
+fsstress.c:1342:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'truncate64_path':
+fsstress.c:1323:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'symlink_path':
+fsstress.c:1304:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'stat64_path':
+fsstress.c:1280:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'rmdir_path':
+fsstress.c:1207:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'rename_path':
+fsstress.c:1157:9: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c:1177:10: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c:1185:10: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'readlink_path':
+fsstress.c:1133:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'opendir_path':
+fsstress.c:1092:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'open_path':
+fsstress.c:1073:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'mknod_path':
+fsstress.c:1032:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'mkdir_path':
+fsstress.c:1013:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'lstat64_path':
+fsstress.c:977:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'link_path':
+fsstress.c:927:9: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c:947:10: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c:955:10: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'lchown_path':
+fsstress.c:903:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'creat_path':
+fsstress.c:569:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'check_cwd':
+fsstress.c:549:7: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'attr_set_path':
+fsstress.c:535:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'attr_remove_path':
+fsstress.c:514:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'attr_list_path':
+fsstress.c:495:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+fsstress.c: In function 'append_pathname':
+fsstress.c:463:8: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    fsx
+</span><span class="stderr">fsx.c: In function 'prt':
+fsx.c:206:2: warning: format not a string literal and no format arguments [-Wformat-security]
+fsx.c:208:3: warning: format not a string literal and no format arguments [-Wformat-security]
+fsx.c: In function 'test_punch_hole':
+fsx.c:1326:13: warning: ignoring return value of 'ftruncate', declared with attribute warn_unused_result [-Wunused-result]
+fsx.c: In function 'test_fallocate':
+fsx.c:1306:13: warning: ignoring return value of 'ftruncate', declared with attribute warn_unused_result [-Wunused-result]
+fsx.c: In function 'check_trunc_hack':
+fsx.c:471:11: warning: ignoring return value of 'ftruncate', declared with attribute warn_unused_result [-Wunused-result]
+fsx.c:472:11: warning: ignoring return value of 'ftruncate', declared with attribute warn_unused_result [-Wunused-result]
+fsx.c:478:11: warning: ignoring return value of 'ftruncate', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    growfiles
+    [CC]    iogen
+</span><span class="stderr">iogen.c: In function 'parse_cmdline':
+iogen.c:1820:16: warning: ignoring return value of 'getcwd', declared with attribute warn_unused_result [-Wunused-result]
+iogen.c: In function 'main':
+iogen.c:404:7: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">Building src
+    [DEP]
+    [CC]    dirstress
+    [CC]    fill
+    [CC]    fill2
+    [CC]    getpagesize
+    [CC]    holes
+    [CC]    lstat64
+    [CC]    nametest
+</span><span class="stderr">nametest.c: In function 'main':
+nametest.c:248:10: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+nametest.c:250:9: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+nametest.c:300:10: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    permname
+    [CC]    randholes
+    [CC]    runas
+    [CC]    truncfile
+    [CC]    usemem
+    [CC]    mmapcat
+</span><span class="stderr">mmapcat.c: In function 'main':
+mmapcat.c:29:7: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    append_reader
+    [CC]    append_writer
+    [CC]    dirperf
+    [CC]    metaperf
+</span><span class="stderr">metaperf.c: In function 'crfiles':
+metaperf.c:177:9: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+metaperf.c: In function 't_linkun':
+metaperf.c:465:8: warning: ignoring return value of 'link', declared with attribute warn_unused_result [-Wunused-result]
+metaperf.c: In function 't_chown':
+metaperf.c:415:10: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+metaperf.c:417:10: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+metaperf.c: In function 'i_chown':
+metaperf.c:302:8: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+metaperf.c: In function 'main':
+metaperf.c:163:7: warning: ignoring return value of 'chdir', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    devzero
+    [CC]    feature
+    [CC]    alloc
+</span><span class="stderr">alloc.c: In function 'main':
+alloc.c:215:10: warning: ignoring return value of 'mkstemp', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    fault
+    [CC]    fstest
+    [CC]    t_access_root
+</span><span class="stderr">t_access_root.c: In function 'main':
+t_access_root.c:55:11: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    godown
+    [CC]    resvtest
+    [CC]    writemod
+    [CC]    makeextents
+    [CC]    itrash
+    [CC]    rename
+    [CC]    multi_open_unlink
+    [CC]    dmiperf
+    [CC]    unwritten_sync
+    [CC]    genhashnames
+    [CC]    t_holes
+    [CC]    t_mmap_writev
+    [CC]    xfsctl
+    [CC]    bstat
+    [CC]    t_mtab
+</span><span class="stderr">t_mtab.c: In function 'update_mtab':
+t_mtab.c:250:9: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    getdevicesize
+    [CC]    preallo_rw_pattern_reader
+</span><span class="stderr">preallo_rw_pattern_reader.c: In function 'main':
+iopat.c:47:8: warning: ignoring return value of 'read', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    preallo_rw_pattern_writer
+</span><span class="stderr">preallo_rw_pattern_writer.c: In function 'main':
+iopat.c:43:9: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    ftrunc
+</span><span class="stderr">ftrunc.c: In function 'main':
+ftrunc.c:33:9: warning: variable 'ch' set but not used [-Wunused-but-set-variable]
+</span><span class="stdout">    [CC]    trunc
+</span><span class="stderr">trunc.c: In function 'main':
+trunc.c:50:14: warning: variable 'ch' set but not used [-Wunused-but-set-variable]
+</span><span class="stdout">    [CC]    fs_perms
+</span><span class="stderr">fs_perms.c: In function 'testsetup':
+fs_perms.c:79:10: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+fs_perms.c:81:9: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+fs_perms.c: In function 'main':
+fs_perms.c:66:10: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    testx
+    [CC]    looptest
+    [CC]    locktest
+    [CC]    unwritten_mmap
+    [CC]    bulkstat_unlink_test
+</span><span class="stderr">bulkstat_unlink_test.c: In function 'main':
+bulkstat_unlink_test.c:104:9: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+bulkstat_unlink_test.c:176:9: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    t_stripealign
+    [CC]    bulkstat_unlink_test_modified
+</span><span class="stderr">bulkstat_unlink_test_modified.c: In function 'main':
+bulkstat_unlink_test_modified.c:81:11: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+bulkstat_unlink_test_modified.c:137:11: warning: ignoring return value of 'write', declared with attribute warn_unused_result [-Wunused-result]
+bulkstat_unlink_test_modified.c:184:8: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    t_dir_offset
+    [CC]    t_futimens
+    [CC]    t_immutable
+</span><span class="stderr">t_immutable.c: In function 'create_test_area':
+t_immutable.c:1947:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1954:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1961:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1968:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1975:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1982:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1989:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1997:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2005:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2038:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2071:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2100:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2113:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2142:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c: In function 'remove_test_area':
+t_immutable.c:2176:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2187:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2199:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2210:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2221:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:2233:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c: In function 'check_test_area':
+t_immutable.c:1806:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1818:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1830:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1842:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1855:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1868:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1880:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1892:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1905:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c: In function 'test_immutable':
+t_immutable.c:184:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:414:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:441:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:518:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:565:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:586:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:589:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:608:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:628:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:652:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:664:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:686:21: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:690:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:701:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:738:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:815:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c: In function 'test_append':
+t_immutable.c:855:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1042:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1069:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1144:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1513:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1534:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1537:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1547:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1557:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1577:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1591:12: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1604:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1614:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1636:21: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1640:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1662:21: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1666:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1677:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1710:14: warning: ignoring return value of 'chown', declared with attribute warn_unused_result [-Wunused-result]
+t_immutable.c:1787:14: warning: ignoring return value of 'asprintf', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    stale_handle
+</span><span class="stderr">stale_handle.c: In function 'main':
+stale_handle.c:116:8: warning: ignoring return value of 'system', declared with attribute warn_unused_result [-Wunused-result]
+</span><span class="stdout">    [CC]    pwrite_mmap_blocked
+    [CC]    fstrim
+    [CC]    fiemap-tester
+</span><span class="stderr">fiemap-tester.c: In function 'main':
+fiemap-tester.c:488:19: warning: 'last_data' may be used uninitialized in this function [-Wuninitialized]
+fiemap-tester.c:426:42: note: 'last_data' was declared here
+</span><span class="stdout">Building m4
+</span><span class="header">program finished with exit code 0
+elapsedTime=27.005889
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/457/steps/compile_2/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:40:10 GMT -->
+</html>

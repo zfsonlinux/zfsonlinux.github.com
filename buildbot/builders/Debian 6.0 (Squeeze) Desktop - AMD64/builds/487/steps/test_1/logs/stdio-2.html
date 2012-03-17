@@ -1,0 +1,57 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Debian 6.0 (Squeeze) Desktop - AMD64/builds/487/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:20:38 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml-2.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c /usr/libexec/zfs/zpios-sanity.sh -c
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', '/usr/libexec/zfs/zpios-sanity.sh -c']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-debian-squeeze-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+ closing stdin
+ using PTY: False
+</span><span class="stdout">status    name        id	wr-data	wr-ch	wr-bw	rd-data	rd-ch	rd-bw
+-------------------------------------------------------------------------------
+PASS:     file-raid0   0	64m	64	10.63m	64m	64	3.68g
+PASS:     file-raid10  0	64m	64	6.08m	64m	64	755.92m
+PASS:     file-raidz   0	64m	64	14.45m	64m	64	719.22m
+PASS:     file-raidz2  0	64m	64	3.24m	64m	64	906.64m
+PASS:     lo-raid0     0	64m	64	6.98m	64m	64	753.06m
+PASS:     lo-raid10    0	64m	64	4.39m	64m	64	1.91g
+PASS:     lo-raidz     0	64m	64	4.50m	64m	64	1.48g
+PASS:     lo-raidz2    0	64m	64	3.93m	64m	64	3.67g
+</span><span class="header">program finished with exit code 0
+elapsedTime=135.906970
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Debian 6.0 (Squeeze) Desktop - AMD64/builds/487/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:20:39 GMT -->
+</html>

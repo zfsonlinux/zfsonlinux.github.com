@@ -1,0 +1,58 @@
+<html>
+
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/463/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:42:02 GMT -->
+<head><title>Log File contents</title>
+
+<style type="text/css">
+ div.data {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stdout {
+  font-family: "Courier New", courier, monotype;
+ }
+ span.stderr {
+  font-family: "Courier New", courier, monotype;
+  color: red;
+ }
+ span.header {
+  font-family: "Courier New", courier, monotype;
+  color: blue;
+ }
+</style>
+</head>
+<body vlink="#800080">
+<a href="stdio/texthtml-2.html">(view as text)</a><br />
+<pre>
+<span class="header">sudo sh -c '/usr/libexec/zfs/zpios-sanity.sh -c'
+ in dir /var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build (timeout 1200 secs)
+ watching logfiles {}
+ argv: ['sudo', 'sh', '-c', '/usr/libexec/zfs/zpios-sanity.sh -c']
+ environment:
+  HOME=/home/buildbot
+  LANG=en_US.UTF-8
+  LOGNAME=buildbot
+  MAIL=/var/mail/buildbot
+  PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+  PWD=/var/lib/buildbot/ci/zfs-slave/zfs-ubuntu-oneiric-amd64/build
+  SHELL=/bin/sh
+  TERM=linux
+  USER=buildbot
+  XDG_SESSION_COOKIE=6f37e38e3004c055690abe4100000002-1331926537.430776-299311959
+ closing stdin
+ using PTY: False
+</span><span class="stdout">status    name        id	wr-data	wr-ch	wr-bw	rd-data	rd-ch	rd-bw
+-------------------------------------------------------------------------------
+PASS:     file-raid0   0	64m	64	43.54m	64m	64	6.25g
+PASS:     file-raid10  0	64m	64	10.92m	64m	64	3.12g
+PASS:     file-raidz   0	64m	64	8.27m	64m	64	2.08g
+PASS:     file-raidz2  0	64m	64	3.62m	64m	64	3.13g
+PASS:     lo-raid0     0	64m	64	640.00m	64m	64	3.12g
+PASS:     lo-raid10    0	64m	64	237.03m	64m	64	3.13g
+PASS:     lo-raidz     0	64m	64	426.67m	64m	64	2.08g
+PASS:     lo-raidz2    0	64m	64	193.94m	64m	64	3.12g
+</span><span class="header">program finished with exit code 0
+elapsedTime=64.067163
+</span></pre>
+</body>
+<!-- Mirrored from pip.chaos:8010/builders/Ubuntu 11.10 (Oneiric) Desktop - AMD64/builds/463/steps/test_1/logs/stdio by HTTrack Website Copier/3.x [XR&CO'2010], Sat, 17 Mar 2012 01:42:03 GMT -->
+</html>
