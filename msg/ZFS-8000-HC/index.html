@@ -1,11 +1,45 @@
-<html>
-<head>
-<title>ZFS Message ID: ZFS-8000-HC</title>
-<html>
-<body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>ZFS-8000-HC</title><!--<link rel="stylesheet" href="/stylesheets/style.css"/>--></head><body><h1>Message: ZFS-8000-HC</h1><table border="1" cellpadding="6"><tr><td><b>title</b></td><td>ZFS pool I/O failures</td></tr><tr><td><b>description</b></td><td>The ZFS pool has experienced currently unrecoverable I/O failures.</td></tr><tr><td><b>severity</b></td><td>major</td></tr><tr><td><b>type</b></td><td>error</td></tr><tr><td><b>keys</b></td><td>fault.fs.zfs.io_failure_wait</td></tr><tr><td><b>details</b></td><td>The Message ID: <tt>ZFS-8000-HC</tt> indicates that
+	    the pool has experienced I/O failures.  Take the documented
+	    action to resolve the problem.</td></tr><tr><td><b>impact</b></td><td>Read and write I/Os cannot be serviced.</td></tr><tr><td><b>response</b></td><td>No automated response will be taken.</td></tr><tr><td><b>action</b></td><td>
 <p>
-Sorry, the documentation for ZFS-8000-HC is missing because
-www.sun.com is offline. 
-</body>
-</html>
+The pool has experienced I/O failures. Since the ZFS pool property 'failmode'
+is set to 'wait', all I/Os (reads and writes) are blocked.  See the zpool(1M)
+manpage for more information on the 'failmode' property.  Manual intervention
+is required for I/Os to be serviced.  You can see which devices are
+affected by running 'zpool status -x':
+</p>
 
+<pre>
+# zpool status -x
+  pool: test
+ state: FAULTED
+status: There are I/O failures.
+action: Make sure the affected devices are connected, then run 'zpool clear'.
+   see: http://zfsonlinux.org/msg/ZFS-8000-HC
+ scrub: none requested
+config:
+
+        NAME        STATE     READ WRITE CKSUM
+        test        FAULTED      0    13     0  insufficient replicas
+          c0t0d0    FAULTED      0     7     0  experienced I/O failures
+          c0t1d0    ONLINE       0     0     0
+
+errors: 1 data errors, use '-v' for a list
+</pre>
+
+<p>
+After you have made sure the affected devices are connected, run 'zpool clear'
+to allow I/O to the pool again:
+</p>
+
+<pre>
+# zpool clear test
+</pre>
+
+<p>
+If I/O failures continue to happen, then applications and commands  for the
+pool may hang.  At this point, a reboot may be necessary to allow I/O to the
+pool again.
+</p>
+
+	</td></tr></table></body></html>

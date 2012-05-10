@@ -1,10 +1,41 @@
-<html>
-<head>
-<title>ZFS Message ID: ZFS-8000-5E</title>
-<html>
-<body>
-<p>
-Sorry, the documentation for ZFS-8000-5E is missing because
-www.sun.com is offline.
-</body>
-</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>ZFS-8000-5E</title><!--<link rel="stylesheet" href="/stylesheets/style.css"/>--></head><body><h1>Message: ZFS-8000-5E</h1><table border="1" cellpadding="6"><tr><td><b>title</b></td><td>Corrupted device label in non-replicated configuration</td></tr><tr><td><b>description</b></td><td>A device could not be opened due to a missing or invalid
+	    device label and no replicas are available.</td></tr><tr><td><b>severity</b></td><td>critical</td></tr><tr><td><b>type</b></td><td>error</td></tr><tr><td><b>keys</b></td><td>ereport.fs.zfs.device.corrupt_label_nr</td></tr><tr><td><b>details</b></td><td>The Message ID: <tt>ZFS-8000-5E</tt> indicates a
+	    device which was unable to be opened by the ZFS subsystem.</td></tr><tr><td><b>impact</b></td><td>The pool is no longer available</td></tr><tr><td><b>response</b></td><td>No automated response will be taken.</td></tr><tr><td><b>action</b></td><td>
+<h4>For an active pool</h4>
+
+<p>If this error was encountered while running 'zpool import', please see
+the section below.  Otherwise, run 'zpool status -x' to determine which pool
+has experienced a failure:</p>
+
+<pre>
+# zpool status -x
+  pool: test
+ state: FAULTED
+status: One or more devices could not be used because the the label is missing 
+        or invalid.  There are insufficient replicas for the pool to continue
+        functioning.
+action: Destroy and re-create the pool from a backup source.
+   see: http://zfsonlinux.org/msg/ZFS-8000-5E
+ scrub: none requested
+config:
+
+        NAME                  STATE     READ WRITE CKSUM
+        test                  FAULTED      0     0     0  insufficient replicas
+<font color='red'>          c0t0d0              FAULTED      0     0     0  corrupted data</font>
+          c0t0d1              ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+
+<p>The device listed as FAULTED with 'corrupted data' cannot be opened due
+to a corrupt label.  ZFS will be unable to use the pool, and all data within the
+pool is irrevocably lost.  The pool must be destroyed and recreated from an
+appropriate backup source.  Using replicated configurations will prevent this
+from happening in the future.</p>
+
+<h4>For an exported pool</h4>
+
+<p>If this error is encountered during 'zpool import', the action is the
+same.  The pool cannot be imported - all data is lost and must be restored from
+an appropriate backup source.</p>
+	</td></tr></table></body></html>
