@@ -96,9 +96,9 @@ you are willing to
 	<tr>
 		<td>
 <p>If you are using an Ubuntu distribution the easiest way to install ZFS is
-with Darik Horn's <a href="https://launchpad.net/~zfs-native/+archive/stable">
+with the <a href="https://launchpad.net/~zfs-native/+archive/stable">
 ZFS PPA</a>.  Simply add the PPA to your list of repositories and install
-the ZFS packages with your favorite package manager.  The ZFS source will
+the ubuntu-zfs packages with your favorite package manager.  The ZFS source will
 be downloaded to your system and compiled with dkms.  In addition, the ZFS
 source will be automatically recompiled when a new version is available
 or when you update your kernel.</p>
@@ -582,21 +582,9 @@ documentation</a> for setting up a ZFS root file system with dracut.
 <ul>
 	<li>
 <b>Ubuntu PPA:</b>
-If you are using Darik Horn's
-<a href="https://launchpad.net/~zfs-native/+archive/stable">ZFS PPA</a>, auto
-mounting and auto unmounting features are configured in the /etc/default/zfs
-configuration file. Just edit the values of ZFS_MOUNT and ZFS_UNMOUNT in the
-file /etc/default/zfs to other than the default value (a blank string). Here is
-an example content of /etc/default/zfs configuration file:
-
-<pre>
-$ cat /etc/default/zfs
-# Automatically run `zfs mount -a` at system startup if set non-empty.
-ZFS_MOUNT='yes'
-
-# Automatically run `zfs unmount -a` at system shutdown if set non-empty.
-ZFS_UNMOUNT='yes'
-</pre>
+Auto mounting is provided by the enhanced mountall package from the 
+<a href="https://launchpad.net/~zfs-native/+archive/stable">ZFS PPA</a>.
+Install the ubuntu-zfs package to get this feature.
 	</li>
 	<li>
 <b>Fedora, RHEL, Arch, Gentoo, Lunar:</b>
