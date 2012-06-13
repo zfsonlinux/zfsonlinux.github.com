@@ -563,12 +563,14 @@ configure the Samba server.</p>
 	</tr>
 	<tr>
 		<td>
-Yes, but booting from ZFS is currently not recommended without a patched
-version of grub.  However, this does not mean you can't use ZFS as your
-root file system.  You can configure your system with a small ext4 /boot
-file system and refer to the following <a href="https://github.com/
-zfsonlinux/zfs/blob/master/dracut/README.dracut.markdown">
-documentation</a> for setting up a ZFS root file system with dracut.
+Yes, numerous people have had success with this.  However, because it
+still requires the latest versions of grub and is distribution specific
+we don't recommend it.  Instead we suggest using ZFS as your root file
+system.  There are excellent walk throughs available for both
+<a href="https://github.com/dajhorn/pkg-zfs/wiki/HOWTO-install-Ubuntu
+-to-a-Native-ZFS-Root-Filesystem">Ubuntu</a> and
+<a href="https://github.com/pendor/gentoo-zfs-install/tree/master/install">
+Gentoo</a>.
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
