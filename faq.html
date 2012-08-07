@@ -113,11 +113,11 @@ $ sudo apt-get install ubuntu-zfs
 <a href="spl-building-rpm.html">download and compile the source</a> as
 described in the documentation.</p>
 
-<p>Note that because we want to take a cautious, cafeful approach with
-ZFS on Linux we are still calling this a release candiate.  However, all
+<p>Note that because we want to take a cautious, careful approach with
+ZFS on Linux we are still calling this a release candidate.  However, all
 of the core functionality is in place and most of the advanced features
 are working.  Stability of the latest release candidates has been very good
-and performance is respectible.  Many people are successfully using the
+and performance is respectable.  Many people are successfully using the
 ZFS on Linux release candidates every day.</p>
 		</td>
 	</tr>
@@ -139,7 +139,7 @@ things explain your problem, then please open a new
 which fully describes the problem.</p>
 
 <ul>
-	<li>The kernel API changes frequently, currently 2.6.26 through 3.3 kernels are supported.
+	<li>The kernel API changes frequently, currently 2.6.26 through 3.5 kernels are supported.
 	</li>
 	<li>Check for known <a
 href="http://github.com/zfsonlinux/spl/issues/labels/Build%20Issue">SPL</a> and
@@ -174,6 +174,9 @@ created with <i>zfs create</i> and they will be automatically mounted.</p>
 	</tr>
 	<tr>
 		<td>
+<p><b>You are strongly encouraged to use a 64-bit kernel.  At the moment zfs
+will build in a 32-bit environment but will not run stably.</b></p>
+
 <p>In the Solaris kernel it is common practice to make heavy use of the
 virtual address space because it is designed to work well. However, in
 the Linux kernel most memory is addressed with a physical address and use of
@@ -184,13 +187,19 @@ discouraged.  But in this case the address space is so much larger than
 physical memory it is not as much of an issue.</p>
 
 <p>If you are bumping up against the virtual memory limit you will see
-this message in your system logs.  You can increase the virtual address size
+the following message in your system logs.  You can increase the virtual address size
 with the boot option <em>vmalloc=512M</em>.</p>
 
-<pre>
-vmap allocation for size 4198400 failed: use vmalloc=&lt;size&gt; to increase
-size.
-</pre>
+<table bgcolor=#eeeeee> <td> <pre>
+vmap allocation for size 4198400 failed: use vmalloc=&lt;size&gt; to increase size.
+</pre> </td> </table> <br>
+
+However, even after making this change your system will likely not be
+entirely stable.  Proper support for 32-bit systems is contingent upon the zfs code
+being weaned off its dependence on virtual memory.  This will take some time to do
+correctly but it is planned for the Linux port.  This change is also expected
+to improve how efficiently zfs utilizes the systems memory.  And can be further
+leveraged to allow tighter integration with the standard Linux VM mechanisms.
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
@@ -202,29 +211,59 @@ size.
 	<tr>
 		<td>
 <p>The latest spl/zfs-.0.6.0-rc9 release candidate supports Linux <b>2.6.26 -
-3.4</b> kernels.  This covers most of the kernels used in the major Linux
-distributions.  The following distributions are all tested at LLNL using a
+3.5</b> kernels.  This covers most of the kernels used in the major Linux
+distributions.  The following distributions are regularly tested at LLNL using a
 buildbot based continuous integration development model.  If you need support for
 a newer kernel you may find it in the latest github sources. </p>
-
-<ul>
-	<li>RHEL 6.0 (Santiago) Desktop - AMD64</li>
-	<li>TOSS 2.0 Desktop - AMD64</li>
-	<li>Fedora 13 (Goddard) Desktop - AMD64</li>
-	<li>Fedora 14 (Laughlin) Desktop - AMD64</li>
-	<li>Fedora 15 (Lovelock) Desktop - AMD64</li>
-	<li>Fedora 16 (Verne) Desktop - AMD64</li>
-	<li>Ubuntu 10.04 (Lucid) Desktop - AMD64</li>
-	<li>Ubuntu 10.10 (Maverick) Desktop - AMD64</li>
-	<li>Ubuntu 11.04 (Natty) Desktop - AMD64</li>
-	<li>Ubuntu 11.10 (Oneiric) Desktop - AMD64</li>
-	<li>Debian 5.0 (Lenny) Desktop - AMD64</li>
-	<li>Debian 6.0 (Squeeze) Desktop - AMD64</li>
-	<li>openSUSE 11.4 (Celadon) Desktop - AMD6</li>
-	<li>ArchLinux (Current) Desktop - AMD64</li>
-</ul>
+	<center><ul>
+	<table width=90%>
+	<tr>
+		<th align=left>RHEL</th>
+		<th align=left>SLES</th>
+		<th align=left>Fedora</th>
+	<tr>
+		<td valign=top width=33%>
+	<li>RHEL 6.2 (Santiago) - x86_64</li>
+	<li>TOSS 2.0 - x86_64</li>
+		</td>
+		<td valign=top width=33%>
+	<li>openSUSE 11.4 (Celadon) - AMD6</li>
+	<li>openSUSE 12.1 (Asparagus) - x86_64</li>
+		</td>
+		<td valign=top width=33%>
+	<li>Fedora 13 (Goddard) - x86_64</li>
+	<li>Fedora 14 (Laughlin) - x86_64</li>
+	<li>Fedora 15 (Lovelock) - x86_64</li>
+	<li>Fedora 16 (Verne) - x86_64</li>
+	<li>Fedora 17 (Beefy Miracle) - x86_64</li>
 		</td>
 	</tr>
+	<tr>
+		<th align=left>Ubuntu</th>
+		<th align=left>Debian</th>
+		<th align=left>Other</th>
+	<tr>
+	<tr>
+		<td valign=top width=33%>
+	<li>Ubuntu 10.04 (Lucid) - x86_64</li>
+	<li>Ubuntu 10.10 (Maverick) - x86_64</li>
+	<li>Ubuntu 11.04 (Natty) - x86_64</li>
+	<li>Ubuntu 11.10 (Oneiric) - x86_64</li>
+	<li>Ubuntu 12.04 (Precise) - x86_64</li>
+	<li>Ubuntu 12.04 (Precise) - i386</li>
+		</td>
+		<td valign=top width=33%>
+	<li>Debian 5.0 (Lenny) - x86_64</li>
+	<li>Debian 6.0 (Squeeze) - x86_64</li>
+		</td>
+		<td valign=top width=33%>
+	<li>Proxmox 2.0 - x86_64</li>
+	<li>ArchLinux (Current) - x86_64</li>
+	<li>Gentoo (Current) - x86_64</li>
+		</td>
+	</tr>
+	</table>
+	</ul></center>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
@@ -566,7 +605,7 @@ configure the Samba server.</p>
 Yes, numerous people have had success with this.  However, because it
 still requires the latest versions of grub and is distribution specific
 we don't recommend it.  Instead we suggest using ZFS as your root file
-system.  There are excellent walk throughs available for both
+system.  There are excellent walk through available for both
 <a href="https://github.com/dajhorn/pkg-zfs/wiki/HOWTO-install-Ubuntu
 -to-a-Native-ZFS-Root-Filesystem">Ubuntu</a> and
 <a href="https://github.com/pendor/gentoo-zfs-install/tree/master/install">
@@ -678,7 +717,7 @@ data requires.</p>
 		<td>
 <p>Not yet.  Currently using a ZVOL for a swap device is not stable,
 see <a href=http://github.com/zfsonlinux/zfs/issues/342">issue #342</a>
-for futher details.  This should be possible in the future.</p>
+for further details.  This should be possible in the future.</p>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
