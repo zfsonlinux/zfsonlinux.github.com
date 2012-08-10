@@ -12,28 +12,31 @@
 <table width=80%>
 	<tr>
 		<td>
-<p>With the patched kernel and desired backend filesystems built and
-installed your ready to build Lustre.  By default Lustre will detect
-your installed ldiskfs and zfs development headers and enabled support
-for them.  If your using the ldiskfsprogs package you will also want
-to add the <em>--with-ldiskfsprogs</em> option which directs Lustre to
-use the ldiskfsprogs utilities.  More on that shortly.</p>
+<p>Once the <a href="zfs-building-rpm.html">zfs packages are built
+and installed</a> you can build the lustre packages using the standard
+autoconf style build system.  By default lustre will attempt to detect
+whether support can be enabled for ldiskfs and zfs back-ends.  However,
+since we're mainly concerned with zfs, and because ldiskfs requires a
+patched kernel it's recommended that you disable ldiskfs support by
+passing the <em>--without-ldiskfs</em> configure option.</p>
 
-<p>Finally, you may need to specify full paths to your kernel, ldiskfs,
-spl, and zfs devel headers if they are not automatically detected.  You
-can accomplish this using the <em>--with-linux</em>, <em>--with-ldiskfs</em>,
-<em>--with-spl</em> and <em>--with-zfs</em> configure options.  Your
-configure command should look something like this.</p>
+<p>Finally, you may need to specify full paths to your kernel, spl,
+and zfs devel headers if they are not automatically detected.  You
+can accomplish this using the <em>--with-linux</em>, <em>--with-spl</em>
+and <em>--with-zfs</em> configure options.  Your configure command
+should look something like this.</p>
 
 <pre>
-$ ./configure --with-ldiskfsprogs
+$ ./configure --without-ldiskfs
 $ make rpms
 </pre>
 
-<p>The resulting source and binary rpm packages will be written to the
-<em>/home/user/rpmbuild/RPMS/arch/*</em> directory.  There will be five
-binary rpm packages for your platform.</p>
+<p>The result of this will be one source rpm package.</p>
+<ul>
+	<li><em>lustre-w.x.y-z.src.rpm</em></li>
+</ul>
 
+<p>And five binary rpm packages for your platform.</p>
 <ul>
 	<li><em>lustre-w.x.y-z.arch.rpm</em>: The Lustre utilities.</li>
 	<li><em>lustre-modules-w.x.y-z_kernel.arch.rpm</em>:
@@ -49,7 +52,7 @@ binary rpm packages for your platform.</p>
 <p>Next go ahead and install the packages.</p>
 
 <pre>
-$ sudo rpm -Uvh /home/`whoami`/rpmbuild/RPMS/x86_64/lustre-*.x86_64.rpm
+$ sudo rpm -Uvh *.x86_64.rpm
 
 Preparing...                ########################################### [100%]
    1:lustre-modules         ########################################### [ 20%]
@@ -59,9 +62,9 @@ Preparing...                ########################################### [100%]
    5:lustre-debuginfo       ########################################### [100%]
 </pre>
 
-<p>With Lustre installed there is one last package which needs to be
-built, <a href="ldiskfsprogs-building-rpm.html">ldiskfsprogs</a>.  The
-updated ldiskfs utilities are Lustre aware so they must be built last.</p>
+<p>Now you are ready to configure lustre for your cluster, or start
+by setting up the following <a href="lustre-configure-single.html">
+single node example configuration</a>.</p>
 		</td>
 	</td>
 </table>

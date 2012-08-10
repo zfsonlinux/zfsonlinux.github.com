@@ -10,81 +10,102 @@
 <img src="images/zfs-linux.png">
 
 <table width=80%>
-	<tr>
-		<td>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="2">Chaos Lustre Orion with ZFS Support</th>
+	</tr>
+	<tr bgcolor="#dddddd">
+		<th colspan="2">History</th>
+	</tr>
+		<td colspan="2">
 <p>The <a href="http://wiki.lustre.org/index.php/Main_Page">Lustre</a> Orion
-development branch is a version of the code which has been architected to
+development branch is a version of the code which has been designed to
 support multiple backend filesystems.  This work was originally started at
-Sun, continued at <a href="http://www.oracle.com/us/products/servers-storage/
-storage/storage-software/031855.htm">Oracle</a>, and now has been taken over
-by <a href="http://whamcloud.com/">Whamcloud</a>.  Despite these disruptions
-<a href="https://computing.llnl.gov/">Livermore</a> has remained involved
-in the development and committed to deploying a <a href="llnl-zfs-lustre.html">
-zfs based Lustre solution</a> for our large Linux clusters.</p>
+Sun... continued at Oracle... continued at Whamcloud... and is being finished
+at Intel. Despite these disruptions <a href="https://computing.llnl.gov/">
+Livermore</a> has remained involved in the development and committed to
+deploying a <a href="llnl-zfs-lustre.html">ZFS based Lustre solution</a>
+for our large Linux clusters.</p>
 
 <p>The focus of the work at <a href="https://computing.llnl.gov/">
-Livermore</a> has been to port zfs to the Linux kernel so it may be used
+Livermore</a> has been to port ZFS to the Linux kernel so it may be used
 as an advanced backend filesystem for Lustre.  While ldiskfs has served
-Lustre well there is growing acceptence that ldiskfs will soon no longer
+Lustre well there is growing acceptance that ldiskfs will soon no longer
 be a viable solution for the largest Lustre filesystems.  The
 <a href="http://wiki.lustre.org/index.php/ZFS_and_Lustre">limitations of
 ldiskfs</a> are well known and allowing alternate backend filesystems,
-like zfs, is clearly a step in the right direction.</p>
+like ZFS, is clearly a step in the right direction.</p>
 
 <p>Support for multiple backend filesystem was accomplished by developing a
 common interface used by Lustre to communicate with the backend filesystem.
 This interface cleanly abstracts away any filesystem specific details from
 the higher layers of Lustre.  Lustre then provides a small filesystem specific
-layer called the osd which contains the needed filesystem specific code.
-The ldiskfs osd was added first and it was soon followed by the zfs osd.
-There is considerable interest in adding a btrfs osd but this work has
+layer called the OSD which contains the needed filesystem specific code.
+The ldiskfs OSD was added first and it was soon followed by the ZFS OSD.
+There is considerable interest in adding a BTRFS OSD but this work has
 not yet begun.</p>
+	</tr>
 
-<p>The Lustre Orion branch is not yet complete and is still under active
-development.  It is not currently suitable for production use but it is
-available for testing.  The current development is being done under RHEL6
-and for the moment you are <em>strongly</em> encouraged to use RHEL6.
-Alternately, you could use a recent Fedora release with a 2.6.32 based
-kernel.  Other Linux distributions/kernels are unlikely to work at the
-current time.</p>
+	<tr bgcolor="#dddddd">
+		<th colspan="2">Status</th>
+	</tr>
+		<td colspan="2">
+<p>The Lustre Orion branch is currently in use on the
+<a href="https://asc.llnl.gov/computing_resources/sequoia/">Sequoia system</a>
+at Livermore.  This branch is being merged in the mainstream Lustre code
+base and will be generally available as part of the Lustre 2.4 release.
+If you can't wait until Lustre 2.4 the latest source code is available
+below with brief directions on how to download, build, and configure
+your system.
 		</td>
 	</tr>
-</table><br />
-
-<table width=80%>
-	<tr bgcolor="#aaaaaa">
-		<th colspan="6">
-		Chaos Lustre Releases with zfs+ldiskfs Support</th>
-	</tr>
 	<tr bgcolor="#dddddd">
-		<th> SPL Release </th>
-		<th> ZFS Release </th>
-		<th> Lustre Release </th>
-		<th> ldiskfsprogs Release </th>
-		<th> Building Packages </th>
+		<th colspan="2">Download</th>
 	</tr>
-	<tr align="center" bgcolor="#66ccff">
-		<td> <a href="http://github.com/chaos/spl/tags">
-		spl-0.6.0-rcX</a></td>
-		<td> <a href="http://github.com/chaos/zfs/tags">
-		zfs-0.6.0-rcX</a></td>
-		<td> <a href="https://github.com/chaos/lustre/tags">
-		lustre-orion</a></td>
-		<td> <a href="http://github.com/chaos/ldiskfsprogs/tags">
-		ldiskfsprogs</a></td>
-		<td> <a href="lustre-building.html">rpm</a></td>
-	</tr>
-</table><br />
+		<td colspan="2">
+<p>Please use the latest posted tarballs from the Github download section
+and not the most current git tag.  Only the posted tarballs will have
+undergone internal testing at Livermore.  Even then, be aware that this
+is not a polished production release and you may encounter problems.</p>
 
-<table width=80%>
-	<tr bgcolor="#aaaaaa">
-		<th colspan="7">Lustre zfs+ldiskfs Example Configurations</th>
+<ul>
+	<li><a href=https://github.com/chaos/spl/downloads>
+	Chaos SPL Source</a></li>
+	<li><a href=https://github.com/chaos/zfs/downloads>
+	Chaos ZFS Source</a></li>
+	<li><a href=https://github.com/chaos/lustre/downloads>
+	Chaos Lustre Orion Source</a></li>
+</ul>
+
+		</td>
+	</tr>
+
+	<tr bgcolor="#dddddd">
+		<th colspan="2">Building Packages</th>
+	</tr>
+		<td colspan="2">
+<p>After downloading the Chaos versions of the SPL, ZFS, and Lustre Orion
+source you can build RPM packages.  Simply start by following the directions
+to <a href="spl-building-rpm.html">build+install the SPL packages</a> and
+then continue through the Lustre step.  Once you have built and installed
+all the needed packages you can setup one of the example configurations.</p>
+
+<ul>
+	<li>Only they RHEL 2.x distribution has been used for testing.
+While the SPL and ZFS code bases support much newer kernels Lustre does
+not.  You are strongly encouraged to use RHEL 2.x.</li>
+	<li>Only ZFS support is enabled in the following instructions.
+Enabling ldiskfs would require the kernel to be patched and rebuilt, by
+disabling it Lustre can be used with an unmodified RHEL 2.x kernel.</li>
+</ul>
+		</td>
+	</tr>
+
+	<tr bgcolor="#dddddd">
+		<th colspan="2">Lustre zfs+ldiskfs Example Configurations</th>
 	</tr>
 	<tr>
-		<td colspan="1">
-		<a href="lustre-configure-single.html"> Single Node </a></td>
-		<td colspan="6">
-		Single Node Lustre Filesystem
+		<td><a href="lustre-configure-single.html">Single Node</a></td>
+		<td colspan="2">Single Node Lustre Filesystem
 		(MGS uses ldiskfs, MDT and OSTs use ZFS)</a></td>
 	</tr>
 </table>
