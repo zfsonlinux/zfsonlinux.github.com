@@ -19,13 +19,13 @@ an educated guess as to which kernel you wish to build against.  If it guesses
 wrong simply specify your kernel devel headers using the <em>--with-linux</em>
 configure option.  You may also need the <em>--with-linux-obj</em>
 configure option if the kernel build objects are installed in a different
-directory.
+directory.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo yum groupinstall "Development Tools" 
 $ ./configure
 $ make rpm
-</pre>
+</td></tr></table></pre>
 
 <p>The result of this will be two source rpm packages.</p>
 <ul>
@@ -47,19 +47,19 @@ $ make rpm
 
 <p>Next go ahead and install the packages.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo rpm -Uvh *.x86_64.rpm
 
 Preparing...                ########################################### [100%]
    1:spl                    ########################################### [ 33%]
    2:spl-modules-devel      ########################################### [ 67%]
    3:spl-modules            ########################################### [100%]
-</pre>
+</td></tr></table></pre>
 
 <p>At this point you&#8217;re all set.  You can now move on to the next step
 and <a href="zfs-building-rpm.html">build the zfs packages</a>.  If you would
 like to verify the packages you just built you can run the included
-<a href="spl-regression-suite.html">regression test suite</a>.
+<a href="spl-regression-suite.html">regression test suite</a>.</p>
 		</td>
 	</td>
 </table>

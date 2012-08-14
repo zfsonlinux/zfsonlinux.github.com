@@ -19,13 +19,13 @@ an educated guess as to which kernel you wish to build against.  If it guesses
 wrong simply specify your kernel devel headers using the <em>--with-linux</em>
 configure option.  You may also need the <em>--with-linux-obj</em>
 configure option if the kernel build objects are installed in a different
-directory.
+directory.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo apt-get install build-essential gawk alien fakeroot linux-headers-$(uname -r)
 $ ./configure
 $ make deb
-</pre>
+</td></tr></table></pre>
 
 <p>The result of this will be two source rpm packages...  Yes, source rpm
 packages.  Currently, deb style packages are built by first creating rpm
@@ -53,7 +53,7 @@ please feel free to contact us.</p>
 
 <p>Next go ahead and install the packages,</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo dpkg -i *_amd64.deb
 
 Selecting previously deselected package spl.
@@ -66,12 +66,12 @@ Unpacking spl-modules-devel (from spl-modules-devel_0.5.1-2_x86_64.deb) ...
 Setting up spl (0.5.1-2) ...
 Setting up spl-modules (0.5.1-2) ...
 Setting up spl-modules-devel (0.5.1-2) ...
-</pre>
+</td></tr></table></pre>
 
 <p>At this point you&#8217;re all set.  You can now move on to the next step
 and <a href="zfs-building-deb.html">build the zfs packages</a>.  If you would
 like to verify the packages you just built you can run the included
-<a href="spl-regression-suite.html">regression test suite</a>.
+<a href="spl-regression-suite.html">regression test suite</a>.</p>
 		</td>
 	</tr>
 </table>

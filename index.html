@@ -15,13 +15,9 @@
 	</tr>
 	<tr>
 		<td>
-<p>The native Linux kernel port of SUN's ZFS filesystem.  
-To get started with ZFS on Linux simply download the latest
-release, then follow either the <a href="spl-building-rpm.html">
-rpm</a> or <a href="spl-building-deb.html">deb</a> package
-instructions to build and install packages for your system.
-Alternately, there is a <a href="https://launchpad.net/~zfs-native/
-+archive/stable">ppa</a> available for Ubuntu users.</p>
+<p>The native Linux kernel port of the ZFS filesystem.  To get started with
+ZFS on Linux simply download the latest release and install using the
+directions for your distribution.</p>
 		</td>
 	</tr>
 </table>
@@ -29,164 +25,172 @@ Alternately, there is a <a href="https://launchpad.net/~zfs-native/
 
 <table width=80%>
 	<tr bgcolor="#aaaaaa">
-		<th colspan="3"> ZFS Core Features </th>
-	</tr>
-	<tr>
-		<td> Storage pools </td>
-		<td> Massive Capacity </td>
-		<td> Copy-on-write transactions </td>
-	</tr>
-	<tr>
-		<td> Clones </td>
-		<td> Dynamic striping </td>
-		<td> Variable block sizes </td>
-	</tr>
-	<tr>
-		<td> Snapshots </td>
-		<td> Deduplication </td>
-		<td> Online Repair </td>
-	</tr>
-	<tr>
-		<td> Lightweight FS creation </td>
-		<td> Cache management </td>
-		<td> Adaptive endianness </td>
-	</tr>
-</table>
-</br>
-
-<table width=80%>
-	<tr bgcolor="#aaaaaa">
-		<th colspan="11">Releases </th>
+		<th colspan="12">Releases </th>
 	</tr>
 	<tr bgcolor="#dddddd">
-		<th> SPL Release </th>
-		<th> ZFS Release </th>
+		<th colspan="1"> SPL Release </th>
+		<th colspan="4"> SPL Source RPMs </th>
+		<th colspan="1"> ZFS Release </th>
+		<th colspan="4"> ZFS Source RPMs </th>
 		<th> Released </th>
-		<th> Pool Version </th>
-		<th> FS Version </th>
-		<th colspan="2"> SPL Packages </th>
-		<th colspan="2"> ZFS Packages </th>
-		<th> PPA </th>
 	</tr>
 	<tr align="center" bgcolor="#80ff00">
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc10.tar.gz">spl-0.6.0-rc10</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc10.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-modules-0.6.0-rc10.src.rpm">K</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-modules-dkms-0.6.0-rc10.noarch.rpm">D</a></td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc10">C</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc10.tar.gz">zfs-0.6.0-rc10</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc10.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-modules-0.6.0-rc10.src.rpm">K</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-modules-dkms-0.6.0-rc10.noarch.rpm">D</a></td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc10">C</a></td>
+		<td> Aug 14 2012 </td>
+	</tr>
+	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc9.tar.gz">spl-0.6.0-rc9</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc9.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-modules-0.6.0-rc9.src.rpm">K</a></td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc9">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc9.tar.gz">zfs-0.6.0-rc9</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc9.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-modules-0.6.0-rc9.src.rpm">K</a></td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc9">C</a></td>
 		<td> Jun 14 2012 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc8.tar.gz">spl-0.6.0-rc8</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc8.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-modules-0.6.0-rc8.src.rpm">K</a></td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc8">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc8.tar.gz">zfs-0.6.0-rc8</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc8.src.rpm">U</a></td>
+		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-modules-0.6.0-rc8.src.rpm">K</a></td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc9">C</a></td>
 		<td> Mar 26 2012 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc7.tar.gz">spl-0.6.0-rc7</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc7">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc7.tar.gz">zfs-0.6.0-rc7</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc7">C</a></td>
 		<td> Mar 16 2012 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc6.tar.gz">spl-0.6.0-rc6</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc6">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc6.tar.gz">zfs-0.6.0-rc6</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc6">C</a></td>
 		<td> Oct 12 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc5.tar.gz">spl-0.6.0-rc5</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc5">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc5.tar.gz">zfs-0.6.0-rc5</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc5">C</a></td>
 		<td> Jul 12 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc4.tar.gz">spl-0.6.0-rc4</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc4">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc4.tar.gz">zfs-0.6.0-rc4</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc4">C</a></td>
 		<td> May 5 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc3.tar.gz">spl-0.6.0-rc3</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc3">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc3.tar.gz">zfs-0.6.0-rc3</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc3">C</a></td>
 		<td> Apr 8 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc2.tar.gz">spl-0.6.0-rc2</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc2">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc2.tar.gz">zfs-0.6.0-rc2</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc2">C</a></td>
 		<td> Mar 9 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="http://github.com/downloads/zfsonlinux/spl/spl-0.6.0-rc1.tar.gz">spl-0.6.0-rc1</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/spl/commits/spl-0.6.0-rc1">C</a></td>
 		<td> <a href="http://github.com/downloads/zfsonlinux/zfs/zfs-0.6.0-rc1.tar.gz">zfs-0.6.0-rc1</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> <a href="http://github.com/zfsonlinux/zfs/commits/zfs-0.6.0-rc1">C</a></td>
 		<td> Feb 18 2011 </td>
-		<td> 28 </td>
-		<td> 5 </td>
-		<td> <a href="spl-building-rpm.html">rpm</a></td>
-		<td> <a href="spl-building-deb.html">deb</a></td>
-		<td> <a href="zfs-building-rpm.html">rpm</a></td>
-		<td> <a href="zfs-building-deb.html">deb</a></td>
-		<td> <a href="https://launchpad.net/~zfs-native/+archive/stable">ppa</a></td>
 	</tr>
 	<tr align="center">
 		<td> <a href="https://github.com/zfsonlinux/spl/downloads/">spl archive</a></td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
+		<td> </td>
 		<td> <a href="https://github.com/zfsonlinux/zfs/downloads/">zfs archive</a></td>
 		<td> </td>
 		<td> </td>
 		<td> </td>
 		<td> </td>
 		<td> </td>
-		<td> </td>
-		<td> </td>
-		<td> </td>
+	</tr>
+</table>
+<br />
+
+<table width=80%>
+	<tr bgcolor="#aaaaaa">
+		<th colspan="4">Installation Methods</th>
+	</tr>
+	<tr bgcolor="#dddddd">
+		<th width="25%"> <a href="spl-building-rpm.html">RPMs</a> / <a href="spl-building-deb.html">DEBs</a></th>
+		<th width="25%"> <a href="spl-building-srpm.html">Source RPMs + DKMS</a></th>
+		<th width="25%"> Ubuntu PPA
+			 (<a href="https://launchpad.net/~zfs-native/+archive/stable">stable</a> /
+			 <a href="https://launchpad.net/~zfs-native/+archive/daily">daily</a>)</th>
+		<th width="25%"> <a href="http://wiki.gentoo.org/wiki/ZFS">Gentoo Wiki</a></th>
 	</tr>
 </table>
 <br />

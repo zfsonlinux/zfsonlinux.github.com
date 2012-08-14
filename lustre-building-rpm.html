@@ -26,10 +26,10 @@ can accomplish this using the <em>--with-linux</em>, <em>--with-spl</em>
 and <em>--with-zfs</em> configure options.  Your configure command
 should look something like this.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ ./configure --without-ldiskfs
 $ make rpms
-</pre>
+</td></tr></table></pre>
 
 <p>The result of this will be one source rpm package.</p>
 <ul>
@@ -51,7 +51,7 @@ $ make rpms
 
 <p>Next go ahead and install the packages.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo rpm -Uvh *.x86_64.rpm
 
 Preparing...                ########################################### [100%]
@@ -60,7 +60,7 @@ Preparing...                ########################################### [100%]
    3:lustre-tests           ########################################### [ 60%]
    4:lustre-source          ########################################### [ 80%]
    5:lustre-debuginfo       ########################################### [100%]
-</pre>
+</td></tr></table></pre>
 
 <p>Now you are ready to configure lustre for your cluster, or start
 by setting up the following <a href="lustre-configure-single.html">

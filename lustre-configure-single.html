@@ -36,7 +36,7 @@ To disable SELinux edit <em>/etc/selinux/config</em> and change the
 SELINUX line to SELINUX=disabled.   Then reboot your system to remove
 the existing policy.
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ cat /etc/selinux/config
 # This file controls the state of SELinux on the system.
 # SELINUX= can take one of these three values:
@@ -48,7 +48,7 @@ $ cat /etc/selinux/config
 #     targeted - Targeted processes are protected,
 #     mls - Multi Level Security protection.
 SELINUXTYPE=targeted
-</pre>
+</td></tr></table></pre>
 
 <p>Next configure the required Lustre services.  This process will be
 slightly different than that described in the official
@@ -70,7 +70,7 @@ Next, for MDT and OST services you will need to explicitly set their
 service index and the NID of the MGS host.  Finally, you must list
 the dataset name and the desired zfs pool configuration.
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo mkfs.lustre --mgs --backfstype=zfs --vdev-size 131072 \
   lustre-mgs/mgs mirror /tmp/lustre-mgs-disk0 /tmp/lustre-mgs-disk1
 
@@ -93,7 +93,7 @@ lustre-ost0        127K  90.9M    29K  /lustre-ost0
 lustre-ost0/ost0    20K  90.9M    20K  /lustre-ost0/ost0
 lustre-ost1        130K   158M    30K  /lustre-ost1
 lustre-ost1/ost1    20K   158M    20K  /lustre-ost1/ost1
-</pre>
+</pre></td></tr></table>
 
 <p>You may have noticed that we created a seperate zfs pool and dataset
 for each of our services.  While all the services can be created in a
@@ -107,7 +107,7 @@ services.  Minimally this file must contain the hostname where the service
 should run, the service label, and the ldiskfs block device or zfs dataset
 name.  Make sure you update this file with <em>your</em> hostname.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ cat /etc/ldev.conf
 # example /etc/ldev.conf
 #
@@ -117,7 +117,7 @@ toss-2-0-amd64 - mgs     zfs:lustre-mgs/mgs
 toss-2-0-amd64 - mdt0    zfs:lustre-mdt0/mdt0
 toss-2-0-amd64 - ost0    zfs:lustre-ost0/ost0
 toss-2-0-amd64 - ost1    zfs:lustre-ost1/ost1
-</pre>
+</pre></td></tr></table>
 
 <p>Everything is now in place to start the Lustre services.  You should
 start the MGS, then MDT, and lastly the OSTs.  Once everything is running
@@ -126,7 +126,7 @@ the services.  The Lustre Orion code still requires some polish and you
 may encounter a few bugs.  It is not currently considered ready for
 real production usage.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo service lustre start mgs
 Mounting lustre-mgs/mgs on /mnt/lustre/local/mgs
 
@@ -146,8 +146,7 @@ $ df -h /mnt/lustre/client
 Filesystem            Size  Used Avail Use% Mounted on
 192.168.1.100:/lustre
                       1.9G   75M  1.8G   5% /mnt/lustre/client
-</pre>
-
+</pre></td></tr></table>
 	
 		</td>
 	</td>

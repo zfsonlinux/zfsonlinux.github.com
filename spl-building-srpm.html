@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Building SPL RPM Packages." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+	<tr>
+		<td>
+<p>For RPM based distributions source packages with 
+<a href="http://en.wikipedia.org/wiki/Dynamic_Kernel_Module_Support">DKMS</a>
+support for the kernel modules are available.</p>
+
+<p>Start by installing the spl-modules-dkms-w.x.y-z.noarch.rpm package.  This will
+install the source for the kernel modules and build them against your kernel.
+These modules will then be automatically rebuilt when your kernel is updated.</p>
+
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
+$ sudo rpm -Uvh spl-modules-dkms-w.x.y-z.noarch.rpm
+
+Preparing...                ########################################### [100%]
+   1:spl-modules-dkms       ########################################### [100%]
+Loading new spl-w.x.y DKMS files...
+First Installation: checking all kernels...
+Building only for 2.6.32-220.7.1.el6.x86_64
+Building initial module for 2.6.32-220.7.1.el6.x86_64
+Done.
+
+...
+
+Adding any weak-modules
+
+Running the post_install script:
+
+depmod....
+
+DKMS: install completed.
+</pre></td></tr></table>
+
+<p>Alternately, instead of using the DKMS modules package you can simply
+rebuild the spl-modules-w.x.y-z.src.rpm and use the resuilting binary
+packages.  Just remember that you will need to manually rebuild and install
+these kernel modules when updating your kernel.</p>
+
+<p>Next rebuild and install the binary package for the command line tools
+using the spl-w.x.y-z.src.rpm source RPM.  This can be accomplished with
+<em>rpmbuild</em> as follows:</p>
+
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
+$ rpmbuild --rebuild spl-w.x.y-z.src.rpm
+  ...
+$ sudo rpm -Uvh ~rpmbuild/RPMS/x86_64/spl-w.x.y-z.x86_64.rpm
+
+Preparing...                ########################################### [100%]
+   1:spl                    ########################################### [100%]
+</pre></td></tr></table>
+
+<p>You will now need to repeat this process for the <a href="zfs-building-srpm.html">
+zfs packages</a>.</p>
+		</td>
+	</td>
+</table>
+
+</center>
+</body>
+</html>

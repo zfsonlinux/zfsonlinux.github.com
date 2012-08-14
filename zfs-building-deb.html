@@ -22,13 +22,13 @@ against.  If it guesses wrong simply specify your kernel devel headers using
 the <em>--with-linux</em> configure option.  You may also need the
 <em>--with-linux-obj</em> configure option if the kernel build objects
 are installed in a different directory.  You can also specify an alternate
-version of the spl using the <em>--with-spl</em> and <em>--with-spl-obj</em>
+version of the spl using the <em>--with-spl</em> and <em>--with-spl-obj</em></p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo apt-get install zlib1g-dev uuid-dev libblkid-dev libselinux-dev parted lsscsi
 $ ./configure
 $ make deb
-</pre>
+</td></tr></table></pre>
 
 <p>The result of this will be two source rpm packages...  Yes, source rpm
 packages.  Currently, deb style packages are built by first creating rpm
@@ -63,7 +63,7 @@ please feel free to contact us.</p>
 
 <p>Next go ahead and install the packages.</p>
 
-<pre>
+<table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo dpkg -i *_amd64.deb
 
 Selecting previously deselected package zfs.
@@ -85,7 +85,7 @@ Setting up zfs-test (0.5.0-2) ...
 Processing triggers for man-db ...
 Processing triggers for libc-bin ...
 ldconfig deferred processing now taking place
-</pre>
+</td></tr></table></pre>
 
 <p>That&#8217;s it!  You should be able to use the zfs tools just like you
 would under Solaris.  If your unfamiliar with zfs I would suggest looking over
@@ -94,8 +94,8 @@ official documentation</a> or going through one the many tutorials
 available online .  There are also several examples available
 <a href="index.html">here</a>.</p>
 
-If you would like to verify the packages you just built you can run the
-included <a href="zfs-regression-suite.html">regression test suites</a>.
+<p>If you would like to verify the packages you just built you can run the
+included <a href="zfs-regression-suite.html">regression test suites</a>.</p>
 		</td>
 	</tr>
 </table>
