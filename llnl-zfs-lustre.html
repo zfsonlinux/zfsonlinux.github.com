@@ -31,9 +31,7 @@ environment a Lustre I/O server (OSS) can be expected to generate a random
 I/O workload.  There will be 100&#8217;s of threads concurrently accessing
 different files in the back-end file system.  For writes ZFS&#8217;s
 copy-on-write transaction model converts this random workload in to a
-streaming workload which is critical when using SATA disks.  For small I/O,
-Lustre can leverage a ZIL placed on separate SSD devices to maximize
-performance.</p>
+streaming workload which is critical when using SATA disks.</p>
 
 <p>Our intention is to deploy a 50 petabyte production Lustre file system
 based on this Linux ZFS port.  With that much hardware on the floor
