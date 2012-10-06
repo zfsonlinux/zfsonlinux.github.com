@@ -19,7 +19,9 @@ an educated guess as to which kernel you wish to build against.  If it guesses
 wrong simply specify your kernel devel headers using the <em>--with-linux</em>
 configure option.  You may also need the <em>--with-linux-obj</em>
 configure option if the kernel build objects are installed in a different
-directory.</p>
+directory.  Finally, if you are building directly from the git tree, and
+not a tarball, you must first run <em>./autogen.sh</em> to generate the
+<em>configure</em> script.</p>
 
 <table bgcolor="eeeeee" width=100%><tr><td><pre>
 $ sudo yum groupinstall "Development Tools" 
