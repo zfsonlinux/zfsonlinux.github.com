@@ -578,20 +578,19 @@ cache file it will need to be explicitly imported.
 	</tr>
 	<tr>
 		<td>
-<p>ZFS has been integrated with the Linux NFS server.  You can share
-a ZFS file system by setting the <em>sharenfs</em> file system property.
-For example, here's how to share the file system tank/home with the
-default NFS options.  Note you must still manually configure your
-network to allow NFS.</p>
+<p>ZFS has been integrated with the Linux NFS and SMB servers.  You
+can share a ZFS file system by setting the <em>sharenfs</em> or
+<em>sharesmb</em> file system property.  For example, to share the
+file system tank/home via NFS and SMB with the default options.</p>
 
 <pre>
 $ sudo zfs set sharenfs=on tank/home
+$ sudo zfs set sharesmb=on tank/home
 </pre>
 
-<p>ZFS has not yet been directly integrated with the Linux Samba server.
-This means that setting the <em>sharesmb</em> file system property has
-no effect.  To share a ZFS file system with Samba you must manually
-configure the Samba server.</p>
+<p>Note you must still manually configure your network to allow NFS
+of SMB.  You will also need to make sure that the NFS and SMB packages
+for your distribution are installed.</p>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
