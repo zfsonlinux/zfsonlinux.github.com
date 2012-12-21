@@ -17,7 +17,7 @@
 		<td>
 <ul>
 	<li><a href="#WhatAboutTheLicensingIssue">
-	1.1 What about the licensing issue?</a></li>
+	1.1 What is the licensing concern?</a></li>
 	<li><a href="#HowDoIInstallIt">
 	1.2 How do I install it?</a></li>
 	<li><a href="#WhyDoesntItBuild">
@@ -58,33 +58,41 @@
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatAboutTheLicensingIssue">
-1.1 What about the licensing issue?</a>
+1.1 What is the licensing concern?</a>
 		</th>
 	</tr>
 	<tr>
 		<td>
-<p>In a nutshell, the issue is that the Linux kernel which is licensed under the 
-<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a> is
-<a href="http://www.gnu.org/licenses/license-list.html#CDDL">incompatible</a>
-with ZFS which is licensed under the Sun <a
-href="http://hub.opensolaris.org/bin/view/Main/opensolaris_license">CDDL</a>.
-While both the GPL and CDDL are open source licenses their terms are such that
-it is impossible to simultaneously satisfy both licenses.  This means that a
-single <em>derived work</em> of the Linux kernel and ZFS cannot be legally
-<em>distributed</em>.</p>
+<p> ZFS is licensed under the <a href="http://hub.opensolaris.org/bin/
+view/Main/opensolaris_license">Common Development and Distribution
+License (CDDL), </a> and the Linux kernel is licensed under the
+<a href="http://www.gnu.org/licenses/gpl2.html">GNU General Public License
+Version 2 (GPLv2)</a>.  While both are free open source licenses they are
+restrictive licenses.  The combination of them causes problems because it
+prevents using pieces of code exclusively available under one license with
+pieces of code exclusively available under the other in the same binary.
+In the case of the kernel, this prevents us from distributing ZFS as part
+of the kernel binary. However, there is nothing in either license that
+prevents distributing it in the form of a binary module or in the form
+of source code.</p>
 
-<p>One way to resolve this issue is to implement
-<a href="http://zfs-fuse.net/">ZFS in user space with FUSE</a> where it is not
-considered a <em>derived work</em> of the kernel.  This approach resolves the
-licensing issues but it has some technical drawbacks.  There is another option
-though.  The CDDL does not restrict modification and release of the ZFS source
-code which is <a href="http://dlc.sun.com/osol/on/downloads/current/">publicly
-available</a> as part of OpenSolaris.  The ZFS code can be modified to build
-as a CDDL licensed kernel module which is <em>not distributed</em> as part of
-the Linux kernel.  This makes a Native ZFS on Linux implementation possible if
-you are willing to
-<a href="http://github.com/zfsonlinux/zfs/downloads">download</a> and
-<a href="zfs-building-rpm.html">build it</a> yourself.</p>
+<p> For further reading on this issue see the following excellent article
+regarding non-GPL licensed kernel modules.</p>
+
+<ul>
+	<li>
+<a href="http://www.networkworld.com/news/2006/120606-closed-modules1.html">
+Encouraging closed source modules part 1: copyright and software </a>
+	</li>
+	<li>
+<a href="http://www.networkworld.com/news/2006/120806-closed-modules2.html">
+Encouraging closed source modules part 2: law and the module interface </a>
+	</li>
+	<li>
+<a href="http://www.networkworld.com/news/2006/121106-closed-modules3.html">
+Encouraging closed source modules part 3: elimating the "API update tax" </a>
+	</ul>
+</ul>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
