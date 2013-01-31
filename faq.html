@@ -32,8 +32,8 @@
 	1.7 What /dev/ names should I used when creating my pool?</a></li>
 	<li><a href="#HowDoIChangeNamesOnAnExistingPool">
 	1.8 How do I change the /dev/ names on an existing pool?</a></li>
-	<li><a href="#HowDoISetupZdevConf">
-	1.9 How do I setup the /etc/zfs/zdev.conf file?</a></li>
+	<li><a href="#HowDoISetupVdevIdConf">
+	1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a></li>
 	<li><a href="#PerformanceConsideration">
 	1.10 What&#8217;s going on with performance?</a></li>
 	<li><a href="#WhatDoesZpoolCacheDo">
@@ -285,7 +285,7 @@ pool really depends on your requirements.  For development and testing
 using /dev/sdX naming is quick and easy.  A typical home server might
 prefer /dev/disk/by-id/ naming for simplicity and readability.  While very
 large configurations with multiple controllers, enclosures, and switches
-will likely prefer /dev/disk/zpool naming for maximum control.  But in
+will likely prefer /dev/disk/by-vdev naming for maximum control.  But in
 the end, how you choose to identify your disks is up to you.</p>
 <ul>
 	<li>
@@ -373,26 +373,38 @@ These names are long, cumbersome, and difficult for a human to manage.
 	</ul><br>
 
 	<li>
-<b>/dev/disk/zpool/:</b> Best for large pools (greater than 10 disks)
+<b>/dev/disk/by-vdev/:</b> Best for large pools (greater than 10 disks)
 	</li>
 	<ul>
 		<li>
 <em>Summary:</em>
-This is essentially a variation of the /dev/disk/by-path/ method which allows
-you to pick your own unique meaningful names for the disks.  These names will
-be displayed by all the zfs utilities so it can be used to clarify the
-administration of a large complex pool.
+This approach provides administrative control over device naming using
+the configuration file /etc/zfs/vdev_id.conf.  Names for disks in JBODs
+can be generated automatically to reflect their physical location by
+enclosure IDs and slot numbers.  The names can also be manually assigned
+based on existing udev device links, including those in
+/dev/disk/by-path or /dev/disk/by-id.  This allows you to pick your own
+unique meaningful names for the disks.  These names will be displayed by
+all the zfs utilities so it can be used to clarify the administration of
+a large complex pool. See the vdev_id and vdev_id.conf man pages for
+further details.
 		</li>
 		<li>
 <em>Benefits:</em>
-This approach has all the benefits of the /dev/disk/by-path/ method plus
-it allows you to choose meaningful human readable names.
+The main benefit of this approach is that it allows you to choose
+meaningful human-readable names. Beyond that, the benefits depend on the
+naming method employed.  If the names are derived from the physical path
+the benefits of /dev/disk/by-path are realized.  On the other hand,
+aliasing the names based on drive identifiers or WWNs has the same
+benefits as using /dev/disk/by-id.
 		</li>
 		<li>
 <em>Drawbacks:</em>
-This method relies on having a /etc/zfs/zdev.conf file properly configured
+This method relies on having a /etc/zfs/vdev_id.conf file properly configured
 for your system.   To configure this file please refer to section
-<a href="#HowDoISetupZdevConf">1.9 How do I setup the /etc/zfs/zdev.conf file?</a>
+<a href="#HowDoISetupVdevIdConf">1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a>
+As with benefits, the drawbacks of /dev/disk/by-id or /dev/disk/by-path
+may apply depending on the naming method employed.
 		</li>
 		<li>
 <em>Example:</em>
@@ -413,65 +425,94 @@ for your system.   To configure this file please refer to section
 <p>Changing the /dev/ names on an existing pool can be done by simply
 exporting the pool and re-importing it with the -d option to specify
 which new names should be used. For example, to use the custom names
-in /dev/disk/zpool:</p>
+in /dev/disk/by-vdev:</p>
 
 <pre>
 $ sudo zpool export tank
-$ sudo zpool import -d /dev/disk/zpool tank
+$ sudo zpool import -d /dev/disk/by-vdev tank
 </pre>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
 		<th>
-<a name="HowDoISetupZdevConf">
-1.9 How do I setup the /etc/zfs/zdev.conf file?</a>
+<a name="HowDoISetupVdevIdConf">
+1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a>
 		</th>
 	</tr>
 	<tr>
 		<td>
-<p>In order to use /dev/disk/zpool/ naming the /etc/zfs/zdev.conf must be
-configured.  This configuration file consists of custom meaningful names
-which are mapped to a /dev/disk/by-path identifier.</p>
+<p>In order to use /dev/disk/by-vdev/ naming the /etc/zfs/vdev_id.conf must be
+configured.  The format of this file is described in the vdev_id.conf
+man page. Several examples follow.
 
-<p>For example, if you have a Sun X4550 and would like to setup mirror
-pairs across controllers.  You can create a configuration file which
-assigns the names A[0-7] to the disks on the first controller, and the
-names B[0-7] to the disks on the second controller.
+<ul>
+<li>A non-multipath configuration with direct-attached SAS enclosures
+and an arbitrary slot re-mapping.
 
 <pre>
-$ cat /etc/zfs/zdev.conf
-#
-# Custom by-path mapping for large JBOD configurations
-#
-# Example Config:
-# Sun x4550 for RHEL6
-#
 
-# Channel A: PCI Bus 2
-A0      pci-0000:02:00.0-sas-0x50062b0000000001:1:0-0xd6807184d601e192:0
-A1      pci-0000:02:00.0-sas-0x50062b0000000002:1:1-0xd4905378e6e3d592:1
-A2      pci-0000:02:00.0-sas-0x50062b0000000003:1:2-0xd3827673d806d392:2
-A3      pci-0000:02:00.0-sas-0x50062b0000000004:1:3-0xd6805385d6e3e192:3
-A4      pci-0000:02:00.0-sas-0x50062b0000000005:1:4-0xd680655bd6f5b792:4
-A5      pci-0000:02:00.0-sas-0x50062b0000000006:1:5-0x7a967598ec06d091:5
-A6      pci-0000:02:00.0-sas-0x50062b0000000007:1:6-0xd3826c60d8fcbf92:6
-A7      pci-0000:02:00.0-sas-0x50062b0000000008:1:7-0xd6805271d6e2cd92:7
+            multipath     no
+            topology      sas_direct
+            phys_per_port 4
 
-# Channel B: PCI Bus 3
-B0      pci-0000:03:00.0-sas-0x50062b0000000002:1:0-0xd680685fd6f8bb92:0
-B1      pci-0000:03:00.0-sas-0x50062b0000000003:1:1-0xd58c706de200cb92:1
-B2      pci-0000:03:00.0-sas-0x50062b0000000004:1:2-0xd5897480df04de92:2
-B3      pci-0000:03:00.0-sas-0x50062b0000000005:1:3-0xd6805764d6e7c092:3
-B4      pci-0000:03:00.0-sas-0x50062b0000000006:1:4-0xd6806a6dd6fac992:4
-B5      pci-0000:03:00.0-sas-0x50062b0000000007:1:5-0xd58c6b84e2fbe192:5
-B6      pci-0000:03:00.0-sas-0x50062b0000000008:1:6-0xd58a576ee0e7cb92:6
-B7      pci-0000:03:00.0-sas-0x50062b0000000009:1:7-0xd5877871dd08cf92:7
+            #       PCI_SLOT HBA PORT  CHANNEL NAME
+            channel 85:00.0  1         A
+            channel 85:00.0  0         B
+
+            #    Linux      Mapped
+            #    Slot       Slot
+            slot 0          2
+            slot 1          6
+            slot 2          0
+            slot 3          3
+            slot 4          5
+            slot 5          7
+            slot 6          4
+            slot 7          1
 </pre>
+
+<li>A SAS-switch topology.  Note that the channel keyword takes only
+two arguments in this example.
+
+<pre>
+            topology      sas_switch
+
+            #       SWITCH PORT  CHANNEL NAME
+            channel 1            A
+            channel 2            B
+            channel 3            C
+            channel 4            D
+</pre>
+
+<li>A multipath configuration.  Note that channel names have multiple
+definitions - one per physical path.
+
+<pre>
+            multipath yes
+
+            #       PCI_SLOT HBA PORT  CHANNEL NAME
+            channel 85:00.0  1         A
+            channel 85:00.0  0         B
+            channel 86:00.0  1         A
+            channel 86:00.0  0         B
+</pre>
+
+<li>A configuration using device link aliases.
+
+<pre>
+            #     by-vdev
+            #     name     fully qualified or base name of device link
+            alias d1       /dev/disk/by-id/wwn-0x5000c5002de3b9ca
+            alias d2       wwn-0x5000c5002def789e
+</pre>
+</ul>
+
 
 <p>After defining the new disk names run <em>udevadm trigger</em> to
 prompt udev to parse the configuration file.  This will result in a new
-/dev/disk/zpool directory which is populated with symlinks to /dev/sdX names.
-You can then create the new pool of mirrors with the following command:</p>
+/dev/disk/by-vdev directory which is populated with symlinks to /dev/sdX
+names.  Following the first example above, you could then create the new
+pool of mirrors with the following command:</p>
 
 <pre>
 $ sudo zpool create tank \
