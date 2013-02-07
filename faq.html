@@ -50,6 +50,8 @@
 	1.16 Do I have to use ECC memory?</a></li>
 	<li><a href="#CanIUseaZVOLforSwap">
 	1.17 Can I use a ZVOL for swap?</a></li>
+	<li><a href="#HowDoIGenerateTheZpoolCacheFile">
+	1.18 How do I generate the /etc/zfs/zpool.cache file?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 </ul>
@@ -773,6 +775,24 @@ system is already low on memory.</p>
 $ sudo zfs create tank/swap -V 2G -b 4K
 $ sudo mkswap -f /dev/tank/swap
 $ sudo swapon /dev/tank/swap
+</pre>
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
+<a name="HowDoIgenerateTheZpoolCacheFile">
+1.18 How do I generate the /etc/zfs/zpool.cache file?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p>The /etc/zfs/zpool.cache file will be automatically updated when your
+pool configuration is changed.  However, if for some reason it becomes
+stale you can force the generation of a new /etc/zfs/zpool.cache file
+by setting the <em>cachefile</em> property on the pool.</p>
+
+<pre>
+$ sudo zpool set cachefile=/etc/zfs/zpool.cache tank
 </pre>
 		</td>
 	</tr>
