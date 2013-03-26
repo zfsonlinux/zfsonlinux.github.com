@@ -1,0 +1,209 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Building Generic RPM Packages." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+        <tr bgcolor="#aaaaaa">
+                <th> Building Generic RPM Packages </th>
+        </tr>
+	<tr><td>
+<p>The following instructions assume you are building from an official release
+tarball or directly from the git repository.  Most users should not need to
+do this and should preferentially use the packages provided by their
+distribution.  As a general rule the distribution packages will be more
+tightly integrated, widely tested, and better supported.  However, if your
+distribution of choice doesn't provide packages then this may be your best
+option.</p>
+
+<p>The first thing to be aware of is that the build system is capable of
+generating two different types of kernel packages.  Which type of package
+you choose depends on your expected environment.</p>
+
+<ul>
+<li><b>DKMS</b> packages contain only the source code and scripts for
+rebuilding the kernel modules.  When the DKMS package is installed kernel
+modules will be built for all available kernels.  Additionally, when the
+kernel is upgraded new kernels modules will be automatically built for that
+kernel.  This is particularly convenient for desktop systems which receive
+frequent kernel updates.  The downside is that because the DKMS packages
+build the kernel modules from source a full development environment is
+required which may not be appropriate for large deployments.</li>
+
+<li><b>KMOD</b> packages are binary kernel modules which are compiled
+against a specific version of the kernel.  This means that if you update
+the kernel you <i>must</i> recompile and install a new KMOD package.
+If you don't frequently update your kernel or if your managing a large number
+of systems then KMOD packages are a good choice.</li>
+</ul>
+
+<p>By default the build system will generate user packages and both DKMS
+and KMOD packages.  The user packages can be used with either set of kernel
+packages and do not need to be rebuilt when the kernel is updated.  You
+can also streamline the build process by building only the DKMS or KMOD
+packages as shown below.</p>
+
+<p>Be aware that when building directly from a git repository you must first
+run the <i>autogen.sh</i> script to create the <i>configure</i> script.</p>
+	</td></tr>
+        <tr bgcolor="#aaaaaa">
+                <th> DKMS Packages </th>
+        </tr>
+	<tr><td>
+<p>Building DKMS and utility packages can be done as follows.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum groupinstall "Development Tools"
+$ sudo yum install kernel-devel zlib-devel libuuid-devel libblkid-devel libselinux-devel parted lsscsi wget
+
+$ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/spl/spl-x.y.z.tar.gz
+$ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-x.y.z.tar.gz
+
+$ tar -xzf spl-x.y.z.tar.gz
+$ tar -xzf zfs-x.y.z.tar.gz
+
+$ cd spl-x.y.z
+$ ./configure --with-config=user
+$ make rpm-utils rpm-dkms
+
+$ ../zfs-x.y.z
+$ ./configure --with-config=user
+$ make rpm-utils rpm-dkms
+	</pre></td/></tr>
+</table>
+
+<p>The build process will generate the following packages.  There is no need to
+install the <b>debuginfo</b>, <b>devel</b> or <b>*.src.rpm</b> packages.  These
+are provided for developers and package maintainers.  Everything else should be
+installed.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ cd ..
+$ ls spl-x.y.z/*.rpm
+spl-x.y.z/spl-x.y.z-r.dist.src.rpm
+spl-x.y.z/spl-x.y.z-r.dist.arch.rpm
+spl-x.y.z/spl-debuginfo-x.y.z-r.dist.arch.rpm
+spl-x.y.z/spl-dkms-x.y.z-r.dist.noarch.rpm
+spl-x.y.z/spl-dkms-x.y.z-r.dist.src.rpm
+
+$ ls zfs-x.y.z/*.rpm
+zfs-x.y.z/zfs-x.y.z-r.dist.src.rpm
+zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-debuginfo-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-devel-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-dkms-x.y.z-r.dist.noarch.rpm
+zfs-x.y.z/zfs-dkms-x.y.z-r.dist.src.rpm
+zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+
+$ sudo yum localinstall \
+	spl-x.y.z/spl-x.y.z-r.dist.arch.rpm \
+	spl-x.y.z/spl-dkms-x.y.z-r.dist.noarch.rpm \
+	zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/zfs-dkms-x.y.z-r.dist.noarch.rpm \
+	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+</pre></td></tr>
+</table>
+
+<p>That's it!  Once the packages are successfully installed you can use it just
+just like you would in Solaris, Illumos, or FreeBSD.</p>
+	</td></tr>
+        <tr bgcolor="#aaaaaa">
+                <th> KMOD Packages </th>
+        </tr>
+	<tr><td>
+<p>Building KMOD packages is similar to building DKMS packages.  The major
+difference is that when building a KMOD a specific Linux kernel must be
+specified.  At <i>configure</i> time the build system will make an educated
+guess as to which kernel you want to build against.  However, if <i>configure</i>
+is unable to locate your kernel development headers, or you want to build
+against a different kernel, you can specify the exact path with the
+<i>--with-linux</i> and <i>--with-linux-obj</i> options.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum groupinstall "Development Tools"
+$ sudo yum install kernel-devel zlib-devel libuuid-devel libblkid-devel libselinux-devel parted lsscsi wget
+
+$ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/spl/spl-x.y.z.tar.gz
+$ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-x.y.z.tar.gz
+
+$ tar -xzf spl-x.y.z.tar.gz
+$ tar -xzf zfs-x.y.z.tar.gz
+
+$ cd spl-x.y.z
+$ ./configure
+$ make rpm-utils rpm-kmod
+
+# Install the spl development headers, they are required to build zfs.
+$ sudo yum localinstall \
+	kmod-spl-devel-x.y.z-r.dist.arch.rpm \
+	kmod-spl-devel-kernel-x.y.z-r.dist.arch.rpm
+
+$ ../zfs-x.y.z
+$ ./configure
+$ make rpm-utils rpm-kmod
+	</pre></td/></tr>
+</table>
+
+<p>The build process will generate the following packages.  There is no need to
+install the <b>debuginfo</b>, or <b>*.src.rpm</b> packages.  These are provided for
+developers and package maintainers.  Everything else should be installed.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ cd ..
+$ ls spl-x.y.z/*.rpm
+spl-x.y.z/kmod-spl-kernel-x.y.z-r.dist.arch.rpm
+spl-x.y.z/kmod-spl-devel-x.y.z-r.dist.arch.rpm
+spl-x.y.z/kmod-spl-devel-kernel-x.y.z-r.dist.arch.rpm
+spl-x.y.z/spl-x.y.z-r.dist.src.rpm
+spl-x.y.z/spl-x.y.z-r.dist.arch.rpm
+spl-x.y.z/spl-debuginfo-x.y.z-r.dist.arch.rpm
+spl-x.y.z/spl-kmod-x.y.z-r.dist.src.rpm
+spl-x.y.z/spl-kmod-debuginfo-x.y.z-r.dist.arch.rpm
+
+$ ls zfs-x.y.z/*.rpm
+zfs-x.y.z/kmod-zfs-kernel-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/kmod-zfs-devel-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-x.y.z-r.dist.src.rpm
+zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-debuginfo-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-devel-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+zfs-x.y.z/zfs-kmod-x.y.z-r.dist.src.rpm
+zfs-x.y.z/zfs-kmod-debuginfo-x.y.z-r.dist.arch.rpm
+
+$ sudo yum localinstall \
+	spl-x.y.z/spl-x.y.z-r.dist.arch.rpm \
+	spl-x.y.z/kmod-spl-kernel-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/kmod-zfs-kernel-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/kmod-zfs-devel-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+</pre></td></tr>
+</table>
+
+<p>That's it!  Once the packages are successfully installed you can use it just
+just like you would in Solaris, Illumos, or FreeBSD.</p>
+<p></p>
+
+	<tr><td>
+</table>
+
+</center>
+</body>
+</html>

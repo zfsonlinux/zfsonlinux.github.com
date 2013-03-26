@@ -105,30 +105,23 @@ Encouraging closed source modules part 3: elimating the "API update tax" </a>
 	</tr>
 	<tr>
 		<td>
-<p>If you are using an Ubuntu distribution the easiest way to install ZFS is
-with the <a href="https://launchpad.net/~zfs-native/+archive/stable">
-ZFS PPA</a>.  Simply add the PPA to your list of repositories and install
-the ubuntu-zfs packages with your favorite package manager.  The ZFS source will
-be downloaded to your system and compiled with dkms.  In addition, the ZFS
-source will be automatically recompiled when a new version is available
-or when you update your kernel.</p>
+<p>ZFS on Linux is available for numerous distributions and the installation
+process largely depends on the package manager.  The following distributions
+all have support for ZFS and documentation on how it can be installed.  If
+your distribution isn't listed below you can build ZFS using the officially
+released tarballs.</p>
 
-<pre>
-$ sudo add-apt-repository ppa:zfs-native/stable
-$ sudo apt-get update
-$ sudo apt-get install ubuntu-zfs
-</pre>
-
-<p>If you are using a different Linux distribution you will have to manually
-<a href="spl-building-rpm.html">download and compile the source</a> as
-described in the documentation.</p>
-
-<p>Note that because we want to take a cautious, careful approach with
-ZFS on Linux we are still calling this a release candidate.  However, all
-of the core functionality is in place and most of the advanced features
-are working.  Stability of the latest release candidates has been very good
-and performance is respectable.  Many people are successfully using the
-ZFS on Linux release candidates every day.</p>
+<ul>
+	<li><a href="https://wiki.archlinux.org/index.php/ZFS">Arch Linux</a></li>
+	<li><a href="https://alioth.debian.org/projects/pkg-zfsonlinux">Debian</a></li>
+	<li><a href="fedora.html">Fedora</a></li>
+	<li><a href="http://www.funtoo.org/ZFS_Fun">Funtoo</a></li>
+	<li><a href="http://wiki.gentoo.org/wiki/ZFS">Gentoo</a></li>
+	<li><a href="epel.html">RHEL / CentOS / SL</a></li>
+	<li><a href="http://www.sabayon.org/">Sabayon</a></li>
+	<li><a href="https://www.sprezzatech.com/wiki/index.php/ZFS">SprezzOS</a></li>
+	<li><a href="https://launchpad.net/~zfs-native/+archive/stable">Ubuntu</a></li>
+</ul>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
@@ -149,12 +142,12 @@ things explain your problem, then please open a new
 which fully describes the problem.</p>
 
 <ul>
-	<li> The kernel API changes frequently, only
-		<b>2.6.26 - 3.7</b> kernels are supported. </li>
+	<li> The kernel API changes frequently, version 0.6.1 supports
+		<b>2.6.26 - 3.9</b> kernels. </li>
 	<li> There are lots of Linux distributions, <a href=
 		"#WhatKernelVersionsAreSupported">only these releases</a>
 		are part of the automated build/regression testing.</li>
-	<li>This may be a known issue check the
+	<li> This may be a known issue check the
 		<a href="http://github.com/zfsonlinux/spl/issues/
 		labels/Build%20Issue">SPL</a> and
 		<a href="http://github.com/zfsonlinux/zfs/issues/
@@ -219,11 +212,11 @@ leveraged to allow tighter integration with the standard Linux VM mechanisms.
 	</tr>
 	<tr>
 		<td>
-<p>The latest spl/zfs-.0.6.0-rc14 release candidate supports Linux <b>2.6.26 -
-3.7</b> kernels.  This covers most of the kernels used in the major Linux
-distributions.  The following distributions are regularly tested at LLNL using a
-buildbot based continuous integration development model.  If you need support for
-a newer kernel you may find it in the latest github sources. </p>
+<p>The current spl/zfs-0.6.1 release supports Linux <b>2.6.26 - 3.9</b> kernels.
+This covers most of the kernels used in the major Linux distributions.  The following
+distributions are regularly tested at LLNL using a buildbot based continuous integration
+development model.  If you need support for a newer kernel you may find it in the latest
+github sources. </p>
 	<center><ul>
 	<table width=90%>
 	<tr>
@@ -724,14 +717,14 @@ automatically detect the sector size of the drive. This combination will
 result in poorly aligned disk access which will greatly degrade the pool
 performance.</p>
 
-Starting with version 0.6.0-rc5 an ashift property has been added to the
-zpool command to explicitly assign the sector size of the created pool.
-The ashift values range from 9 to 16 with the default value 0 meaning
-auto-detect the sector size. This value is actually a bit shift value,
-so an ashift value for 512 bytes is 9 (2<sup>9</sup> = 512) while the
-ashift value for 4,096 bytes is 12 (2<sup>12</sup> = 4,096).  To force
-the pool to use 4,096 byte sectors we must specify this at pool creation
-time:</p>
+Therefore the ability to set the ashift property has been added to
+the zpool command.  This allows users to explicitly assign the sector
+size at pool creation time.  The ashift values range from 9 to 16 with
+the default value 0 meaning auto-detect the sector size.  This value is
+actually a bit shift value, so an ashift value for 512 bytes is 9
+(2<sup>9</sup> = 512) while the ashift value for 4,096 bytes is 12
+(2<sup>12</sup> = 4,096).  To force the pool to use 4,096 byte sectors
+we must specify this at pool creation time:</p>
 
 <pre>$ sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
 		</td>
