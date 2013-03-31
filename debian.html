@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>ZFS on Linux</title>
+<meta name="keyword" content="zfs, linux"/>
+<meta name="description" content="Debian Packages." />
+<meta name="robots" content="all" />
+</head>
+<body>
+<center>
+<img src="images/zfs-linux.png">
+
+<table width=80%>
+        <tr bgcolor="#aaaaaa">
+                <th> Debian Packages </th>
+        </tr>
+	<tr><td>
+<p>DKMS style packages for Debian are available from the zfsonlinux.org 
+repository.  These packages track the latest official upstream tag and
+are refreshed as new releases are made available.  Packages are provided
+for:</p>
+
+<ul>
+	<li>Releases: Debian 7.0 Wheezy</li>
+	<li>Arches: amd64</li>
+</ul>
+
+<p>To add the repository to your system install the <i>zfsonlinux</i> package
+as shown below.  This will add the
+<i>/etc/apt/sources.list.d/zfsonlinux.list</i>,
+<i>/etc/apt/trusted.gpg.d/zfsonlinux.gpg</i>, and
+<i>/etc/apt/preferences.d/pin-zfsonlinux</i> files to your computer.
+Afterwards, you can install zfs like any other Debian package using
+<i>apt-get</i>.  As new updated packages are made available they will be
+detected and installed as part of the standard update process.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ su -
+# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_1%7Ewheezy_all.deb
+# dpkg -i zfsonlinux_1~wheezy_all.deb
+# apt-get update
+# apt-get install debian-zfs</pre></td/></tr>
+</table>
+
+	<tr><td>
+</table>
+
+</center>
+</body>
+</html>
