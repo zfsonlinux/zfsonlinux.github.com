@@ -2,7 +2,7 @@
 <head>
 <title>ZFS on Linux</title>
 <meta name="keyword" content="zfs, linux"/>
-<meta name="description" content="Lustre Orion Summary." />
+<meta name="description" content="ZFS Lustre Servers." />
 <meta name="robots" content="all" />
 </head>
 <body>
@@ -11,102 +11,123 @@
 
 <table width=80%>
 	<tr bgcolor="#aaaaaa">
-		<th colspan="2">Chaos Lustre Orion with ZFS Support</th>
-	</tr>
-	<tr bgcolor="#dddddd">
-		<th colspan="2">History</th>
+		<th colspan="2">ZFS Lustre Servers</th>
 	</tr>
 		<td colspan="2">
-<p>The <a href="http://wiki.lustre.org/index.php/Main_Page">Lustre</a> Orion
-development branch is a version of the code which has been designed to
-support multiple backend filesystems.  This work was originally started at
-Sun... continued at Oracle... continued at Whamcloud... and is being finished
-at Intel. Despite these disruptions <a href="https://computing.llnl.gov/">
-Livermore</a> has remained involved in the development and committed to
-deploying a <a href="llnl-zfs-lustre.html">ZFS based Lustre solution</a>
-for our large Linux clusters.</p>
+<p>With the release of <a href="http://lustre.opensfs.org">Lustre 2.4</a>
+support for ZFS Lustre servers has arrived.  Historically, Lustre
+has only supported ext4/ldiskfs servers and while those servers have
+performed well they do suffer from a number of well known <a href="http://
+wiki.lustre.org/index.php/ZFS_and_Lustre">limitations</a>.  Extending
+Lustre to use a next generation filesystem like ZFS allows it to achieve
+greater levels of scalability and introduces new functionality.</p>
 
-<p>The focus of the work at <a href="https://computing.llnl.gov/">
-Livermore</a> has been to port ZFS to the Linux kernel so it may be used
-as an advanced backend filesystem for Lustre.  While ldiskfs has served
-Lustre well there is growing acceptance that ldiskfs will soon no longer
-be a viable solution for the largest Lustre filesystems.  The
-<a href="http://wiki.lustre.org/index.php/ZFS_and_Lustre">limitations of
-ldiskfs</a> are well known and allowing alternate backend filesystems,
-like ZFS, is clearly a step in the right direction.</p>
-
-<p>Support for multiple backend filesystem was accomplished by developing a
-common interface used by Lustre to communicate with the backend filesystem.
-This interface cleanly abstracts away any filesystem specific details from
-the higher layers of Lustre.  Lustre then provides a small filesystem specific
-layer called the OSD which contains the needed filesystem specific code.
-The ldiskfs OSD was added first and it was soon followed by the ZFS OSD.
-There is considerable interest in adding a BTRFS OSD but this work has
-not yet begun.</p>
+ZFS Lustre Server Features:
+<ul>
+<li>
+<a href="http://en.wikipedia.org/wiki/ZFS#Data_integrity">Data Integrity</a>
+- Data is always checksummed and self repairing to avoid silent corruption.
+</li>
+<li>
+<a href="http://en.wikipedia.org/wiki/ZFS#Storage_pools">Pooled Storage</a>
+- Easy aggregation of multiple devices in to a single OST.
+</li>
+<li>
+<a href="http://en.wikipedia.org/wiki/ZFS#Capacity">Capacity</a>
+- A 256 zettabytes (2^78 bytes) OST size limit enables larger servers.
+</li>
+<li>
+<a href="http://en.wikipedia.org/wiki/ZFS#Snapshots_and_clones">Snapshots</a>
+- Snapshot the Lustre filesystem prior maintenance for worry free updates.
+</li>
+<li>
+<a href="http://en.wikipedia.org/wiki/LZJB">Compression</a>
+- Transparent compression increases your total usable capacity.
+</li>
+<li>
+<a href="http://en.wikipedia.org/wiki/ZFS#Copy-on-write_transactional_model">
+Copy-on-Write</a> - Improves write performance by transforming random I/O
+in to sequential I/O.</a>
+</li>
+</ul>
 	</tr>
 
 	<tr bgcolor="#dddddd">
 		<th colspan="2">Status</th>
 	</tr>
 		<td colspan="2">
-<p>The Lustre Orion branch is currently in use on the
-<a href="https://asc.llnl.gov/computing_resources/sequoia/">Sequoia system</a>
-at Livermore.  This branch is being merged in the mainstream Lustre code
-base and will be generally available as part of the Lustre 2.4 release.
-If you can't wait until Lustre 2.4 the latest source code is available
-below with brief directions on how to download, build, and configure
-your system.
+<p>Support for ZFS has been merged in to the Lustre mainline source tree and
+will be officially available when <a href="http://lustre.opensfs.org/
+community-lustre-roadmap/">Lustre 2.4 is released</a>.  A pre-release version
+of this code is running on  <a href="https://computing.llnl.gov/">
+Lawrence Livermore's</a> <a href="https://asc.llnl.gov/computing_resources/
+sequoia/">Sequoia</a> system which is currently ranked second on the
+<a href="http://www.top500.org/list/2012/11/">top 500 list</a>.</p>
 		</td>
 	</tr>
 	<tr bgcolor="#dddddd">
 		<th colspan="2">Download</th>
 	</tr>
 		<td colspan="2">
-<p>Please use the latest posted tarballs from the Github download section
-and not the most current git tag.  Only the posted tarballs will have
-undergone internal testing at Livermore.  Even then, be aware that this
-is not a polished production release and you may encounter problems.</p>
+<p>Lustre DKMS packages for RHEL/CentOS 6 are available from the ZFS on
+Linux EPEL repository.  They track the upstream Lustre master branch and
+are refreshed as new pre-releases are tagged.  Once the official Lustre 2.4
+release is tagged the repository will switch to tracking the 2.4 maintenance
+branch.  Packages are provided for:</p>
 
 <ul>
-	<li><a href=https://github.com/chaos/spl/downloads>
-	Chaos SPL Source</a></li>
-	<li><a href=https://github.com/chaos/zfs/downloads>
-	Chaos ZFS Source</a></li>
-	<li><a href=https://github.com/chaos/lustre/downloads>
-	Chaos Lustre Orion Source</a></li>
+        <li>Releases: RHEL/CentOS 6.x</li>
+        <li>Arches: x86_64</li>
 </ul>
 
+<p>To add the repository to your system install the <i>zfs-release</i>
+package as shown below.  This will add the <i>/etc/yum.repo.d/zfs.repo</i>
+and required signing keys to your system.  You can then install Lustre like
+any other EPEL package using <i>yum</i>.  As new updated packages are
+made available they will be detected and installed as part of the standard
+update process.</p>
+
+<table align="center" width=95%>
+        <tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release-1-2.el6.noarch.rpm
+$ sudo yum install lustre
+</pre></td/></tr>
+</table><br>
 		</td>
 	</tr>
 
 	<tr bgcolor="#dddddd">
-		<th colspan="2">Building Packages</th>
-	</tr>
-		<td colspan="2">
-<p>After downloading the Chaos versions of the SPL, ZFS, and Lustre Orion
-source you can build RPM packages.  Simply start by following the directions
-to <a href="spl-building-rpm.html">build+install the SPL packages</a> and
-then continue through the Lustre step.  Once you have built and installed
-all the needed packages you can setup one of the example configurations.</p>
-
-<ul>
-	<li>Only they RHEL 6.x distribution has been used for testing.
-While the SPL and ZFS code bases support much newer kernels Lustre does
-not.  You are strongly encouraged to use RHEL 6.x.</li>
-	<li>Only ZFS support is enabled in the following instructions.
-Enabling ldiskfs would require the kernel to be patched and rebuilt, by
-disabling it Lustre can be used with an unmodified RHEL 6.x kernel.</li>
-</ul>
-		</td>
-	</tr>
-
-	<tr bgcolor="#dddddd">
-		<th colspan="2">Lustre zfs+ldiskfs Example Configurations</th>
+		<th colspan="2">Deploy</th>
 	</tr>
 	<tr>
-		<td><a href="lustre-configure-single.html">Single Node</a></td>
-		<td colspan="2">Single Node Lustre Filesystem
-		(MGS uses ldiskfs, MDT and OSTs use ZFS)</a></td>
+		<td>
+<p>To familiarize yourself with the ZFS Lustre servers you can quickly setup
+a new test filesystem using the <i>llmount.sh</i> script.  Make sure SELinux
+is disabled and the <i>lustre-tests</i> package is installed, then run:</p>
+
+<table align="center" width=95%>
+        <tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum install lustre-tests
+$ sudo FSTYPE=zfs /usr/lib64/lustre/tests/llmount.sh
+  ...
+
+$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+lustre-mdt1/mdt1      154M  2.9M  149M   2% /mnt/mds1
+lustre-ost1/ost1      154M  1.3M  151M   1% /mnt/ost1
+lustre-ost2/ost2      154M  1.2M  151M   1% /mnt/ost2
+centos-6-amd64@tcp:/lustre
+                      308M  2.4M  302M   1% /mnt/lustre
+ </pre></td/></tr>
+</table>
+
+<p>That's it!  You've create a single node Lustre filesystem using ZFS
+servers which is mounted at <i>/mnt/lustre</i>.  When you're done testing
+it can be unmounted and the servers stopped by running, <i>'sudo FSTYPE=zfs
+/usr/lib64/lustre//tests/llmountcleanup.sh'</i>.  To deploy a more realistic
+configuration you should refer to the <a href="http://lustre.opensfs.org/
+documentation/">official Lustre documentation</a>.</p>
+		</td>
 	</tr>
 </table>
 <br />
