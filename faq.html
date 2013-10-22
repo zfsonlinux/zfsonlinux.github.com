@@ -7,7 +7,7 @@
 </head>
 <body>
 <center>
-<img src="images/zfs-linux.png">
+<a href="index.html"><img title="Native ZFS on Linux" alt="Native ZFS on Linux" src="images/zfs-linux.png"></a>
 
 <table width=80%>
 	<tr bgcolor="#aaaaaa">
@@ -52,6 +52,8 @@
 	1.17 Can I use a ZVOL for swap?</a></li>
 	<li><a href="#HowDoIGenerateTheZpoolCacheFile">
 	1.18 How do I generate the /etc/zfs/zpool.cache file?</a></li>
+	<li><a href="#CanIRunZFSForXenHypervisor">
+	1.19 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 </ul>
@@ -790,6 +792,31 @@ $ sudo zpool set cachefile=/etc/zfs/zpool.cache tank
 </pre>
 		</td>
 	</tr>
+
+	<tr bgcolor="#aaaaaa">
+		<th>
+<a name="CanIRunZFSForXenHypervisor">
+1.19 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p>Sure, but it is usually recommended to keep virtual machine storage and hypervisor pools, quite separate.
+Although few people have managed to successfully deploy and run ZFS on the same machine configured as Dom0.
+There are few caveats:
+	<ul>
+		<li>Set a fair amount of memory in grub.conf, dedicated to Dom0. e.g. <pre>dom0_mem=16384M,max:16384M</pre></li>
+		<li>Allocate no more of <em>30-40%</em> of Dom0's memory to ZFS in /etc/modprobe.d/zfs.conf. e.g. <pre>options zfs zfs_arc_max=6442450944</pre></li>
+		<li>Disable Xen's auto-ballooning in <pre>/etc/xen/xl.conf</pre></li>
+		<li>Watch out for any Xen bugs, such as <a href="http://lists.xen.org/archives/html/xen-devel/2012-12/msg01668.html" target="_blank">
+			this one</a> related to ballooning</li>
+	</ul>
+	For details, please see <a href="https://github.com/zfsonlinux/zfs/issues/1067" target="_blank">issue #1067</a> on GitHub.
+</p>
+
+		</td>
+	</tr>
+
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowCanIHelp">
