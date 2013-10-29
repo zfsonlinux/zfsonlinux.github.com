@@ -16,8 +16,8 @@
 	<tr>
 		<td>
 <ul>
-	<li><a href="#WhatAboutTheLicensingIssue">
-	1.1 What is the licensing concern?</a></li>
+	<li><a href="#WhatIsZFS">
+	1.1 What is ZFS?</a></li>
 	<li><a href="#HowDoIInstallIt">
 	1.2 How do I install it?</a></li>
 	<li><a href="#WhyDoesntItBuild">
@@ -56,47 +56,32 @@
 	1.19 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
+	<li><a href="#WhatAboutTheLicensingIssue">
+	2.2 What is the licensing concern?</a></li>
 </ul>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
 		<th>
-<a name="WhatAboutTheLicensingIssue">
-1.1 What is the licensing concern?</a>
+<a name="WhatIsZFS">
+1.1 What is ZFS?</a>
 		</th>
 	</tr>
 	<tr>
 		<td>
-<p> ZFS is licensed under the <a href="http://hub.opensolaris.org/bin/
-view/Main/opensolaris_license">Common Development and Distribution
-License (CDDL), </a> and the Linux kernel is licensed under the
-<a href="http://www.gnu.org/licenses/gpl2.html">GNU General Public License
-Version 2 (GPLv2)</a>.  While both are free open source licenses they are
-restrictive licenses.  The combination of them causes problems because it
-prevents using pieces of code exclusively available under one license with
-pieces of code exclusively available under the other in the same binary.
-In the case of the kernel, this prevents us from distributing ZFS as part
-of the kernel binary. However, there is nothing in either license that
-prevents distributing it in the form of a binary module or in the form
-of source code.</p>
-
-<p> For further reading on this issue see the following excellent article
-regarding non-GPL licensed kernel modules.</p>
-
+<p>ZFS is a highly scalable future proof file system and logical volume
+manager designed around a few key concepts:</p>
 <ul>
-	<li>
-<a href="http://www.networkworld.com/news/2006/120606-closed-modules1.html">
-Encouraging closed source modules part 1: copyright and software </a>
-	</li>
-	<li>
-<a href="http://www.networkworld.com/news/2006/120806-closed-modules2.html">
-Encouraging closed source modules part 2: law and the module interface </a>
-	</li>
-	<li>
-<a href="http://www.networkworld.com/news/2006/121106-closed-modules3.html">
-Encouraging closed source modules part 3: elimating the "API update tax" </a>
-	</ul>
+	<li>Data integrity is paramount.</li>
+	<li>Storage administration should be simple.</li>
+	<li>Everything can be done online.</li>
 </ul>
+
+<p>For a full overview and description of the available features see this
+detailed <a href="http://en.wikipedia.org/wiki/ZFS">wikipedia article</a>.  In
+addition to this functionality the <a href="http://open-zfs.org">OpenZFS</a>
+development community is regularly <a href="http://open-zfs.org/wiki/Features">
+adding new features and performance improvements</a>.</p>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
@@ -833,6 +818,46 @@ like what you see and would like to contribute to the project please send
 open issues on the <a href="http://github.com/zfsonlinux/zfs/issues">issue
 tracker</a> which need attention or if you have an idea of your own that is
 fine too.</p>
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
+<a name="WhatAboutTheLicensingIssue">
+2.2 What is the licensing concern?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p> ZFS is licensed under the <a href="http://hub.opensolaris.org/bin/
+view/Main/opensolaris_license">Common Development and Distribution
+License (CDDL), </a> and the Linux kernel is licensed under the
+<a href="http://www.gnu.org/licenses/gpl2.html">GNU General Public License
+Version 2 (GPLv2)</a>.  While both are free open source licenses they are
+restrictive licenses.  The combination of them causes problems because it
+prevents using pieces of code exclusively available under one license with
+pieces of code exclusively available under the other in the same binary.
+In the case of the kernel, this prevents us from distributing ZFS as part
+of the kernel binary. However, there is nothing in either license that
+prevents distributing it in the form of a binary module or in the form
+of source code.</p>
+
+<p> For further reading on this issue see the following excellent article
+regarding non-GPL licensed kernel modules.</p>
+
+<ul>
+	<li>
+<a href="http://www.networkworld.com/news/2006/120606-closed-modules1.html">
+Encouraging closed source modules part 1: copyright and software </a>
+	</li>
+	<li>
+<a href="http://www.networkworld.com/news/2006/120806-closed-modules2.html">
+Encouraging closed source modules part 2: law and the module interface </a>
+	</li>
+	<li>
+<a href="http://www.networkworld.com/news/2006/121106-closed-modules3.html">
+Encouraging closed source modules part 3: elimating the "API update tax" </a>
+	</ul>
+</ul>
 		</td>
 	</tr>
 </table>
