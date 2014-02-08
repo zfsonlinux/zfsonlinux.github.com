@@ -58,6 +58,8 @@
 	2.1 How can I help?</a></li>
 	<li><a href="#WhatAboutTheLicensingIssue">
 	2.2 What is the licensing concern?</a></li>
+	<li><a href="#HowDoIReportProblems">
+	3.1 How do I report problems?</a></li>
 </ul>
 		</td>
 	</tr>
@@ -858,6 +860,95 @@ Encouraging closed source modules part 2: law and the module interface </a>
 Encouraging closed source modules part 3: elimating the "API update tax" </a>
 	</li>
 </ul>
+		</td>
+	</tr>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
+<a name="HowDoIReportProblems">
+3.1 How do I report problems?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p> You can open an issue and search existing issues using the
+<a href="https://github.com/zfsonlinux/zfs/issues">issue tracker</a> at
+<a href="https://github.com/">github.com</a>. A github account is required to
+make posts.</p>
+
+<p> As well as a description of the problem you experience your issue should 
+also contain at least the following:</p>
+
+<ul>
+	<li>
+	Your pool configuration from the output of <tt>`zdb`</tt> if possible,
+	or <tt>`zpool status`</tt> otherwise.
+	</li>
+	<li>
+	Your hardware configuration, such as number of CPUs, amount of memory,
+	whether it is running under a VMM/Hypervisor and whether your system has ECC
+	memory.
+	</li>
+	<li>
+	Linux distribution name and version, including your kernel version as
+	displayed by <tt>`uname -r`</tt>. If you have a custom built kernel then
+	the configuration file for your kernel is also useful. eg: <tt>`zcat
+	/proc/config.gz`</tt>
+	</li>
+	<li>
+	A description of what the system was doing at the time of the crash. For
+	example, clients were communicating with a Samba server configured to use
+	AIO.
+	</li>
+</ul>
+
+<p> The following information is also helpful, especially when dealing with hung
+processes:</p>
+<ul>
+	<li>
+	Stack traces for all threads. Because ZFS is asynchronous all threads should
+	be reported where possible. These can be found in /proc/$pid/task/$tid/stack
+	for all processes. An example script to retrieve this information would be:
+<pre>
+# cd /proc
+# for pid in [1-9]*
+> do
+>   echo $pid:
+>   cat /proc/$pid/cmdline
+>   echo
+>   for task in /proc/$pid/task/*
+>   do
+>      cat $task/stack
+>      echo ===
+>   done
+> done > /tmp/stacktraces.log
+</pre>
+	<ul>
+		<li>
+		If these files does not exist then you can run:
+		<pre>
+# echo t > /proc/sysrq-trigger</pre> 
+		This will dump the stacks of all processes to the output of
+		<tt>`dmesg`</tt> and your system logs. However this method is not as
+		reliable as the amount of information may overflow the log buffer.
+		</li>
+		<li>
+		Your kernel may automatically dump stack traces of hung tasks in the
+		<tt>D</tt> state every 2 minutes.
+		</li>
+	</ul>
+	</li>
+	<li>
+	The contents of the files <tt>/proc/spl/kstat/zfs/arcstats</tt> and
+	<tt>/proc/spl/kmem/slab</tt>
+	</li>
+</ul>
+
+<p> Of course include any other information you feel is relevant. </p>
+
+<p> As this can be a large amount of information github has a service similar
+to a pastebin at <a href="https://gist.github.com/">https://gist.github.com/</a>
+which you can use to hold the bulk of the data.</p>
 		</td>
 	</tr>
 </table>
