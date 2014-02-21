@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>ZFS Message ID: ZFS-8000-ER</title>
+</head>
+<body>
+<!--
+ CDDL HEADER START
+
+ The contents of this file are subject to the terms of the
+ Common Development and Distribution License (the "License").
+ You may not use this file except in compliance with the License.
+
+ You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+ or http://www.opensolaris.org/os/licensing.
+ See the License for the specific language governing permissions
+ and limitations under the License.
+
+ When distributing Covered Code, include this CDDL HEADER in each
+ file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+ If applicable, add the following below this CDDL HEADER, with the
+ fields enclosed by brackets "[]" replaced with your own identifying
+ information: Portions Copyright [yyyy] [name of copyright owner]
+
+ CDDL HEADER END
+-->
+<!-- start: templates/success -->
+<!-- ident      "@(#)success    1.4     02/14/14 SMI" -->
+Article for Message ID:&nbsp;&nbsp; <font size="+1"><tt><b>ZFS-8000-ER</b></tt></font>
+<br><br>
+<hr>
+<br><br>
+<!-- end: templates/success -->
+<!-- start: article -->
+<!-- code: ZFS-8000-ER -->
+<!-- keys: errata -->
+<table width="80%"><tr><td>
+<a name="1"><b>ZFS Errata #1</b></a>
+<p>
+<dl>
+<dt><p><b>Type</b>
+<dd>Compatibility
+<dt><p><b>Severity</b>
+<dd>Moderate
+<dt><p><b>Description</b>
+<dd>The ZFS pool contains an on-disk format incompatibility.
+<dt><p><b>Automated Response</b>
+<dd>No automated response will be taken.
+<dt><p><b>Impact</b>
+<dd>Until the pool is scrubbed using ZoL version 0.6.3 or newer the pool may not be imported by older versions of ZoL or other non-Linux ZFS implementations.
+<dt><p><b>Suggested Action for System Administrator</b>
+<dd>
+The pool contains an on-disk format incompatibility.  Affected pools must be
+imported and scrubbed using the current version of ZFS.  This will return the
+pool to a state in which it may be imported by other implementations.  This
+errata only impacts compatibility between ZFS versions, no user data is at
+risk as result of this erratum.
+
+<pre>
+# zpool status -x
+  pool: test
+ state: ONLINE
+status: Errata #1 detected.
+action: To correct the issue run 'zpool scrub'.
+   see: http://zfsonlinux.org/msg/ZFS-8000-ER
+  scan: none requested
+config:
+
+	NAME            STATE     READ WRITE CKSUM
+	test            ONLINE    0    0     0
+	  raidz1-0      ONLINE    0    0     0
+	    vdev0       ONLINE    0    0     0
+	    vdev1       ONLINE    0    0     0
+	    vdev2       ONLINE    0    0     0
+	    vdev3       ONLINE    0    0     0
+
+errors: No known data errors
+
+# zpool scrub test
+
+# zpool status -x
+all pools are healthy
+</pre>
+</td></tr></table>
+<br><br>
+<hr>
+<br><br>
+<!-- end: templates/success -->
+<!-- start: article -->
+<!-- code: ZFS-8000-ER -->
+<!-- keys: errata -->
+<table width="80%"><tr><td>
+<a name="2"><b>ZFS Errata #2</b></a>
+<p>
+<dl>
+<dt><p><b>Type</b>
+<dd>Compatibility
+<dt><p><b>Severity</b>
+<dd>Moderate
+<dt><p><b>Description</b>
+<dd>The ZFS packages were updated while an asynchronous destroy was in
+progress and the pool contains an on-disk format incompatibility.
+<dt><p><b>Automated Response</b>
+<dd>No automated response will be taken.
+<dt><p><b>Impact</b>
+<dd>The pool cannot be imported until the issue is corrected.
+<dt><p><b>Suggested Action for System Administrator</b>
+<dd>
+Affected pools must be reverted to the previous ZFS version where they can
+be correctly imported.  Once imported all asynchronous destroy operations
+must be allowed to complete.  The ZFS packages may then be updated and the
+pool can be imported cleanly by the newer software.
+<pre>
+# zpool import
+  pool: test
+    id: 1165955789558693437
+ state: ONLINE
+status: Errata #2 detected.
+action: The pool cannot be imported with this version of ZFS due to
+	an active asynchronous destroy.  Revert to an earlier version
+	and allow the destroy to complete before updating.
+   see: http://zfsonlinux.org/msg/ZFS-8000-ER
+config:
+
+	test           ONLINE
+	  raidz1-0     ONLINE
+	    vdev0      ONLINE
+	    vdev1      ONLINE
+	    vdev2      ONLINE
+	    vdev3      ONLINE
+</pre>
+
+Revert to previous ZFS version, import the pool, then wait for the
+<b>freeing</b> property to drop to zero.  This indicates that all outstanding
+asynchronous destroys have completed.
+
+<pre>
+# zpool get freeing
+NAME   PROPERTY  VALUE    SOURCE
+rpool  freeing   0        default
+</pre>
+
+The ZFS packages may be now be updated and the pool imported.  The on-disk
+format incompatibility can now be corrected online as described in
+<a href="#1">Errata #1</a>.
+</pre>
+</td></tr></table>
+</body></html>
