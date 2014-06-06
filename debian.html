@@ -38,6 +38,23 @@ detected and installed as part of the standard update process.</p>
 $ su -
 # wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_2%7Ewheezy_all.deb
 # dpkg -i zfsonlinux_2~wheezy_all.deb
+	</pre></td>
+</table>
+
+<p>If you wish to use the Debian GNU/Linux Wheezy snapshot packages (pre-releases),
+you will need to add a line to your sources list file:</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ su -
+# echo 'deb http://archive.zfsonlinux.org/debian wheezy-daily main' > /etc/apt/sources.list.d/zfsonlinux.list
+	<tr><td>
+</table>
+
+Then run apt-get to update and install ZoL:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 # apt-get update
 # apt-get install debian-zfs</pre></td/></tr>
 </table>
