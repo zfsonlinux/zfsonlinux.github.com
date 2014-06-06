@@ -80,7 +80,13 @@ against a different kernel, you can specify the exact path with the
 	<tr bgcolor="#eeeeee"><td><pre>
 $ sudo apt-get install build-essential gawk alien fakeroot linux-headers-$(uname -r)
 $ sudo apt-get install zlib1g-dev uuid-dev libblkid-dev libselinux-dev parted lsscsi wget
+	</pre></td/></tr>
+</table>
 
+If you want to use the official released tarballs, use the following commands:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/spl/spl-x.y.z.tar.gz
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-x.y.z.tar.gz
 
@@ -89,21 +95,65 @@ $ tar -xzf zfs-x.y.z.tar.gz
 
 $ cd spl-x.y.z
 $ ./configure
+	</pre></td/></tr>
+</table>
+
+If, instead you would like to use the GIT version, use the following commands instead:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ git clone https://github.com/zfsonlinux/spl.git
+$ git clone https://github.com/zfsonlinux/zfs.git
+
+$ cd spl
+$ ./autogen.sh
+$ ./configure
+	</pre></td/></tr>
+</table>
+
+Then the rest is the same:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ make deb-utils deb-kmod
 
 # Install the spl development headers, they are required to build zfs.
 $ sudo dpkg -i \
 	kmod-spl-devel-x.y.z-r.arch.deb \
 	kmod-spl-devel-kernel-x.y.z-r.arch.deb
+	</pre></td/></tr>
+</table>
 
+If using the distribution tarball:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ cd ../zfs-x.y.z
 $ ./configure
+	</pre></td/></tr>
+</table>
+
+or if using the GIT repository clone:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ cd ../zfs
+$ ./autogen.sh
+$ ./configure
+	</pre></td/></tr>
+</table>
+
+And build (in both cases) with:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ make deb-utils deb-kmod
 	</pre></td/></tr>
 </table>
 
 <p>The build process will generate the following packages.  All of the
-<b>.deb</b> packages should be installed.</p>
+<b>.deb</b> packages should be installed. If you're using the GIT repository
+to build your packages, remove the <b>-x.y.z</b> part).</p>
 
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
