@@ -159,29 +159,34 @@ to build your packages, remove the <b>-x.y.z</b> part).</p>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ cd ..
 $ ls spl-x.y.z/*.deb
-spl-x.y.z/kmod-spl-kernel-x.y.z-r.arch.deb
-spl-x.y.z/kmod-spl-devel-x.y.z-r.arch.deb
+spl-x.y.z/kmod-spl-kernel-x.y.z-r_arch.deb
+spl-x.y.z/kmod-spl-devel-x.y.z-r_arch.deb
 spl-x.y.z/kmod-spl-devel-kernel-x.y.z-r.arch.deb
 spl-x.y.z/spl-x.y.z-r.arch.deb
 
 $ ls zfs-x.y.z/*.deb
-zfs-x.y.z/kmod-zfs-kernel-x.y.z-r.arch.deb
-zfs-x.y.z/kmod-zfs-devel-x.y.z-r.arch.deb
-zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r.arch.deb
-zfs-x.y.z/zfs-x.y.z-r.arch.deb
-zfs-x.y.z/zfs-devel-x.y.z-r.arch.deb
-zfs-x.y.z/zfs-dracut-x.y.z-r.arch.deb
-zfs-x.y.z/zfs-test-x.y.z-r.arch.deb
+zfs-x.y.z/kmod-zfs-kernel-x.y.z-r_arch.deb
+zfs-x.y.z/kmod-zfs-devel-x.y.z-r_arch.deb
+zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r_arch.deb
+zfs-x.y.z/libnvpair1_x.y.z-r_arch.deb
+zfs-x.y.z/libuutil1_x.y.z-r_arch.deb
+zfs-x.y.z/libzfs2-devel_x.y.z-r_arch.deb
+zfs-x.y.z/libzfs2_x.y.z-r_arch.deb
+zfs-x.y.z/libzpool2_x.y.z-r_arch.deb
+zfs-x.y.z/zfs-x.y.z-r_arch.deb
+zfs-x.y.z/zfs-devel-x.y.z-r_arch.deb
+zfs-x.y.z/zfs-dracut-x.y.z-r_arch.deb
+zfs-x.y.z/zfs-test-x.y.z-r_arch.deb
 
 $ sudo dpkg -i \
-	spl-x.y.z/spl-x.y.z-r.arch.deb \
-	spl-x.y.z/kmod-spl-kernel-x.y.z-r.arch.deb \
-	zfs-x.y.z/zfs-x.y.z-r.arch.deb \
-	zfs-x.y.z/kmod-zfs-kernel-x.y.z-r.arch.deb \
-	zfs-x.y.z/kmod-zfs-devel-x.y.z-r.arch.deb \
-	zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r.arch.deb \
-	zfs-x.y.z/zfs-dracut-x.y.z-r.arch.deb \
-	zfs-x.y.z/zfs-test-x.y.z-r.arch.deb
+	spl-x.y.z/spl-x.y.z-r_arch.deb \
+	spl-x.y.z/kmod-spl-kernel-x.y.z-r_arch.deb \
+	zfs-x.y.z/zfs-x.y.z-r_arch.deb \
+	zfs-x.y.z/kmod-zfs-kernel-x.y.z-r_arch.deb \
+	zfs-x.y.z/zfs-x.y.z/libnvpair1_x.y.z-r_arch.deb \
+	zfs-x.y.z/zfs-x.y.z/libuutil1_x.y.z-r_arch.deb \
+	zfs-x.y.z/zfs-x.y.z/libzfs2_x.y.z-r_arch.deb \
+	zfs-x.y.z/zfs-x.y.z/libzpool2_x.y.z-r_arch.deb
 </pre></td></tr>
 </table>
 
