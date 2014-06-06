@@ -63,7 +63,13 @@ will require installing the GNU autotools packages for your distribution.</p>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ sudo yum groupinstall "Development Tools"
 $ sudo yum install kernel-devel zlib-devel libuuid-devel libblkid-devel libselinux-devel parted lsscsi wget
+	</pre></td/></tr>
+</table>
 
+If you want to use the official released tarballs, use the following commands:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/spl/spl-x.y.z.tar.gz
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-x.y.z.tar.gz
 
@@ -80,10 +86,30 @@ $ make rpm-utils rpm-dkms
 	</pre></td/></tr>
 </table>
 
+If, instead you would like to use the GIT version, use the following commands instead:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ git clone https://github.com/zfsonlinux/spl.git
+$ git clone https://github.com/zfsonlinux/zfs.git
+
+$ cd spl
+$ ./autogen.sh
+$ ./configure --with-config=user
+$ make rpm-utils rpm-dkms
+
+$ cd ../zfs
+$ ./autogen.sh
+$ ./configure --with-config=user
+$ make rpm-utils rpm-dkms
+	</pre></td/></tr>
+</table>
+
 <p>The build process will generate the following packages.  There is no need to
 install the <b>debuginfo</b>, <b>devel</b> or <b>*.src.rpm</b> packages.  These
 are provided for developers and package maintainers.  Everything else should be
-installed.</p>
+installed. If you're using the GIT repository to build your packages, remove the
+<b>-x.y.z</b> part).</p>
 
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
@@ -104,14 +130,33 @@ zfs-x.y.z/zfs-dkms-x.y.z-r.dist.noarch.rpm
 zfs-x.y.z/zfs-dkms-x.y.z-r.dist.src.rpm
 zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
 zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+	</pre></td/></tr>
+</table>
 
+As of GIT commit <a href="https://github.com/zfsonlinux/zfs/commit/c9b5cc8">c9b5cc</a>
+(Sat May 17 13:20:59 2014), the following packages are also created (if these
+are not created, i.e., you're building from an older version, please leave those
+out in the yum localinstall command below):<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+zfs-x.y.z/libnvpair1-x.y.z-r.arch.rpm
+zfs-x.y.z/libuutil1-x.y.z-r.arch.rpm
+zfs-x.y.z/libzfs2-x.y.z-r.arch.rpm
+zfs-x.y.z/libzfs2-devel-x.y.z-r.arch.rpm
+zfs-x.y.z/libzpool2-x.y.z-r.arch.rpm
+
+# Install all relevant packages
 $ sudo yum localinstall \
 	spl-x.y.z/spl-x.y.z-r.dist.arch.rpm \
 	spl-x.y.z/spl-dkms-x.y.z-r.dist.noarch.rpm \
+	zfs-x.y.z/libnvpair1-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libuutil1-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libzfs2-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libzpool2-x.y.z-r.arch.rpm \
 	zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm \
 	zfs-x.y.z/zfs-dkms-x.y.z-r.dist.noarch.rpm \
-	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm \
-	zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
 </pre></td></tr>
 </table>
 
@@ -134,7 +179,13 @@ against a different kernel, you can specify the exact path with the
 	<tr bgcolor="#eeeeee"><td><pre>
 $ sudo yum groupinstall "Development Tools"
 $ sudo yum install kernel-devel zlib-devel libuuid-devel libblkid-devel libselinux-devel parted lsscsi wget
+	</pre></td/></tr>
+</table>
 
+If you want to use the official released tarballs, use the following commands:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/spl/spl-x.y.z.tar.gz
 $ wget http://archive.zfsonlinux.org/downloads/zfsonlinux/zfs/zfs-x.y.z.tar.gz
 
@@ -156,9 +207,29 @@ $ make rpm-utils rpm-kmod
 	</pre></td/></tr>
 </table>
 
+If, instead you would like to use the GIT version, use the following commands instead:<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ git clone https://github.com/zfsonlinux/spl.git
+$ git clone https://github.com/zfsonlinux/zfs.git
+
+$ cd spl
+$ ./autogen.sh
+$ ./configure
+$ make rpm-utils rpm-kmod
+
+$ cd ../zfs
+$ ./autogen.sh
+$ ./configure
+$ make rpm-utils rpm-kmod
+	</pre></td/></tr>
+</table>
+
 <p>The build process will generate the following packages.  There is no need to
 install the <b>debuginfo</b>, or <b>*.src.rpm</b> packages.  These are provided for
-developers and package maintainers.  Everything else should be installed.</p>
+developers and package maintainers.  Everything else should be installed. If you're
+using the GIT repository to build your packages, remove the <b>-x.y.z</b> part).</p>
 
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
@@ -185,16 +256,34 @@ zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
 zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
 zfs-x.y.z/zfs-kmod-x.y.z-r.dist.src.rpm
 zfs-x.y.z/zfs-kmod-debuginfo-x.y.z-r.dist.arch.rpm
+	</pre></td/></tr>
+</table>
 
+As of GIT commit <a href="https://github.com/zfsonlinux/zfs/commit/c9b5cc8">c9b5cc</a>
+(Sat May 17 13:20:59 2014), the following packages are also created (if these
+are not created, i.e., you're building from an older version, please leave those
+out in the yum localinstall command below):<p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+zfs-x.y.z/libnvpair1-x.y.z-r.arch.rpm
+zfs-x.y.z/libuutil1-x.y.z-r.arch.rpm
+zfs-x.y.z/libzfs2-x.y.z-r.arch.rpm
+zfs-x.y.z/libzfs2-devel-x.y.z-r.arch.rpm
+zfs-x.y.z/libzpool2-x.y.z-r.arch.rpm
+
+# Install all relevant packages
 $ sudo yum localinstall \
 	spl-x.y.z/spl-x.y.z-r.dist.arch.rpm \
 	spl-x.y.z/kmod-spl-kernel-x.y.z-r.dist.arch.rpm \
+	zfs-x.y.z/libnvpair1-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libuutil1-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libzfs2-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libzfs2-devel-x.y.z-r.arch.rpm \
+	zfs-x.y.z/libzpool2-x.y.z-r.arch.rpm \
 	zfs-x.y.z/zfs-x.y.z-r.dist.arch.rpm \
 	zfs-x.y.z/kmod-zfs-kernel-x.y.z-r.dist.arch.rpm \
-	zfs-x.y.z/kmod-zfs-devel-x.y.z-r.dist.arch.rpm \
-	zfs-x.y.z/kmod-zfs-devel-kernel-x.y.z-r.dist.arch.rpm \
-	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm \
-	zfs-x.y.z/zfs-test-x.y.z-r.dist.arch.rpm
+	zfs-x.y.z/zfs-dracut-x.y.z-r.dist.arch.rpm
 </pre></td></tr>
 </table>
 
