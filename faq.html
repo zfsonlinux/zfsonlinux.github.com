@@ -874,7 +874,16 @@ Encouraging closed source modules part 3: elimating the "API update tax" </a>
 <p> You can open an issue and search existing issues using the
 <a href="https://github.com/zfsonlinux/zfs/issues">issue tracker</a> at
 <a href="https://github.com/">github.com</a>. A github account is required to
-make posts.</p>
+make posts. Please make sure you 'stick around' and monitor the issue once
+it have been issued, don't create an issue and then stop caring about it,
+you will most likely be asked followup questions and if we don't hear back
+from you about this in a couple of months, we might close it as 'reproducible'.</p>
+
+<p>Be also prepared that you might be asked to test a newer version, either from
+the package repositories (if one is availible) or by building from the GIT repo.
+If you're not comfortable with building software manually, it is not a requirenment.
+But if you're not running the very latest, there is a chance that the problem
+have already been fixed. ZFSOnLinux development is moving quickly.</p>
 
 <p> As well as a description of the problem you experience your issue should 
 also contain at least the following:</p>
@@ -885,22 +894,72 @@ also contain at least the following:</p>
 	or <tt>`zpool status`</tt> otherwise.
 	</li>
 	<li>
-	Your hardware configuration, such as number of CPUs, amount of memory,
-	whether it is running under a VMM/Hypervisor and whether your system has ECC
-	memory.
+	Your hardware configuration, such as
+	<ul>
+		<li>number of CPUs</li>
+		<li>amount of memory</li>
+		<li>whether it is running under a VMM/Hypervisor</li>
+		<li>whether your system has ECC memory</li>
+	</ul>
 	</li>
 	<li>
-	Linux distribution name and version, including your kernel version as
-	displayed by <tt>`uname -r`</tt>. If you have a custom built kernel then
-	the configuration file for your kernel is also useful. eg: <tt>`zcat
-	/proc/config.gz`</tt>
+	System configuration, such as
+	<ul>
+		<li>Linux distribution name and version</li>
+		<li>kernel version as displayed by <tt>`uname -a`</tt></li>
+		<li>If you have a custom built kernel then the configuration
+		  file for your kernel is also useful. eg:
+		  <tt>`zcat /proc/config.gz`</tt></li>
+		<li>SPL and ZFS version and where it came from (package
+		  from the ZoL package repository or built from the GIT
+		  repository - be sure to include the commit revision<br>
+		  To find out what exact version is actually loaded, run
+		  <pre>
+# dmesg | grep -E 'SPL:|ZFS:'</pre>
+		  If nothing is shown, it might have been lost (the kernel
+		  only keeps a certain amount). In that case, you will have
+		  to look for it in the logfiles:
+		  <pre>
+# cat /var/log/dmesg | grep -E 'SPL:|ZFS:'</pre>
+If it isn't there either, try some of the other dmesg.* files.</li>
+		<li>values of the ZFS/SPL module parameters.<br>
+		  To get the full list, run
+		  <pre>
+for param in /sys/module/{spl,zfs}/parameters/*; do printf "%-50s" `basename $param`; cat $param; done</pre></li>
+		<li>short description on what the system does (fileserver,
+		  iSCSI, mail- or user homes server etc)</li>
+	</ul>
 	</li>
 	<li>
 	A description of what the system was doing at the time of the crash. For
 	example, clients were communicating with a Samba server configured to use
 	AIO.
 	</li>
+	<li>
+	If you include a stack trace or large blocks of text, make sure to
+	use the GitHub markup language appropriately (using the
+	<a href="https://help.github.com/articles/github-flavored-markdown#fenced-code-blocks">
+'tripple backticks' example)</a>.</li>
 </ul>
+
+<p>You can use this template example (notice the three backticks):</p>
+<pre>
+```
+CPUs:			1
+Memory:			1GB
+VM/Hypervisor:		yes
+ECC mem:		no
+Distribution:		Debian GNU/Linux
+Kernel version:		Linux DebianZFS-Wheezy-SCST2 3.2.0-4-amd64 #1 SMP Debian 3.2.51-1 x86_64 GNU/Linux
+SPL/ZFS source:		Packages built from GIT repository
+SPL/ZFS version:	DebianZFS-Wheezy-SCST2:/usr/src/zfs# dmesg | grep -E 'SPL:|ZFS:'
+			[    4.937840] SPL: Loaded module v0.6.2-23_g4c99541 (DEBUG mode)
+			[    5.384665] ZFS: Loaded module v0.6.2-296_g21b446a, ZFS pool version 5000, ZFS filesystem version 5
+			[    5.875207] SPL: using hostid 0xa8c03245
+System services:	Development and testing of ZoL
+Short  description:	Removing large number of files caused the system to hang
+```
+</pre>
 
 <p> The following information is also helpful, especially when dealing with hung
 processes:</p>
@@ -912,16 +971,16 @@ processes:</p>
 <pre>
 # cd /proc
 # for pid in [1-9]*
-> do
->   echo $pid:
->   cat /proc/$pid/cmdline
->   echo
->   for task in /proc/$pid/task/*
->   do
->      cat $task/stack
->      echo ===
->   done
-> done > /tmp/stacktraces.log
+do
+  echo $pid:
+  cat /proc/$pid/cmdline
+  echo
+  for task in /proc/$pid/task/*
+  do
+     cat $task/stack
+     echo ===
+  done
+done > /tmp/stacktraces.log
 </pre>
 	<ul>
 		<li>
@@ -946,7 +1005,7 @@ processes:</p>
 
 <p> Of course include any other information you feel is relevant. </p>
 
-<p> As this can be a large amount of information github has a service similar
+<p> As some of this can be a large amount of information github has a service similar
 to a pastebin at <a href="https://gist.github.com/">https://gist.github.com/</a>
 which you can use to hold the bulk of the data.</p>
 		</td>
