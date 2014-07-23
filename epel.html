@@ -20,7 +20,7 @@ latest official upstream tag and are refreshed as new releases are made
 available.  Packages are provided for:</p>
 
 <ul>
-        <li>Releases: 6.x</li>
+        <li>Releases: 6, 7</li>
         <li>Arches: x86_64</li>
 </ul>
 
@@ -33,12 +33,24 @@ are installed you can install zfs like any other package using <i>yum</i>.
 As new updated packages are made available they will be detected and
 installed as part of the standard update process.</p>
 
+<ul>
+	<li>EPEL 6</li>
+	<table align="center" width=95%>
+		<tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum localinstall --nogpgcheck http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm
+$ sudo yum install zfs
+		</pre></td/></tr>
+</table>
+
+<li>EPEL 7</li>
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
-$ sudo yum localinstall --nogpgcheck http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release$(rpm -E %dist).noarch.rpm
+$ sudo yum localinstall --nogpgcheck http://download.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release.el7.noarch.rpm
 $ sudo yum install zfs </pre></td/></tr>
 </table>
+</ul>
 
 	<tr><td>
 </table>
