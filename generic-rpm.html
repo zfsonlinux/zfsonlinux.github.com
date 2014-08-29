@@ -196,10 +196,12 @@ $ cd spl-x.y.z
 $ ./configure
 $ make rpm-utils rpm-kmod
 
-# Install the spl development headers, they are required to build zfs.
+# Install the spl packages, they are required to build zfs.
 $ sudo yum localinstall \
 	kmod-spl-devel-x.y.z-r.dist.arch.rpm \
-	kmod-spl-devel-kernel-x.y.z-r.dist.arch.rpm
+	kmod-spl-devel-kernel-x.y.z-r.dist.arch.rpm \
+	kmod-spl-kernel-x.y.z-r.dist.arch.rpm \
+	spl-x.y.z-r.dist.arch.rpm
 
 $ cd ../zfs-x.y.z
 $ ./configure

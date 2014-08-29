@@ -117,10 +117,12 @@ Then the rest is the same:<p>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ make deb-utils deb-kmod
 
-# Install the spl development headers, they are required to build zfs.
+# Install the spl packages, they are required to build zfs.
 $ sudo dpkg -i \
 	kmod-spl-devel-x.y.z-r.arch.deb \
-	kmod-spl-devel-kernel-x.y.z-r.arch.deb
+	kmod-spl-devel-kernel-x.y.z-r.arch.deb \
+	kmod-spl-kernel-x.y.z-r.arch.deb \
+	spl-x.y.z-r.arch.deb
 	</pre></td/></tr>
 </table>
 
