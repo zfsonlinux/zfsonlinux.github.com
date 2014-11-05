@@ -962,18 +962,7 @@ processes:</p>
 	be reported where possible. These can be found in /proc/$pid/task/$tid/stack
 	for all processes. An example script to retrieve this information would be:
 <pre>
-# cd /proc
-# for pid in [1-9]*
-do
-  echo $pid:
-  cat /proc/$pid/cmdline
-  echo
-  for task in /proc/$pid/task/*
-  do
-     cat $task/stack
-     echo ===
-  done
-done > /tmp/stacktraces.log
+# (for p in /proc/[0-9]*; do cat $p/{comm,stack}; done;) > /tmp/stacktraces.log
 </pre>
 	<ul>
 		<li>
