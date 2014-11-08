@@ -20,9 +20,20 @@ are refreshed as new releases are made available.  Packages are provided
 for:</p>
 
 <ul>
+	<li>Releases: Debian 8.0 Jessie (<i>not yet officially released by Debian GNU/Linux</i>)</li>
+	<li>Arches: amd64</li>
+</ul>
+
+<ul>
 	<li>Releases: Debian 7.0 Wheezy</li>
 	<li>Arches: amd64</li>
 </ul>
+
+<ul>
+	<li>Releases: Debian 6.0 Squeeze</li>
+	<li>Arches: amd64</li>
+</ul>
+
 
 <p>To add the repository to your system install the <i>zfsonlinux</i> package
 as shown below.  This will add the
@@ -33,21 +44,24 @@ Afterwards, you can install zfs like any other Debian package using
 <i>apt-get</i>.  As new updated packages are made available they will be
 detected and installed as part of the standard update process.</p>
 
+<b>NOTE: Please replace <u>DIST</u> with either squeeze, wheezy or jessie, depending on
+what version of Debian GNU/Linux you're installing on.</b>
+
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ su -
-# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_3%7Ewheezy_all.deb
-# dpkg -i zfsonlinux_3~wheezy_all.deb
+# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_3%7EDIST_all.deb
+# dpkg -i zfsonlinux_3~DIST_all.deb
 	</pre></td>
 </table>
 
-<p>If you wish to use the Debian GNU/Linux Wheezy snapshot packages (pre-releases),
+<p>If you wish to use the Debian GNU/Linux ZoL snapshot packages (pre-releases),
 you will need to add a line to your sources list file:</p>
 
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ su -
-# echo 'deb http://archive.zfsonlinux.org/debian wheezy-daily main' > /etc/apt/sources.list.d/zfsonlinux.list
+# echo 'deb http://archive.zfsonlinux.org/debian DIST-daily main' >> /etc/apt/sources.list.d/zfsonlinux.list
 	<tr><td>
 </table>
 
