@@ -78,6 +78,22 @@ Then run apt-get to update and install ZoL:<p>
 
 <table width=80%>
         <tr bgcolor="#aaaaaa">
+                <th> Multi-Arch setups </th>
+        </tr>
+	<tr><td>
+For people that run a multi-arch setup (both i386 and amd64 packages), a <b>[arch=amd64]</b> should be added
+to the sources list line in <b>/etc/apt/sources.list.d/zfsonlinux.list</b> as so:
+<pre>
+	deb [arch=amd64] http://archive.zfsonlinux.org/debian wheezy main
+</pre>
+	</td></tr>
+
+</table>
+
+<br>
+
+<table width=80%>
+        <tr bgcolor="#aaaaaa">
                 <th> Package keys </th>
         </tr>
 	<tr><td>
