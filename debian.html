@@ -44,26 +44,18 @@ Afterwards, you can install zfs like any other Debian package using
 <i>apt-get</i>.  As new updated packages are made available they will be
 detected and installed as part of the standard update process.</p>
 
-<b>NOTE: Please replace <u>DIST</u> with either squeeze, wheezy or jessie, depending on
-what version of Debian GNU/Linux you're installing on.</b>
-
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ su -
-# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_3%7EDIST_all.deb
-# dpkg -i zfsonlinux_3~DIST_all.deb
+# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_4_all.deb
+# dpkg -i zfsonlinux_4_all.deb
 	</pre></td>
 </table>
 
 <p>If you wish to use the Debian GNU/Linux ZoL snapshot packages (pre-releases),
-you will need to add a line to your sources list file:</p>
-
-<table align="center" width=95%>
-	<tr bgcolor="#eeeeee"><td><pre>
-$ su -
-# echo 'deb http://archive.zfsonlinux.org/debian DIST-daily main' >> /etc/apt/sources.list.d/zfsonlinux.list
-	<tr><td>
-</table>
+you will need to uncomment the line(s) related to the 'dailies' repository (at the
+end of the /etc/apt/sources.list.d/zfsonlinux.list file) by removing the hash mark
+at the beginning of the line.</p>
 
 Then run apt-get to update and install ZoL:<p>
 
@@ -74,20 +66,6 @@ Then run apt-get to update and install ZoL:<p>
 </table>
 
 	<tr><td>
-</table>
-
-<table width=80%>
-        <tr bgcolor="#aaaaaa">
-                <th> Multi-Arch setups </th>
-        </tr>
-	<tr><td>
-For people that run a multi-arch setup (both i386 and amd64 packages), a <b>[arch=amd64]</b> should be added
-to the sources list line in <b>/etc/apt/sources.list.d/zfsonlinux.list</b> as so:
-<pre>
-	deb [arch=amd64] http://archive.zfsonlinux.org/debian wheezy main
-</pre>
-	</td></tr>
-
 </table>
 
 <br>
@@ -104,8 +82,12 @@ to the sources list line in <b>/etc/apt/sources.list.d/zfsonlinux.list</b> as so
 </pre>
 <p>It can be found at the <a href="https://pgp.mit.edu/pks/lookup?search=turbo+fredriksson&op=index">GPG key server</a>.
 
-<p>It can also be found on the ZFSOnLinux servers as <a href="4D5843EA.asc">4D5843EA.asc</a></p>.
+<p>It can also be found on the ZFSOnLinux servers as <a href="4D5843EA.asc">4D5843EA.asc</a>.</p>
 
+<p>To install this on the commandline:</p>
+<pre>
+    # wget http://zfsonlinux.org/4D5843EA.asc -O - | apt-key add -
+</pre>
 	</td></tr>
 </table>
 
