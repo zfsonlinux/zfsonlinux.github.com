@@ -24,13 +24,13 @@ available.  Packages are provided for:</p>
         <li>Arches: x86_64</li>
 </ul>
 
-<p>To add the repository to your system install the <i>zfs-release</i>
-package as shown below.  This will add the <i>/etc/yum.repo.d/zfs.repo</i>
-and required signing keys to your system.  Additionally, if your system
+<p>To add the repository to your system install the <b>zfs-release</b>
+package as shown below.  This will add the <b>/etc/yum.repo.d/zfs.repo</b>
+file and required signing keys to your system.  Additionally, if your system
 does not already have the <a href=https://fedoraproject.org/wiki/EPEL>EPEL
 repository</a> installed you will need to add it.  Once both repositories
-are installed you can install zfs like any other package using <i>yum</i>.
-As new updated packages are made available they will be detected and
+are installed you can install zfs like any other package using yum.  As
+new updated packages are made available they will be detected and
 installed as part of the standard update process.</p>
 
 <ul>
@@ -51,6 +51,20 @@ $ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-rele
 $ sudo yum install kernel-devel zfs </pre></td/></tr>
 </table>
 </ul>
+
+<p>In addition to the primary <b>zfs</b> repository a <b>zfs-testing</b>
+repository is available.  This repository, which is disabled by default,
+contains the latest versions of zfs which are under active development.
+These packages are made available in order to get feedback from testers
+regarding the functionality and stability of upcoming releases.  These
+packages <b>should not</b> be used on production systems.  Packages from
+the testing repository can be installed as follows.</p>
+
+<table align="center" width=95%>
+        <tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum --enablerepo=zfs-testing install kernel-devel zfs </pre></td/></tr>
+</table>
+
 
 	<tr><td>
 </table>

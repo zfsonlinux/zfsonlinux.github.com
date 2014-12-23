@@ -20,21 +20,34 @@ are refreshed as new releases are made available.  Packages are provided
 for:</p>
 
 <ul>
-	<li>Releases: 18, 19, 20</li>
+	<li>Releases: 18, 19, 20, 21</li>
 	<li>Arches: x86_64</li>
 </ul>
 
-<p>To add the repository to your system install the <i>zfs-release</i>
-package as shown below.  This will add the <i>/etc/yum.repo.d/zfs.repo</i>
-and required signing keys to your system.  You can then install zfs like
-any other Fedora package using <i>yum</i>.  As new updated packages are
-made available they will be detected and installed as part of the standard
+<p>To add the repository to your system install the <b>zfs-release</b>
+package as shown below.  This will add the <b>/etc/yum.repo.d/zfs.repo</b>
+file and required signing keys to your system.  You can now install zfs like
+any other Fedora package using yum.  As new updated packages are made
+available they will be detected and installed as part of the standard
 update process.</p>
 
 <table align="center" width=95%>
 	<tr bgcolor="#eeeeee"><td><pre>
 $ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
 $ sudo yum install kernel-devel zfs </pre></td/></tr>
+</table>
+
+<p>In addition to the primary <b>zfs</b> repository a <b>zfs-testing</b>
+repository is available.  This repository, which is disabled by default,
+contains the latest versions of zfs which are under active development.
+These packages are made available in order to get feedback from testers
+regarding the functionality and stability of upcoming releases.  These
+packages <b>should not</b> be used on production systems.  Packages from
+the testing repository can be installed as follows.</p>
+
+<table align="center" width=95%>
+	<tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum --enablerepo=zfs-testing install kernel-devel zfs </pre></td/></tr>
 </table>
 
 	<tr><td>
