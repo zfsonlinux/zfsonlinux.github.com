@@ -18,42 +18,44 @@
 <ul>
 	<li><a href="#WhatIsZFS">
 	1.1 What is ZFS?</a></li>
+	<li><a href="#BasicRequirements">
+	1.2 Basic Requirements?</a></li>
 	<li><a href="#HowDoIInstallIt">
-	1.2 How do I install it?</a></li>
+	1.3 How do I install it?</a></li>
 	<li><a href="#WhyDoesntItBuild">
-	1.3 Why doesn&#8217;t it build?</a></li>
+	1.4 Why doesn&#8217;t it build?</a></li>
 	<li><a href="#HowDoIMountTheFileSystem">
-	1.4 How do I mount the file system?</a></li>
+	1.5 How do I mount the file system?</a></li>
 	<li><a href="#WhyShouldIUseA64BitSystem">
-	1.5 Why should I use a 64-bit system?</a></li>
+	1.6 Why should I use a 64-bit system?</a></li>
 	<li><a href="#WhatKernelVersionsAreSupported">
-	1.6 What kernel versions are supported?</a></li>
+	1.7 What kernel versions are supported?</a></li>
 	<li><a href="#WhatDevNamesShouldIUseWhenCreatingMyPool">
-	1.7 What /dev/ names should I used when creating my pool?</a></li>
+	1.8 What /dev/ names should I used when creating my pool?</a></li>
 	<li><a href="#HowDoIChangeNamesOnAnExistingPool">
 	1.8 How do I change the /dev/ names on an existing pool?</a></li>
 	<li><a href="#HowDoISetupVdevIdConf">
-	1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a></li>
+	1.10 How do I setup the /etc/zfs/vdev_id.conf file?</a></li>
 	<li><a href="#PerformanceConsideration">
-	1.10 What&#8217;s going on with performance?</a></li>
+	1.11 What&#8217;s going on with performance?</a></li>
 	<li><a href="#WhatDoesZpoolCacheDo">
-	1.11 What does the /etc/zfs/zpool.cache file do?</a></li>
+	1.12 What does the /etc/zfs/zpool.cache file do?</a></li>
 	<li><a href="#HowDoISetupShares">
-	1.12 How do I setup an NFS or SMB shares?</a></li>
+	1.13 How do I setup an NFS or SMB shares?</a></li>
 	<li><a href="#CanIBootFromZFS">
-	1.13 Can I boot from ZFS root?</a></li>
+	1.14 Can I boot from ZFS root?</a></li>
 	<li><a href="#HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
-	1.14 How do I automatically mount ZFS filesystems during startup?</a></li>
+	1.15 How do I automatically mount ZFS filesystems during startup?</a></li>
 	<li><a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-	1.15 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
+	1.16 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
 	<li><a href="#DoIHaveToUseECCMemory">
-	1.16 Do I have to use ECC memory?</a></li>
+	1.17 Do I have to use ECC memory?</a></li>
 	<li><a href="#CanIUseaZVOLforSwap">
-	1.17 Can I use a ZVOL for swap?</a></li>
+	1.18 Can I use a ZVOL for swap?</a></li>
 	<li><a href="#HowDoIGenerateTheZpoolCacheFile">
-	1.18 How do I generate the /etc/zfs/zpool.cache file?</a></li>
+	1.19 How do I generate the /etc/zfs/zpool.cache file?</a></li>
 	<li><a href="#CanIRunZFSForXenHypervisor">
-	1.19 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a></li>
+	1.20 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a></li>
 	<li><a href="#HowCanIHelp">
 	2.1 How can I help?</a></li>
 	<li><a href="#WhatAboutTheLicensingIssue">
@@ -88,8 +90,40 @@ adding new features and performance improvements</a>.</p>
 	</tr>
 	<tr bgcolor="#aaaaaa">
 		<th>
+<a name="BasicRequirements">
+1.3 Basic Requirements?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p>Because ZFS was originally designed for Sun Solaris it was long considered
+a filesystem for large servers and for companies that could afford the best
+and most powerful hardware available. But since the porting of ZFS to
+numerous OpenSource platforms (The BSDs, Illumos and Linux - under the
+umbrella organization "OpenZFS"), these requirements have been lowered.</p>
+
+<p>The suggested hardware requirements are:</p>
+<ul>
+	<li>ECC memory. This isn't really a requirement, but it's highly
+            recommended.</li>
+	<li>At least 8-16GB to perform well. It's perfectly possible to run
+            with less than that (and people do). But you'll need  more if
+            using deduplication.
+	</li>
+	<li>If booting from a ZFS dataset you can't create the root pool with
+            more than the number of disks your hardware (BIOS) supports.
+            This is usually eight disks, but certain virtualization products
+            (most notably VirtualBox), can only handle four.  Please see
+            <a href="#CanIBootFromZFS">booting from ZFS</a> for
+            more information.
+	</li>
+</ul>
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIInstallIt">
-1.2 How do I install it?</a>
+1.3 How do I install it?</a>
 		</th>
 	</tr>
 	<tr>
@@ -123,7 +157,7 @@ released tarballs.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhyDoesntItBuild">
-1.3 Why doesn&#8217;t it build?</a>
+1.4 Why doesn&#8217;t it build?</a>
 		</th>
 	</tr>
 	<tr>
@@ -154,7 +188,7 @@ which fully describes the problem.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoIMountTheFileSystem">
-1.4 How do I mount the file system?</a>
+1.5 How do I mount the file system?</a>
 		</th>
 	</tr>
 	<tr>
@@ -167,7 +201,7 @@ created with <i>zfs create</i> and they will be automatically mounted.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhyShouldIUseA64BitSystem">
-1.5 Why should I use a 64-bit system?</a>
+1.6 Why should I use a 64-bit system?</a>
 		</th>
 	</tr>
 	<tr>
@@ -203,7 +237,7 @@ leveraged to allow tighter integration with the standard Linux VM mechanisms.
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatKernelVersionsAreSupported">
-1.6  What kernel versions are supported?</a>
+1.7  What kernel versions are supported?</a>
 		</th>
 	</tr>
 	<tr>
@@ -268,7 +302,7 @@ in the latest github sources.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
-1.7 What /dev/ names should I use when creating my pool?</a>
+1.8 What /dev/ names should I use when creating my pool?</a>
 		</th>
 	</tr>
 	<tr>
@@ -411,7 +445,7 @@ may apply depending on the naming method employed.
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoIChangeNamesOnAnExistingPool">
-1.8 How do I change the /dev/ names on an existing pool?</a>
+1.9 How do I change the /dev/ names on an existing pool?</a>
 		</th>
 	</tr>
 	<tr>
@@ -430,7 +464,7 @@ $ sudo zpool import -d /dev/disk/by-vdev tank
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoISetupVdevIdConf">
-1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a>
+1.10 How do I setup the /etc/zfs/vdev_id.conf file?</a>
 		</th>
 	</tr>
 	<tr>
@@ -553,7 +587,7 @@ errors: No known data errors
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="PerformanceConsideration">
-1.10 What&#8217;s going on with performance?</a>
+1.11 What&#8217;s going on with performance?</a>
 		</th>
 	</tr>
 	<tr>
@@ -598,7 +632,7 @@ you should set this option when using Advanced Format drives see section
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatDoesZpoolCacheDo">
-1.11 What does the /etc/zfs/zpool.cache file do?</a>
+1.12 What does the /etc/zfs/zpool.cache file do?</a>
 		</th>
 	</tr>
 	<tr>
@@ -615,7 +649,7 @@ cache file it will need to be explicitly imported.
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoISetupShares">
-1.12 How do I setup an NFS or SMB shares?</a>
+1.13 How do I setup an NFS or SMB shares?</a>
 		</th>
 	</tr>
 	<tr>
@@ -638,7 +672,7 @@ for your distribution are installed.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="CanIBootFromZFS">
-1.13 Can I boot from ZFS?</a>
+1.14 Can I boot from ZFS?</a>
 		</th>
 	</tr>
 	<tr>
@@ -658,7 +692,7 @@ Gentoo</a>.
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
-1.14 How do I automatically mount ZFS file systems during startup?</a>
+1.15 How do I automatically mount ZFS file systems during startup?</a>
 		</th>
 	</tr>
 	<tr>
@@ -704,7 +738,7 @@ SELINUXTYPE=targeted
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-1.15 How does ZFS on Linux handles Advanced Format disks?</a>
+1.16 How does ZFS on Linux handles Advanced Format disks?</a>
 		</th>
 	</tr>
 	<tr>
@@ -731,7 +765,7 @@ we must specify this at pool creation time:</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="DoIHaveToUseECCMemory">
-1.16 Do I have to use ECC memory for ZFS?</a>
+1.17 Do I have to use ECC memory for ZFS?</a>
 		</th>
 	</tr>
 	<tr>
@@ -753,7 +787,7 @@ data requires.</p>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="CanIUseaZVOLforSwap">
-1.17 Can I use a ZVOL for swap?</a>
+1.18 Can I use a ZVOL for swap?</a>
 		</th>
 	</tr>
 	<tr>
@@ -773,7 +807,7 @@ $ sudo swapon /dev/tank/swap
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="HowDoIGenerateTheZpoolCacheFile">
-1.18 How do I generate the /etc/zfs/zpool.cache file?</a>
+1.19 How do I generate the /etc/zfs/zpool.cache file?</a>
 		</th>
 	</tr>
 	<tr>
@@ -792,7 +826,7 @@ $ sudo zpool set cachefile=/etc/zfs/zpool.cache tank
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="CanIRunZFSForXenHypervisor">
-1.19 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a>
+1.20 Can I run ZFS on Xen Hypervisor or Xen Dom0?</a>
 		</th>
 	</tr>
 	<tr>
