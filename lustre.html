@@ -11,97 +11,54 @@
 
 <table width=80%>
 	<tr bgcolor="#aaaaaa">
-		<th colspan="2">ZFS Lustre Servers</th>
+		<th colspan="1">ZFS Lustre Servers</th>
 	</tr>
-		<td colspan="2">
-<p>With the release of <a href="http://lustre.opensfs.org">Lustre 2.4</a>
-support for ZFS Lustre servers has arrived.  Historically, Lustre
-has only supported ext4/ldiskfs servers and while those servers have
-performed well they do suffer from a number of well known <a href="http://
-wiki.lustre.org/index.php/ZFS_and_Lustre">limitations</a>.  Extending
-Lustre to use a next generation filesystem like ZFS allows it to achieve
-greater levels of scalability and introduces new functionality.</p>
-
-ZFS Lustre Server Features:
-<ul>
-<li>
-<a href="http://en.wikipedia.org/wiki/ZFS#Data_integrity">Data Integrity</a>
-- Data is always checksummed and self repairing to avoid silent corruption.
-</li>
-<li>
-<a href="http://en.wikipedia.org/wiki/ZFS#Storage_pools">Pooled Storage</a>
-- Easy aggregation of multiple devices in to a single OST.
-</li>
-<li>
-<a href="http://en.wikipedia.org/wiki/ZFS#Capacity">Capacity</a>
-- A 256 zettabytes (2^78 bytes) OST size limit enables larger servers.
-</li>
-<li>
-<a href="http://en.wikipedia.org/wiki/ZFS#Snapshots_and_clones">Snapshots</a>
-- Snapshot the Lustre filesystem prior maintenance for worry free updates.
-</li>
-<li>
-<a href="http://en.wikipedia.org/wiki/LZJB">Compression</a>
-- Transparent compression increases your total usable capacity.
-</li>
-<li>
-<a href="http://en.wikipedia.org/wiki/ZFS#Copy-on-write_transactional_model">
-Copy-on-Write</a> - Improves write performance by transforming random I/O
-in to sequential I/O.</a>
-</li>
-</ul>
-	</tr>
-
-	<tr bgcolor="#dddddd">
-		<th colspan="2">Status</th>
-	</tr>
-		<td colspan="2">
-<p>Support for ZFS has been merged in to the Lustre mainline source tree and
-will be officially available when <a href="http://lustre.opensfs.org/
-community-lustre-roadmap/">Lustre 2.4 is released</a>.  A pre-release version
-of this code is running on  <a href="https://computing.llnl.gov/">
-Lawrence Livermore's</a> <a href="https://asc.llnl.gov/computing_resources/
-sequoia/">Sequoia</a> system which is currently ranked second on the
-<a href="http://www.top500.org/list/2012/11/">top 500 list</a>.</p>
-		</td>
-	</tr>
-	<tr bgcolor="#dddddd">
-		<th colspan="2">Download</th>
-	</tr>
-		<td colspan="2">
-<p>Lustre DKMS packages for RHEL/CentOS 6 are available from the ZFS on
-Linux EPEL repository.  They track the upstream Lustre master branch and
-are refreshed as new pre-releases are tagged.  Once the official Lustre 2.4
-release is tagged the repository will switch to tracking the 2.4 maintenance
-branch.  Packages are provided for:</p>
+		<td colspan="1">
+<p>Lustre DKMS packages for RHEL, CentOS and Scientific Linux are
+available from the zfsonlinux.org repository.  They track the upstream
+Lustre maintenance branch and are refreshed periodically.  Packages are
+provided for:</p>
 
 <ul>
-        <li>Releases: RHEL/CentOS 6.x</li>
+        <li>Releases: 6</li>
         <li>Arches: x86_64</li>
 </ul>
 
-<p>To add the repository to your system install the <i>zfs-release</i>
-package as shown below.  This will add the <i>/etc/yum.repo.d/zfs.repo</i>
-and required signing keys to your system.  You can then install Lustre like
-any other EPEL package using <i>yum</i>.  As new updated packages are
-made available they will be detected and installed as part of the standard
-update process.</p>
+<p>To add the repository to your system install the <b>zfs-release</b>
+package as shown below.  This will add the <b>/etc/yum.repo.d/zfs.repo</b>
+file and required signing keys to your system.  Additionally, if your system
+does not already have the <a href=https://fedoraproject.org/wiki/EPEL>EPEL
+repository</a> installed you will need to add it.  Once both repositories
+are installed you can install lustre like any other package using yum.  As
+new updated packages are made available they will be detected and
+installed as part of the standard update process.</p>
+
+<ul>
+	<li>EPEL 6</li>
+	<table align="center" width=95%>
+		<tr bgcolor="#eeeeee"><td><pre>
+$ sudo yum localinstall --nogpgcheck https://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm
+
+# Install a ZFS based Lustre server.
+$ sudo yum install kernel-devel lustre lustre-osd-zfs
+		</pre></td/></tr>
+	</table>
+</ul>
+
+<p>In addition to the primary <b>zfs</b> repository a <b>zfs-testing</b>
+repository is available.  This repository, which is disabled by default,
+contains the latest versions of zfs which are under active development.
+These packages are made available in order to get feedback from testers
+regarding the functionality and stability of upcoming releases.  These
+packages <b>should not</b> be used on production systems.  Packages from
+the testing repository can be installed as follows.</p>
 
 <table align="center" width=95%>
         <tr bgcolor="#eeeeee"><td><pre>
-$ sudo yum localinstall --nogpgcheck https://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-$ sudo yum localinstall --nogpgcheck http://archive.zfsonlinux.org/epel/zfs-release.el6.noarch.rpm
-$ sudo yum install kernel-devel lustre
-</pre></td/></tr>
-</table><br>
-		</td>
-	</tr>
+$ sudo yum --enablerepo=zfs-testing install kernel-devel lustre lustre-osd-zfs</pre></td/></tr>
+</table>
 
-	<tr bgcolor="#dddddd">
-		<th colspan="2">Deploy</th>
-	</tr>
-	<tr>
-		<td>
 <p>To familiarize yourself with the ZFS Lustre servers you can quickly setup
 a new test filesystem using the <i>llmount.sh</i> script.  Make sure SELinux
 is disabled and the <i>lustre-tests</i> package is installed, then run:</p>
@@ -122,16 +79,28 @@ centos-6-amd64@tcp:/lustre
  </pre></td/></tr>
 </table>
 
-<p>That's it!  You've create a single node Lustre filesystem using ZFS
-servers which is mounted at <i>/mnt/lustre</i>.  When you're done testing
-it can be unmounted and the servers stopped by running, <i>'sudo FSTYPE=zfs
-/usr/lib64/lustre//tests/llmountcleanup.sh'</i>.  To deploy a more realistic
-configuration you should refer to the <a href="http://lustre.opensfs.org/
-documentation/">official Lustre documentation</a>.</p>
-		</td>
-	</tr>
+<p>You've create a single node Lustre filesystem backed by ZFS which is
+mounted at <i>/mnt/lustre</i>.  When you're done testing it can be unmounted
+and the servers stopped with the <i>llmountcleanup.sh</i> script.  To
+deploy a more realistic configuration you should refer to the <a href=
+"http://lustre.opensfs.org/documentation/">official Lustre documentation</a>.
+</p>
+</td></tr>
+
+<table align="center" width=80%>
+        <tr bgcolor="#aaaaaa">
+                <th> Package keys </th>
+        </tr>
+	<tr><td>
+<p>The EPEL ZFS on Linux packages are signed using the public gpg key with the
+id F14AB620.  The public key is part of the zfs-release package for EPEL.</p>
+<pre>
+        Key ID: F14AB620
+        Key fingerprint = C93A FFFD 9F3F 7B03 C310  CEB6 A9D5 A1C0 F14A B620
+</pre>
+        </td></tr>
 </table>
-<br />
+
 
 </center>
 </body>
