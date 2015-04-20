@@ -60,8 +60,10 @@
 	2.1 How can I help?</a></li>
 	<li><a href="#WhatAboutTheLicensingIssue">
 	2.2 What is the licensing concern?</a></li>
+	<li><a href="#WhereDoIReportProblems">
+	3.1 Where do I report problems?</a></li>
 	<li><a href="#HowDoIReportProblems">
-	3.1 How do I report problems?</a></li>
+	3.2 How do I report problems?</a></li>
 </ul>
 		</td>
 	</tr>
@@ -908,8 +910,35 @@ Encouraging closed source modules part 3: elimating the "API update tax" </a>
 	</tr>
 	<tr bgcolor="#aaaaaa">
 		<th>
+<a name="WhereDoIReportProblems">
+3.2 Where do I report problems?</a>
+		</th>
+	</tr>
+	<tr>
+		<td>
+<p>If you're having a problem with the core ZFS On Linux software (such as segmentation faults,
+kernel crashes, memory problems, etc), please report them to either the
+<a href="https://github.com/zfsonlinux/spl/issues"> SPL issue tracker</a> (if you <u>know</u> that
+it's related to SPL - Solaris Porting Layer) or the <a href="https://github.com/zfsonlinux/zfs/issues">
+ZFS issue tracker</a>. If in doubt, use the ZFS tracker and we will tell you to move it if it's
+not in the right place.</p>
+
+<p>For package related issues (if you're using either the Ubuntu PPA or the ZFS On Linux
+Debian GNU/Linux package repository and you're having problem with systemd, init or the initrd
+not autoimporting your pool or mounting your filesystems etc), please report them to either
+the <a href="https://github.com/zfsonlinux/pkg-spl">pkg-spl tracker</a> (for spl.deb related
+issues) or the <a href="https://github.com/zfsonlinux/pkg-zfs">pkg-zfs tracker</a> (for zfs.deb
+related issues).</p>
+
+<p>If you're using packages for another distribution (or if you're compiling your own from
+either the GIT repo or from the tar balls distributed at the ZFS On Linux main page), please
+use <a href="https://github.com/zfsonlinux/zfs/issues">ZFS tracker</a>.</p>
+		</td>
+	</tr>
+	<tr bgcolor="#aaaaaa">
+		<th>
 <a name="HowDoIReportProblems">
-3.1 How do I report problems?</a>
+3.2 How do I report problems?</a>
 		</th>
 	</tr>
 	<tr>
@@ -920,6 +949,39 @@ issue tracker is used to organize outstanding bug reports, feature requests,
 and other development tasks.  Anyone may post comments after signing up for a
 <a href=<https://help.github.com/articles/signing-up-for-a-new-github-account">
 github account</a>.</p>
+
+<p>Please do make sure that what you're actually seeing is a bug and not a
+support issue! If in doubt, please ask on the mailing list first, and if you're
+then asked to file an issue, do so.</p>
+
+<p>At the very least, ALWAYS include this information at the very top of the
+issue:
+<ul>
+	<li>What distribution you're using</li>
+	<li>The distributions version</li>
+	<li>Where you got the packages from</li>
+	<li>What version the packages are</li>
+	<li>If you're building from git (and if so, which tag/branch)</li>
+	<li>If you're building from official tar balls</li>
+</ul>
+
+<p>To find out what exact version is actually loaded (there is/might be a
+difference between the package that's installed and what's actually running),
+run the following command sequence:</p>
+<pre>
+# dmesg | grep -E 'SPL:|ZFS:'</pre>
+</pre>
+
+<p>If nothing is shown, it might have been lost (the kernel only keeps a
+certain amount). In that case, you will have to look for it in the logfiles:</p>
+<pre>
+# cat /var/log/dmesg | grep -E 'SPL:|ZFS:'</pre>
+</pre>
+
+<p>If it isn't there either, try some of the other dmesg.* files.</p>
+
+<p>If you're having problems with memory, kernel krashes etc, we are going
+to need much more information.</p>
 
 <p>When a new issue is opened it's not uncommon for a developer to request
 additional information about the problem.  In general, the more detail you
@@ -937,30 +999,17 @@ you should provide a description of the problem and the following:</p>
 	<ul>
 		<li>Number of CPUs</li>
 		<li>Amount of memory</li>
-		<li>Whether it is running under a VMM/Hypervisor</li>
 		<li>Whether your system has ECC memory</li>
+		<li>Whether it is running under a VMM/Hypervisor</li>
 	</ul>
 	</li>
 	<li>
 	System configuration, such as
 	<ul>
-		<li>Linux distribution name and version</li>
 		<li>Kernel version as displayed by <tt>`uname -a`</tt></li>
 		<li>If you have a custom built kernel then the configuration
 		  file for your kernel is also useful. eg:
 		  <tt>`zcat /proc/config.gz`</tt></li>
-		<li>SPL and ZFS version and where it came from (package
-		  from the ZoL package repository or built from the GIT
-		  repository - be sure to include the commit revision<br>
-		  To find out what exact version is actually loaded, run
-		  <pre>
-# dmesg | grep -E 'SPL:|ZFS:'</pre>
-		  If nothing is shown, it might have been lost (the kernel
-		  only keeps a certain amount). In that case, you will have
-		  to look for it in the logfiles:
-		  <pre>
-# cat /var/log/dmesg | grep -E 'SPL:|ZFS:'</pre>
-If it isn't there either, try some of the other dmesg.* files.</li>
 		<li>Values of the ZFS/SPL module parameters.<br>
 		  To get the full list, run
 		  <pre>
@@ -971,8 +1020,8 @@ for param in /sys/module/{spl,zfs}/parameters/*; do printf "%-50s" `basename $pa
 	</li>
 	<li>
 	A description of what the system was doing at the time of the crash. For
-	example, clients were communicating with a Samba server configured to use
-	AIO.
+	example: <i>clients were communicating with a Samba server configured to use
+	AIO.</i>
 	</li>
 	<li>
 	If you include a stack trace or large blocks of text, make sure to
