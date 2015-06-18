@@ -46,8 +46,8 @@
 	1.14 Can I boot from ZFS root?</a></li>
 	<li><a href="#HowDoIAutomaticallyMountZFSFilesystemsDuringStartup">
 	1.15 How do I automatically mount ZFS filesystems during startup?</a></li>
-	<li><a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-	1.16 How does ZFS on Linux handles Advanced Format (4 KB sector) drives?</a></li>
+	<li><a href="#HowDoesZFSonLinuxHandleAdvacedFormatDrives">
+	1.16 How does ZFS on Linux handle Advanced Format (4 KB sector) drives?</a></li>
 	<li><a href="#DoIHaveToUseECCMemory">
 	1.17 Do I have to use ECC memory?</a></li>
 	<li><a href="#CanIUseaZVOLforSwap">
@@ -432,7 +432,7 @@ benefits as using /dev/disk/by-id.
 <em>Drawbacks:</em>
 This method relies on having a /etc/zfs/vdev_id.conf file properly configured
 for your system.   To configure this file please refer to section
-<a href="#HowDoISetupVdevIdConf">1.9 How do I setup the /etc/zfs/vdev_id.conf file?</a>
+<a href="#HowDoISetupVdevIdConf">1.10 How do I setup the /etc/zfs/vdev_id.conf file?</a>
 As with benefits, the drawbacks of /dev/disk/by-id or /dev/disk/by-path
 may apply depending on the naming method employed.
 		</li>
@@ -625,8 +625,8 @@ You may be able to improve performance for some workloads by setting
 ashift=12.  This tuning can only be set when the pool is first created
 and it will result in a decrease of capacity.  For additional detail on why
 you should set this option when using Advanced Format drives see section
-<a href="#HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-1.15 How does ZFS on Linux handles Advanced Format disks?</a>
+<a href="#HowDoesZFSonLinuxHandleAdvacedFormatDrives">
+1.16 How does ZFS on Linux handle Advanced Format disks?</a>
 	</li>
 </ul>
 		</td>
@@ -739,8 +739,8 @@ SELINUXTYPE=targeted
 	</tr>
 	<tr bgcolor="#aaaaaa">
 		<th>
-<a name="HowDoesZFSonLinuxHandlesAdvacedFormatDrives">
-1.16 How does ZFS on Linux handles Advanced Format disks?</a>
+<a name="HowDoesZFSonLinuxHandleAdvacedFormatDrives">
+1.16 How does ZFS on Linux handle Advanced Format disks?</a>
 		</th>
 	</tr>
 	<tr>
@@ -947,7 +947,7 @@ use <a href="https://github.com/zfsonlinux/zfs/issues">ZFS tracker</a>.</p>
 <a href="https://github.com/zfsonlinux/zfs/issues">issue tracker</a>.  The
 issue tracker is used to organize outstanding bug reports, feature requests,
 and other development tasks.  Anyone may post comments after signing up for a
-<a href=<https://help.github.com/articles/signing-up-for-a-new-github-account">
+<a href="https://help.github.com/articles/signing-up-for-a-new-github-account">
 github account</a>.</p>
 
 <p>Please do make sure that what you're actually seeing is a bug and not a
