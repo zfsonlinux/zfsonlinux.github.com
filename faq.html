@@ -174,8 +174,9 @@ things explain your problem, then please open a new
 which fully describes the problem.</p>
 
 <ul>
-	<li> The kernel API changes frequently, version 0.6.4 supports
-		<b>2.6.32 - 3.19</b> kernels. </li>
+	<li> The kernel API changes frequently, verify the
+		<a href="http://github.com/zfsonlinux/zfs/releases">
+		ZFS version supports your kernel</a>.</li>
 	<li> There are lots of Linux distributions, <a href=
 		"#WhatKernelVersionsAreSupported">only these releases</a>
 		are part of the automated build/regression testing.</li>
@@ -244,63 +245,21 @@ leveraged to allow tighter integration with the standard Linux VM mechanisms.
 	</tr>
 	<tr>
 		<td>
-<p>The current spl/zfs-0.6.4 release supports Linux <b>2.6.32 - 3.19</b> kernels.
-This covers most of the kernels used in the major Linux distributions.  The
-following <a href="http://buildbot.zfsonlinux.org/builders">distributions</a>
+<p>The release notes for the <a href=
+"https://github.com/zfsonlinux/zfs/releases/latest">latest ZFS release</a>
+will include a range of supported kernels.  Our general policy is that new
+ZFS releases should support for the latest official Linux kernels.  Point
+releases will be made as needed to keep current.  The oldest supported Linux
+kernel is 2.6.32 due to its prominence in Enterprise Linux distributions.
+This covers most of the kernels used in the major Linux distributions.
+
+The following <a href="http://buildbot.zfsonlinux.org/builders">distributions</a>
 are <a href="http://buildbot.zfsonlinux.org/console?branch=master">
 automatically tested</a> using a <a href="http://buildbot.zfsonlinux.org/">
 buildbot</a> based continuous integration
 development model.  If you need support for a newer kernel you may find it
-in the latest github sources.</p>
-	<center><ul>
-	<table width=90%>
-	<tr>
-		<th align=left>RHEL</th>
-		<th align=left>Ubuntu</th>
-		<th align=left>Fedora</th>
-	<tr>
-		<td valign=top width=33%>
-	<li>RHEL 7 - x86_64</li>
-	<li>RHEL 6 - x86_64</li>
-	<li>CentOS 6 - x86_64</li>
-	<li>CentOS 7 - x86_64</li>
-	<li>TOSS 2 - x86_64</li>
-		</td>
-		<td valign=top width=33%>
-	<li>Ubuntu 10.04 (Lucid) - x86_64</li>
-	<li>Ubuntu 12.04 (Precise) - x86_64</li>
-	<li>Ubuntu 12.04 (Precise) - i386</li>
-	<li>Ubuntu 12.10 (Quantal) - x86_64</li>
-	<li>Ubuntu 13.04 (Raring) - x86_64</li>
-	<li>Ubuntu 13.10 (Saucy) - x86_64</li>
-	<li>Ubuntu 14.04 (Trusty) - x86_64</li>
-		</td>
-		<td valign=top width=33%>
-	<li>Fedora 18 (Spherical Cow) - x86_64</li>
-	<li>Fedora 19 (Schrodinger's Cat) - x86_64</li>
-	<li>Fedora 20 (Heisenbug) - x86_64</li>
-		</td>
+in the latest Github sources.</p>
 	</tr>
-	<tr>
-		<th></th>
-		<th align=left>Debian</th>
-		<th align=left>Other</th>
-	<tr>
-	<tr>
-		<td valign=top width=33%>
-		</td>
-		<td valign=top width=33%>
-	<li>Debian 6.0 (Squeeze) - x86_64</li>
-	<li>Debian 7.0 (Wheezy) - x86_64</li>
-		</td>
-		<td valign=top width=33%>
-	<li>Proxmox 2.0 - x86_64</li>
-	<li>ArchLinux (Current) - x86_64</li>
-	<li>Gentoo (Current) - x86_64</li>
-		</td>
-	</tr>
-	</table>
-	</ul></center>
 	<tr bgcolor="#aaaaaa">
 		<th>
 <a name="WhatDevNamesShouldIUseWhenCreatingMyPool">
