@@ -581,10 +581,11 @@ enabled.
 	<li>
 <b>Improve performance by setting ashift=12:</b>
 You may be able to improve performance for some workloads by setting
-ashift=12.  This tuning can only be set when the pool is first created
-and it will result in a decrease of capacity.  For additional detail on why
-you should set this option when using Advanced Format drives see section
-<a href="#HowDoesZFSonLinuxHandleAdvacedFormatDrives">
+ashift=12.  This tuning can only be set when block devices are first added 
+to a pool, such as when the pool is first created or when a new vdev 
+is added to the pool. This tuning parameter will result in a decrease of capacity.  
+For additional detail on why you should set this option when using Advanced 
+Format drives see section <a href="#HowDoesZFSonLinuxHandleAdvacedFormatDrives">
 1.16 How does ZFS on Linux handle Advanced Format disks?</a>
 	</li>
 </ul>
@@ -713,14 +714,20 @@ performance.</p>
 
 Therefore the ability to set the ashift property has been added to
 the zpool command.  This allows users to explicitly assign the sector
-size at pool creation time.  The ashift values range from 9 to 16 with
-the default value 0 meaning auto-detect the sector size.  This value is
-actually a bit shift value, so an ashift value for 512 bytes is 9
-(2<sup>9</sup> = 512) while the ashift value for 4,096 bytes is 12
+size when devices are first added to a pool (typically at pool creation 
+time or adding a vdev to the pool).  The ashift values range from 9 to 16 with
+the default value 0 meaning that zfs should auto-detect the sector size.  
+This value is actually a bit shift value, so an ashift value for 512 bytes 
+is 9 (2<sup>9</sup> = 512) while the ashift value for 4,096 bytes is 12
 (2<sup>12</sup> = 4,096).  To force the pool to use 4,096 byte sectors
-we must specify this at pool creation time:</p>
+at pool creation time, you may do:</p>
 
 <pre>$ sudo zpool create -o ashift=12 tank mirror sda sdb</pre>
+
+To force the pool to use 4,096 byte sectors when adding a vdev to a pool, 
+you may do:
+
+<pre>$ sudo zpool add -o ashift=12 tank mirror sdc sdd</pre>
 		</td>
 	</tr>
 	<tr bgcolor="#aaaaaa">
