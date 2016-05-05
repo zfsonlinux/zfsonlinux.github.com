@@ -7,87 +7,9 @@
 </head>
 <body>
 <center>
-<a href="index.html"><img title="Native ZFS on Linux" alt="Native ZFS on Linux" src="images/zfs-linux.png"></a>
-
-<table width=80%>
-        <tr bgcolor="#aaaaaa">
-                <th> Debian Packages </th>
-        </tr>
-	<tr><td>
-<p>DKMS style packages for Debian are available from the zfsonlinux.org 
-repository.  These packages are no longer actively maintained and will
-not be updated as new releases are tagged.  The Debian project has
-<a href="https://lists.debian.org/debian-devel-announce/2015/04/msg00006.html">
-announced their intention</a> to ship ZFS in Debian and that work is
-<a href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=686447">
-currently ongoing</a>.  The zfsonlinux.org project provides packages for:</p>
-
-<ul>
-	<li>Releases: Debian 8.0 Jessie</li>
-	<li>Arches: amd64</li>
-</ul>
-
-<ul>
-	<li>Releases: Debian 7.0 Wheezy</li>
-	<li>Arches: amd64</li>
-</ul>
-
-<p>To add the repository to your system install the <i>zfsonlinux</i> package
-as shown below.  This will add the
-<i>/etc/apt/sources.list.d/zfsonlinux.list</i> and 
-<i>/etc/apt/trusted.gpg.d/zfsonlinux.gpg</i> files to your computer.
-Afterwards, you can install zfs like any other Debian package using
-<i>apt-get</i>.  As new updated packages are made available they will be
-detected and installed as part of the standard update process.</p>
-
-<table align="center" width=95%>
-	<tr bgcolor="#eeeeee"><td><pre>
-$ su -
-# apt-get install lsb-release
-# wget http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb
-# dpkg -i zfsonlinux_6_all.deb
-	</pre></td>
-</table>
-
-<p>If you wish to use the Debian GNU/Linux ZoL snapshot packages (pre-releases),
-you will need to uncomment the line(s) related to the 'dailies' repository (at the
-end of the /etc/apt/sources.list.d/zfsonlinux.list file) by removing the hash mark
-at the beginning of the line.</p>
-
-Then run apt-get to update and install ZoL:<p>
-
-<table align="center" width=95%>
-	<tr bgcolor="#eeeeee"><td><pre>
-# apt-get update
-# apt-get install debian-zfs</pre></td/></tr>
-</table>
-
-	<tr><td>
-</table>
-
-<br>
-
-<table width=80%>
-        <tr bgcolor="#aaaaaa">
-                <th> Package keys </th>
-        </tr>
-	<tr><td>
-<p>The Debian GNU/Linux ZoL packages are signed by <a href="mailto:turbo@bayour.com">Turbo Fredriksson</a>:<br>
-<pre>
-	Key ID: 4D5843EA
-	Key fingerprint = 5EB3 5C47 B97A C11F 551D  B287 201C 3129 4D58 43EA.
-</pre>
-<p>It can be found at the <a href="https://pgp.mit.edu/pks/lookup?search=turbo+fredriksson&op=index">GPG key server</a>.
-
-<p>It can also be found on the ZFSOnLinux servers as <a href="4D5843EA.asc">4D5843EA.asc</a>.</p>
-
-<p>To install this on the commandline:</p>
-<pre>
-    # wget http://zfsonlinux.org/4D5843EA.asc -O - | apt-key add -
-</pre>
-	</td></tr>
-</table>
-
+<a href="index.html"><img title="Native ZFS on Linux" alt="Native ZFS on Linux" src="images/zfs-linux.png"></a><br>
+<a href="https://github.com/zfsonlinux/zfs/wiki/Debian">
+This page has moved to the ZFS on Linux wiki</a> 
 </center>
 </body>
 </html>

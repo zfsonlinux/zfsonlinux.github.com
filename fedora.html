@@ -7,67 +7,9 @@
 </head>
 <body>
 <center>
-<a href="index.html"><img title="Native ZFS on Linux" alt="Native ZFS on Linux" src="images/zfs-linux.png"></a>
-
-<table width=80%>
-        <tr bgcolor="#aaaaaa">
-                <th> Fedora Packages </th>
-        </tr>
-	<tr><td>
-<p>DKMS style packages for Fedora are available from the zfsonlinux.org 
-repository.  These packages track the latest official upstream tag and
-are refreshed as new releases are made available.  Packages are provided
-for:</p>
-
-<ul>
-	<li>Releases: 20, 21, 22, 23</li>
-	<li>Arches: x86_64</li>
-</ul>
-
-<p>To add the repository to your system install the <b>zfs-release</b>
-package as shown below.  This will add the <b>/etc/yum.repo.d/zfs.repo</b>
-file and required signing keys to your system.  You can now install zfs like
-any other Fedora package using yum.  As new updated packages are made
-available they will be detected and installed as part of the standard
-update process.</p>
-
-<table align="center" width=95%>
-	<tr bgcolor="#eeeeee"><td><pre>
-$ sudo yum install --nogpgcheck http://archive.zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
-$ sudo yum install kernel-devel zfs </pre></td/></tr>
-</table>
-
-<p>In addition to the primary <b>zfs</b> repository a <b>zfs-testing</b>
-repository is available.  This repository, which is disabled by default,
-contains the latest versions of zfs which are under active development.
-These packages are made available in order to get feedback from testers
-regarding the functionality and stability of upcoming releases.  These
-packages <b>should not</b> be used on production systems.  Packages from
-the testing repository can be installed as follows.</p>
-
-<table align="center" width=95%>
-	<tr bgcolor="#eeeeee"><td><pre>
-$ sudo yum --enablerepo=zfs-testing install kernel-devel zfs </pre></td/></tr>
-</table>
-	</td></tr>
-</table>
-
-<br>
-
-<table align="center" width=80%>
-        <tr bgcolor="#aaaaaa">
-                <th> Package keys </th>
-        </tr>
-	<tr><td>
-<p>The Fedora ZFS on Linux packages are signed using the public gpg key with the
-id F14AB620.  The public key is part of the zfs-release package for Fedora.</p>
-<pre>
-        Key ID: F14AB620
-        Key fingerprint = C93A FFFD 9F3F 7B03 C310  CEB6 A9D5 A1C0 F14A B620
-</pre>
-	</td></tr>
-</table>
-
+<a href="index.html"><img title="Native ZFS on Linux" alt="Native ZFS on Linux" src="images/zfs-linux.png"></a><br>
+<a href="https://github.com/zfsonlinux/zfs/wiki/Fedora">
+This page has moved to the ZFS on Linux wiki</a>
 </center>
 </body>
 </html>
