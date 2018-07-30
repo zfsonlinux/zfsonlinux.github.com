@@ -1,4 +1,4 @@
 zfsonlinux.github.com
 =====================
 
-The official http://zfsonlinux.org web site for ZoL.
+The official https://zfsonlinux.org web site for ZoL.

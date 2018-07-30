@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>ZFS-8000-5E</title><!--<link rel="stylesheet" href="/stylesheets/style.css"/>--></head><body><h1>Message: ZFS-8000-5E</h1><table border="1" cellpadding="6"><tr><td><b>title</b></td><td>Corrupted device label in non-replicated configuration</td></tr><tr><td><b>description</b></td><td>A device could not be opened due to a missing or invalid
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>ZFS-8000-5E</title><!--<link rel="stylesheet" href="/stylesheets/style.css"/>--></head><body><h1>Message: ZFS-8000-5E</h1><table border="1" cellpadding="6"><tr><td><b>title</b></td><td>Corrupted device label in non-replicated configuration</td></tr><tr><td><b>description</b></td><td>A device could not be opened due to a missing or invalid
 	    device label and no replicas are available.</td></tr><tr><td><b>severity</b></td><td>critical</td></tr><tr><td><b>type</b></td><td>error</td></tr><tr><td><b>keys</b></td><td>ereport.fs.zfs.device.corrupt_label_nr</td></tr><tr><td><b>details</b></td><td>The Message ID: <tt>ZFS-8000-5E</tt> indicates a
 	    device which was unable to be opened by the ZFS subsystem.</td></tr><tr><td><b>impact</b></td><td>The pool is no longer available</td></tr><tr><td><b>response</b></td><td>No automated response will be taken.</td></tr><tr><td><b>action</b></td><td>
 <h4>For an active pool</h4>
@@ -15,7 +15,7 @@ status: One or more devices could not be used because the the label is missing
         or invalid.  There are insufficient replicas for the pool to continue
         functioning.
 action: Destroy and re-create the pool from a backup source.
-   see: http://zfsonlinux.org/msg/ZFS-8000-5E
+   see: https://zfsonlinux.org/msg/ZFS-8000-5E
  scrub: none requested
 config:
 
