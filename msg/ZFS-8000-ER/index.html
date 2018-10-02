@@ -175,11 +175,10 @@ System administrators with affected pools will need to recreate any encrypted
 datasets created before the new version of ZFS was used. This can be
 accomplished by using <b>zfs send</b> and <b>zfs receive</b>. Note, however,
 that backups can NOT be done with a raw <b>zfs send -w</b>, since this would
-preserve the on-disk incompatibility. Since the <b>-p</b> and <b>-R</b> options
-imply <b>-w</b> for encrypted datasets, these flags can not be used either.
-Alternatively, system administrators can use conventional tools to back up data
-to new encrypted datasets. The new version of ZFS will prevent new data from
-being written to the impacted datasets, but they can still be mounted read-only.
+preserve the on-disk incompatibility. Alternatively, system administrators can
+use conventional tools to back up data to new encrypted datasets. The new
+version of ZFS will prevent new data from being written to the impacted datasets,
+but they can still be mounted read-only.
 <pre>
 # zpool status
   pool: test
@@ -201,15 +200,12 @@ config:
 
 Import the pool and backup any existing encrypted datasets to new datasets.
 To ensure the new datasets are re-encrypted, be sure to receive them below an
-encryption root, then destroy the source dataset.
+encryption root or use <b>zfs receive -o encryption=on</b>, then destroy the
+source dataset.
 <pre>
-# zfs create -o encryption=on -o keyformat=passphrase test/new_root
-Enter passphrase:
-Re-enter passphrase
-# zfs send test/crypt1 | zfs receive test/new_root/crypt1
-# zfs send test/crypt2 | zfs receive test/new_root/crypt2
-# zfs destroy test/crypt1
-# zfs destroy test/crypt2
+# zfs send -R test/crypt1@snap1 | zfs receive -o encryption=on -o keyformat=passphrase -o keylocation=file:///path/to/keyfile test/newcrypt1
+# zfs send -R -I test/crypt1@snap1 test/crypt1@snap5 | zfs receive test/newcrypt1
+# zfs destroy -R test/crypt1
 </pre>
 
 New datasets can be mounted read-write and used normally. The errata will be
@@ -222,7 +218,7 @@ datasets, and check <b>zpool status</b>.
 # zpool export test
 # zpool import test
 # zfs load-key -a
-Enter passphrase for 'test/new_root': 
+Enter passphrase for 'test/crypt1':
 1 / 1 key(s) successfully loaded
 # zfs mount -a
 # zpool status -x
