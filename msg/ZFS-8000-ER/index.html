@@ -160,7 +160,7 @@ format incompatibility can now be corrected online as described in
 <dt><p><b>Severity</b>
 <dd>Moderate
 <dt><p><b>Description</b>
-<dd>An encrypted dataset contains an on-disk format incompatability.
+<dd>An encrypted dataset contains an on-disk format incompatibility.
 <dt><p><b>Automated Response</b>
 <dd>No automated response will be taken.
 <dt><p><b>Impact</b>
@@ -203,8 +203,8 @@ To ensure the new datasets are re-encrypted, be sure to receive them below an
 encryption root or use <b>zfs receive -o encryption=on</b>, then destroy the
 source dataset.
 <pre>
-# zfs send -R test/crypt1@snap1 | zfs receive -o encryption=on -o keyformat=passphrase -o keylocation=file:///path/to/keyfile test/newcrypt1
-# zfs send -R -I test/crypt1@snap1 test/crypt1@snap5 | zfs receive test/newcrypt1
+# zfs send test/crypt1@snap1 | zfs receive -o encryption=on -o keyformat=passphrase -o keylocation=file:///path/to/keyfile test/newcrypt1
+# zfs send -I test/crypt1@snap1 test/crypt1@snap5 | zfs receive test/newcrypt1
 # zfs destroy -R test/crypt1
 </pre>
 
