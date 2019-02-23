@@ -1,0 +1,163 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of splat</TITLE>
+</HEAD><BODY>
+<H1>splat</H1>
+Section: User Commands (1)<BR>Updated: 2013 MAR 16<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+splat - Solaris Porting LAyer Tests
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<B>splat [-chvx] &lt; --all | --list | --test </B><I>subsystem</I><B>:</B><I>test</I><B> [...] &gt;</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This utility uses the splat.ko kernel module to test the spl.ko kernel
+module. Run &quot;modprobe splat&quot; before invoking <B>splat</B>.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>
+<B>-a</B><I></I><B>, --all</B><I></I>
+
+<DT><DD>
+<DD>Run all available tests on all subsystems.
+<DT>
+<B>-c</B><I></I><B>, --nocolor</B><I></I>
+
+<DT><DD>
+<DD>Disable output highlighting. By default, &quot;Fail&quot; is printed in red text
+and &quot;Pass&quot; is printed in green text.
+<DT>
+<B>-h</B><I></I><B>, --help</B><I></I>
+
+<DT><DD>
+<DD>Print the usage message.
+<DT>
+<B>-l</B><I></I><B>, --list</B><I></I>
+
+<DT><DD>
+<DD>For each spl.ko subsystem, print all available test names and
+hexadecimal identifiers with a short description.
+<DT>
+<B>-t</B><I> subsystem</I><B>:</B><I>test</I><B>, --test</B><I> subsystem</I><B>:</B><I>test</I>
+
+<DT>
+<B>-t</B><I> subsystem</I><B>:all</B><I></I><B>, --test</B><I> subsystem</I><B>:all</B><I></I>
+
+<DT><DD>
+<DD>Run the <I>test</I> diagnostic routine for the spl.ko <I>subsystem</I>.
+Specify this option more than once to run multiple tests.
+<P>
+The <I>test</I> and <I>subsystem</I> parameters are the names or
+hexadecimal identifiers returned by the <B>splat --list</B> command.
+<P>
+If <I>subsystem</I> is a name and not a hexadecimal identifier, then the
+<B>all</B> keyword can be used to run all available <I>subsystem</I>
+tests.
+<P>
+<DT>
+<B>-v</B><I></I><B>, --verbose</B><I></I>
+
+<DT>
+<DT><DD>
+<DD>Increase verbosity.
+<DT>
+<B>-x</B><I></I><B>, --exit</B><I></I>
+
+<DT><DD>
+<DD>Stop running tests after the first failure.
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<P>
+
+Test everything in the spl.ko kernel module:
+<DL COMPACT>
+<DT><DD>
+# splat --all --verbose
+</DL>
+<P>
+
+Test the entire kernel memory subsystem:
+<DL COMPACT>
+<DT><DD>
+# splat --test kmem:all
+</DL>
+<P>
+
+Test the kernel compression and queue waiting facilities:
+<DL COMPACT>
+<DT><DD>
+# splat --test zlib:compress/uncompress --test taskq:wait
+</DL>
+<P>
+
+This is the same as the previous command, except that the subsystems
+and tests are referenced by hexadecimal identifier instead of by name:
+<DL COMPACT>
+<DT><DD>
+# splat -t 0x0f00:0x0f01 -t 0x0200:0x0204
+<P>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>NOTES</H2>
+
+All tests always return a green &quot;Pass&quot; result on a healthy system. Any
+red &quot;Fail&quot; result should be investigated or reported.
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>BUGS</H2>
+
+Some tests can deadlock the kernel if an X11 desktop is running,
+especially if a proprietary blob driver is loaded for the video
+hardware.
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+This man page was written by Darik Horn &lt;dajhorn@vanadac.com&gt;.
+<P>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man1/zpios.1.html">zpios</A></B>(1),
+
+<B><A HREF="../man1/ztest.1.html">ztest</A></B>(1)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">NOTES</A><DD>
+<DT><A HREF="#lbAH">BUGS</A><DD>
+<DT><A HREF="#lbAI">AUTHORS</A><DD>
+<DT><A HREF="#lbAJ">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:59:19 GMT, February 23, 2019
+</BODY>
+</HTML>

@@ -1,0 +1,257 @@
+<HTML><HEAD><TITLE>Manpage of zpios</TITLE>
+</HEAD><BODY>
+<H1>zpios</H1>
+Section: User Commands (1)<BR>Updated: 2013 FEB 28<BR>
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">AUTHORS</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+zpios - Directly test the DMU.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<B>zpios [options] &lt;-p </B><I>pool</I><B>&gt;</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This utility runs in-kernel DMU performance and stress tests that do
+not depend on the ZFS Posix Layer (&quot;ZPL&quot;).
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>
+<B>-s</B><I> regex</I><B>, --threadcount</B><I> regex</I>
+
+<DT><DD>
+<DD>Start this many threads for each test series, specified as a comma
+delimited regular expression. (eg: &quot;-s 1,2,3&quot;)
+<DT><DD>
+This option is mutually exclusive with the <B>threadcount_*</B>
+options.
+<DT>
+<B>-l</B><I> regex_low</I><B>, --threadcount_low</B><I> regex_low</I>
+
+<DT>
+<B>-h</B><I> regex_high</I><B>, --threadcount_high</B><I> regex_high</I>
+
+<DT>
+<B>-e</B><I> regex_incr</I><B>, --threadcount_incr</B><I> regex_incr</I>
+
+<DT><DD>
+<DD>Start <I>regex_low</I> threads for the first test,
+add <I>regex_incr</I> threads for each subsequent test,
+and start <I>regex_high</I> threads for the last test.
+<DT><DD>
+These three options must be specified together and are mutually
+exclusive with the <B>threadcount</B> option.
+<DT>
+<B>-n</B><I> regex</I><B>, --regioncount</B><I> regex</I>
+
+<DT><DD>
+<DD>Create this many regions for each test series, specified as a comma
+delimited regular expression. (eg: &quot;-n 512,4096,65536&quot;)
+<DT><DD>
+This option is mutually exclusive with the <B>regioncount_*</B>
+options.
+<DT>
+<B>-i</B><I> regex_low</I><B>, --regioncount_low</B><I> regex_low</I>
+
+<DT>
+<B>-j</B><I> regex_high</I><B>, --regioncount_high</B><I> regex_high</I>
+
+<DT>
+<B>-k</B><I> regex_incr</I><B>, --regioncount_incr</B><I> regex_incr</I>
+
+<DT><DD>
+<DD>Create <I>regex_low</I> regions for the first test,
+add <I>regex_incr</I> regions for each subsequent test, and
+create <I>regex_high</I> regions for the last test.
+<DT><DD>
+These three options must be specified together and are mutually
+exclusive with the <B>regioncount</B> option.
+<DT>
+<B>-o</B><I> size</I><B>, --offset</B><I> size</I>
+
+<DT><DD>
+<DD>Create regions at <I>size</I> offset for each test series, specified as
+a comma delimited regular expression with an optional unit suffix.
+(eg: &quot;-o 4M&quot; means four megabytes.)
+<DT><DD>
+This option is mutually exclusive with the <B>offset_*</B> options.
+<DT>
+<B>-m</B><I> size_low</I><B>, --offset_low</B><I> size_low</I>
+
+<DT>
+<B>-q</B><I> size_high</I><B>, --offset_high</B><I> size_high</I>
+
+<DT>
+<B>-r</B><I> size_incr</I><B>, --offset_incr</B><I> size_incr</I>
+
+<DT><DD>
+<DD>Create a region at <I>size_low</I> offset for the first test, add
+<I>size_incr</I> to the offset for each subsequent test, and create
+a region at <I>size_high</I> offset for the last test.
+<DT><DD>
+These three options must be specified together and are mutually
+exclusive with the <B>offset</B> option.
+<DT>
+<B>-c</B><I> size</I><B>, --chunksize</B><I> size</I>
+
+<DT><DD>
+<DD>Use <I>size</I> chunks for each test, specified as a comma delimited
+regular expression with an optional unit suffix. (eg: &quot;-c 1M&quot; means
+one megabyte.) The chunk size must be at least the region size.
+<DT><DD>
+This option is mutually exclusive with the <B>chunksize_* options.
+<DT>
+-a</B><I> size_low</I><B>, --chunksize_low</B><I> size_low</I>
+
+<DT>
+<B>-b</B><I> size_high</I><B>, --chunksize_high</B><I> size_high</I>
+
+<DT>
+<B>-g</B><I> size_incr</I><B>, --chunksize_incr</B><I> size_incr</I>
+
+<DT><DD>
+<DD>Use a <I>size_low</I> chunk size for the first test, add <I>size_incr</I>
+to the chunk size for each subsequent test, and use a <I>size_high</I>
+chunk size for the last test.
+<DT><DD>
+These three options must be specified together and are mutually
+exclusive with the <B>chunksize</B> option.
+<DT>
+<B>-L</B><I> dmu_flags</I><B>, --load</B><I> dmu_flags</I>
+
+<DT><DD>
+<DD>Specify <I>dmuio</I> for regular DMU_IO, <I>ssf</I> for single shared
+file access, or <I>fpp</I> for per thread access. Use commas to delimit
+multiple flags. (eg: &quot;-L dmuio,ssf&quot;)
+<DT>
+<B>-p</B><I> name</I><B>, --pool</B><I> name</I>
+
+<DT><DD>
+<DD>The pool name, which is mandatory.
+<DT>
+<B>-M</B><I> test</I><B>, --name</B><I> test</I>
+
+<DT><DD>
+<DD>An arbitrary string that appears in the program output.
+<DT>
+<B>-x, --cleanup</B>
+
+<DT><DD>
+<DD>Enable the DMU_REMOVE flag.
+<DT>
+<B>-P</B><I> command</I><B>, --prerun</B><I> command</I>
+
+<DT><DD>
+<DD>Invoke <I>command</I> from the kernel before running the test. Shell
+expansion is not performed and the environment is set to
+HOME=/; TERM=linux; PATH=/sbin:/usr/sbin:/bin:/usr/bin.
+<DT>
+<B>-R</B><I> command</I><B>, --postrun</B><I> command</I>
+
+<DT><DD>
+<DD>Invoke <I>command</I> from the kernel after running the test. Shell
+expansion is not performed and the environment is set to
+HOME=/; TERM=linux; PATH=/sbin:/usr/sbin:/bin:/usr/bin.
+<DT>
+<B>-G</B><I> directory</I><B>, --log</B><I> directory</I>
+
+<DT><DD>
+<DD>Put logging output in this directory.
+<DT>
+<B>-I</B><I> size</I><B>, --regionnoise</B><I> size</I>
+
+<DT><DD>
+<DD>Randomly vary the <B>regionsize</B> parameter for each test
+modulo <I>size</I> bytes.
+<DT>
+<B>-N</B><I> size</I><B>, --chunknoise</B><I> size</I>
+
+<DT><DD>
+<DD>Randomly vary the <B>chunksize</B> parameter for each test
+modulo <I>size</I> bytes.
+<DT>
+<B>-T</B><I> time</I><B>, --threaddelay</B><I> time</I>
+
+<DT><DD>
+<DD>Randomly vary the execution time for each test
+modulo <I>time</I> kernel jiffies.
+<DT>
+<B>-V</B><I></I><B>, --verify</B><I></I>
+
+<DT><DD>
+<DD>Enable the DMU_VERIFY flag for trivial data verification.
+<DT>
+<B>-z</B><I></I><B>, --zerocopy</B><I></I>
+
+<DT><DD>
+<DD>Enable the DMU_READ_ZC and DMU_WRITE_ZC flags, which are
+currently unimplemented for Linux.
+<DT><DD>
+<DT>
+<B>-O</B><I></I><B>, --nowait</B><I></I>
+
+<DT><DD>
+<DD>Enable the DMU_WRITE_NOWAIT flag.
+<DT>
+<B>-f</B><I></I><B>, --noprefetch</B><I></I>
+
+<DT><DD>
+<DD>Enable the DMU_READ_NOPF flag.
+<DT>
+<B>-H</B><I></I><B>, --human-readable</B><I></I>
+
+<DT><DD>
+<DD>Print PASS and FAIL results explicitly and put unit suffixes on large
+numbers.
+<DT>
+<B>-v</B><I></I><B>, --verbose</B><I></I>
+
+<DT><DD>
+<DD>Increase output verbosity.
+<DT>
+<B>-?</B><I> </I><B>, --help</B><I> </I>
+
+<DT><DD>
+<DD>Print the usage message.
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+The original zpios implementation was created by Cluster File Systems
+Inc and adapted to ZFS on Linux by Brian Behlendorf
+&lt;behlendorf1@llnl.gov&gt;.
+<P>
+This man page was written by Darik Horn &lt;dajhorn@vanadac.com&gt;.
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man8/zpool.8.html">zpool</A></B>(8),
+
+<B><A HREF="../man8/zfs.8.html">zfs</A></B>(8)
+
+<P>
+
+</BODY>
+</HTML>
