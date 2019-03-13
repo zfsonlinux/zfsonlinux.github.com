@@ -225,4 +225,97 @@ Enter passphrase for 'test/crypt1':
 all pools are healthy
 </pre>
 </td></tr></table>
+<br><br>
+<hr>
+<br><br>
+<!-- end: templates/success -->
+<!-- start: article -->
+<!-- code: ZFS-8000-ER -->
+<!-- keys: errata -->
+<table width="80%"><tr><td>
+<a name="4"><b>ZFS Errata #4</b></a>
+<p>
+<dl>
+<dt><p><b>Type</b>
+<dd>Compatibility
+<dt><p><b>Severity</b>
+<dd>Moderate
+<dt><p><b>Description</b>
+<dd>An encrypted dataset contains an on-disk format incompatibility.
+<dt><p><b>Automated Response</b>
+<dd>No automated response will be taken.
+<dt><p><b>Impact</b>
+<dd>
+Encrypted datasets created before the ZFS packages were updated cannot be
+backed up via a raw send to an updated system. These datasets also cannot
+receive additional snapshots.
+</dd>
+<dt><p><b>Suggested Action for System Administrator</b>
+<dd>
+First, system administrators with affected pools will need to enable the
+<b>bookmark_v2</b> feature on their pools. Enabling this feature will
+prevent this pool from being imported by previous versions of the ZFS
+software (including read-only imports). Next, administrators will need
+to backup all existing encrypted datasets. This can be done in several
+ways. Non-raw <b>zfs send</b> and <b>zfs receive</b> can be used as per
+usual, as can traditional backup tools.
+
+The above-mentioned steps are needed because ZFS is not able to check
+that a receive of (or into) an old dataset will result in a valid new
+snapshot. This restriction can be disabled, however, which will allow
+ZFS to receive a stream that results in a snapshot that can not be
+accessed due to authentication errors. To disable this restriction, set
+the <b>zfs_disable_ivset_guid_check</b> module parameter to 1. Streams
+received this way (as well as any received before the upgrade) will
+need to be manually checked to ensure they are not corrupted. For more
+information on this issue, please refer to the zfs man page section on
+<b>zfs receive</b> which describes the restrictions on raw sends.
+<pre>
+# zpool status
+  pool: test
+ state: ONLINE
+status: Errata #4 detected.
+        Existing encrypted datasets contain an on-disk incompatibility
+        which needs to be corrected.
+action: To correct the issue enable the bookmark_v2 feature and backup
+        existing encrypted datasets to new encrypted datasets and
+        destroy the old ones.
+   see: http://zfsonlinux.org/msg/ZFS-8000-ER
+  scan: none requested
+config:
+
+        NAME           STATE     READ WRITE CKSUM
+        test           ONLINE       0     0     0
+          /root/vdev0  ONLINE       0     0     0
+
+errors: No known data errors
+</pre>
+
+Import the pool and enable the <b>bookmark_v2</b> feature. Then backup any
+existing encrypted datasets to new datasets. This can be done with
+traditional tools or via <b>zfs send</b>. Raw sends will require that the
+zfs_disable_ivset_guid_check is set to 1 on the receive side. Once this
+is done, the original datasets should be destroyed.
+<pre>
+# zpool set feature@bookmark_v2=enabled test
+# echo 1 > /sys/module/zfs/parameters/zfs_disable_ivset_guid_check
+# zfs send -Rw test/crypt1@snap1 | zfs receive test/newcrypt1
+# zfs send -I test/crypt1@snap1 test/crypt1@snap5 | zfs receive test/newcrypt1
+# zfs destroy -R test/crypt1
+# echo 0 > /sys/module/zfs/parameters/zfs_disable_ivset_guid_check
+</pre>
+
+The errata will be cleared upon reimporting the pool and the alert will
+only be shown again if another dataset is found with the errata. To
+check that all datasets are fixed, perform a <b>zfs list -t all</b>, and
+check <b>zpool status</b> once it is completed.
+
+<pre>
+# zpool export test
+# zpool import test
+# zpool scrub # wait for completion
+# zpool status -x
+all pools are healthy
+</pre>
+</td></tr></table>
 </body></html>
