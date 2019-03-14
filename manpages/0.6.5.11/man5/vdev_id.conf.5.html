@@ -1,0 +1,225 @@
+<HTML><HEAD><TITLE>Manpage of vdev_id.conf</TITLE>
+</HEAD><BODY>
+<H1>vdev_id.conf</H1>
+Section: File Formats (5)<BR>
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAD">EXAMPLES</A><DD>
+<DT><A HREF="#lbAE">FILES</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+vdev_id.conf - Configuration file for vdev_id
+<A NAME="lbAC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<I>vdev_id.conf</I>
+
+is the configuration file for
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8).
+
+It controls the default behavior of
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8)
+
+while it is mapping a disk device name to an alias.
+<P>
+
+The
+<I>vdev_id.conf</I>
+
+file uses a simple format consisting of a keyword followed by one or
+more values on a single line.  Any line not beginning with a recognized
+keyword is ignored.  Comments may optionally begin with a hash
+character.
+<P>
+The following keywords and values are used.
+<DL COMPACT>
+<DT><I>alias</I> &lt;name&gt; &lt;devlink&gt;<DD>
+Maps a device link in the /dev directory hierarchy to a new device
+name.  The udev rule defining the device link must have run prior to
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8).
+
+A defined alias takes precedence over a topology-derived name, but the
+two naming methods can otherwise coexist.  For example, one might name
+drives in a JBOD with the sas_direct topology while naming an internal
+L2ARC device with an alias.
+<P>
+<I>name</I> - the name of the link to the device that will by created in
+/dev/disk/by-vdev.
+<P>
+<I>devlink</I> - the name of the device link that has already been
+defined by udev.  This may be an absolute path or the base filename.
+<P>
+<DT><I>channel</I> [pci_slot] &lt;port&gt; &lt;name&gt;<DD>
+Maps a physical path to a channel name (typically representing a single
+disk enclosure).
+<P>
+<I>pci_slot</I> - specifies the PCI SLOT of the HBA
+hosting the disk enclosure being mapped, as found in the output of
+<B><A HREF="../man8/lspci.8.html">lspci</A></B>(8).
+
+This argument is not used in sas_switch mode.
+<P>
+<I>port</I> - specifies the numeric identifier of the HBA or SAS switch port
+connected to the disk enclosure being mapped.
+<P>
+<I>name</I> - specifies the name of the channel.
+<P>
+<DT><I>slot</I> &lt;old&gt; &lt;new&gt; [channel]<DD>
+Maps a disk slot number as reported by the operating system to an
+alternative slot number.  If the <I>channel</I> parameter is specified
+then the mapping is only applied to slots in the named channel,
+otherwise the mapping is applied to all channels. The first-specified
+<I>slot</I> rule that can match a slot takes precedence.  Therefore a
+channel-specific mapping for a given slot should generally appear before
+a generic mapping for the same slot.  In this way a custom mapping may
+be applied to a particular channel and a default mapping applied to the
+others.
+<P>
+<DT><I>multipath</I> &lt;yes|no&gt;<DD>
+Specifies whether
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8)
+
+will handle only dm-multipath devices.  If set to &quot;yes&quot; then
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8)
+
+will examine the first running component disk of a dm-multipath
+device as listed by the
+<B><A HREF="../man8/multipath.8.html">multipath</A></B>(8)
+
+command to determine the physical path.
+<DT><I>topology</I> &lt;sas_direct|sas_switch&gt;<DD>
+Identifies a physical topology that governs how physical paths are
+mapped to channels.
+<P>
+<I>sas_direct</I> - in this mode a channel is uniquely identified by
+a PCI slot and a HBA port number
+<P>
+<I>sas_switch</I> - in this mode a channel is uniquely identified by
+a SAS switch port number
+<P>
+<DT><I>phys_per_port</I> &lt;num&gt;<DD>
+Specifies the number of PHY devices associated with a SAS HBA port or SAS
+switch port.
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8)
+
+internally uses this value to determine which HBA or switch port a
+device is connected to.  The default is 4.
+<P>
+<DT><I>slot</I> &lt;bay|phy|id|lun&gt;<DD>
+Specifies from which element of a SAS identifier the slot number is
+taken.  The default is bay.
+<P>
+<I>bay</I> - read the slot number from the bay identifier.
+<P>
+<I>phy</I> - read the slot number from the phy identifier.
+<P>
+<I>id</I> - use the scsi id as the slot number.
+<P>
+<I>lun</I> - use the scsi lun as the slot number.
+</DL>
+<A NAME="lbAD">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+A non-multipath configuration with direct-attached SAS enclosures and an
+arbitrary slot re-mapping.
+
+<PRE>
+        multipath     no
+        topology      sas_direct
+        phys_per_port 4
+        slot          bay
+
+        #       PCI_SLOT HBA PORT  CHANNEL NAME
+        channel 85:00.0  1         A
+        channel 85:00.0  0         B
+        channel 86:00.0  1         C
+        channel 86:00.0  0         D
+
+        # Custom mapping for Channel A
+
+        #    Linux      Mapped
+        #    Slot       Slot      Channel
+        slot 1          7         A
+        slot 2          10        A
+        slot 3          3         A
+        slot 4          6         A
+
+        # Default mapping for B, C, and D
+
+        slot 1          4
+        slot 2          2
+        slot 3          1
+        slot 4          3
+</PRE>
+
+
+A SAS-switch topology.  Note that the
+<I>channel</I>
+
+keyword takes only two arguments in this example.
+
+<PRE>
+        topology      sas_switch
+
+        #       SWITCH PORT  CHANNEL NAME
+        channel 1            A
+        channel 2            B
+        channel 3            C
+        channel 4            D
+</PRE>
+
+
+A multipath configuration.  Note that channel names have multiple
+definitions - one per physical path.
+
+<PRE>
+        multipath yes
+
+        #       PCI_SLOT HBA PORT  CHANNEL NAME
+        channel 85:00.0  1         A
+        channel 85:00.0  0         B
+        channel 86:00.0  1         A
+        channel 86:00.0  0         B
+</PRE>
+
+
+A configuration using device link aliases.
+
+<PRE>
+        #     by-vdev
+        #     name     fully qualified or base name of device link
+        alias d1       /dev/disk/by-id/wwn-0x5000c5002de3b9ca
+        alias d2       wwn-0x5000c5002def789e
+</PRE>
+
+
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>FILES</H2>
+
+<DL COMPACT>
+<DT><I>/etc/zfs/vdev_id.conf</I>
+
+<DD>
+The configuration file for
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8).
+
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man8/vdev_id.8.html">vdev_id</A></B>(8)
+
+<P>
+
+</BODY>
+</HTML>

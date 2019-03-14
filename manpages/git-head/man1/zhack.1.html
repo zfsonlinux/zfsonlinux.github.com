@@ -1,0 +1,135 @@
+<HTML><HEAD><TITLE>Manpage of zhack</TITLE>
+</HEAD><BODY>
+<H1>zhack</H1>
+Section: User Commands (1)<BR>Updated: 2013 MAR 16<BR>
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAD">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">SUBCOMMANDS</A><DD>
+<DT><A HREF="#lbAG">EXAMPLES</A><DD>
+<DT><A HREF="#lbAH">AUTHORS</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+</DL>
+<HR>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+zhack - libzpool debugging tool
+<A NAME="lbAC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+This utility pokes configuration changes directly into a ZFS pool,
+which is dangerous and can cause data corruption.
+<A NAME="lbAD">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<B>zhack [-c </B><I>cachefile</I><B>] [-d </B><I>dir</I><B>] &lt;</B><I>subcommand</I><B>&gt; [</B><I>arguments</I><B>]</B>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>
+<B>-c</B><I> cachefile</I>
+
+<DT><DD>
+<DD>Read the <I>pool</I> configuration from the <I>cachefile</I>, which is
+/etc/zfs/zpool.cache by default.
+<DT>
+<B>-d</B><I> dir</I>
+
+<DT><DD>
+<DD>Search for <I>pool</I> members in the <I>dir</I> path. Can be specified
+more than once.
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SUBCOMMANDS</H2>
+
+<P>
+
+<B>feature stat </B><I>pool</I>
+
+<DL COMPACT>
+<DT><DD>
+List feature flags.
+</DL>
+<P>
+
+<B>feature enable [-d </B><I>description</I><B>] [-r] </B><I>pool guid</I>
+
+<DL COMPACT>
+<DT><DD>
+Add a new feature to <I>pool</I> that is uniquely identified by
+<I>guid</I>, which is specified in the same form as a <A HREF="../man8/zfs.8.html">zfs</A>(8) user
+property.
+<DT><DD>
+The <I>description</I> is a short human readable explanation of the new
+feature.
+<DT><DD>
+The <B>-r</B> switch indicates that <I>pool</I> can be safely opened
+in read-only mode by a system that does not have the <I>guid</I>
+feature.
+</DL>
+<P>
+
+<B>feature ref [-d|-m] </B><I>pool guid</I>
+
+<DL COMPACT>
+<DT><DD>
+Increment the reference count of the <I>guid</I> feature in <I>pool</I>.
+<DT><DD>
+The <B>-d</B> switch decrements the reference count of the <I>guid</I>
+feature in <I>pool</I>.
+<DT><DD>
+The <B>-m</B> switch indicates that the <I>guid</I> feature is now
+required to read the pool MOS.
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<P>
+
+<PRE>
+# zhack feature stat tank
+
+for_read_obj:
+        org.illumos:lz4_compress = 0
+for_write_obj:
+        com.delphix:async_destroy = 0
+        com.delphix:empty_bpobj = 0
+descriptions_obj:
+        com.delphix:async_destroy = Destroy filesystems asynchronously.
+        com.delphix:empty_bpobj = Snapshots use less space.
+        org.illumos:lz4_compress = LZ4 compression algorithm support.
+
+# zhack feature enable -d 'Predict future disk failures.' \
+    tank com.example:clairvoyance
+
+# zhack feature ref tank com.example:clairvoyance
+</PRE><A NAME="lbAH">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+This man page was written by Darik Horn &lt;dajhorn@vanadac.com&gt;.
+<A NAME="lbAI">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="../man8/zfs.8.html">zfs</A></B>(8),
+
+<B><A HREF="../man5/zpool-features.5.html">zpool-features</A></B>(5),
+
+<B><A HREF="../man1/ztest.1.html">ztest</A></B>(1)
+
+<P>
+
+<HR>
+</BODY>
+</HTML>
