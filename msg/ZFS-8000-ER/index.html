@@ -248,17 +248,21 @@ all pools are healthy
 <dd>
 Encrypted datasets created before the ZFS packages were updated cannot be
 backed up via a raw send to an updated system. These datasets also cannot
-receive additional snapshots.
+receive additional snapshots. New encrypted datasets cannot be created
+until the bookmark_v2 feature has been enabled.
 </dd>
 <dt><p><b>Suggested Action for System Administrator</b>
 <dd>
 First, system administrators with affected pools will need to enable the
 <b>bookmark_v2</b> feature on their pools. Enabling this feature will
 prevent this pool from being imported by previous versions of the ZFS
-software (including read-only imports). Next, administrators will need
-to backup all existing encrypted datasets. This can be done in several
-ways. Non-raw <b>zfs send</b> and <b>zfs receive</b> can be used as per
-usual, as can traditional backup tools.
+software (including read-only imports). If the pool contains no encrypted
+datasets, this is the only step required.
+
+If there are existing encrypted datasets, administrators will then need
+to back these datasets up. This can be done in several ways. Non-raw
+<b>zfs send</b> and <b>zfs receive</b> can be used as per usual, as can
+traditional backup tools.
 
 The above-mentioned steps are needed because ZFS is not able to check
 that a receive of (or into) an old dataset will result in a valid new
@@ -278,8 +282,9 @@ status: Errata #4 detected.
         Existing encrypted datasets contain an on-disk incompatibility
         which needs to be corrected.
 action: To correct the issue enable the bookmark_v2 feature and backup
-        existing encrypted datasets to new encrypted datasets and
-        destroy the old ones.
+        any existing encrypted datasets to new encrypted datasets and
+        destroy the old ones. If this pool does not contain any
+        encrypted datasets, simply enable the bookmark_v2 feature.
    see: http://zfsonlinux.org/msg/ZFS-8000-ER
   scan: none requested
 config:
