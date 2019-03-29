@@ -256,24 +256,31 @@ until the bookmark_v2 feature has been enabled.
 First, system administrators with affected pools will need to enable the
 <b>bookmark_v2</b> feature on their pools. Enabling this feature will
 prevent this pool from being imported by previous versions of the ZFS
-software (including read-only imports). If the pool contains no encrypted
-datasets, this is the only step required.
+software after any new bookmarks are created (including read-only imports).
+If the pool contains no encrypted datasets, this is the only step required.
 
 If there are existing encrypted datasets, administrators will then need
 to back these datasets up. This can be done in several ways. Non-raw
 <b>zfs send</b> and <b>zfs receive</b> can be used as per usual, as can
 traditional backup tools.
 
-The above-mentioned steps are needed because ZFS is not able to check
-that a receive of (or into) an old dataset will result in a valid new
-snapshot. This restriction can be disabled, however, which will allow
-ZFS to receive a stream that results in a snapshot that can not be
-accessed due to authentication errors. To disable this restriction, set
-the <b>zfs_disable_ivset_guid_check</b> module parameter to 1. Streams
+Raw receives of existing encrypted datasets and raw receives into
+existing encrypted datasets are currently disabled because ZFS is not
+able to guarantee that the stream and the existing dataset came from a
+consistent source. This check can be disabled which will allow ZFS to
+receive these streams anyway. Note that this can result in datasets
+with data that cannot be accessed due to authentication errors if raw
+and non-raw receives are mixed over the course of several incremental
+backups. To disable this restriction, set the
+<b>zfs_disable_ivset_guid_check</b> module parameter to 1. Streams
 received this way (as well as any received before the upgrade) will
-need to be manually checked to ensure they are not corrupted. For more
-information on this issue, please refer to the zfs man page section on
-<b>zfs receive</b> which describes the restrictions on raw sends.
+need to be manually checked by reading the data to ensure they are not
+corrupted. Note that <b>zpool scrub</b> cannot be used for this purpose
+because the scrub does not check the cryptographic authentication codes.
+For more information on this issue, please refer to the zfs man page
+section on <b>zfs receive</b> which describes the restrictions
+on raw sends.
+
 <pre>
 # zpool status
   pool: test
