@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of ZPOOL</TITLE>
 </HEAD><BODY>
 <H1>ZPOOL</H1>
-Section: Maintenance Commands (8)<BR>Updated: November 29, 2018<BR>
+Section: Maintenance Commands (8)<BR>Updated: May 2, 2019<BR>
 <HR>
 <A NAME="index">&nbsp;</A><H2>Index</H2>
 <DL>
@@ -43,7 +43,7 @@ Linux
 <B></B>
 
 
--<B>?</B>
+-<B>?V</B>
 
 <BR><B></B>
 
@@ -777,6 +777,35 @@ Linux
 <BR><B></B>
 
 
+<B>trim</B>
+
+[-<B>d</B>
+
+]
+
+[-<B>r </B><I>rate</I>
+
+
+
+]
+
+[-<B>c | -s</B>
+
+
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<BR><B></B>
+
+
 <B>set</B>
 
 <I>property </I><B>= </B><I>value</I>
@@ -837,7 +866,7 @@ Linux
 
 
 
-[-<B>DigLpPsvx</B>
+[-<B>DigLpPstvx</B>
 
 ]
 
@@ -910,6 +939,11 @@ Linux
 
 
 
+
+<BR><B></B>
+
+
+<B>version</B>
 
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
@@ -1025,7 +1059,7 @@ The recommended number is between 3 and 9 to help increase performance.
 
 
 <DD>
-A special pseudo-vdev which keeps track of available hot spares for a pool.
+A pseudo-vdev which keeps track of available hot spares for a pool.
 For more information, see the
 Sx Hot Spares
 
@@ -1047,19 +1081,19 @@ section.
 
 
 <DD>
-A device dedicated solely for allocating dedup data.
+A device dedicated solely for deduplication tables.
 The redundancy of this device should match the redundancy of the other normal
 devices in the pool. If more than one dedup device is specified, then
-allocations are load-balanced between devices.
+allocations are load-balanced between those devices.
 <DT><B>special</B>
 
 
 <DD>
 A device dedicated solely for allocating various kinds of internal metadata,
-and optionally small file data.
+and optionally small file blocks.
 The redundancy of this device should match the redundancy of the other normal
 devices in the pool. If more than one special device is specified, then
-allocations are load-balanced between devices.
+allocations are load-balanced between those devices.
 <P>
 
 For more information on special allocations, see the
@@ -1281,6 +1315,12 @@ exported since other pools may use this shared spare, which may lead to
 potential data corruption.
 <P>
 
+Shared spares add some risk.  If the pools are imported on different hosts, and
+both pools suffer a device failure at the same time, both could attempt to use
+the spare at the same time.  This may not be detected, resulting in data
+corruption.
+<P>
+
 An in-progress spare replacement can be cancelled by detaching the hot spare.
 If the original faulted device is detached, then the hot spare assumes its
 place in the configuration, and is removed from the spare list of all active
@@ -1424,17 +1464,17 @@ current state of the pool won't be scanned during a scrub.
 
 The allocations in the special class are dedicated to specific block types.
 By default this includes all metadata, the indirect blocks of user data, and
-any dedup data.  The class can also be provisioned to accept a limited
-percentage of small file data blocks.
+any deduplication tables.  The class can also be provisioned to accept
+small file blocks.
 <P>
 
-A pool must always have at least one general (non-specified) vdev before
+A pool must always have at least one normal (non-dedup/special) vdev before
 other devices can be assigned to the special class. If the special class
 becomes full, then allocations intended for it will spill back into the
 normal class.
 <P>
 
-Dedup data can be excluded from the special class by setting the
+Deduplication tables can be excluded from the special class by setting the
 <B>zfs_ddt_data_is_special</B>
 
 zfs module parameter to false (0).
@@ -1445,7 +1485,7 @@ can control the size of small file blocks allowed in the special class by
 setting the
 <B>special_small_blocks</B>
 
-dataset property. It defaults to zero so you must opt-in by setting it to a
+dataset property. It defaults to zero, so you must opt-in by setting it to a
 non-zero value. See
 <A HREF="../man8/zfs.8.html">zfs</A>(8)
 
@@ -1468,6 +1508,13 @@ The following are read-only properties:
 
 <DD>
 Amount of storage used within the pool.
+See
+<B>fragmentation</B>
+
+and
+<B>free</B>
+
+for more information.
 <DT><B>capacity</B>
 
 
@@ -1500,12 +1547,41 @@ This space occurs when a LUN is dynamically expanded.
 
 
 <DD>
-The amount of fragmentation in the pool.
+The amount of fragmentation in the pool. As the amount of space
+<B>allocated</B>
+
+increases, it becomes more difficult to locate
+<B>free</B>
+
+space. This may result in lower write performance compared to pools with more
+unfragmented free space.
 <DT><B>free</B>
 
 
 <DD>
 The amount of free space available in the pool.
+By contrast, the
+<A HREF="../man8/zfs.8.html">zfs</A>(8)
+
+
+<B>available</B>
+
+property describes how much new data can be written to ZFS filesystems/volumes.
+The zpool
+<B>free</B>
+
+property is not generally useful for this purpose, and can be substantially more than the zfs
+<B>available</B>
+
+space. This discrepancy is due to several factors, including raidz party; zfs
+reservation, quota, refreservation, and refquota properties; and space set aside by
+<B>spa_slop_shift</B>
+
+(see
+zfs-module-parameters5
+
+
+for more information).
 <DT><B>freeing</B>
 
 
@@ -1690,7 +1766,7 @@ Pool sector size exponent, to the power of
 (internally referred to as
 <B>ashift</B>
 
-). Values from 9 to 16, inclusive, are valid; also, the special
+). Values from 9 to 16, inclusive, are valid; also, the
 value 0 (the default) means to auto-detect using the kernel's block
 layer and a ZFS internal exception list. I/O operations will be aligned
 to the specified size boundaries. Additionally, the minimum (disk)
@@ -1854,10 +1930,10 @@ can later be imported with
 
 
  
-Setting it to the special value
+Setting it to the value
 <B>none</B>
 
-creates a temporary pool that is never cached, and the special value
+creates a temporary pool that is never cached, and the
 Qq (empty string)
 
 
@@ -1896,6 +1972,10 @@ property.
 
 
 <DD>
+This property is deprecated.  In a future release, it will no longer have any
+effect.
+<P>
+
 Threshold for the number of block ditto copies.
 If the reference count for a deduplicated block increases above this number, a
 new ditto copy of this block is automatically stored.
@@ -1984,6 +2064,51 @@ Prints out a message to the console and generates a system crash dump.
 </DL>
 <P>
 
+<DT><B>autotrim = on | off</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+When set to
+<B>on</B>
+
+space which has been recently freed, and is no longer allocated by the pool,
+will be periodically trimmed.  This allows block device vdevs which support
+BLKDISCARD, such as SSDs, or file vdevs on which the underlying file system
+supports hole-punching, to reclaim unused blocks.  The default setting for
+this property is
+<B>off</B>
+
+ 
+<P>
+
+Automatic TRIM does not immediately reclaim blocks after a free. Instead,
+it will optimistically delay allowing smaller ranges to be aggregated in to
+a few larger ones.  These can then be issued more efficiently to the storage.
+<P>
+
+Be aware that automatic trimming of recently freed data blocks can put
+significant stress on the underlying storage devices.  This will vary
+depending of how well the specific device handles these commands.  For
+lower end devices it is often possible to achieve most of the benefits
+of automatic trimming by running an on-demand (manual) TRIM periodically
+using the
+<B>zpool trim</B>
+
+
+
+command.
 <DT><B>feature@ </B><I>feature_name </I><B>= enabled</B>
 
 
@@ -2074,9 +2199,18 @@ When a pool is determined to be active it cannot be imported, even with the
 -<B>f</B>
 
 option.  This property is intended to be used in failover configurations
-where multiple hosts have access to a pool on shared storage.  When this
-property is on, periodic writes to storage occur to show the pool is in use.
-See
+where multiple hosts have access to a pool on shared storage.
+<P>
+
+Multihost provides protection on import only.  It does not protect against an
+individual device being used in multiple pools, regardless of the type of vdev.
+See the discussion under
+<B>zpool create.</B>
+
+<P>
+
+When this property is on, periodic writes to storage occur to show the pool is
+in use.  See
 <B>zfs_multihost_interval</B>
 
 in the
@@ -2150,6 +2284,22 @@ The following subcommands are supported:
 <DD>
 
 <DD>Displays a help message.
+<DT><B>
+</B>
+
+<B></B>
+
+
+-<B>V, -version</B>
+
+<DD>
+
+<DD>An alias for the
+<B>zpool version</B>
+
+
+
+subcommand.
 <DT><B>
 </B>
 
@@ -2350,7 +2500,7 @@ Forces use of
 <I>new_device</I>
 
  
-even if its appears to be in use.
+even if it appears to be in use.
 Not all devices can be overridden in this manner.
 <DT><B>-o </B><I>property </I><B>= </B><I>value</I>
 
@@ -2466,6 +2616,9 @@ Discards an existing checkpoint from
 If no arguments are specified, all device errors within the pool are cleared.
 If one or more devices is specified, only those errors associated with the
 specified device or devices are cleared.
+If multihost is enabled, and the pool has been suspended, this will not
+resume I/O.  While the pool was suspended, it may have been imported on
+another host, and resuming I/O could result in pool damage.
 <DT><B>
 </B>
 
@@ -2622,8 +2775,33 @@ Sx Virtual Devices
 section.
 <P>
 
-The command verifies that each device specified is accessible and not currently
-in use by another subsystem.
+The command attempts to verify that each device specified is accessible and not
+currently in use by another subsystem.  However this check is not robust enough
+to detect simultaneous attempts to use a new device in different pools, even if
+<B>multihost</B>
+
+is
+<B>enabled.</B>
+
+The
+administrator must ensure that simultaneous invocations of any combination of
+<B>zpool replace</B>
+
+ 
+<B>zpool create</B>
+
+ 
+<B>zpool add</B>
+
+ 
+or
+<B>zpool labelclear</B>
+
+ 
+do not refer to the same device.  Using the same device in two pools will
+result in pool corruption.
+<P>
+
 There are some uses, such as being currently mounted, or specified as the
 dedicated dump device, that prevents a device from ever being used by ZFS.
 Other uses, such as having a preexisting UFS file system, can be overridden with
@@ -4066,10 +4244,17 @@ with no flags on the relevant target devices.
 
 <DD>
 
-<DD>Displays I/O statistics for the given pools/vdevs. You can pass in a
-list of pools, a pool and list of vdevs in that pool, or a list of any
-vdevs from any pool. If no items are specified, statistics for every
-pool in the system are shown.
+<DD>Displays logical I/O statistics for the given pools/vdevs. Physical I/Os may
+be observed via
+<A HREF="../man1/iostat.1.html">iostat</A>(1).
+
+
+If writes are located nearby, they may be merged into a single
+larger operation. Additional I/O may be generated depending on the level of
+vdev redundancy.
+To filter output, you may pass in a list of pools, a pool and list of vdevs
+in that pool, or a list of any vdevs from any pool. If no items are specified,
+statistics for every pool in the system are shown.
 When given an
 <I>interval</I>
 
@@ -4297,18 +4482,10 @@ flag.
 
 
 <DD>
-Print request size histograms for the leaf ZIOs. This includes
-histograms of individual ZIOs (
-<I>ind</I>
-
- 
-and aggregate ZIOs (
-<I>agg ).</I>
-
-These stats can be useful for seeing how well the ZFS IO aggregator is
-working. Do not confuse these request size stats with the block layer
-requests; it's possible ZIOs can be broken up before being sent to the
-block device.
+Print request size histograms for the leaf vdev's IO. This includes
+histograms of individual IOs (ind) and aggregate IOs (agg). These stats
+can be useful for observing how well IO aggregation is working.  Note
+that TRIM IOs may exceed 16M, but will be counted as 16M.
 <DT><B>-v</B>
 
 
@@ -4382,6 +4559,10 @@ Does not include disk time.
 
  
 Average queuing time in scrub queue. Does not include disk time.
+<I>trim</I>
+
+ 
+Average queuing time in trim queue. Does not include disk time.
 <DT><B>-q</B>
 
 
@@ -4413,6 +4594,10 @@ Current number of entries in asynchronous priority queues.
 
  
 Current number of entries in scrub queue.
+<I>trimq_write</I>
+
+ 
+Current number of entries in trim queue.
 <P>
 
 All queue statistics are instantaneous measurements of the number of
@@ -4609,7 +4794,7 @@ flag.
 <DD>
 Display a time stamp.
 Specify
--<B>u</B>
+<B>u</B>
 
 for a printed representation of the internal representation of time.
 See
@@ -4617,7 +4802,7 @@ See
 
 
 Specify
--<B>d</B>
+<B>d</B>
 
 for standard date format.
 See
@@ -4954,7 +5139,7 @@ Forces use of
 <I>new_device</I>
 
  
-even if its appears to be in use.
+even if it appears to be in use.
 Not all devices can be overridden in this manner.
 <DT><B>-o </B><I>property </I><B>= </B><I>value</I>
 
@@ -5037,6 +5222,11 @@ If a scrub is paused, the
 resumes it.
 If a resilver is in progress, ZFS does not allow a scrub to be started until the
 resilver completes.
+<P>
+
+Note that, due to changes in pool data on a live system, it is possible for
+scrubs to progress slightly beyond 100% completion. During this period, no
+completion time estimate will be provided.
 <DL COMPACT>
 <P>
 
@@ -5086,7 +5276,96 @@ again.
 
 <DD>Starts a resilver. If an existing resilver is already running it will be
 restarted from the beginning. Any drives that were scheduled for a deferred
-resilver will be added to the new one.
+resilver will be added to the new one. This requires the
+<B>resilver_defer</B>
+
+feature.
+<DT><B>
+</B>
+
+<B></B>
+
+
+<B>trim</B>
+
+[-<B>d</B>
+
+]
+
+[-<B>c | -s</B>
+
+
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<DD>
+
+<DD>Initiates an immediate on-demand TRIM operation for all of the free space in
+a pool.  This operation informs the underlying storage devices of all blocks
+in the pool which are no longer allocated and allows thinly provisioned
+devices to reclaim the space.
+<P>
+
+A manual on-demand TRIM operation can be initiated irrespective of the
+<B>autotrim</B>
+
+pool property setting.  See the documentation for the
+<B>autotrim</B>
+
+property above for the types of vdev devices which can be trimmed.
+<DL COMPACT>
+<P>
+
+<DT><B>-d -secure</B>
+
+
+<DD>
+Causes a secure TRIM to be initiated.  When performing a secure TRIM, the
+device guarantees that data stored on the trimmed blocks has been erased.
+This requires support from the device and is not supported by all SSDs.
+<DT><B>-r -rate </B><I>rate</I>
+
+
+
+
+<DD>
+Controls the rate at which the TRIM operation progresses.  Without this
+option TRIM is executed as quickly as possible. The rate, expressed in bytes
+per second, is applied on a per-vdev basis and may be set differently for
+each leaf vdev.
+<DT><B>-c, -cancel</B>
+
+
+<DD>
+Cancel trimming on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+trimmed, the command will fail and no cancellation will occur on any device.
+<DT><B>-s -suspend</B>
+
+
+<DD>
+Suspend trimming on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+trimmed, the command will fail and no suspension will occur on any device.
+Trimming can then be resumed by running
+<B>zpool trim</B>
+
+
+
+with no flags on the relevant target devices.
+</DL>
+<P>
+
 <DT><B>
 </B>
 
@@ -5303,7 +5582,7 @@ and automatically import it.
 
 ]
 
-[-<B>DigLpPsvx</B>
+[-<B>DigLpPstvx</B>
 
 ]
 
@@ -5441,6 +5720,11 @@ didn't complete in <B>zio_slow_io_ms</B> milliseconds (default 30 seconds).
 This does not necessarily mean the IOs failed to complete, just took an
 unreasonably long amount of time.  This may indicate a problem with the
 underlying storage.
+<DT><B>-t</B>
+
+
+<DD>
+Display vdev TRIM status.
 <DT><B>-T u | d</B>
 
 
@@ -5455,7 +5739,7 @@ underlying storage.
 <DD>
 Display a time stamp.
 Specify
--<B>u</B>
+<B>u</B>
 
 for a printed representation of the internal representation of time.
 See
@@ -5463,7 +5747,7 @@ See
 
 
 Specify
--<B>d</B>
+<B>d</B>
 
 for standard date format.
 See
@@ -5605,6 +5889,21 @@ supported legacy version number.
 </DL>
 <P>
 
+<DT><B>
+</B>
+
+<B></B>
+
+
+<B>version</B>
+
+<DD>
+
+<DD>Displays the software version of the
+<B></B>
+
+
+userland utility and the zfs kernel module.
 </DL>
 <P>
 
@@ -6058,9 +6357,9 @@ option in
 
 <DD>
 Cause
-<B>zpool subcommands to output vdev guids by default.  This behavior</B>
+<B>zpool</B>
 
-is identical to the
+subcommands to output vdev guids by default.  This behavior is identical to the
 <B>zpool status -g</B>
 
 command line option.
