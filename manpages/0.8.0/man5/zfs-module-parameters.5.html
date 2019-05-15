@@ -125,11 +125,7 @@ Default value: <B>6</B>.
 <B>ignore_hole_birth</B> (int)
 
 <DL COMPACT><DT><DD>
-When set, the hole_birth optimization will not be used, and all holes will
-always be sent on zfs send. Useful if you suspect your datasets are affected
-by a bug in hole_birth.
-<P>
-Use <B>1</B> for on (default) and <B>0</B> for off.
+This is an alias for <B>send_holes_without_birth_time</B>.
 </DL>
 
 <P>
@@ -415,6 +411,20 @@ Use <B>1</B> for yes (default) and <B>0</B> for no.
 <P>
 
 
+<B>send_holes_without_birth_time</B> (int)
+
+<DL COMPACT><DT><DD>
+When set, the hole_birth optimization will not be used, and all holes will
+always be sent on zfs send.  This is useful if you suspect your datasets are
+affected by a bug in hole_birth.
+<P>
+Use <B>1</B> for on (default) and <B>0</B> for off.
+</DL>
+
+<P>
+<P>
+
+
 <B>spa_config_path</B> (charp)
 
 <DL COMPACT><DT><DD>
@@ -584,6 +594,19 @@ Default value: <B>8</B>.
 Min time before an active prefetch stream can be reclaimed
 <P>
 Default value: <B>2</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_abd_scatter_min_size</B> (uint)
+
+<DL COMPACT><DT><DD>
+This is the minimum allocation size that will use scatter (page-based)
+ABD's.  Smaller allocations will use linear ABD's.
+<P>
+Default value: <B>1536</B> (512B and 1KB allocations will be linear).
 </DL>
 
 <P>
@@ -1644,6 +1667,32 @@ Default value: <B>10</B>.
 <P>
 
 
+<B>zfs_vdev_trim_max_active</B> (int)
+
+<DL COMPACT><DT><DD>
+Maximum trim/discard I/Os active to each device.
+See the section &quot;ZFS I/O SCHEDULER&quot;.
+<P>
+Default value: <B>2</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_vdev_trim_min_active</B> (int)
+
+<DL COMPACT><DT><DD>
+Minimum trim/discard I/Os active to each device.
+See the section &quot;ZFS I/O SCHEDULER&quot;.
+<P>
+Default value: <B>1</B>.
+</DL>
+
+<P>
+<P>
+
+
 <B>zfs_vdev_queue_depth_pct</B> (int)
 
 <DL COMPACT><DT><DD>
@@ -1727,6 +1776,12 @@ together.
 <TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
 <TR VALIGN=top><TD ALIGN=right>512</TD><TD>ZFS_DEBUG_SET_ERROR<BR></TD></TR>
 <TR VALIGN=top><TD ALIGN=right></TD><TD>Enable SET_ERROR and dprintf entries in the debug log.<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=right>1024</TD><TD>ZFS_DEBUG_INDIRECT_REMAP<BR></TD></TR>
+<TR VALIGN=top><TD ALIGN=right></TD><TD>Verify split blocks created by device removal.<BR></TD></TR>
+<TR VALIGN=top><TD COLSPAN=2><HR></TD></TR>
+<TR VALIGN=top><TD ALIGN=right>2048</TD><TD>ZFS_DEBUG_TRIM<BR></TD></TR>
+<TR VALIGN=top><TD ALIGN=right></TD><TD>Verify TRIM ranges are always within the allocatable range tree.<BR></TD></TR>
 </TABLE></TABLE>
 
 <P>
@@ -1973,20 +2028,14 @@ Default value: <B>0</B>.
 
 <DL COMPACT><DT><DD>
 Used to control the frequency of multihost writes which are performed when the
-<B>multihost</B> pool property is on.  This is one factor used to determine
-the length of the activity check during import.
+<B>multihost</B> pool property is on.  This is one factor used to determine the
+length of the activity check during import.
 <P>
-The multihost write period is <B>zfs_multihost_interval / leaf-vdevs</B> milliseconds.
-This means that on average a multihost write will be issued for each leaf vdev every
-<B>zfs_multihost_interval</B> milliseconds.  In practice, the observed period can
-vary with the I/O load and this observed value is the delay which is stored in
-the uberblock.
-<P>
-On import the activity check waits a minimum amount of time determined by
-<B>zfs_multihost_interval * zfs_multihost_import_intervals</B>.  The activity
-check time may be further extended if the value of mmp delay found in the best
-uberblock indicates actual multihost updates happened at longer intervals than
-<B>zfs_multihost_interval</B>.  A minimum value of <B>100ms</B> is enforced.
+The multihost write period is <B>zfs_multihost_interval / leaf-vdevs</B>
+milliseconds.  On average a multihost write will be issued for each leaf vdev
+every <B>zfs_multihost_interval</B> milliseconds.  In practice, the observed
+period can vary with the I/O load and this observed value is the delay which is
+stored in the uberblock.
 <P>
 Default value: <B>1000</B>.
 </DL>
@@ -2001,10 +2050,19 @@ Default value: <B>1000</B>.
 Used to control the duration of the activity test on import.  Smaller values of
 <B>zfs_multihost_import_intervals</B> will reduce the import time but increase
 the risk of failing to detect an active pool.  The total activity check time is
-never allowed to drop below one second.  A value of 0 is ignored and treated as
-if it was set to 1
+never allowed to drop below one second.
 <P>
-Default value: <B>10</B>.
+On import the activity check waits a minimum amount of time determined by
+<B>zfs_multihost_interval * zfs_multihost_import_intervals</B>, or the same
+product computed on the host which last had the pool imported (whichever is
+greater).  The activity check time may be further extended if the value of mmp
+delay found in the best uberblock indicates actual multihost updates happened
+at longer intervals than <B>zfs_multihost_interval</B>.  A minimum value of
+<B>100ms</B> is enforced.
+<P>
+A value of 0 is ignored and treated as if it was set to 1.
+<P>
+Default value: <B>20</B>.
 </DL>
 
 <P>
@@ -2014,19 +2072,24 @@ Default value: <B>10</B>.
 <B>zfs_multihost_fail_intervals</B> (uint)
 
 <DL COMPACT><DT><DD>
-Controls the behavior of the pool when multihost write failures are detected.
+Controls the behavior of the pool when multihost write failures or delays are
+detected.
 <P>
-When <B>zfs_multihost_fail_intervals = 0</B> then multihost write failures are ignored.
-The failures will still be reported to the ZED which depending on its
-configuration may take action such as suspending the pool or offlining a device.
+When <B>zfs_multihost_fail_intervals = 0</B>, multihost write failures or delays
+are ignored.  The failures will still be reported to the ZED which depending on
+its configuration may take action such as suspending the pool or offlining a
+device.
 <P>
-When <B>zfs_multihost_fail_intervals &gt; 0</B> then sequential multihost write failures
-will cause the pool to be suspended.  This occurs when
-<B>zfs_multihost_fail_intervals * zfs_multihost_interval</B> milliseconds have
-passed since the last successful multihost write.  This guarantees the activity test
-will see multihost writes if the pool is imported.
 <P>
-Default value: <B>5</B>.
+When <B>zfs_multihost_fail_intervals &gt; 0</B>, the pool will be suspended if
+<B>zfs_multihost_fail_intervals * zfs_multihost_interval</B> milliseconds pass
+without a successful mmp write.  This guarantees the activity test will see
+mmp writes if the pool is imported.  A value of 1 is ignored and treated as
+if it was set to 2.  This is necessary to prevent the pool from being suspended
+due to normal, small I/O latency variations.
+<P>
+<P>
+Default value: <B>10</B>.
 </DL>
 
 <P>
@@ -2134,6 +2197,48 @@ This tunable disables predictive prefetch.  Note that it leaves &quot;prescient&
 prefetch (e.g. prefetch for zfs send) intact.  Unlike predictive prefetch,
 prescient prefetch never issues i/os that end up not being needed, so it
 can't hurt performance.
+<P>
+Use <B>1</B> for yes and <B>0</B> for no (default).
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_qat_checksum_disable</B> (int)
+
+<DL COMPACT><DT><DD>
+This tunable disables qat hardware acceleration for sha256 checksums. It
+may be set after the zfs modules have been loaded to initialize the qat
+hardware as long as support is compiled in and the qat driver is present.
+<P>
+Use <B>1</B> for yes and <B>0</B> for no (default).
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_qat_compress_disable</B> (int)
+
+<DL COMPACT><DT><DD>
+This tunable disables qat hardware acceleration for gzip compression. It
+may be set after the zfs modules have been loaded to initialize the qat
+hardware as long as support is compiled in and the qat driver is present.
+<P>
+Use <B>1</B> for yes and <B>0</B> for no (default).
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_qat_encrypt_disable</B> (int)
+
+<DL COMPACT><DT><DD>
+This tunable disables qat hardware acceleration for AES-GCM encryption. It
+may be set after the zfs modules have been loaded to initialize the qat
+hardware as long as support is compiled in and the qat driver is present.
 <P>
 Use <B>1</B> for yes and <B>0</B> for no (default).
 </DL>
@@ -2407,6 +2512,22 @@ Use <B>1</B> for yes and <B>0</B> for no (default).
 <P>
 
 
+<B>zfs_send_unmodified_spill_blocks</B> (int)
+
+<DL COMPACT><DT><DD>
+Include unmodified spill blocks in the send stream. Under certain circumstances
+previous versions of ZFS could incorrectly remove the spill block from an
+existing object.  Including unmodified copies of the spill blocks creates a
+backwards compatible stream which will recreate a spill block if it was
+incorrectly removed.
+<P>
+Use <B>1</B> for yes (default) and <B>0</B> for no.
+</DL>
+
+<P>
+<P>
+
+
 <B>zfs_send_queue_length</B> (int)
 
 <DL COMPACT><DT><DD>
@@ -2423,7 +2544,6 @@ Default value: <B>16,777,216</B>.
 <B>zfs_recv_queue_length</B> (int)
 
 <DL COMPACT><DT><DD>
-<P>
 The maximum number of bytes allowed in the <B>zfs receive</B> queue. This value
 must be at least twice the maximum block size in use.
 <P>
@@ -2453,6 +2573,21 @@ Maximum memory used for prefetching a checkpoint's space map on each
 vdev while discarding the checkpoint.
 <P>
 Default value: <B>16,777,216</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_special_class_metadata_reserve_pct</B> (int)
+
+<DL COMPACT><DT><DD>
+Only allow small data blocks to be allocated on the special and dedup vdev
+types when the available free space percentage on these vdevs exceeds this
+value. This ensures reserved space is available for pool meta data as the
+special vdevs approach capacity.
+<P>
+Default value: <B>25</B>.
 </DL>
 
 <P>
@@ -2496,6 +2631,87 @@ Default value: <B>75</B>%.
 <P>
 
 
+<B>zfs_trim_extent_bytes_max</B> (unsigned int)
+
+<DL COMPACT><DT><DD>
+Maximum size of TRIM command.  Ranges larger than this will be split in to
+chunks no larger than <B>zfs_trim_extent_bytes_max</B> bytes before being
+issued to the device.
+<P>
+Default value: <B>134,217,728</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_trim_extent_bytes_min</B> (unsigned int)
+
+<DL COMPACT><DT><DD>
+Minimum size of TRIM commands.  TRIM ranges smaller than this will be skipped
+unless they're part of a larger range which was broken in to chunks.  This is
+done because it's common for these small TRIMs to negatively impact overall
+performance.  This value can be set to 0 to TRIM all unallocated space.
+<P>
+Default value: <B>32,768</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_trim_metaslab_skip</B> (unsigned int)
+
+<DL COMPACT><DT><DD>
+Skip uninitialized metaslabs during the TRIM process.  This option is useful
+for pools constructed from large thinly-provisioned devices where TRIM
+operations are slow.  As a pool ages an increasing fraction of the pools
+metaslabs will be initialized progressively degrading the usefulness of
+this option.  This setting is stored when starting a manual TRIM and will
+persist for the duration of the requested TRIM.
+<P>
+Default value: <B>0</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_trim_queue_limit</B> (unsigned int)
+
+<DL COMPACT><DT><DD>
+Maximum number of queued TRIMs outstanding per leaf vdev.  The number of
+concurrent TRIM commands issued to the device is controlled by the
+<B>zfs_vdev_trim_min_active</B> and <B>zfs_vdev_trim_max_active</B> module
+options.
+<P>
+Default value: <B>10</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_trim_txg_batch</B> (unsigned int)
+
+<DL COMPACT><DT><DD>
+The number of transaction groups worth of frees which should be aggregated
+before TRIM operations are issued to the device.  This setting represents a
+trade-off between issuing larger, more efficient TRIM operations and the
+delay before the recently trimmed space is available for use by the device.
+<P>
+Increasing this value will allow frees to be aggregated for a longer time.
+This will result is larger TRIM operations and potentially increased memory
+usage.  Decreasing this value will have the opposite effect.  The default
+value of 32 was determined to be a reasonable compromise.
+<P>
+Default value: <B>32</B>.
+</DL>
+
+<P>
+<P>
+
+
 <B>zfs_txg_history</B> (int)
 
 <DL COMPACT><DT><DD>
@@ -2521,10 +2737,36 @@ Default value: <B>5</B>.
 <P>
 
 
+<B>zfs_vdev_aggregate_trim</B> (int)
+
+<DL COMPACT><DT><DD>
+Allow TRIM I/Os to be aggregated.  This is normally not helpful because
+the extents to be trimmed will have been already been aggregated by the
+metaslab.  This option is provided for debugging and performance analysis.
+<P>
+Default value: <B>0</B>.
+</DL>
+
+<P>
+<P>
+
+
 <B>zfs_vdev_aggregation_limit</B> (int)
 
 <DL COMPACT><DT><DD>
 Max vdev I/O aggregation size
+<P>
+Default value: <B>1,048,576</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>zfs_vdev_aggregation_limit_non_rotating</B> (int)
+
+<DL COMPACT><DT><DD>
+Max vdev I/O aggregation size for non-rotating media
 <P>
 Default value: <B>131,072</B>.
 </DL>
@@ -3017,20 +3259,6 @@ Defines zvol block devices behaviour when <B>volmode</B> is set to <B>default</B
 Valid values are <B>1</B> (full), <B>2</B> (dev) and <B>3</B> (none).
 <P>
 Default value: <B>1</B>.
-</DL>
-
-<P>
-<P>
-
-
-<B>zfs_qat_disable</B> (int)
-
-<DL COMPACT><DT><DD>
-This tunable disables qat hardware acceleration for gzip compression and.
-AES-GCM encryption. It is available only if qat acceleration is compiled in
-and the qat driver is present.
-<P>
-Use <B>1</B> for yes and <B>0</B> for no (default).
 </DL>
 
 <P>

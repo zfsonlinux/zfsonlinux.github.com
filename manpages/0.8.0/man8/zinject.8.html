@@ -93,15 +93,15 @@ Simulate a hardware failure that fails to honor a cache flush.
 
 <DD>
 Panic inside the specified function.
-<DT><B>zinject -t data [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-r </B><I>range</I><B>] [-amq] </B><I>path</I><B></B>
+<DT><B>zinject -t data [-C </B><I>dvas</I><B>] [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-r </B><I>range</I><B>] [-amq] </B><I>path</I><B></B>
 
 <DD>
 Force an error into the contents of a file.
-<DT><B>zinject -t dnode [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-amq] </B><I>path</I><B></B>
+<DT><B>zinject -t dnode [-C </B><I>dvas</I><B>] [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-amq] </B><I>path</I><B></B>
 
 <DD>
 Force an error into the metadnode for a file or directory.
-<DT><B>zinject -t </B><I>mos_type</I><B> [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-r </B><I>range</I><B>] [-amqu] </B><I>pool</I><B></B>
+<DT><B>zinject -t </B><I>mos_type</I><B> [-C </B><I>dvas</I><B>] [-e </B><I>device_error</I><B>] [-f </B><I>frequency</I><B>] [-l </B><I>level</I><B>] [-r </B><I>range</I><B>] [-amqu] </B><I>pool</I><B></B>
 
 <DD>
 Force an error into the MOS of a pool.
@@ -119,6 +119,17 @@ Flush the ARC before injection.
 <DD>
 Force an error into the pool at this bookmark tuple. Each number is
 in hexadecimal, and only one block can be specified.
+<DT><B>-C</B><I> dvas</I>
+
+<DD>
+Inject the given error only into specific DVAs. The mask should be
+specified as a list of 0-indexed DVAs separated by commas (ex. '0,2'). This
+option is not applicable to logical data errors such as
+<B>decompress</B>
+
+and
+<B>decrypt</B>.
+
 <DT><B>-d</B><I> vdev</I>
 
 <DD>
