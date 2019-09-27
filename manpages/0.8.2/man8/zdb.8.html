@@ -1,0 +1,1070 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZDB</TITLE>
+</HEAD><BODY>
+<H1>ZDB</H1>
+Section: Maintenance Commands (8)<BR>Updated: SMM<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+Linux
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<B>zdb</B>
+
+ - display zpool debugging and consistency information
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B></B>
+
+
+[-<B>AbcdDFGhikLMPsvXY</B>
+
+]
+
+[-<B>e </B>[-<B>V </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+]
+
+
+
+
+
+]
+
+[-<B>I </B><I>inflight I/</I>[-<B>o </B><I>var </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>t </B><I>txg</I>
+
+
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+[-<B>x </B><I>dumpdir</I>
+
+
+
+]
+
+[<I>poolname </I>[<I>object ...</I>
+
+]
+
+
+
+]
+
+<BR><B></B>
+
+
+[-<B>AdiPv </B>[-<B>e </B>[-<B>V </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+]
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+<I>dataset </I>[<I>object ...</I>
+
+]
+
+
+
+<BR><B></B>
+
+
+-<B>C</B>
+
+[-<B>A</B>
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+<BR><B></B>
+
+
+-<B>E</B>
+
+[-<B>A</B>
+
+]
+
+<I>word0 </I><B>: </B><I>word1 </I><B>:...: </B><I>word15</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B></B>
+
+
+-<B>l</B>
+
+[-<B>Aqu</B>
+
+]
+
+<I>device</I>
+
+<BR><B></B>
+
+
+-<B>m</B>
+
+[-<B>AFLPXY</B>
+
+]
+
+[-<B>e </B>[-<B>V </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+]
+
+
+
+
+
+]
+
+[-<B>t </B><I>txg</I>
+
+
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+<I>poolname </I>[<I>vdev </I>[<I>metaslab ...</I>
+
+]
+
+
+
+]
+
+
+
+<BR><B></B>
+
+
+-<B>O</B>
+
+<I>dataset path</I>
+
+<BR><B></B>
+
+
+-<B>R</B>
+
+[-<B>A</B>
+
+]
+
+[-<B>e </B>[-<B>V </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+]
+
+
+
+
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+<I>poolname vdev </I><B>: </B><I>offset </I><B>: </B><I>size </I><B></B>[: <B></B><I>flags</I>
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B></B>
+
+
+-<B>S</B>
+
+[-<B>AP</B>
+
+]
+
+[-<B>e </B>[-<B>V </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+]
+
+
+
+
+
+]
+
+[-<B>U </B><I>cache</I>
+
+
+
+]
+
+<I>poolname</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The
+<B></B>
+
+
+utility displays information about a ZFS pool useful for debugging and performs
+some amount of consistency checking.
+It is a not a general purpose tool and options
+(and facilities)
+
+may change.
+This is not a
+<A HREF="/man/man2html?8+fsck">fsck</A>(8)
+
+
+utility.
+<P>
+
+The output of this command in general reflects the on-disk structure of a ZFS
+pool, and is inherently unstable.
+The precise output of most invocations is not documented, a knowledge of ZFS
+internals is assumed.
+<P>
+
+If the
+<I>dataset</I>
+
+argument does not contain any
+Qq Sy /
+
+or
+Qq Sy @
+
+characters, it is interpreted as a pool name.
+The root dataset can be specified as
+<I>pool </I><B>/</B>
+
+
+
+(pool name followed by a slash)
+
+ 
+<P>
+
+When operating on an imported and active pool it is possible, though unlikely,
+that zdb may interpret inconsistent pool data and behave erratically.
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+Display options:
+<DL COMPACT>
+<P>
+
+<DT><B>-b</B>
+
+
+<DD>
+Display statistics regarding the number, size
+(logical, physical and allocated)
+
+and deduplication of blocks.
+<DT><B>-c</B>
+
+
+<DD>
+Verify the checksum of all metadata blocks while printing block statistics
+Po see
+
+-<B>b</B>
+
+Pc .
+
+<P>
+
+If specified multiple times, verify the checksums of all blocks.
+<DT><B>-C</B>
+
+
+<DD>
+Display information about the configuration.
+If specified with no other options, instead display information about the cache
+file
+(/etc/zfs/zpool.cache
+
+)
+
+ 
+To specify the cache file to display, see
+-<B>U</B>
+
+ 
+<P>
+
+If specified multiple times, and a pool name is also specified display both the
+cached configuration and the on-disk configuration.
+If specified multiple times with
+-<B>e</B>
+
+also display the configuration that would be used were the pool to be imported.
+<DT><B>-d</B>
+
+
+<DD>
+Display information about datasets.
+Specified once, displays basic dataset information: ID, create transaction,
+size, and object count.
+<P>
+
+If specified multiple times provides greater and greater verbosity.
+<P>
+
+If object IDs are specified, display information about those specific objects
+only.
+<DT><B>-D</B>
+
+
+<DD>
+Display deduplication statistics, including the deduplication ratio
+(<B>dedup</B>
+
+)
+
+ 
+compression ratio
+(<B>compress</B>
+
+)
+
+ 
+inflation due to the zfs copies property
+(<B>copies</B>
+
+)
+
+ 
+and an overall effective ratio
+(<B>dedup * compress / copies</B>
+
+
+
+
+
+
+
+
+
+)
+
+ 
+<DT><B>-DD</B>
+
+
+<DD>
+Display a histogram of deduplication statistics, showing the allocated
+(physically present on disk)
+
+and referenced
+(logically referenced in the pool)
+
+block counts and sizes by reference count.
+<DT><B>-DDD</B>
+
+
+<DD>
+Display the statistics independently for each deduplication table.
+<DT><B>-DDDD</B>
+
+
+<DD>
+Dump the contents of the deduplication tables describing duplicate blocks.
+<DT><B>-DDDDD</B>
+
+
+<DD>
+Also dump the contents of the deduplication tables describing unique blocks.
+<DT><B>-E </B><I>word0 </I><B>: </B><I>word1 </I><B>:...: </B><I>word15</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Decode and display block from an embedded block pointer specified by the
+<I>word</I>
+
+arguments.
+<DT><B>-h</B>
+
+
+<DD>
+Display pool history similar to
+<B>zpool history</B>
+
+
+
+ 
+but include internal changes, transaction, and dataset information.
+<DT><B>-i</B>
+
+
+<DD>
+Display information about intent log
+(ZIL)
+
+entries relating to each dataset.
+If specified multiple times, display counts of each intent log transaction type.
+<DT><B>-k</B>
+
+
+<DD>
+Examine the checkpointed state of the pool.
+Note, the on disk format of the pool is not reverted to the checkpointed state.
+<DT><B>-l </B><I>device</I>
+
+
+
+
+<DD>
+Read the vdev labels from the specified device.
+<B>-l</B>
+
+
+
+will return 0 if valid label was found, 1 if error occurred, and 2 if no valid
+labels were found. Each unique configuration is displayed only once.
+<DT><B>-ll </B><I>device</I>
+
+
+
+
+<DD>
+In addition display label space usage stats.
+<DT><B>-lll </B><I>device</I>
+
+
+
+
+<DD>
+Display every configuration, unique or not.
+<P>
+
+If the
+-<B>q</B>
+
+option is also specified, don't print the labels.
+<P>
+
+If the
+-<B>u</B>
+
+option is also specified, also display the uberblocks on this device.  Specify
+multiple times to increase verbosity.
+<DT><B>-L</B>
+
+
+<DD>
+Disable leak detection and the loading of space maps.
+By default,
+<B></B>
+
+
+verifies that all non-free blocks are referenced, which can be very expensive.
+<DT><B>-m</B>
+
+
+<DD>
+Display the offset, spacemap, and free space of each metaslab.
+<DT><B>-mm</B>
+
+
+<DD>
+Also display information about the on-disk free space histogram associated with
+each metaslab.
+<DT><B>-mmm</B>
+
+
+<DD>
+Display the maximum contiguous free space, the in-core free space histogram, and
+the percentage of free space in each space map.
+<DT><B>-mmmm</B>
+
+
+<DD>
+Display every spacemap record.
+<DT><B>-M</B>
+
+
+<DD>
+Display the offset, spacemap, and free space of each metaslab.
+<DT><B>-MM</B>
+
+
+<DD>
+Also display information about the maximum contiguous free space and the
+percentage of free space in each space map.
+<DT><B>-MMM</B>
+
+
+<DD>
+Display every spacemap record.
+<DT><B>-O </B><I>dataset path</I>
+
+
+
+
+<DD>
+Look up the specified
+<I>path</I>
+
+inside of the
+<I>dataset</I>
+
+and display its metadata and indirect blocks.
+Specified
+<I>path</I>
+
+must be relative to the root of
+<I>dataset</I>
+
+ 
+This option can be combined with
+-<B>v</B>
+
+for increasing verbosity.
+<DT><B>
+</B>
+
+-<B>R </B><I>poolname vdev </I><B>: </B><I>offset </I><B>: </B><I>size </I><B></B>[: <B></B><I>flags</I>
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Read and display a block from the specified device.
+By default the block is displayed as a hex dump, but see the description of the
+<B>r</B>
+
+flag, below.
+<P>
+
+The block is specified in terms of a colon-separated tuple
+<I>vdev</I>
+
+(an integer vdev identifier)
+
+<I>offset</I>
+
+(the offset within the vdev)
+
+<I>size</I>
+
+(the size of the block to read)
+
+and, optionally,
+<I>flags</I>
+
+(a set of flags, described below)
+
+ 
+<P>
+
+<DL COMPACT>
+<P>
+
+<DT><B>b </B><I>offset</I>
+
+
+
+
+<DD>
+Print block pointer
+<DT><B>d</B>
+
+
+<DD>
+Decompress the block. Set environment variable
+<B>ZBD_NO_ZLE</B>
+
+to skip zle when guessing.
+<DT><B>e</B>
+
+
+<DD>
+Byte swap the block
+<DT><B>g</B>
+
+
+<DD>
+Dump gang block header
+<DT><B>i</B>
+
+
+<DD>
+Dump indirect block
+<DT><B>r</B>
+
+
+<DD>
+Dump raw uninterpreted block data
+</DL>
+<P>
+
+<DT><B>-s</B>
+
+
+<DD>
+Report statistics on
+<B>zdb</B>
+
+I/O.
+Display operation counts, bandwidth, and error counts of I/O to the pool from
+<B>.</B>
+
+<DT><B>-S</B>
+
+
+<DD>
+Simulate the effects of deduplication, constructing a DDT and then display
+that DDT as with
+-<B>DD</B>
+
+ 
+<DT><B>-u</B>
+
+
+<DD>
+Display the current uberblock.
+</DL>
+<P>
+
+<P>
+
+Other options:
+<DL COMPACT>
+<P>
+
+<DT><B>-A</B>
+
+
+<DD>
+Do not abort should any assertion fail.
+<DT><B>-AA</B>
+
+
+<DD>
+Enable panic recovery, certain errors which would otherwise be fatal are
+demoted to warnings.
+<DT><B>-AAA</B>
+
+
+<DD>
+Do not abort if asserts fail and also enable panic recovery.
+<DT><B>-e </B>[-<B>p </B><I>path ...</I>
+
+
+
+]
+
+
+
+
+<DD>
+Operate on an exported pool, not present in
+/etc/zfs/zpool.cache
+
+ 
+The
+-<B>p</B>
+
+flag specifies the path under which devices are to be searched.
+<DT><B>-x </B><I>dumpdir</I>
+
+
+
+
+<DD>
+All blocks accessed will be copied to files in the specified directory.
+The blocks will be placed in sparse files whose name is the same as
+that of the file or device read.
+<B></B>
+
+
+can be then run on the generated files.
+Note that the
+-<B>bbc</B>
+
+flags are sufficient to access
+(and thus copy)
+
+all metadata on the pool.
+<DT><B>-F</B>
+
+
+<DD>
+Attempt to make an unreadable pool readable by trying progressively older
+transactions.
+<DT><B>-G</B>
+
+
+<DD>
+Dump the contents of the zfs_dbgmsg buffer before exiting
+<B>.</B>
+
+zfs_dbgmsg is a buffer used by ZFS to dump advanced debug information.
+<DT><B>-I </B><I>inflight I/Limit the number of outstanding checksum I/to the specified value.
+
+
+
+</I>
+
+
+
+
+<DD>
+The default value is 200.
+This option affects the performance of the
+-<B>c</B>
+
+option.
+<DT><B>-o </B><I>var </I><B>= </B><I>value ...</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Set the given global libzpool variable to the provided value.
+The value must be an unsigned 32-bit integer.
+Currently only little-endian systems are supported to avoid accidentally setting
+the high 32 bits of 64-bit variables.
+<DT><B>-P</B>
+
+
+<DD>
+Print numbers in an unscaled form more amenable to parsing, eg. 1000000 rather
+than 1M.
+<DT><B>-t </B><I>transaction</I>
+
+
+
+
+<DD>
+Specify the highest transaction to use when searching for uberblocks.
+See also the
+-<B>u</B>
+
+and
+-<B>l</B>
+
+options for a means to see the available uberblocks and their associated
+transaction numbers.
+<DT><B>-U </B><I>cachefile</I>
+
+
+
+
+<DD>
+Use a cache file other than
+/etc/zfs/zpool.cache
+
+ 
+<DT><B>-v</B>
+
+
+<DD>
+Enable verbosity.
+Specify multiple times for increased verbosity.
+<DT><B>-V</B>
+
+
+<DD>
+Attempt verbatim import.
+This mimics the behavior of the kernel when loading a pool from a cachefile.
+Only usable with
+-<B>e</B>
+
+ 
+<DT><B>-X</B>
+
+
+<DD>
+Attempt
+Qq extreme
+
+transaction rewind, that is attempt the same recovery as
+-<B>F</B>
+
+but read transactions otherwise deemed too old.
+<DT><B>-Y</B>
+
+
+<DD>
+Attempt all possible combinations when reconstructing indirect split blocks.
+This flag disables the individual I/O deadman timer in order to allow as
+much time as required for the attempted reconstruction.
+</DL>
+<P>
+
+<P>
+
+Specifying a display option more than once enables verbosity for only that
+option, with more occurrences enabling more verbosity.
+<P>
+
+If no options are specified, all information about the named pool will be
+displayed at default verbosity.
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>Example 1</B>
+
+<DD>Display the configuration of imported pool
+rpool
+
+
+
+
+<PRE>
+# zdb -C rpool
+
+MOS Configuration:
+        version: 28
+        name: 'rpool'
+ ...
+</PRE>
+
+<DT><B>
+</B>
+
+<B>Example 2</B>
+
+<DD>Display basic dataset information about
+rpool
+
+
+
+
+<PRE>
+# zdb -d rpool
+Dataset mos [META], ID 0, cr_txg 4, 26.9M, 1051 objects
+Dataset rpool/swap [ZVOL], ID 59, cr_txg 356, 486M, 2 objects
+ ...
+</PRE>
+
+<DT><B>
+</B>
+
+<B>Example 3</B>
+
+<DD>Display basic information about object 0 in
+rpool/export/home
+
+
+
+
+<PRE>
+# zdb -d rpool/export/home 0
+Dataset rpool/export/home [ZPL], ID 137, cr_txg 1546, 32K, 8 objects
+
+    Object  lvl   iblk   dblk  dsize  lsize   %full  type
+         0    7    16K    16K  15.0K    16K   25.00  DMU dnode
+</PRE>
+
+<DT><B>
+</B>
+
+<B>Example 4</B>
+
+<DD>Display the predicted effect of enabling deduplication on
+rpool
+
+
+
+
+<PRE>
+# zdb -S rpool
+Simulated DDT histogram:
+
+bucket              allocated                       referenced
+______   ______________________________   ______________________________
+refcnt   blocks   LSIZE   PSIZE   DSIZE   blocks   LSIZE   PSIZE   DSIZE
+------   ------   -----   -----   -----   ------   -----   -----   -----
+     1     694K   27.1G   15.0G   15.0G     694K   27.1G   15.0G   15.0G
+     2    35.0K   1.33G    699M    699M    74.7K   2.79G   1.45G   1.45G
+ ...
+dedup = 1.11, compress = 1.80, copies = 1.00, dedup * compress / copies = 2.00
+</PRE>
+
+</DL>
+<P>
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+zfs">zfs</A>(8),
+
+
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:49:32 GMT, September 27, 2019
+</BODY>
+</HTML>

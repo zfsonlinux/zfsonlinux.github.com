@@ -1,0 +1,130 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZGENHOSTID</TITLE>
+</HEAD><BODY>
+<H1>ZGENHOSTID</H1>
+Section: Maintenance Commands (8)<BR>Updated: SMM<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+Linux
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<B>zgenhostid</B>
+
+ - generate and store a hostid in
+
+<I>/etc/hostid</I>
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B></B>
+
+
+[<I>hostid</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+If
+<I>/etc/hostid</I>
+
+does not exist, create it and store a hostid in it.  If the user provides
+[<I>hostid</I>
+
+]
+
+on the command line, store that value.  Otherwise, randomly generate a
+value to store.
+<P>
+
+This emulates the
+<A HREF="/man/man2html?1+genhostid">genhostid</A>(1)
+
+
+utility and is provided for use on systems which do not include the utility.
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+[<I>hostid</I>
+
+]
+
+Specifies the value to be placed in
+<I>/etc/hostid</I>
+
+ 
+It must be a number with a value between 1 and 2^32-1.  This value
+<B>must</B>
+
+be unique among your systems.  It must be expressed in hexadecimal and be
+exactly 8 digits long.
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>Generate a random hostid and store it</B>
+<DD>
+
+<PRE>
+# zgenhostid
+</PRE>
+
+<DT><B>Record the libc-generated hostid in </B><I>/etc/hostid</I>
+
+
+<DD>
+
+<PRE>
+# zgenhostid $(hostid)
+</PRE>
+
+<DT><B>Record a custom hostid (0xdeadbeef) in </B><I>etc/hostid</I>
+
+
+<DD>
+
+<PRE>
+# zgenhostid deadbeef
+</PRE>
+
+</DL>
+<P>
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?1+genhostid">genhostid</A>(1),
+
+
+<A HREF="/man/man2html?1+hostid">hostid</A>(1),
+
+
+spl-module-parameters5
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:49:32 GMT, September 27, 2019
+</BODY>
+</HTML>
