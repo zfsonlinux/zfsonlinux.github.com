@@ -1,0 +1,267 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of cstyle</TITLE>
+</HEAD><BODY>
+<H1>cstyle</H1>
+Section: User Commands  (1)<BR>Updated: 28 March 2005<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<I>cstyle</I>
+
+- check for some common stylistic errors in C source files
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>cstyle [-chpvCP] [-o constructs] [file...]</B>
+<P>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<A NAME="ixAAB"></A>
+<P>
+
+<I>cstyle</I>
+
+inspects C source files (*.c and *.h) for common stylistic errors.  It
+attempts to check for the cstyle documented in
+<I><A HREF="http://www.cis.upenn.edu/~lee/06cse480/data/cstyle.ms.pdf">http://www.cis.upenn.edu/~lee/06cse480/data/cstyle.ms.pdf</A></I>.
+Note that there is much in that document that
+<I>cannot</I>
+
+be checked for; just because your code is <B><A HREF="/man/man2html?1+cstyle">cstyle</A>(1)</B> clean does not
+mean that you've followed Sun's C style.  <I>Caveat emptor</I>.
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<P>
+
+The following options are supported:
+<DL COMPACT>
+<DT><B>-c</B>
+
+<DD>
+Check continuation line indentation inside of functions.  Sun's C style
+states that all statements must be indented to an appropriate tab stop,
+and any continuation lines after them must be indented <I>exactly</I> four
+spaces from the start line.  This option enables a series of checks
+designed to find continuation line problems within functions only.  The
+checks have some limitations;  see CONTINUATION CHECKING, below.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-h</B>
+
+<DD>
+Performs heuristic checks that are sometimes wrong.  Not generally used.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-p</B>
+
+<DD>
+Performs some of the more picky checks.  Includes ANSI #else and #endif
+rules, and tries to detect spaces after casts.  Used as part of the
+putback checks.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-v</B>
+
+<DD>
+Verbose output;  includes the text of the line of error, and, for
+<B>-c</B>, the first statement in the current continuation block.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-C</B>
+
+<DD>
+Ignore errors in header comments (i.e. block comments starting in the
+first column).  Not generally used.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-P</B>
+
+<DD>
+Check for use of non-POSIX types.  Historically, types like &quot;u_int&quot; and
+&quot;u_long&quot; were used, but they are now deprecated in favor of the POSIX
+types uint_t, ulong_t, etc.  This detects any use of the deprecated
+types.  Used as part of the putback checks.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>-o </B><I>constructs</I>
+
+<DD>
+Allow a comma-separated list of additional constructs.  Available
+constructs include:
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>doxygen</B>
+
+<DD>
+Allow doxygen-style block comments (<B>/**</B> and <B>/*!</B>)
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>splint</B>
+
+<DD>
+Allow splint-style lint comments (<B>/*@...@*/</B>)
+</DL>
+<P>
+
+<A NAME="lbAF">&nbsp;</A>
+<H2>NOTES</H2>
+
+<P>
+
+The cstyle rule for the OS/Net consolidation is that all new files must
+be <B>-pP</B> clean.  For existing files, the following invocations are
+run against both the old and new files:
+<P>
+
+<DL COMPACT>
+<DT><B>cstyle file<DD>
+</DL>
+<P>
+
+<DL COMPACT>
+<DT>cstyle -p file<DD>
+</DL>
+<P>
+
+<DL COMPACT>
+<DT>cstyle -pP file<DD>
+</DL>
+<P>
+
+If the old file gave no errors for one of the invocations, the new file
+must also give no errors.  This way, files can only become more clean.
+<P>
+
+</B><A NAME="lbAG">&nbsp;</A>
+<H2>CONTINUATION CHECKING</H2>
+
+<P>
+
+The continuation checker is a reasonably simple state machine that knows
+something about how C is laid out, and can match parenthesis, etc. over
+multiple lines.  It does have some limitations:
+<P>
+
+<DL COMPACT>
+<DT><B>1.</B>
+
+<DD>
+Preprocessor macros which cause unmatched parenthesis will confuse the
+checker for that line.  To fix this, you'll need to make sure that each
+branch of the #if statement has balanced parenthesis.
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>2.</B>
+
+<DD>
+Some <B>cpp</B> macros do not require ;s after them.  Any such macros
+*must* be ALL_CAPS; any lower case letters will cause bad output.
+</DL>
+<P>
+
+The bad output will generally be corrected after the next <B>;</B>,
+<B>{</B>, or <B>}</B>.
+<P>
+
+Some continuation error messages deserve some additional explanation
+<P>
+
+<DL COMPACT>
+<DT><B>multiple statements continued over multiple lines</B>
+
+<DD>
+A multi-line statement which is not broken at statement
+boundaries.  For example:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT>
+<DD>if (this_is_a_long_variable == another_variable) a =
+<BR>
+
+b + c;
+</DL>
+<P>
+
+Will trigger this error.  Instead, do:
+<DL COMPACT>
+<DT>
+<DD>if (this_is_a_long_variable == another_variable)
+<BR>
+
+a = b + c;
+</DL>
+</DL>
+
+</DL>
+<P>
+
+<DL COMPACT>
+<DT><B>empty if/for/while body not on its own line</B>
+
+<DD>
+For visibility, empty bodies for if, for, and while statements should be
+on their own line.  For example:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT>
+<DD>while (do_something(&amp;x) == 0);
+</DL>
+<P>
+
+Will trigger this error.  Instead, do:
+<DL COMPACT>
+<DT>
+<DD>while (do_something(&amp;x) == 0)
+<BR>
+
+;
+</DL>
+</DL>
+
+<P>
+<P>
+</DL>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">NOTES</A><DD>
+<DT><A HREF="#lbAG">CONTINUATION CHECKING</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 22:16:52 GMT, January 23, 2020
+</BODY>
+</HTML>
