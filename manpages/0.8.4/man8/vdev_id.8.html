@@ -1,0 +1,119 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of vdev_id</TITLE>
+</HEAD><BODY>
+<H1>vdev_id</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+vdev_id - generate user-friendly names for JBOD disks
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<PRE>
+<B>vdev_id</B> &lt;-d dev&gt; [-c config_file] [-g sas_direct|sas_switch]
+                 [-m] [-p phys_per_port]
+<B>vdev_id</B> -h
+</PRE>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The <B>vdev_id</B> command is a udev helper which parses the file
+<B>/etc/zfs/<A HREF="/man/man2html?5+vdev_id.conf">vdev_id.conf</A></B>(5)
+
+to map a physical path in a storage topology to a channel name.  The
+channel name is combined with a disk enclosure slot number to create an
+alias that reflects the physical location of the drive.  This is
+particularly helpful when it comes to tasks like replacing failed
+drives.  Slot numbers may also be re-mapped in case the default
+numbering is unsatisfactory.  The drive aliases will be created as
+symbolic links in /dev/disk/by-vdev.
+<P>
+The currently supported topologies are sas_direct and sas_switch.  A
+multipath mode is supported in which dm-mpath devices are handled by
+examining the first-listed running component disk as reported by the
+<B><A HREF="/man/man2html?8+multipath">multipath</A></B>(8)
+
+command.  In multipath mode the configuration file should contain a
+channel definition with the same name for each path to a given
+enclosure.
+<P>
+<B>vdev_id</B>
+
+also supports creating aliases based on existing udev links in the /dev
+hierarchy using the <I>alias</I> configuration file keyword.  See the
+<B><A HREF="/man/man2html?5+vdev_id.conf">vdev_id.conf</A></B>(5)
+
+man page for details.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT><B>-c</B> &lt;config_file&gt;<DD>
+Specifies the path to an alternate configuration file.  The default is
+/etc/zfs/vdev_id.conf.
+<DT><B>-d</B> &lt;device&gt;<DD>
+This is the only mandatory argument.  Specifies the name of a device
+in /dev, i.e. &quot;sda&quot;.
+<DT><B>-g</B> &lt;sas_direct|sas_switch&gt;<DD>
+Identifies a physical topology that governs how physical paths are
+mapped to channels.
+<P>
+<I>sas_direct</I> - in this mode a channel is uniquely identified by
+a PCI slot and a HBA port number
+<P>
+<I>sas_switch</I> - in this mode a channel is uniquely identified by
+a SAS switch port number
+<DT><B>-m</B><DD>
+Specifies that
+<B><A HREF="/man/man2html?8+vdev_id">vdev_id</A></B>(8)
+
+will handle only dm-multipath devices.  If set to &quot;yes&quot; then
+<B><A HREF="/man/man2html?8+vdev_id">vdev_id</A></B>(8)
+
+will examine the first running component disk of a dm-multipath
+device as listed by the
+<B><A HREF="/man/man2html?8+multipath">multipath</A></B>(8)
+
+command to determine the physical path.
+<DT><B>-p</B> &lt;phys_per_port&gt;<DD>
+Specifies the number of PHY devices associated with a SAS HBA port or SAS
+switch port.
+<B><A HREF="/man/man2html?8+vdev_id">vdev_id</A></B>(8)
+
+internally uses this value to determine which HBA or switch port a
+device is connected to.  The default is 4.
+<DT><B>-h</B><DD>
+Print a usage summary.
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<P>
+
+<B><A HREF="/man/man2html?5+vdev_id.conf">vdev_id.conf</A></B>(5)
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 22:23:04 GMT, May 11, 2020
+</BODY>
+</HTML>
