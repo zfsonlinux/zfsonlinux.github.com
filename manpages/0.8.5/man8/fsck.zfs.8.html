@@ -1,0 +1,99 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of fsck.zfs</TITLE>
+</HEAD><BODY>
+<H1>fsck.zfs</H1>
+Section: System Administration Commands (8)<BR>Updated: 2013 MAR 16<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+fsck.zfs - Dummy ZFS filesystem checker.
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<B>fsck.zfs [</B><I>options</I><B>] &lt;</B><I>dataset</I><B>&gt;</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+
+<B>fsck.zfs</B> is a shell stub that does nothing and always returns
+true. It is installed by ZoL because some Linux distributions expect
+a fsck helper for all filesystems.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>
+<DD>All <I>options</I> and the <I>dataset</I> are ignored.
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>NOTES</H2>
+
+<P>
+
+ZFS datasets are checked by running <B>zpool scrub</B> on the
+containing pool. An individual ZFS dataset is never checked
+independently of its pool, which is unlike a regular filesystem.
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>BUGS</H2>
+
+<P>
+
+On some systems, if the <I>dataset</I> is in a degraded pool, then it
+might be appropriate for <B>fsck.zfs</B> to return exit code 4 to
+indicate an uncorrected filesystem error.
+<P>
+
+Similarly, if the <I>dataset</I> is in a faulted pool and has a legacy
+/etc/fstab record, then <B>fsck.zfs</B> should return exit code 8 to
+indicate a fatal operational error.
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+<P>
+
+Darik Horn &lt;<A HREF="mailto:dajhorn@vanadac.com">dajhorn@vanadac.com</A>&gt;.
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="/man/man2html?8+fsck">fsck</A></B>(8),
+
+<B><A HREF="/man/man2html?5+fstab">fstab</A></B>(5),
+
+<B><A HREF="/man/man2html?8+zpool">zpool</A></B>(8)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">NOTES</A><DD>
+<DT><A HREF="#lbAG">BUGS</A><DD>
+<DT><A HREF="#lbAH">AUTHORS</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:41:20 GMT, October 05, 2020
+</BODY>
+</HTML>
