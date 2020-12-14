@@ -1,0 +1,406 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of SPL-MODULE-PARAMETERS</TITLE>
+</HEAD><BODY>
+<H1>SPL-MODULE-PARAMETERS</H1>
+Section: File Formats (5)<BR>Updated: Oct 28, 2017<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+spl-module-parameters - SPL module parameters
+<A NAME="lbAC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+<P>
+
+Description of the different parameters to the SPL module.
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H3>Module parameters</H3>
+
+<P>
+<P>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_expire</B> (uint)
+
+<DL COMPACT><DT><DD>
+Cache expiration is part of default Illumos cache behavior.  The idea is
+that objects in magazines which have not been recently accessed should be
+returned to the slabs periodically.  This is known as cache aging and
+when enabled objects will be typically returned after 15 seconds.
+<P>
+On the other hand Linux slabs are designed to never move objects back to
+the slabs unless there is memory pressure.  This is possible because under
+Linux the cache will be notified when memory is low and objects can be
+released.
+<P>
+By default only the Linux method is enabled.  It has been shown to improve
+responsiveness on low memory systems and not negatively impact the performance
+of systems with more memory.  This policy may be changed by setting the
+<B>spl_kmem_cache_expire</B> bit mask as follows, both policies may be enabled
+concurrently.
+<P>
+0x01 - Aging (Illumos), 0x02 - Low memory (Linux)
+<P>
+Default value: <B>0x02</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_kmem_threads</B> (uint)
+
+<DL COMPACT><DT><DD>
+The number of threads created for the spl_kmem_cache task queue.  This task
+queue is responsible for allocating new slabs for use by the kmem caches.
+For the majority of systems and workloads only a small number of threads are
+required.
+<P>
+Default value: <B>4</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_reclaim</B> (uint)
+
+<DL COMPACT><DT><DD>
+When this is set it prevents Linux from being able to rapidly reclaim all the
+memory held by the kmem caches.  This may be useful in circumstances where
+it's preferable that Linux reclaim memory from some other subsystem first.
+Setting this will increase the likelihood out of memory events on a memory
+constrained system.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_obj_per_slab</B> (uint)
+
+<DL COMPACT><DT><DD>
+The preferred number of objects per slab in the cache.   In general, a larger
+value will increase the caches memory footprint while decreasing the time
+required to perform an allocation.  Conversely, a smaller value will minimize
+the footprint and improve cache reclaim time but individual allocations may
+take longer.
+<P>
+Default value: <B>8</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_obj_per_slab_min</B> (uint)
+
+<DL COMPACT><DT><DD>
+The minimum number of objects allowed per slab.  Normally slabs will contain
+<B>spl_kmem_cache_obj_per_slab</B> objects but for caches that contain very
+large objects it's desirable to only have a few, or even just one, object per
+slab.
+<P>
+Default value: <B>1</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_max_size</B> (uint)
+
+<DL COMPACT><DT><DD>
+The maximum size of a kmem cache slab in MiB.  This effectively limits
+the maximum cache object size to <B>spl_kmem_cache_max_size</B> /
+<B>spl_kmem_cache_obj_per_slab</B>.  Caches may not be created with
+object sized larger than this limit.
+<P>
+Default value: <B>32 (64-bit) or 4 (32-bit)</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_slab_limit</B> (uint)
+
+<DL COMPACT><DT><DD>
+For small objects the Linux slab allocator should be used to make the most
+efficient use of the memory.  However, large objects are not supported by
+the Linux slab and therefore the SPL implementation is preferred.  This
+value is used to determine the cutoff between a small and large object.
+<P>
+Objects of <B>spl_kmem_cache_slab_limit</B> or smaller will be allocated
+using the Linux slab allocator, large objects use the SPL allocator.  A
+cutoff of 16K was determined to be optimal for architectures using 4K pages.
+<P>
+Default value: <B>16,384</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_kmem_limit</B> (uint)
+
+<DL COMPACT><DT><DD>
+Depending on the size of a cache object it may be backed by kmalloc()'d
+or vmalloc()'d memory.  This is because the size of the required allocation
+greatly impacts the best way to allocate the memory.
+<P>
+When objects are small and only a small number of memory pages need to be
+allocated, ideally just one, then kmalloc() is very efficient.  However,
+when allocating multiple pages with kmalloc() it gets increasingly expensive
+because the pages must be physically contiguous.
+<P>
+For this reason we shift to vmalloc() for slabs of large objects which
+which removes the need for contiguous pages.  We cannot use vmalloc() in
+all cases because there is significant locking overhead involved.  This
+function takes a single global lock over the entire virtual address range
+which serializes all allocations.  Using slightly different allocation
+functions for small and large objects allows us to handle a wide range of
+object sizes.
+<P>
+The <B>spl_kmem_cache_kmem_limit</B> value is used to determine this cutoff
+size.  One quarter the PAGE_SIZE is used as the default value because
+<B>spl_kmem_cache_obj_per_slab</B> defaults to 16.  This means that at
+most we will need to allocate four contiguous pages.
+<P>
+Default value: <B>PAGE_SIZE/4</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_alloc_warn</B> (uint)
+
+<DL COMPACT><DT><DD>
+As a general rule kmem_alloc() allocations should be small, preferably
+just a few pages since they must by physically contiguous.  Therefore, a
+rate limited warning will be printed to the console for any kmem_alloc()
+which exceeds a reasonable threshold.
+<P>
+The default warning threshold is set to eight pages but capped at 32K to
+accommodate systems using large pages.  This value was selected to be small
+enough to ensure the largest allocations are quickly noticed and fixed.
+But large enough to avoid logging any warnings when a allocation size is
+larger than optimal but not a serious concern.  Since this value is tunable,
+developers are encouraged to set it lower when testing so any new largish
+allocations are quickly caught.  These warnings may be disabled by setting
+the threshold to zero.
+<P>
+Default value: <B>32,768</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_alloc_max</B> (uint)
+
+<DL COMPACT><DT><DD>
+Large kmem_alloc() allocations will fail if they exceed KMALLOC_MAX_SIZE.
+Allocations which are marginally smaller than this limit may succeed but
+should still be avoided due to the expense of locating a contiguous range
+of free pages.  Therefore, a maximum kmem size with reasonable safely
+margin of 4x is set.  Kmem_alloc() allocations larger than this maximum
+will quickly fail.  Vmem_alloc() allocations less than or equal to this
+value will use kmalloc(), but shift to vmalloc() when exceeding this value.
+<P>
+Default value: <B>KMALLOC_MAX_SIZE/4</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_kmem_cache_magazine_size</B> (uint)
+
+<DL COMPACT><DT><DD>
+Cache magazines are an optimization designed to minimize the cost of
+allocating memory.  They do this by keeping a per-cpu cache of recently
+freed objects, which can then be reallocated without taking a lock. This
+can improve performance on highly contended caches.  However, because
+objects in magazines will prevent otherwise empty slabs from being
+immediately released this may not be ideal for low memory machines.
+<P>
+For this reason <B>spl_kmem_cache_magazine_size</B> can be used to set a
+maximum magazine size.  When this value is set to 0 the magazine size will
+be automatically determined based on the object size.  Otherwise magazines
+will be limited to 2-256 objects per magazine (i.e per cpu).  Magazines
+may never be entirely disabled in this implementation.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_hostid</B> (ulong)
+
+<DL COMPACT><DT><DD>
+The system hostid, when set this can be used to uniquely identify a system.
+By default this value is set to zero which indicates the hostid is disabled.
+It can be explicitly enabled by placing a unique non-zero value in
+<B>/etc/hostid/</B>.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_hostid_path</B> (charp)
+
+<DL COMPACT><DT><DD>
+The expected path to locate the system hostid when specified.  This value
+may be overridden for non-standard configurations.
+<P>
+Default value: <B>/etc/hostid</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_panic_halt</B> (uint)
+
+<DL COMPACT><DT><DD>
+Cause a kernel panic on assertion failures. When not enabled, the thread is 
+halted to facilitate further debugging.
+<P>
+Set to a non-zero value to enable.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_taskq_kick</B> (uint)
+
+<DL COMPACT><DT><DD>
+Kick stuck taskq to spawn threads. When writing a non-zero value to it, it will
+scan all the taskqs. If any of them have a pending task more than 5 seconds old,
+it will kick it to spawn more threads. This can be used if you find a rare
+deadlock occurs because one or more taskqs didn't spawn a thread when it should.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_taskq_thread_bind</B> (int)
+
+<DL COMPACT><DT><DD>
+Bind taskq threads to specific CPUs.  When enabled all taskq threads will
+be distributed evenly  over the available CPUs.  By default, this behavior
+is disabled to allow the Linux scheduler the maximum flexibility to determine
+where a thread should run.
+<P>
+Default value: <B>0</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_taskq_thread_dynamic</B> (int)
+
+<DL COMPACT><DT><DD>
+Allow dynamic taskqs.  When enabled taskqs which set the TASKQ_DYNAMIC flag
+will by default create only a single thread.  New threads will be created on
+demand up to a maximum allowed number to facilitate the completion of
+outstanding tasks.  Threads which are no longer needed will be promptly
+destroyed.  By default this behavior is enabled but it can be disabled to
+aid performance analysis or troubleshooting.
+<P>
+Default value: <B>1</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_taskq_thread_priority</B> (int)
+
+<DL COMPACT><DT><DD>
+Allow newly created taskq threads to set a non-default scheduler priority.
+When enabled the priority specified when a taskq is created will be applied
+to all threads created by that taskq.  When disabled all threads will use
+the default Linux kernel thread priority.  By default, this behavior is
+enabled.
+<P>
+Default value: <B>1</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_taskq_thread_sequential</B> (int)
+
+<DL COMPACT><DT><DD>
+The number of items a taskq worker thread must handle without interruption
+before requesting a new worker thread be spawned.  This is used to control
+how quickly taskqs ramp up the number of threads processing the queue.
+Because Linux thread creation and destruction are relatively inexpensive a
+small default value has been selected.  This means that normally threads will
+be created aggressively which is desirable.  Increasing this value will
+result in a slower thread creation rate which may be preferable for some
+configurations.
+<P>
+Default value: <B>4</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>spl_max_show_tasks</B> (uint)
+
+<DL COMPACT><DT><DD>
+The maximum number of tasks per pending list in each taskq shown in
+/proc/spl/{taskq,taskq-all}. Write 0 to turn off the limit. The proc file will
+walk the lists with lock held, reading it could cause a lock up if the list
+grow too large without limiting the output. &quot;(truncated)&quot; will be shown if the
+list is larger than the limit.
+<P>
+Default value: <B>512</B>
+</DL>
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAD">Module parameters</A><DD>
+</DL>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:59:20 GMT, December 14, 2020
+</BODY>
+</HTML>

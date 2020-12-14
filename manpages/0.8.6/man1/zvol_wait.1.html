@@ -1,0 +1,65 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZVOL_WAIT</TITLE>
+</HEAD><BODY>
+<H1>ZVOL_WAIT</H1>
+Section: User Commands  (1)<BR>Updated: SMM<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+Linux
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<B>zvol_wait</B>
+
+ - Wait for ZFS volume links in
+
+<I>/dev</I>
+
+to be created.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B></B>
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+When a ZFS pool is imported, ZFS will register each ZFS volume
+(zvol) as a disk device with the system. As the disks are registered,
+<B>udev7</B>
+
+
+will asynchronously create symlinks under
+<I>/dev/zvol</I>
+
+using the zvol's name.
+<B></B>
+
+
+will wait for all those symlinks to be created before returning.
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B>udev7</B>
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:59:20 GMT, December 14, 2020
+</BODY>
+</HTML>
