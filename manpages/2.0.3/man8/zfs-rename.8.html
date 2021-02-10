@@ -1,0 +1,287 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-RENAME</TITLE>
+</HEAD><BODY>
+<H1>ZFS-RENAME</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-rename</B>
+
+ - Renames the given dataset (filesystem or snapshot).
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>rename</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>rename</B>
+
+-<B>p</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>rename</B>
+
+-<B>u</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem filesystem</I>
+
+
+
+<BR><B>zfs</B>
+
+<B>rename</B>
+
+-<B>r</B>
+
+<I>snapshot snapshot</I>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>rename</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>rename</B>
+
+-<B>p</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>rename</B>
+
+-<B>u</B>
+
+[-<B>f</B>
+
+]
+
+<I>filesystem</I>
+
+<I>filesystem</I>
+
+<DD>
+
+<DD>Renames the given dataset.
+The new target can be located anywhere in the ZFS hierarchy, with the exception
+of snapshots.
+Snapshots can only be renamed within the parent file system or volume.
+When renaming a snapshot, the parent file system of the snapshot does not need
+to be specified as part of the second argument.
+Renamed file systems can inherit new mount points, in which case they are
+unmounted and remounted at the new mount point.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Force unmount any file systems that need to be unmounted in the process.
+This flag has no effect if used together with the
+-<B>u</B>
+
+flag.
+<DT><B>-p</B>
+
+
+<DD>
+Creates all the nonexistent parent datasets.
+Datasets created in this manner are automatically mounted according to the
+<B>mountpoint</B>
+
+property inherited from their parent.
+<DT><B>-u</B>
+
+
+<DD>
+Do not remount file systems during rename.
+If a file system's
+<B>mountpoint</B>
+
+property is set to
+<B>legacy</B>
+
+or
+<B>none</B>
+
+ 
+the file system is not unmounted even if this option is not given.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>rename</B>
+
+-<B>r</B>
+
+<I>snapshot snapshot</I>
+
+
+
+<DD>
+
+<DD>Recursively rename the snapshots of all descendent datasets.
+Snapshots are the only dataset that can be renamed recursively.
+</DL>
+<P>
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

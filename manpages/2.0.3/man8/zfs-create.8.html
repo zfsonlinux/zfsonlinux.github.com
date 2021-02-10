@@ -1,0 +1,520 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-CREATE</TITLE>
+</HEAD><BODY>
+<H1>ZFS-CREATE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-create</B>
+
+ - Creates a new ZFS file system.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>create</B>
+
+[-<B>Pnpv</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem</I>
+
+<BR><B>zfs</B>
+
+<B>create</B>
+
+[-<B>ps</B>
+
+]
+
+[-<B>b </B><I>blocksize</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+-<B>V </B><I>size volume</I>
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>create</B>
+
+[-<B>Pnpv</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem</I>
+
+<DD>
+
+<DD>Creates a new ZFS file system.
+The file system is automatically mounted according to the
+<B>mountpoint</B>
+
+property inherited from the parent.
+<DL COMPACT>
+<P>
+
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property as if the command
+<B>zfs set </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+
+was invoked at the same time the dataset was created.
+Any editable ZFS property can also be set at creation time.
+Multiple
+-<B>o</B>
+
+options can be specified.
+An error results if the same property is specified in multiple
+-<B>o</B>
+
+options.
+<DT><B>-p</B>
+
+
+<DD>
+Creates all the non-existing parent datasets.
+Datasets created in this manner are automatically mounted according to the
+<B>mountpoint</B>
+
+property inherited from their parent.
+Any property specified on the command line using the
+-<B>o</B>
+
+option is ignored.
+If the target filesystem already exists, the operation completes successfully.
+<DT><B>-n</B>
+
+
+<DD>
+Do a dry-run
+(Qq No-op
+
+)
+
+creation.
+No datasets will be created.
+This is useful in conjunction with the
+-<B>v</B>
+
+or
+-<B>P</B>
+
+flags to validate properties that are passed via
+-<B>o</B>
+
+options and those implied by other options.
+The actual dataset creation can still fail due to insufficient privileges or
+available capacity.
+<DT><B>-P</B>
+
+
+<DD>
+Print machine-parsable verbose information about the created dataset.
+Each line of output contains a key and one or two values, all separated by tabs.
+The
+<B>create_ancestors</B>
+
+and
+<B>create</B>
+
+keys have
+<I>filesystem</I>
+
+as their only value.
+The
+<B>create_ancestors</B>
+
+key only appears if the
+-<B>p</B>
+
+option is used.
+The
+<B>property</B>
+
+key has two values, a property name that property's value.
+The
+<B>property</B>
+
+key may appear zero or more times, once for each property that will be set local
+to
+<I>filesystem</I>
+
+due to the use of the
+-<B>o</B>
+
+option.
+<DT><B>-v</B>
+
+
+<DD>
+Print verbose information about the created dataset.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>create</B>
+
+[-<B>ps</B>
+
+]
+
+[-<B>b </B><I>blocksize</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+-<B>V </B><I>size volume</I>
+
+
+
+
+
+<DD>
+
+<DD>Creates a volume of the given size.
+The volume is exported as a block device in
+/dev/zvol/path
+
+ 
+where
+<I>path</I>
+
+is the name of the volume in the ZFS namespace.
+The size represents the logical size as exported by the device.
+By default, a reservation of equal size is created.
+<P>
+
+<I>size</I>
+
+is automatically rounded up to the nearest multiple of the
+<B>blocksize</B>
+
+ 
+<DL COMPACT>
+<P>
+
+<DT><B>-b </B><I>blocksize</I>
+
+
+
+
+<DD>
+Equivalent to
+-<B>o volblocksize = </B><I>blocksize</I>
+
+
+
+
+
+
+
+
+
+ 
+If this option is specified in conjunction with
+-<B>o volblocksize</B>
+
+
+
+ 
+the resulting behavior is undefined.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property as if the
+<B>zfs set </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+
+command was invoked at the same time the dataset was created.
+Any editable ZFS property can also be set at creation time.
+Multiple
+-<B>o</B>
+
+options can be specified.
+An error results if the same property is specified in multiple
+-<B>o</B>
+
+options.
+<DT><B>-p</B>
+
+
+<DD>
+Creates all the non-existing parent datasets.
+Datasets created in this manner are automatically mounted according to the
+<B>mountpoint</B>
+
+property inherited from their parent.
+Any property specified on the command line using the
+-<B>o</B>
+
+option is ignored.
+If the target filesystem already exists, the operation completes successfully.
+<DT><B>-s</B>
+
+
+<DD>
+Creates a sparse volume with no reservation.
+See
+<B>volsize</B>
+
+in the
+<I>Native Properties</I>
+
+section of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+for more information about sparse volumes.
+<DT><B>-n</B>
+
+
+<DD>
+Do a dry-run
+(Qq No-op
+
+)
+
+creation.
+No datasets will be created.
+This is useful in conjunction with the
+-<B>v</B>
+
+or
+-<B>P</B>
+
+flags to validate properties that are passed via
+-<B>o</B>
+
+options and those implied by other options.
+The actual dataset creation can still fail due to insufficient privileges or
+available capacity.
+<DT><B>-P</B>
+
+
+<DD>
+Print machine-parsable verbose information about the created dataset.
+Each line of output contains a key and one or two values, all separated by tabs.
+The
+<B>create_ancestors</B>
+
+and
+<B>create</B>
+
+keys have
+<I>volume</I>
+
+as their only value.
+The
+<B>create_ancestors</B>
+
+key only appears if the
+-<B>p</B>
+
+option is used.
+The
+<B>property</B>
+
+key has two values, a property name that property's value.
+The
+<B>property</B>
+
+key may appear zero or more times, once for each property that will be set local
+to
+<I>volume</I>
+
+due to the use of the
+-<B>b</B>
+
+or
+-<B>o</B>
+
+options, as well as
+<B>refreservation</B>
+
+if the volume is not sparse.
+<DT><B>-v</B>
+
+
+<DD>
+Print verbose information about the created dataset.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H3>ZFS Volumes as Swap</H3>
+
+ZFS volumes may be used as swap devices. After creating the volume with the
+<B>zfs create -V</B>
+
+
+
+
+
+command set up and enable the swap area using the
+<A HREF="/man/man2html?8+mkswap">mkswap</A>(8)
+
+
+and
+<A HREF="/man/man2html?8+swapon">swapon</A>(8)
+
+
+commands. Do not swap to a file on a ZFS file system. A ZFS swap file
+configuration is not supported.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-destroy8,
+
+
+zfs-list8,
+
+
+zpool-create8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">ZFS Volumes as Swap</A><DD>
+</DL>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

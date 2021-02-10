@@ -1,0 +1,1512 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS</TITLE>
+</HEAD><BODY>
+<H1>ZFS</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs</B>
+
+ - configures ZFS file systems
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B></B>
+
+
+-<B>?V</B>
+
+<BR><B></B>
+
+
+<B>version</B>
+
+<BR><B></B>
+
+
+<B>&lt;subcommand&gt;</B>
+
+[<I>&lt;args&gt;</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+The
+<B></B>
+
+
+command configures ZFS datasets within a ZFS storage pool, as described in
+<A HREF="/man/man2html?8+zpool">zpool</A>(8).
+
+
+A dataset is identified by a unique path within the ZFS namespace.
+For example:
+
+<PRE>
+pool/{filesystem,volume,snapshot}
+</PRE>
+
+<P>
+
+where the maximum length of a dataset name is
+<B>MAXNAMELEN</B>
+
+(256 bytes)
+
+and the maximum amount of nesting allowed in a path is 50 levels deep.
+<P>
+
+A dataset can be one of the following:
+<DL COMPACT>
+<P>
+
+<DT><B>file system</B>
+
+
+<DD>
+A ZFS dataset of type
+<B>filesystem</B>
+
+can be mounted within the standard system namespace and behaves like other file
+systems.
+While ZFS file systems are designed to be POSIX compliant, known issues exist
+that prevent compliance in some cases.
+Applications that depend on standards conformance might fail due to non-standard
+behavior when checking file system free space.
+<DT><B>volume</B>
+
+
+<DD>
+A logical volume exported as a raw or block device.
+This type of dataset should only be used when a block device is required.
+File systems are typically used in most environments.
+<DT><B>snapshot</B>
+
+
+<DD>
+A read-only version of a file system or volume at a given point in time.
+It is specified as
+<I>filesystem </I><B>@ </B><I>name</I>
+
+
+
+
+
+
+
+or
+<I>volume </I><B>@ </B><I>name</I>
+
+
+
+
+
+
+
+ 
+<DT><B>bookmark</B>
+
+
+<DD>
+Much like a
+<B>snapshot</B>
+
+ 
+but without the hold on on-disk data.
+It can be used as the source of a send (but not for a receive). It is specified as
+<I>filesystem </I><B># </B><I>name</I>
+
+
+
+
+
+
+
+or
+<I>volume </I><B># </B><I>name</I>
+
+
+
+
+
+
+
+ 
+</DL>
+<P>
+
+<P>
+
+For details see
+<A HREF="/man/man2html?8+zfsconcepts">zfsconcepts</A>(8).
+
+
+<A NAME="lbAE">&nbsp;</A>
+<H3>Properties</H3>
+
+Properties are divided into two types, native properties and user-defined
+Po or
+
+Qq user
+
+Pc properties.
+
+Native properties either export internal statistics or control ZFS behavior.
+In addition, native properties are either editable or read-only.
+User properties have no effect on ZFS behavior, but you can use them to annotate
+datasets in a way that is meaningful in your environment.
+For more information about properties, see the
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)manpage.
+
+
+<A NAME="lbAF">&nbsp;</A>
+<H3>Encryption</H3>
+
+Enabling the
+<B>encryption</B>
+
+feature allows for the creation of encrypted filesystems and volumes.
+ZFS will encrypt file and zvol data, file attributes, ACLs, permission bits,
+directory listings, FUID mappings, and
+<B>userused</B>
+
+/
+<B>groupused</B>
+
+data.
+For an overview of encryption see the
+zfs-load-key8commandmanual.
+
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>SUBCOMMANDS</H2>
+
+All subcommands that modify state are logged persistently to the pool in their
+original form.
+<DL COMPACT>
+<P>
+
+<DT><B>-
+
+</B>
+
+
+<DD>
+ 
+Displays a help message.
+<DT><B>
+</B>
+
+<B></B>
+
+
+-<B>V , -version</B>
+
+<DD>
+
+<DD>An alias for the
+<B>zfs version</B>
+
+
+
+subcommand.
+<DT><B>
+</B>
+
+<B></B>
+
+
+<B>version</B>
+
+<DD>
+
+<DD>Displays the software version of the
+<B></B>
+
+
+userland utility and the zfs kernel module.
+</DL>
+<P>
+
+<A NAME="lbAH">&nbsp;</A>
+<H3>Dataset Management</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-list8
+
+</B>
+<DD>
+Lists the property information for the given datasets in tabular form.
+<DT><B>zfs-create8
+
+</B>
+<DD>
+Creates a new ZFS file system or volume.
+<DT><B>zfs-destroy8
+
+</B>
+<DD>
+Destroys the given dataset(s), snapshot(s), or bookmark.
+<DT><B>zfs-rename8
+
+</B>
+<DD>
+Renames the given dataset (filesystem or snapshot).
+<DT><B>zfs-upgrade8
+
+</B>
+<DD>
+Manage upgrading the on-disk version of filesystems.
+</DL>
+<P>
+
+<A NAME="lbAI">&nbsp;</A>
+<H3>Snapshots</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-snapshot8
+
+</B>
+<DD>
+Creates snapshots with the given names.
+<DT><B>zfs-rollback8
+
+</B>
+<DD>
+Roll back the given dataset to a previous snapshot.
+<DT><B>
+</B>
+
+zfs-hold8/
+
+
+zfs-release8
+
+
+<DD>
+
+<DD>Add or remove a hold reference to the specified snapshot or snapshots.
+If a hold exists on a snapshot, attempts to destroy that snapshot by using the
+<B>zfs destroy</B>
+
+
+
+command return
+Er EBUSY .
+
+<DT><B>zfs-diff8
+
+</B>
+<DD>
+Display the difference between a snapshot of a given filesystem and another
+snapshot of that filesystem from a later time or the current contents of the
+filesystem.
+</DL>
+<P>
+
+<A NAME="lbAJ">&nbsp;</A>
+<H3>Clones</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-clone8
+
+</B>
+<DD>
+Creates a clone of the given snapshot.
+<DT><B>zfs-promote8
+
+</B>
+<DD>
+Promotes a clone file system to no longer be dependent on its
+Qq origin
+
+snapshot.
+</DL>
+<P>
+
+<A NAME="lbAK">&nbsp;</A>
+<H3>Send &amp; Receive</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-send8
+
+</B>
+<DD>
+Generate a send stream, which may be of a filesystem, and may be incremental
+from a bookmark.
+<DT><B>zfs-receive8
+
+</B>
+<DD>
+Creates a snapshot whose contents are as specified in the stream provided on
+standard input.
+If a full stream is received, then a new file system is created as well.
+Streams are created using the
+zfs-send8
+
+
+subcommand, which by default creates a full stream.
+<DT><B>zfs-bookmark8
+
+</B>
+<DD>
+Creates a new bookmark of the given snapshot or bookmark.
+Bookmarks mark the point in time when the snapshot was created, and can be used
+as the incremental source for a
+<B>zfs send</B>
+
+
+
+command.
+<DT><B>zfs-redact8
+
+</B>
+<DD>
+Generate a new redaction bookmark.
+This feature can be used to allow clones of a filesystem to be made available on
+a remote system, in the case where their parent need not (or needs to not) be
+usable.
+</DL>
+<P>
+
+<A NAME="lbAL">&nbsp;</A>
+<H3>Properties</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-get8
+
+</B>
+<DD>
+Displays properties for the given datasets.
+<DT><B>zfs-set8
+
+</B>
+<DD>
+Sets the property or list of properties to the given value(s) for each dataset.
+<DT><B>zfs-inherit8
+
+</B>
+<DD>
+Clears the specified property, causing it to be inherited from an ancestor,
+restored to default if no ancestor has the property set, or with the
+-<B>S</B>
+
+option reverted to the received value if one exists.
+</DL>
+<P>
+
+<A NAME="lbAM">&nbsp;</A>
+<H3>Quotas</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+zfs-userspace8/
+
+
+zfs-groupspace8/
+
+
+zfs-projectspace8
+
+
+<DD>
+
+<DD>Displays space consumed by, and quotas on, each user, group, or project
+in the specified filesystem or snapshot.
+<DT><B>zfs-project8
+
+</B>
+<DD>
+List, set, or clear project ID and/or inherit flag on the file(s) or directories.
+</DL>
+<P>
+
+<A NAME="lbAN">&nbsp;</A>
+<H3>Mountpoints</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-mount8
+
+</B>
+<DD>
+Displays all ZFS file systems currently mounted, or mount ZFS filesystem
+on a path described by its
+<B>mountpoint</B>
+
+property.
+<DT><B>zfs-unmount8
+
+</B>
+<DD>
+Unmounts currently mounted ZFS file systems.
+</DL>
+<P>
+
+<A NAME="lbAO">&nbsp;</A>
+<H3>Shares</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-share8
+
+</B>
+<DD>
+Shares available ZFS file systems.
+<DT><B>zfs-unshare8
+
+</B>
+<DD>
+Unshares currently shared ZFS file systems.
+</DL>
+<P>
+
+<A NAME="lbAP">&nbsp;</A>
+<H3>Delegated Administration</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-allow8
+
+</B>
+<DD>
+Delegate permissions on the specified filesystem or volume.
+<DT><B>zfs-unallow8
+
+</B>
+<DD>
+Remove delegated permissions on the specified filesystem or volume.
+</DL>
+<P>
+
+<A NAME="lbAQ">&nbsp;</A>
+<H3>Encryption</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-change-key8
+
+</B>
+<DD>
+Add or change an encryption key on the specified dataset.
+<DT><B>zfs-load-key8
+
+</B>
+<DD>
+Load the key for the specified encrypted dataset, enabling access.
+<DT><B>zfs-unload-key8
+
+</B>
+<DD>
+Unload a key for the specified dataset, removing the ability to access the dataset.
+</DL>
+<P>
+
+<A NAME="lbAR">&nbsp;</A>
+<H3>Channel Programs</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-program8
+
+</B>
+<DD>
+Execute ZFS administrative operations
+programmatically via a Lua script-language channel program.
+</DL>
+<P>
+
+<A NAME="lbAS">&nbsp;</A>
+<H3>Jails</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-jail8
+
+</B>
+<DD>
+Attaches a filesystem to a jail.
+<DT><B>zfs-unjail8
+
+</B>
+<DD>
+Detaches a filesystem from a jail.
+</DL>
+<P>
+
+<A NAME="lbAT">&nbsp;</A>
+<H3>Waiting</H3>
+
+<DL COMPACT>
+<P>
+
+<DT><B>zfs-wait8
+
+</B>
+<DD>
+Wait for background activity in a filesystem to complete.
+</DL>
+<P>
+
+<A NAME="lbAU">&nbsp;</A>
+<H2>EXIT STATUS</H2>
+
+The
+<B></B>
+
+
+utility exits 0 on success, 1 if an error occurs, and 2 if invalid command line
+options were specified.
+<A NAME="lbAV">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>Example 1 Creating a ZFS File System Hierarchy</B>
+
+
+
+
+<DD>
+The following commands create a file system named
+<I>pool/home</I>
+
+and a file system named
+<I>pool/home/bob</I>
+
+ 
+The mount point
+/export/home
+
+is set for the parent file system, and is automatically inherited by the child
+file system.
+
+<PRE>
+# zfs create pool/home
+# zfs set mountpoint=/export/home pool/home
+# zfs create pool/home/bob
+</PRE>
+
+<DT><B>Example 2 Creating a ZFS Snapshot</B>
+
+
+
+
+<DD>
+The following command creates a snapshot named
+<B>yesterday</B>
+
+ 
+This snapshot is mounted on demand in the
+.zfs/snapshot
+
+directory at the root of the
+<I>pool/home/bob</I>
+
+file system.
+
+<PRE>
+# zfs snapshot pool/home/<A HREF="mailto:bob@yesterday">bob@yesterday</A>
+</PRE>
+
+<DT><B>Example 3 Creating and Destroying Multiple Snapshots</B>
+
+
+
+
+<DD>
+The following command creates snapshots named
+<B>yesterday</B>
+
+of
+<I>pool/home</I>
+
+and all of its descendent file systems.
+Each snapshot is mounted on demand in the
+.zfs/snapshot
+
+directory at the root of its file system.
+The second command destroys the newly created snapshots.
+
+<PRE>
+# zfs snapshot -r pool/<A HREF="mailto:home@yesterday">home@yesterday</A>
+# zfs destroy -r pool/<A HREF="mailto:home@yesterday">home@yesterday</A>
+</PRE>
+
+<DT><B>Example 4 Disabling and Enabling File System Compression</B>
+
+
+
+
+<DD>
+The following command disables the
+<B>compression</B>
+
+property for all file systems under
+<I>pool/home</I>
+
+ 
+The next command explicitly enables
+<B>compression</B>
+
+for
+<I>pool/home/anne</I>
+
+ 
+
+<PRE>
+# zfs set compression=off pool/home
+# zfs set compression=on pool/home/anne
+</PRE>
+
+<DT><B>Example 5 Listing ZFS Datasets</B>
+
+
+
+
+<DD>
+The following command lists all active file systems and volumes in the system.
+Snapshots are displayed if the
+<B>listsnaps</B>
+
+property is
+<B>on</B>
+
+ 
+The default is
+<B>off</B>
+
+ 
+See
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+for more information on pool properties.
+
+<PRE>
+# zfs list
+NAME                      USED  AVAIL  REFER  MOUNTPOINT
+pool                      450K   457G    18K  /pool
+pool/home                 315K   457G    21K  /export/home
+pool/home/anne             18K   457G    18K  /export/home/anne
+pool/home/bob             276K   457G   276K  /export/home/bob
+</PRE>
+
+<DT><B>Example 6 Setting a Quota on a ZFS File System</B>
+
+
+
+
+<DD>
+The following command sets a quota of 50 Gbytes for
+<I>pool/home/bob</I>
+
+ 
+
+<PRE>
+# zfs set quota=50G pool/home/bob
+</PRE>
+
+<DT><B>Example 7 Listing ZFS Properties</B>
+
+
+
+
+<DD>
+The following command lists all properties for
+<I>pool/home/bob</I>
+
+ 
+
+<PRE>
+# zfs get all pool/home/bob
+NAME           PROPERTY              VALUE                  SOURCE
+pool/home/bob  type                  filesystem             -
+pool/home/bob  creation              Tue Jul 21 15:53 2009  -
+pool/home/bob  used                  21K                    -
+pool/home/bob  available             20.0G                  -
+pool/home/bob  referenced            21K                    -
+pool/home/bob  compressratio         1.00x                  -
+pool/home/bob  mounted               yes                    -
+pool/home/bob  quota                 20G                    local
+pool/home/bob  reservation           none                   default
+pool/home/bob  recordsize            128K                   default
+pool/home/bob  mountpoint            /pool/home/bob         default
+pool/home/bob  sharenfs              off                    default
+pool/home/bob  checksum              on                     default
+pool/home/bob  compression           on                     local
+pool/home/bob  atime                 on                     default
+pool/home/bob  devices               on                     default
+pool/home/bob  exec                  on                     default
+pool/home/bob  setuid                on                     default
+pool/home/bob  readonly              off                    default
+pool/home/bob  zoned                 off                    default
+pool/home/bob  snapdir               hidden                 default
+pool/home/bob  acltype               off                    default
+pool/home/bob  aclmode               discard                default
+pool/home/bob  aclinherit            restricted             default
+pool/home/bob  canmount              on                     default
+pool/home/bob  xattr                 on                     default
+pool/home/bob  copies                1                      default
+pool/home/bob  version               4                      -
+pool/home/bob  utf8only              off                    -
+pool/home/bob  normalization         none                   -
+pool/home/bob  casesensitivity       sensitive              -
+pool/home/bob  vscan                 off                    default
+pool/home/bob  nbmand                off                    default
+pool/home/bob  sharesmb              off                    default
+pool/home/bob  refquota              none                   default
+pool/home/bob  refreservation        none                   default
+pool/home/bob  primarycache          all                    default
+pool/home/bob  secondarycache        all                    default
+pool/home/bob  usedbysnapshots       0                      -
+pool/home/bob  usedbydataset         21K                    -
+pool/home/bob  usedbychildren        0                      -
+pool/home/bob  usedbyrefreservation  0                      -
+</PRE>
+
+<P>
+
+The following command gets a single property value.
+
+<PRE>
+# zfs get -H -o value compression pool/home/bob
+on
+</PRE>
+
+The following command lists all properties with local settings for
+<I>pool/home/bob</I>
+
+ 
+
+<PRE>
+# zfs get -r -s local -o name,property,value all pool/home/bob
+NAME           PROPERTY              VALUE
+pool/home/bob  quota                 20G
+pool/home/bob  compression           on
+</PRE>
+
+<DT><B>Example 8 Rolling Back a ZFS File System</B>
+
+
+
+
+<DD>
+The following command reverts the contents of
+<I>pool/home/anne</I>
+
+to the snapshot named
+<B>yesterday</B>
+
+ 
+deleting all intermediate snapshots.
+
+<PRE>
+# zfs rollback -r pool/home/<A HREF="mailto:anne@yesterday">anne@yesterday</A>
+</PRE>
+
+<DT><B>Example 9 Creating a ZFS Clone</B>
+
+
+
+
+<DD>
+The following command creates a writable file system whose initial contents are
+the same as
+<I>pool/home/<A HREF="mailto:bob@yesterday">bob@yesterday</A></I>
+
+ 
+
+<PRE>
+# zfs clone pool/home/<A HREF="mailto:bob@yesterday">bob@yesterday</A> pool/clone
+</PRE>
+
+<DT><B>Example 10 Promoting a ZFS Clone</B>
+
+
+
+
+<DD>
+The following commands illustrate how to test out changes to a file system, and
+then replace the original file system with the changed one, using clones, clone
+promotion, and renaming:
+
+<PRE>
+# zfs create pool/project/production
+  populate /pool/project/production with data
+# zfs snapshot pool/project/<A HREF="mailto:production@today">production@today</A>
+# zfs clone pool/project/<A HREF="mailto:production@today">production@today</A> pool/project/beta
+  make changes to /pool/project/beta and test them
+# zfs promote pool/project/beta
+# zfs rename pool/project/production pool/project/legacy
+# zfs rename pool/project/beta pool/project/production
+  once the legacy version is no longer needed, it can be destroyed
+# zfs destroy pool/project/legacy
+</PRE>
+
+<DT><B>Example 11 Inheriting ZFS Properties</B>
+
+
+
+
+<DD>
+The following command causes
+<I>pool/home/bob</I>
+
+and
+<I>pool/home/anne</I>
+
+to inherit the
+<B>checksum</B>
+
+property from their parent.
+
+<PRE>
+# zfs inherit checksum pool/home/bob pool/home/anne
+</PRE>
+
+<DT><B>Example 12 Remotely Replicating ZFS Data</B>
+
+
+
+
+<DD>
+The following commands send a full stream and then an incremental stream to a
+remote machine, restoring them into
+<I>poolB/received/fs@a</I>
+
+and
+<I>poolB/received/fs@b</I>
+
+ 
+respectively.
+<I>poolB</I>
+
+must contain the file system
+<I>poolB/received</I>
+
+ 
+and must not initially contain
+<I>poolB/received/fs</I>
+
+ 
+
+<PRE>
+# zfs send pool/fs@a | \
+  ssh host zfs receive poolB/received/fs@a
+# zfs send -i a pool/fs@b | \
+  ssh host zfs receive poolB/received/fs
+</PRE>
+
+<DT><B>Example 13 Using the zfs receive -d Option</B>
+
+
+
+
+<DD>
+The following command sends a full stream of
+<I>poolA/fsA/<A HREF="mailto:fsB@snap">fsB@snap</A></I>
+
+to a remote machine, receiving it into
+<I>poolB/received/fsA/<A HREF="mailto:fsB@snap">fsB@snap</A></I>
+
+ 
+The
+<I>fsA/<A HREF="mailto:fsB@snap">fsB@snap</A></I>
+
+portion of the received snapshot's name is determined from the name of the sent
+snapshot.
+<I>poolB</I>
+
+must contain the file system
+<I>poolB/received</I>
+
+ 
+If
+<I>poolB/received/fsA</I>
+
+does not exist, it is created as an empty file system.
+
+<PRE>
+# zfs send poolA/fsA/<A HREF="mailto:fsB@snap">fsB@snap</A> | \
+  ssh host zfs receive -d poolB/received
+</PRE>
+
+<DT><B>Example 14 Setting User Properties</B>
+
+
+
+
+<DD>
+The following example sets the user-defined
+<B>com.example:department</B>
+
+property for a dataset.
+
+<PRE>
+# zfs set com.example:department=12345 tank/accounting
+</PRE>
+
+<DT><B>Example 15 Performing a Rolling Snapshot</B>
+
+
+
+
+<DD>
+The following example shows how to maintain a history of snapshots with a
+consistent naming scheme.
+To keep a week's worth of snapshots, the user destroys the oldest snapshot,
+renames the remaining snapshots, and then creates a new snapshot, as follows:
+
+<PRE>
+# zfs destroy -r pool/<A HREF="mailto:users@7daysago">users@7daysago</A>
+# zfs rename -r pool/<A HREF="mailto:users@6daysago">users@6daysago</A> @7daysago
+# zfs rename -r pool/<A HREF="mailto:users@5daysago">users@5daysago</A> @6daysago
+# zfs rename -r pool/<A HREF="mailto:users@4daysago">users@4daysago</A> @5daysago
+# zfs rename -r pool/<A HREF="mailto:users@3daysago">users@3daysago</A> @4daysago
+# zfs rename -r pool/<A HREF="mailto:users@2daysago">users@2daysago</A> @3daysago
+# zfs rename -r pool/<A HREF="mailto:users@yesterday">users@yesterday</A> @2daysago
+# zfs rename -r pool/<A HREF="mailto:users@today">users@today</A> @yesterday
+# zfs snapshot -r pool/<A HREF="mailto:users@today">users@today</A>
+</PRE>
+
+<DT><B>Example 16 Setting sharenfs Property Options on a ZFS File System</B>
+
+
+
+
+<DD>
+The following commands show how to set
+<B>sharenfs</B>
+
+property options to enable
+<B>rw</B>
+
+access for a set of
+<B>IP</B>
+
+addresses and to enable root access for system
+<B>neo</B>
+
+on the
+<I>tank/home</I>
+
+file system.
+
+<PRE>
+# zfs set sharenfs='rw=@123.123.0.0/16,root=neo' tank/home
+</PRE>
+
+<P>
+
+If you are using
+<B>DNS</B>
+
+for host name resolution, specify the fully qualified hostname.
+<DT><B>Example 17 Delegating ZFS Administration Permissions on a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows how to set permissions so that user
+<B>cindys</B>
+
+can create, destroy, mount, and take snapshots on
+<I>tank/cindys</I>
+
+ 
+The permissions on
+<I>tank/cindys</I>
+
+are also displayed.
+
+<PRE>
+# zfs allow cindys create,destroy,mount,snapshot tank/cindys
+# zfs allow tank/cindys
+---- Permissions on tank/cindys --------------------------------------
+Local+Descendent permissions:
+        user cindys create,destroy,mount,snapshot
+</PRE>
+
+<P>
+
+Because the
+<I>tank/cindys</I>
+
+mount point permission is set to 755 by default, user
+<B>cindys</B>
+
+will be unable to mount file systems under
+<I>tank/cindys</I>
+
+ 
+Add an ACE similar to the following syntax to provide mount point access:
+
+<PRE>
+# chmod A+user:cindys:add_subdirectory:allow /tank/cindys
+</PRE>
+
+<DT><B>Example 18 Delegating Create Time Permissions on a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows how to grant anyone in the group
+<B>staff</B>
+
+to create file systems in
+<I>tank/users</I>
+
+ 
+This syntax also allows staff members to destroy their own file systems, but not
+destroy anyone else's file system.
+The permissions on
+<I>tank/users</I>
+
+are also displayed.
+
+<PRE>
+# zfs allow staff create,mount tank/users
+# zfs allow -c destroy tank/users
+# zfs allow tank/users
+---- Permissions on tank/users ---------------------------------------
+Permission sets:
+        destroy
+Local+Descendent permissions:
+        group staff create,mount
+</PRE>
+
+<DT><B>Example 19 Defining and Granting a Permission Set on a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows how to define and grant a permission set on the
+<I>tank/users</I>
+
+file system.
+The permissions on
+<I>tank/users</I>
+
+are also displayed.
+
+<PRE>
+# zfs allow -s @pset create,destroy,snapshot,mount tank/users
+# zfs allow staff @pset tank/users
+# zfs allow tank/users
+---- Permissions on tank/users ---------------------------------------
+Permission sets:
+        @pset create,destroy,mount,snapshot
+Local+Descendent permissions:
+        group staff @pset
+</PRE>
+
+<DT><B>Example 20 Delegating Property Permissions on a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows to grant the ability to set quotas and reservations
+on the
+<I>users/home</I>
+
+file system.
+The permissions on
+<I>users/home</I>
+
+are also displayed.
+
+<PRE>
+# zfs allow cindys quota,reservation users/home
+# zfs allow users/home
+---- Permissions on users/home ---------------------------------------
+Local+Descendent permissions:
+        user cindys quota,reservation
+cindys% zfs set quota=10G users/home/marks
+cindys% zfs get quota users/home/marks
+NAME              PROPERTY  VALUE  SOURCE
+users/home/marks  quota     10G    local
+</PRE>
+
+<DT><B>Example 21 Removing ZFS Delegated Permissions on a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows how to remove the snapshot permission from the
+<B>staff</B>
+
+group on the
+<I>tank/users</I>
+
+file system.
+The permissions on
+<I>tank/users</I>
+
+are also displayed.
+
+<PRE>
+# zfs unallow staff snapshot tank/users
+# zfs allow tank/users
+---- Permissions on tank/users ---------------------------------------
+Permission sets:
+        @pset create,destroy,mount,snapshot
+Local+Descendent permissions:
+        group staff @pset
+</PRE>
+
+<DT><B>Example 22 Showing the differences between a snapshot and a ZFS Dataset</B>
+
+
+
+
+<DD>
+The following example shows how to see what has changed between a prior
+snapshot of a ZFS dataset and its current state.
+The
+-<B>F</B>
+
+option is used to indicate type information for the files affected.
+
+<PRE>
+# zfs diff -F tank/<A HREF="mailto:test@before">test@before</A> tank/test
+M       /       /tank/test/
+M       F       /tank/test/linked      (+1)
+R       F       /tank/test/oldname -&gt; /tank/test/newname
+-       F       /tank/test/deleted
++       F       /tank/test/created
+M       F       /tank/test/modified
+</PRE>
+
+<DT><B>Example 23 Creating a bookmark</B>
+
+
+
+
+<DD>
+The following example create a bookmark to a snapshot.
+This bookmark can then be used instead of snapshot in send streams.
+
+<PRE>
+# zfs bookmark <A HREF="mailto:rpool@snapshot">rpool@snapshot</A> rpool#bookmark
+</PRE>
+
+<DT><B>Example 24 Setting sharesmb Property Options on a ZFS File System</B>
+
+
+
+
+<DD>
+The following example show how to share SMB filesystem through ZFS.
+Note that that a user and his/her password must be given.
+
+<PRE>
+# smbmount //127.0.0.1/share_tmp /mnt/tmp \
+  -o user=workgroup/turbo,password=obrut,uid=1000
+</PRE>
+
+<P>
+
+Minimal
+<I>/etc/samba/smb.conf</I>
+
+configuration required:
+<P>
+
+Samba will need to listen to 'localhost' (127.0.0.1) for the ZFS utilities to
+communicate with Samba.
+This is the default behavior for most Linux distributions.
+<P>
+
+Samba must be able to authenticate a user.
+This can be done in a number of ways, depending on if using the system password file, LDAP or the Samba
+specific smbpasswd file.
+How to do this is outside the scope of this manual.
+Please refer to the
+smb.conf5
+
+
+man page for more information.
+<P>
+
+See the
+<B>USERSHARE section</B>
+
+of the
+smb.conf5
+
+
+man page for all configuration options in case you need to modify any options
+to the share afterwards.
+Do note that any changes done with the
+<A HREF="/man/man2html?8+net">net</A>(8)
+
+
+command will be undone if the share is ever unshared (such as at a reboot etc).
+</DL>
+<P>
+
+<A NAME="lbAW">&nbsp;</A>
+<H2>ENVIRONMENT VARIABLES</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>ZFS_MOUNT_HELPER</B>
+
+
+<DD>
+Cause
+<B>zfs mount</B>
+
+to use
+<I>/bin/mount</I>
+
+to mount zfs datasets. This option is provided for backwards compatibility with older zfs versions.
+</DL>
+<P>
+
+<A NAME="lbAX">&nbsp;</A>
+<H2>INTERFACE STABILITY</H2>
+
+<B>Committed</B>
+
+ 
+<A NAME="lbAY">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?1+attr">attr</A>(1),
+
+
+<A HREF="/man/man2html?1+gzip">gzip</A>(1),
+
+
+<A HREF="/man/man2html?1+ssh">ssh</A>(1),
+
+
+<A HREF="/man/man2html?2+chmod">chmod</A>(2),
+
+
+<A HREF="/man/man2html?2+fsync">fsync</A>(2),
+
+
+<A HREF="/man/man2html?2+stat">stat</A>(2),
+
+
+<A HREF="/man/man2html?2+write">write</A>(2),
+
+
+<A HREF="/man/man2html?5+acl">acl</A>(5),
+
+
+<A HREF="/man/man2html?5+attributes">attributes</A>(5),
+
+
+<A HREF="/man/man2html?5+exports">exports</A>(5),
+
+
+<A HREF="/man/man2html?8+exportfs">exportfs</A>(8),
+
+
+<A HREF="/man/man2html?8+mount">mount</A>(8),
+
+
+<A HREF="/man/man2html?8+net">net</A>(8),
+
+
+<A HREF="/man/man2html?8+selinux">selinux</A>(8),
+
+
+zfs-allow8,
+
+
+zfs-bookmark8,
+
+
+zfs-change-key8,
+
+
+zfs-clone8,
+
+
+zfs-create8,
+
+
+zfs-destroy8,
+
+
+zfs-diff8,
+
+
+zfs-get8,
+
+
+zfs-groupspace8,
+
+
+zfs-hold8,
+
+
+zfs-inherit8,
+
+
+zfs-jail8,
+
+
+zfs-list8,
+
+
+zfs-load-key8,
+
+
+zfs-mount8,
+
+
+zfs-program8,
+
+
+zfs-project8,
+
+
+zfs-projectspace8,
+
+
+zfs-promote8,
+
+
+zfs-receive8,
+
+
+zfs-redact8,
+
+
+zfs-release8,
+
+
+zfs-rename8,
+
+
+zfs-rollback8,
+
+
+zfs-send8,
+
+
+zfs-set8,
+
+
+zfs-share8,
+
+
+zfs-snapshot8,
+
+
+zfs-unallow8,
+
+
+zfs-unjail8,
+
+
+zfs-unload-key8,
+
+
+zfs-unmount8,
+
+
+zfs-unshare8,
+
+
+zfs-upgrade8,
+
+
+zfs-userspace8,
+
+
+zfs-wait8,
+
+
+<A HREF="/man/man2html?8+zfsconcepts">zfsconcepts</A>(8),
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8),
+
+
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">Properties</A><DD>
+<DT><A HREF="#lbAF">Encryption</A><DD>
+</DL>
+<DT><A HREF="#lbAG">SUBCOMMANDS</A><DD>
+<DL>
+<DT><A HREF="#lbAH">Dataset Management</A><DD>
+<DT><A HREF="#lbAI">Snapshots</A><DD>
+<DT><A HREF="#lbAJ">Clones</A><DD>
+<DT><A HREF="#lbAK">Send &amp; Receive</A><DD>
+<DT><A HREF="#lbAL">Properties</A><DD>
+<DT><A HREF="#lbAM">Quotas</A><DD>
+<DT><A HREF="#lbAN">Mountpoints</A><DD>
+<DT><A HREF="#lbAO">Shares</A><DD>
+<DT><A HREF="#lbAP">Delegated Administration</A><DD>
+<DT><A HREF="#lbAQ">Encryption</A><DD>
+<DT><A HREF="#lbAR">Channel Programs</A><DD>
+<DT><A HREF="#lbAS">Jails</A><DD>
+<DT><A HREF="#lbAT">Waiting</A><DD>
+</DL>
+<DT><A HREF="#lbAU">EXIT STATUS</A><DD>
+<DT><A HREF="#lbAV">EXAMPLES</A><DD>
+<DT><A HREF="#lbAW">ENVIRONMENT VARIABLES</A><DD>
+<DT><A HREF="#lbAX">INTERFACE STABILITY</A><DD>
+<DT><A HREF="#lbAY">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

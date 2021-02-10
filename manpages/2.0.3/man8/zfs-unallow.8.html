@@ -1,0 +1,1341 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-ALLOW</TITLE>
+</HEAD><BODY>
+<H1>ZFS-ALLOW</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-allow</B>
+
+ - Delegates ZFS administration permission for the file systems to non-privileged users.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+[-<B>dglu</B>
+
+]
+
+<I>user </I><B>| </B><I>group </I><B></B>[, <B></B><I>user </I><B>| </B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>allow</B>
+
+[-<B>dl</B>
+
+]
+
+-<B>e | everyone</B>
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>allow</B>
+
+-<B>c</B>
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>allow</B>
+
+-<B>s @ </B><I>setname</I>
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>dglru</B>
+
+]
+
+<I>user </I><B>| </B><I>group </I><B></B>[, <B></B><I>user </I><B>| </B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>dlr</B>
+
+]
+
+-<B>e | everyone</B>
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>r</B>
+
+]
+
+-<B>c</B>
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>r</B>
+
+]
+
+-<B>s @ </B><I>setname</I>
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Displays permissions that have been delegated on the specified filesystem or
+volume.
+See the other forms of
+<B>zfs allow</B>
+
+
+
+for more information.
+<P>
+
+Delegations are supported under Linux with the exception of
+<B>mount</B>
+
+ 
+<B>unmount</B>
+
+ 
+<B>mountpoint</B>
+
+ 
+<B>canmount</B>
+
+ 
+<B>rename</B>
+
+ 
+and
+<B>share</B>
+
+ 
+These permissions cannot be delegated because the Linux
+<A HREF="/man/man2html?8+mount">mount</A>(8)
+
+
+command restricts modifications of the global namespace to the root user.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+[-<B>dglu</B>
+
+]
+
+<I>user </I><B>| </B><I>group </I><B></B>[, <B></B><I>user </I><B>| </B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+[-<B>dl</B>
+
+]
+
+-<B>e | everyone</B>
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Delegates ZFS administration permission for the file systems to non-privileged
+users.
+<DL COMPACT>
+<P>
+
+<DT><B>-d</B>
+
+
+<DD>
+Allow only for the descendent file systems.
+<DT><B>-e | everyone</B>
+
+
+
+
+
+
+
+
+<DD>
+Specifies that the permissions be delegated to everyone.
+<DT><B>-g </B><I>group </I><B></B>[, <B></B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Explicitly specify that permissions are delegated to the group.
+<DT><B>-l</B>
+
+
+<DD>
+Allow
+Qq locally
+
+only for the specified file system.
+<DT><B>-u </B><I>user </I><B></B>[, <B></B><I>user </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Explicitly specify that permissions are delegated to the user.
+<DT><B></B><I>user </I><B>| </B><I>group </I><B></B>[, <B></B><I>user </I><B>| </B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Specifies to whom the permissions are delegated.
+Multiple entities can be specified as a comma-separated list.
+If neither of the
+-<B>gu</B>
+
+options are specified, then the argument is interpreted preferentially as the
+keyword
+<B>everyone</B>
+
+ 
+then as a user name, and lastly as a group name.
+To specify a user or group named
+Qq everyone ,
+
+use the
+-<B>g</B>
+
+or
+-<B>u</B>
+
+options.
+To specify a group with the same name as a user, use the
+-<B>g</B>
+
+options.
+<DT><B>
+</B>
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>The permissions to delegate.
+Multiple permissions may be specified as a comma-separated list.
+Permission names are the same as ZFS subcommand and property names.
+See the property list below.
+Property set names, which begin with
+<B>@</B>
+
+ 
+may be specified.
+See the
+-<B>s</B>
+
+form below for details.
+</DL>
+<P>
+
+<P>
+
+If neither of the
+-<B>dl</B>
+
+options are specified, or both are, then the permissions are allowed for the
+file system or volume, and all of its descendents.
+<P>
+
+Permissions are generally the ability to use a ZFS subcommand or change a ZFS
+property.
+The following permissions are available:
+
+<PRE>
+NAME             TYPE           NOTES
+allow            subcommand     Must also have the permission that is
+                                being allowed
+clone            subcommand     Must also have the 'create' ability and
+                                'mount' ability in the origin file system
+create           subcommand     Must also have the 'mount' ability.
+                                Must also have the 'refreservation' ability to
+                                create a non-sparse volume.
+destroy          subcommand     Must also have the 'mount' ability
+diff             subcommand     Allows lookup of paths within a dataset
+                                given an object number, and the ability
+                                to create snapshots necessary to
+                                'zfs diff'.
+load-key         subcommand     Allows loading and unloading of encryption key
+                                (see 'zfs load-key' and 'zfs unload-key').
+change-key       subcommand     Allows changing an encryption key via
+                                'zfs change-key'.
+mount            subcommand     Allows mount/umount of ZFS datasets
+promote          subcommand     Must also have the 'mount' and 'promote'
+                                ability in the origin file system
+receive          subcommand     Must also have the 'mount' and 'create'
+                                ability
+rename           subcommand     Must also have the 'mount' and 'create'
+                                ability in the new parent
+rollback         subcommand     Must also have the 'mount' ability
+send             subcommand
+share            subcommand     Allows sharing file systems over NFS
+                                or SMB protocols
+snapshot         subcommand     Must also have the 'mount' ability
+
+groupquota       other          Allows accessing any groupquota@...
+                                property
+groupused        other          Allows reading any groupused@... property
+userprop         other          Allows changing any user property
+userquota        other          Allows accessing any userquota@...
+                                property
+userused         other          Allows reading any userused@... property
+projectobjquota  other          Allows accessing any projectobjquota@...
+                                property
+projectquota     other          Allows accessing any projectquota@... property
+projectobjused   other          Allows reading any projectobjused@... property
+projectused      other          Allows reading any projectused@... property
+
+aclinherit       property
+acltype          property
+atime            property
+canmount         property
+casesensitivity  property
+checksum         property
+compression      property
+copies           property
+devices          property
+exec             property
+filesystem_limit property
+mountpoint       property
+nbmand           property
+normalization    property
+primarycache     property
+quota            property
+readonly         property
+recordsize       property
+refquota         property
+refreservation   property
+reservation      property
+secondarycache   property
+setuid           property
+sharenfs         property
+sharesmb         property
+snapdir          property
+snapshot_limit   property
+utf8only         property
+version          property
+volblocksize     property
+volsize          property
+vscan            property
+xattr            property
+zoned            property
+</PRE>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+-<B>c</B>
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Sets
+Qq create time
+
+permissions.
+These permissions are granted
+(locally)
+
+to the creator of any newly-created descendent file system.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>allow</B>
+
+-<B>s @ </B><I>setname</I>
+
+
+
+
+
+
+
+<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Defines or adds permissions to a permission set.
+The set can be used by other
+<B>zfs allow</B>
+
+
+
+commands for the specified file system and its descendents.
+Sets are evaluated dynamically, so changes to a set are immediately reflected.
+Permission sets follow the same naming restrictions as ZFS file systems, but the
+name must begin with
+<B>@</B>
+
+ 
+and can be no more than 64 characters long.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>dglru</B>
+
+]
+
+<I>user </I><B>| </B><I>group </I><B></B>[, <B></B><I>user </I><B>| </B><I>group </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>dlr</B>
+
+]
+
+-<B>e | everyone</B>
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>r</B>
+
+]
+
+-<B>c</B>
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Removes permissions that were granted with the
+<B>zfs allow</B>
+
+
+
+command.
+No permissions are explicitly denied, so other permissions granted are still in
+effect.
+For example, if the permission is granted by an ancestor.
+If no permissions are specified, then all permissions for the specified
+<I>user</I>
+
+ 
+<I>group</I>
+
+ 
+or
+<B>everyone</B>
+
+are removed.
+Specifying
+<B>everyone</B>
+
+Po or using the
+
+-<B>e</B>
+
+option
+Pc only removes the permissions that were granted to everyone, not all permissions
+
+for every user and group.
+See the
+<B>zfs allow</B>
+
+
+
+command for a description of the
+-<B>ldugec</B>
+
+options.
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Recursively remove the permissions from this file system and all descendents.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unallow</B>
+
+[-<B>r</B>
+
+]
+
+-<B>s @ </B><I>setname</I>
+
+
+
+
+
+
+
+[<I>perm </I><B>| @ </B><I>setname </I><B></B>[, <B></B><I>perm </I><B>| @ </B><I>setname </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Removes permissions from a permission set.
+If no permissions are specified, then all permissions are removed, thus removing
+the set entirely.
+</DL>
+<P>
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

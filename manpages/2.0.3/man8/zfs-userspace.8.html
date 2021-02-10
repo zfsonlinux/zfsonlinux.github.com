@@ -1,0 +1,694 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-USERSPACE</TITLE>
+</HEAD><BODY>
+<H1>ZFS-USERSPACE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-userspace</B>
+
+ - Displays space consumed by, and quotas on, each user or group in the specified filesystem or snapshot.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>userspace</B>
+
+[-<B>Hinp</B>
+
+]
+
+[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot </I><B>| </B><I>path</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>groupspace</B>
+
+[-<B>Hinp</B>
+
+]
+
+[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot </I><B>| </B><I>path</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>projectspace</B>
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot </I><B>| </B><I>path</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>userspace</B>
+
+[-<B>Hinp</B>
+
+]
+
+[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot </I><B>| </B><I>path</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Displays space consumed by, and quotas on, each user in the specified filesystem,
+snapshot, or path.
+If a path is given, the filesystem that contains that path will be used.
+This corresponds to the
+<B>userused@ </B><I>user</I>
+
+
+
+
+
+ 
+<B>userobjused@ </B><I>user</I>
+
+
+
+
+
+ 
+<B>userquota@ </B><I>user,</I>
+
+
+
+
+
+and
+<B>userobjquota@ </B><I>user</I>
+
+
+
+
+
+properties.
+<DL COMPACT>
+<P>
+
+<DT><B>-H</B>
+
+
+<DD>
+Do not print headers, use tab-delimited output.
+<DT><B>-S </B><I>field</I>
+
+
+
+
+<DD>
+Sort by this field in reverse order.
+See
+-<B>s</B>
+
+ 
+<DT><B>-i</B>
+
+
+<DD>
+Translate SID to POSIX ID.
+The POSIX ID may be ephemeral if no mapping exists.
+Normal POSIX interfaces
+Po for example,
+
+<A HREF="/man/man2html?2+stat">stat</A>(2),
+
+
+<B>ls -l</B>
+
+
+
+Pc perform this translation, so the
+
+-<B>i</B>
+
+option allows the output from
+<B>zfs userspace</B>
+
+
+
+to be compared directly with those utilities.
+However,
+-<B>i</B>
+
+may lead to confusion if some files were created by an SMB user before a
+SMB-to-POSIX name mapping was established.
+In such a case, some files will be owned by the SMB entity and some by the POSIX
+entity.
+However, the
+-<B>i</B>
+
+option will report that the POSIX entity has the total usage and quota for both.
+<DT><B>-n</B>
+
+
+<DD>
+Print numeric ID instead of user/group name.
+<DT><B>-o </B><I>field </I><B></B>[, <B></B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Display only the specified fields from the following set:
+<B>type</B>
+
+ 
+<B>name</B>
+
+ 
+<B>used</B>
+
+ 
+<B>quota</B>
+
+ 
+The default is to display all fields.
+<DT><B>-p</B>
+
+
+<DD>
+Use exact
+(parsable)
+
+numeric output.
+<DT><B>-s </B><I>field</I>
+
+
+
+
+<DD>
+Sort output by this field.
+The
+-<B>s</B>
+
+and
+-<B>S</B>
+
+flags may be specified multiple times to sort first by one field, then by
+another.
+The default is
+-<B>s type -s name</B>
+
+
+
+
+
+
+
+ 
+<DT><B>-t </B><I>type </I><B></B>[, <B></B><I>type </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+Print only the specified types from the following set:
+<B>all</B>
+
+ 
+<B>posixuser</B>
+
+ 
+<B>smbuser</B>
+
+ 
+<B>posixgroup</B>
+
+ 
+<B>smbgroup</B>
+
+ 
+The default is
+-<B>t posixuser , smbuser</B>
+
+
+
+
+
+
+
+
+
+ 
+The default can be changed to include group types.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>groupspace</B>
+
+[-<B>Hinp</B>
+
+]
+
+[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Displays space consumed by, and quotas on, each group in the specified
+filesystem or snapshot.
+This subcommand is identical to
+<B>userspace</B>
+
+ 
+except that the default types to display are
+-<B>t posixgroup , smbgroup</B>
+
+
+
+
+
+
+
+
+
+ 
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>projectspace</B>
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>snapshot </I><B>| </B><I>path</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Displays space consumed by, and quotas on, each project in the specified
+filesystem or snapshot. This subcommand is identical to
+<B>userspace</B>
+
+ 
+except that the project identifier is numeral, not name. So need neither
+the option
+<B>-i</B>
+
+for SID to POSIX ID nor
+<B>-n</B>
+
+for numeric ID, nor
+<B>-t</B>
+
+for types.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-set8,
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:26 GMT, February 10, 2021
+</BODY>
+</HTML>

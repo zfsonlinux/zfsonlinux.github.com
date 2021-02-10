@@ -1,0 +1,205 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZGENHOSTID</TITLE>
+</HEAD><BODY>
+<H1>ZGENHOSTID</H1>
+Section: Maintenance Commands (8)<BR>Updated: SMM<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zgenhostid</B>
+
+ - generate and store a hostid in
+
+<I>/etc/hostid</I>
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B></B>
+
+
+[-<B>f</B>
+
+]
+
+[-<B>o </B><I>filename</I>
+
+
+
+]
+
+[<I>hostid</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+Creates
+/etc/hostid
+
+file and stores hostid in it.
+If the user provides
+[<I>hostid</I>
+
+]
+
+on the command line, validates and stores that value.
+Otherwise, randomly generates a value to store.
+<DL COMPACT>
+<P>
+
+<DT><B>-h</B>
+
+
+<DD>
+Display a summary of the command-line options.
+<DT><B>-f</B>
+
+
+<DD>
+Force file overwrite.
+<DT><B>-o </B><I>filename</I>
+
+
+
+
+<DD>
+Write to
+filename
+
+instead of default
+/etc/hostd
+
+<DT><B></B><I>hostid</I>
+
+
+<DD>
+Specifies the value to be placed in
+/etc/hostid
+
+ 
+It should be a number with a value between 1 and 2^32-1.
+If it is 0, zgenhostid will generate a random hostid.
+This value
+<B>must</B>
+
+be unique among your systems.
+It
+<B>must</B>
+
+be expressed in hexadecimal and be exactly
+<I>8</I>
+
+digits long, optionally prefixed by
+<I>0x</I>
+
+ 
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>FILES</H2>
+
+/etc/hostid
+
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>Generate a random hostid and store it</B>
+<DD>
+
+<PRE>
+# zgenhostid
+</PRE>
+
+<DT><B>Record the libc-generated hostid in /etc/hostid
+
+</B>
+<DD>
+
+<PRE>
+# zgenhostid &quot;$(hostid)&quot;
+</PRE>
+
+<DT><B>Record a custom hostid (0xdeadbeef) in /etc/hostid
+
+</B>
+<DD>
+
+<PRE>
+# zgenhostid deadbeef
+</PRE>
+
+<DT><B>Record a custom hostid (0x01234567) in /tmp/hostid
+
+</B>
+<DD>
+and ovewrite the file if it exists
+
+<PRE>
+# zgenhostid -f -o /tmp/hostid 0x01234567
+</PRE>
+
+</DL>
+<P>
+
+<A NAME="lbAG">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?1+genhostid">genhostid</A>(1),
+
+
+<A HREF="/man/man2html?1+hostid">hostid</A>(1),
+
+
+<A HREF="/man/man2html?3+sethostid">sethostid</A>(3),
+
+
+spl-module-parameters5
+
+
+<A NAME="lbAH">&nbsp;</A>
+<H2>HISTORY</H2>
+
+<B></B>
+
+
+emulates the
+<A HREF="/man/man2html?1+genhostid">genhostid</A>(1)
+
+
+utility and is provided for use on systems which
+do not include the utility or do not provide
+<A HREF="/man/man2html?3+sethostid">sethostid</A>(3)
+
+
+call.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">FILES</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">SEE ALSO</A><DD>
+<DT><A HREF="#lbAH">HISTORY</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

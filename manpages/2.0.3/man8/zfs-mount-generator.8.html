@@ -1,0 +1,153 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS\-MOUNT\-GENERATOR</TITLE>
+</HEAD><BODY>
+<H1>ZFS\-MOUNT\-GENERATOR</H1>
+Section:  (8)<BR>Updated: ZFS<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+zfs-mount-generator - generates systemd mount units for ZFS
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>/lib/systemd/system-generators/zfs-mount-generator</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+zfs-mount-generator implements the <B>Generators Specification</B>
+of
+<B><A HREF="/man/man2html?1+systemd">systemd</A></B>(1),
+
+and is called during early boot to generate
+<B><A HREF="/man/man2html?5+systemd.mount">systemd.mount</A></B>(5)
+
+units for automatically mounted datasets. Mount ordering and dependencies
+are created for all tracked pools (see below). If a dataset has
+<B>canmount=on</B>
+
+and
+<B>mountpoint</B>
+
+set, the
+<B>auto</B>
+
+mount option will be set, and a dependency for
+<B>local-fs.target</B>
+
+on the mount will be created.
+<P>
+Because zfs pools may not be available very early in the boot process,
+information on ZFS mountpoints must be stored separately. The output
+of the command
+<P>
+
+<DL COMPACT><DT><DD>
+zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand,encroot,keylocation
+</DL>
+
+<P>
+
+for datasets that should be mounted by systemd, should be kept
+separate from the pool, at
+<P>
+
+<DL COMPACT><DT><DD>
+/usr/local/etc/zfs/zfs-list.cache/<I>POOLNAME</I>
+
+</DL>
+
+<P>
+
+The cache file, if writeable, will be kept synchronized with the pool
+state by the ZEDLET
+<P>
+
+<DL COMPACT><DT><DD>
+history_event-zfs-list-cacher.sh .
+</DL>
+
+<P>
+
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+To begin, enable tracking for the pool:
+<P>
+
+<DL COMPACT><DT><DD>
+touch
+/usr/local/etc/zfs/zfs-list.cache/<I>POOLNAME</I>
+
+</DL>
+
+<P>
+
+Then, enable the tracking ZEDLET:
+<P>
+
+<DL COMPACT><DT><DD>
+ln -s &quot;/usr/local/libexec/zfs/zed.d/history_event-zfs-list-cacher.sh&quot; &quot;/usr/local/etc/zfs/zed.d&quot;
+<P>
+systemctl enable zed.service
+<P>
+systemctl restart zed.service
+</DL>
+
+<P>
+
+Force the running of the ZEDLET by setting canmount=on for at least one dataset in the pool:
+<P>
+
+<DL COMPACT><DT><DD>
+zfs set canmount=on
+<I>DATASET</I>
+
+</DL>
+
+<P>
+
+This forces an update to the stale cache file.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="/man/man2html?5+zfs">zfs</A></B>(5)
+
+<B><A HREF="/man/man2html?5+zfs-events">zfs-events</A></B>(5)
+
+<B><A HREF="/man/man2html?8+zed">zed</A></B>(8)
+
+<B><A HREF="/man/man2html?5+zpool">zpool</A></B>(5)
+
+<B><A HREF="/man/man2html?1+systemd">systemd</A></B>(1)
+
+<B><A HREF="/man/man2html?5+systemd.target">systemd.target</A></B>(5)
+
+<B><A HREF="/man/man2html?7+systemd.special">systemd.special</A></B>(7)
+
+<B><A HREF="/man/man2html?7+systemd.mount">systemd.mount</A></B>(7)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">EXAMPLE</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:49:32 GMT, September 27, 2019
+</BODY>
+</HTML>

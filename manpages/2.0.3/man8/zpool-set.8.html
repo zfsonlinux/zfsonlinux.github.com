@@ -1,0 +1,273 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-GET</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-GET</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-get</B>
+
+ - Retrieves properties for the specified ZFS storage pool(s)
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>get</B>
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+<B>all | </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+<BR><B>zpool</B>
+
+<B>set</B>
+
+<I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+<I>pool</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>get</B>
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+<B>all | </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+<DD>
+
+<DD>Retrieves the given list of properties
+Po or all properties if
+
+<B>all</B>
+
+is used
+Pc for the specified storage pool(s).
+
+These properties are displayed with the following fields:
+
+<PRE>
+        name          Name of storage pool
+        property      Property name
+        value         Property value
+        source        Property source, either 'default' or 'local'.
+</PRE>
+
+<P>
+
+See the
+zpoolprops
+
+
+manual page for more information on the available pool properties.
+<DL COMPACT>
+<P>
+
+<DT><B>-H</B>
+
+
+<DD>
+Scripted mode.
+Do not display headers, and separate fields by a single tab instead of arbitrary
+space.
+<DT><B>-o </B><I>field</I>
+
+
+
+
+<DD>
+A comma-separated list of columns to display.
+<B>name , property , value , source</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is the default value.
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable (exact) values.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>set</B>
+
+<I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+<I>pool</I>
+
+<DD>
+
+<DD>Sets the given property on the specified pool.
+See the
+zpoolprops
+
+
+manual page for more information on what properties can be set and acceptable
+values.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8),
+
+
+zpool-list8,
+
+
+zpool-features5
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

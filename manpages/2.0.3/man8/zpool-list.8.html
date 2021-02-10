@@ -1,0 +1,285 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-LIST</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-LIST</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-list</B>
+
+ - Lists ZFS storage pools along with a health status and space usage
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>list</B>
+
+[-<B>HgLpPv </B>[-<B>o </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>list</B>
+
+[-<B>HgLpPv </B>[-<B>o </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<DD>
+
+<DD>Lists the given pools along with a health status and space usage.
+If no
+<I>pool </I><B>s</B>
+
+
+
+are specified, all pools in the system are listed.
+When given an
+<I>interval</I>
+
+ 
+the information is printed every
+<I>interval</I>
+
+seconds until ^C is pressed.
+If
+<I>count</I>
+
+is specified, the command exits after
+<I>count</I>
+
+reports are printed.
+<DL COMPACT>
+<P>
+
+<DT><B>-g</B>
+
+
+<DD>
+Display vdev GUIDs instead of the normal device names. These GUIDs
+can be used in place of device names for the zpool
+detach/offline/remove/replace commands.
+<DT><B>-H</B>
+
+
+<DD>
+Scripted mode.
+Do not display headers, and separate fields by a single tab instead of arbitrary
+space.
+<DT><B>-o </B><I>property</I>
+
+
+
+
+<DD>
+Comma-separated list of properties to display.
+See the
+zpoolprops
+
+
+manual page for a list of valid properties.
+The default list is
+<B>name , size , allocated , free , checkpoint, expandsize , fragmentation</B>
+
+ 
+<B>capacity , dedupratio , health , altroot</B>
+
+ 
+<DT><B>-L</B>
+
+
+<DD>
+Display real paths for vdevs resolving all symbolic links. This can
+be used to look up the current block device name regardless of the
+/dev/disk/ path used to open it.
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable
+(exact)
+
+values.
+<DT><B>-P</B>
+
+
+<DD>
+Display full paths for vdevs instead of only the last component of
+the path. This can be used in conjunction with the
+-<B>L</B>
+
+flag.
+<DT><B>-T u | d</B>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Display a time stamp.
+Specify
+<B>u</B>
+
+for a printed representation of the internal representation of time.
+See
+<A HREF="/man/man2html?2+time">time</A>(2).
+
+
+Specify
+<B>d</B>
+
+for standard date format.
+See
+<A HREF="/man/man2html?1+date">date</A>(1).
+
+
+<DT><B>-v</B>
+
+
+<DD>
+Verbose statistics.
+Reports usage statistics for individual vdevs within the pool, in addition to
+the pool-wide statistics.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-import8,
+
+
+zpool-status8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

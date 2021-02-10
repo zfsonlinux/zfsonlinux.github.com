@@ -1,0 +1,634 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-SET</TITLE>
+</HEAD><BODY>
+<H1>ZFS-SET</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-set</B>
+
+ - Sets the property or list of properties to the given value(s) for each dataset.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>set</B>
+
+<I>property </I><B>= </B><I>value </I>[<I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>get</B>
+
+[-<B>r | -d </B><I>depth</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>source </I><B></B>[, <B></B><I>source </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<B>all | </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>| </B><I>bookmark </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>inherit</B>
+
+[-<B>rS</B>
+
+]
+
+<I>property filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>set</B>
+
+<I>property </I><B>= </B><I>value </I>[<I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Only some properties can be edited.
+See
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+for more information on what properties can be set and acceptable
+values.
+Numeric values can be specified as exact values, or in a human-readable form
+with a suffix of
+<B>B , K , M , G , T , P , E , Z</B>
+
+Po for bytes, kilobytes, megabytes, gigabytes, terabytes, petabytes, exabytes,
+
+or zettabytes, respectively
+Pc .
+
+User properties can be set on snapshots.
+For more information, see the
+<I>User Properties</I>
+
+section of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8).
+
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>get</B>
+
+[-<B>r | -d </B><I>depth</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>Hp </B>[-<B>o </B><I>field </I><B></B>[, <B></B><I>field </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>source </I><B></B>[, <B></B><I>source </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+<B>all | </B><I>property </I><B></B>[, <B></B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>| </B><I>bookmark </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Displays properties for the given datasets.
+If no datasets are specified, then the command displays properties for all
+datasets on the system.
+For each property, the following columns are displayed:
+
+<PRE>
+    name      Dataset name
+    property  Property name
+    value     Property value
+    source    Property source  <B>local</B>, <B>default</B>, <B>inherited</B>,
+              <B>temporary</B>, <B>received</B> or none (<B>-</B>).
+</PRE>
+
+<P>
+
+All columns are displayed by default, though this can be controlled by using the
+-<B>o</B>
+
+option.
+This command takes a comma-separated list of properties as described in the
+<I>Native Properties</I>
+
+and
+<I>User Properties</I>
+
+sections of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8).
+
+
+<P>
+
+The value
+<B>all</B>
+
+can be used to display all properties that apply to the given dataset's type
+(filesystem, volume, snapshot, or bookmark)
+
+ 
+<DL COMPACT>
+<P>
+
+<DT><B>-H</B>
+
+
+<DD>
+Display output in a form more easily parsed by scripts.
+Any headers are omitted, and fields are explicitly separated by a single tab
+instead of an arbitrary amount of space.
+<DT><B>-d </B><I>depth</I>
+
+
+
+
+<DD>
+Recursively display any children of the dataset, limiting the recursion to
+<I>depth</I>
+
+ 
+A depth of
+<B>1</B>
+
+will display only the dataset and its direct children.
+<DT><B>-o </B><I>field</I>
+
+
+
+
+<DD>
+A comma-separated list of columns to display.
+<B>name , property , value , source</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is the default value.
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable
+(exact)
+
+values.
+<DT><B>-r</B>
+
+
+<DD>
+Recursively display properties for any children.
+<DT><B>-s </B><I>source</I>
+
+
+
+
+<DD>
+A comma-separated list of sources to display.
+Those properties coming from a source other than those in this list are ignored.
+Each source must be one of the following:
+<B>local</B>
+
+ 
+<B>default</B>
+
+ 
+<B>inherited</B>
+
+ 
+<B>temporary</B>
+
+ 
+<B>received</B>
+
+ 
+and
+<B>none</B>
+
+ 
+The default value is all sources.
+<DT><B>-t </B><I>type</I>
+
+
+
+
+<DD>
+A comma-separated list of types to display, where
+<I>type</I>
+
+is one of
+<B>filesystem</B>
+
+ 
+<B>snapshot</B>
+
+ 
+<B>volume</B>
+
+ 
+<B>bookmark</B>
+
+ 
+or
+<B>all</B>
+
+ 
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>inherit</B>
+
+[-<B>rS</B>
+
+]
+
+<I>property filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Clears the specified property, causing it to be inherited from an ancestor,
+restored to default if no ancestor has the property set, or with the
+-<B>S</B>
+
+option reverted to the received value if one exists.
+See
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+for a listing of default values, and details on which properties can be
+inherited.
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Recursively inherit the given property for all children.
+<DT><B>-S</B>
+
+
+<DD>
+Revert the property to the received value if one exists; otherwise operate as
+if the
+-<B>S</B>
+
+option was not specified.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-list8,
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

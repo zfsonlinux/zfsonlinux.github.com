@@ -1,0 +1,156 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-DIFF</TITLE>
+</HEAD><BODY>
+<H1>ZFS-DIFF</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-diff</B>
+
+ - Display the difference between two snapshots of a given filesystem.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>diff</B>
+
+[-<B>FHt </B><I>snapshot snapshot </I><B>| </B><I>filesystem</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>diff</B>
+
+[-<B>FHt </B><I>snapshot snapshot </I><B>| </B><I>filesystem</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<DD>
+
+<DD>Display the difference between a snapshot of a given filesystem and another
+snapshot of that filesystem from a later time or the current contents of the
+filesystem.
+The first column is a character indicating the type of change, the other columns
+indicate pathname, new pathname
+(in case of rename)
+
+ 
+change in link count, and optionally file type and/or change time.
+The types of change are:
+
+<PRE>
+-       The path has been removed
++       The path has been created
+M       The path has been modified
+R       The path has been renamed
+</PRE>
+
+<DL COMPACT>
+<P>
+
+<DT><B>-F</B>
+
+
+<DD>
+Display an indication of the type of file, in a manner similar to the
+-<B>F</B>
+
+option of
+<A HREF="/man/man2html?1+ls">ls</A>(1).
+
+
+
+<PRE>
+B       Block device
+C       Character device
+/       Directory
+&gt;       Door
+|       Named pipe
+@       Symbolic link
+P       Event port
+=       Socket
+F       Regular file
+</PRE>
+
+<DT><B>-H</B>
+
+
+<DD>
+Give more parsable tab-separated output, without header lines and without
+arrows.
+<DT><B>-t</B>
+
+
+<DD>
+Display the path's inode change time as the first column of output.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-snapshot8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

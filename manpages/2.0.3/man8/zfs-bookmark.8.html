@@ -1,0 +1,100 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-BOOKMARK</TITLE>
+</HEAD><BODY>
+<H1>ZFS-BOOKMARK</H1>
+Section: Maintenance Commands (8)<BR>Updated: SMM<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-bookmark</B>
+
+ - Creates a bookmark of the given snapshot.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>bookmark</B>
+
+<I>snapshot </I><B>| </B><I>bookmark newbookmark</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Creates a new bookmark of the given snapshot or bookmark.
+Bookmarks mark the point in time when the snapshot was created, and can be used
+as the incremental source for a
+zfs-send8
+
+
+command.
+<P>
+
+When creating a bookmark from an existing redaction bookmark, the resulting
+bookmark is
+<B>not</B>
+
+a redaction bookmark.
+<P>
+
+This feature must be enabled to be used.
+See
+zpool-features5
+
+
+for details on ZFS feature flags and the
+<B>bookmarks</B>
+
+feature.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-destroy8,
+
+
+zfs-send8,
+
+
+zfs-snapshot8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

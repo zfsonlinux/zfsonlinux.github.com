@@ -1,0 +1,258 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-SPLIT</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-SPLIT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-split</B>
+
+ - Split devices off a ZFS storage pool creating a new pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>split</B>
+
+[-<B>gLlnP</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+<I>pool newpool</I>
+
+[<I>device </I><B>...</B>
+
+]
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>split</B>
+
+[-<B>gLlnP</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+<I>pool newpool</I>
+
+[<I>device ...</I>
+
+]
+
+<DD>
+
+<DD>Splits devices off
+<I>pool</I>
+
+creating
+<I>newpool</I>
+
+ 
+All vdevs in
+<I>pool</I>
+
+must be mirrors and the pool must not be in the process of resilvering.
+At the time of the split,
+<I>newpool</I>
+
+will be a replica of
+<I>pool</I>
+
+ 
+By default, the
+last device in each mirror is split from
+<I>pool</I>
+
+to create
+<I>newpool</I>
+
+ 
+<P>
+
+The optional device specification causes the specified device(s) to be
+included in the new
+<I>pool</I>
+
+and, should any devices remain unspecified,
+the last device in each mirror is used as would be by default.
+<DL COMPACT>
+<P>
+
+<DT><B>-g</B>
+
+
+<DD>
+Display vdev GUIDs instead of the normal device names. These GUIDs
+can be used in place of device names for the zpool
+detach/offline/remove/replace commands.
+<DT><B>-L</B>
+
+
+<DD>
+Display real paths for vdevs resolving all symbolic links. This can
+be used to look up the current block device name regardless of the
+/dev/disk/
+
+path used to open it.
+<DT><B>-l</B>
+
+
+<DD>
+Indicates that this command will request encryption keys for all encrypted
+datasets it attempts to mount as it is bringing the new pool online. Note that
+if any datasets have a
+<B>keylocation</B>
+
+of
+<B>prompt</B>
+
+this command will block waiting for the keys to be entered. Without this flag
+encrypted datasets will be left unavailable until the keys are loaded.
+<DT><B>-n</B>
+
+
+<DD>
+Do dry run, do not actually perform the split.
+Print out the expected configuration of
+<I>newpool</I>
+
+ 
+<DT><B>-P</B>
+
+
+<DD>
+Display full paths for vdevs instead of only the last component of
+the path. This can be used in conjunction with the
+-<B>L</B>
+
+flag.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property for
+<I>newpool</I>
+
+ 
+See the
+zpoolprops
+
+
+manual page for more information on the available pool properties.
+<DT><B>-R </B><I>root</I>
+
+
+
+
+<DD>
+Set
+<B>altroot</B>
+
+for
+<I>newpool</I>
+
+to
+<I>root</I>
+
+and automatically import it.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-import8,
+
+
+zpool-list8,
+
+
+zpool-remove8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

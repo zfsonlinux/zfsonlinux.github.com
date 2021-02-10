@@ -1,0 +1,83 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-REOPEN</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-REOPEN</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-reopen</B>
+
+ - Reopen all virtual devices (vdevs) associated with a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>reopen</B>
+
+[-<B>n</B>
+
+]
+
+<I>pool</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>reopen</B>
+
+[-<B>n</B>
+
+]
+
+<I>pool</I>
+
+<DD>
+
+<DD>Reopen all the vdevs associated with the pool.
+<DL COMPACT>
+<P>
+
+<DT><B>-n</B>
+
+
+<DD>
+Do not restart an in-progress scrub operation. This is not recommended and can
+result in partially resilvered devices unless a second scrub is performed.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

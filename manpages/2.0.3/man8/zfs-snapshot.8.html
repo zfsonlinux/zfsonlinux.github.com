@@ -1,0 +1,216 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-SNAPSHOT</TITLE>
+</HEAD><BODY>
+<H1>ZFS-SNAPSHOT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-snapshot</B>
+
+ - Creates snapshots with the given names.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>snapshot</B>
+
+[-<B>r</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>@ </B><I>snapname </I><B>| </B><I>volume </I><B>@ </B><I>snapname </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>snapshot</B>
+
+[-<B>r</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>filesystem </I><B>@ </B><I>snapname </I><B>| </B><I>volume </I><B>@ </B><I>snapname </I><B>...</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>All previous modifications by successful system calls to the file system are
+part of the snapshots.
+Snapshots are taken atomically, so that all snapshots correspond to the same
+moment in time.
+<B>zfs snap</B>
+
+
+
+can be used as an alias for
+<B>zfs snapshot.</B>
+
+
+
+See the
+<I>Snapshots</I>
+
+section of
+<A HREF="/man/man2html?8+zfsconcepts">zfsconcepts</A>(8)
+
+
+for details.
+<DL COMPACT>
+<P>
+
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property; see
+<B>zfs create</B>
+
+
+
+for details.
+<DT><B>-r</B>
+
+
+<DD>
+Recursively create snapshots of all descendent datasets
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-bookmark8,
+
+
+zfs-clone8,
+
+
+zfs-destroy8,
+
+
+zfs-diff8,
+
+
+zfs-hold8,
+
+
+zfs-rename8,
+
+
+zfs-rollback8,
+
+
+zfs-send8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

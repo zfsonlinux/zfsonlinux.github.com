@@ -1,0 +1,132 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-WAIT</TITLE>
+</HEAD><BODY>
+<H1>ZFS-WAIT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-wait</B>
+
+ - Wait for background activity to stop in a ZFS filesystem
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>wait</B>
+
+[-<B>t </B><I>activity </I><B></B>[, <B></B><I>activity </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<I>fs</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>wait</B>
+
+[-<B>t </B><I>activity </I><B></B>[, <B></B><I>activity </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<I>fs</I>
+
+<DD>
+
+<DD>Waits until all background activity of the given types has ceased in the given
+filesystem.
+The activity could cease because it has completed or because the filesystem has
+been destroyed or unmounted.
+If no activities are specified, the command waits until background activity of
+every type listed below has ceased.
+If there is no activity of the given types in progress, the command returns
+immediately.
+<P>
+
+These are the possible values for
+<I>activity</I>
+
+ 
+along with what each one waits for:
+
+<PRE>
+        deleteq       The filesystem's internal delete queue to empty
+</PRE>
+
+<P>
+
+Note that the internal delete queue does not finish draining until
+all large files have had time to be fully destroyed and all open file
+handles to unlinked files are closed.
+</DL>
+<P>
+
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+lsof">lsof</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>

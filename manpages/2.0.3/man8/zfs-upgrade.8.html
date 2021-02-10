@@ -1,0 +1,190 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-UPGRADE</TITLE>
+</HEAD><BODY>
+<H1>ZFS-UPGRADE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-upgrade</B>
+
+ - Manage upgrading the on-disk version of filesystems.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>upgrade</B>
+
+<BR><B>zfs</B>
+
+<B>upgrade</B>
+
+-<B>v</B>
+
+<BR><B>zfs</B>
+
+<B>upgrade</B>
+
+[-<B>r</B>
+
+]
+
+[-<B>V </B><I>version</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>upgrade</B>
+
+<DD>
+
+<DD>Displays a list of file systems that are not the most recent version.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>upgrade</B>
+
+-<B>v</B>
+
+<DD>
+
+<DD>Displays a list of currently supported file system versions.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>upgrade</B>
+
+[-<B>r</B>
+
+]
+
+[-<B>V </B><I>version</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<DD>
+
+<DD>Upgrades file systems to a new on-disk version.
+Once this is done, the file systems will no longer be accessible on systems
+running older versions of the software.
+<B>zfs send</B>
+
+
+
+streams generated from new snapshots of these file systems cannot be accessed on
+systems running older versions of the software.
+<P>
+
+In general, the file system version is independent of the pool version.
+See
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+for information on the
+<B>zpool upgrade</B>
+
+
+
+command.
+<P>
+
+In some cases, the file system version and the pool version are interrelated and
+the pool version must be upgraded before the file system version can be
+upgraded.
+<DL COMPACT>
+<P>
+
+<DT><B>-V </B><I>version</I>
+
+
+
+
+<DD>
+Upgrade to the specified
+<I>version</I>
+
+ 
+If the
+-<B>V</B>
+
+flag is not specified, this command upgrades to the most recent version.
+This
+option can only be used to increase the version number, and only up to the most
+recent version supported by this software.
+<DT><B>-a</B>
+
+
+<DD>
+Upgrade all file systems on all imported pools.
+<DT><B></B><I>filesystem</I>
+
+
+<DD>
+Upgrade the specified file system.
+<DT><B>-r</B>
+
+
+<DD>
+Upgrade the specified file system and all descendent file systems.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-upgrade8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 21:56:27 GMT, February 10, 2021
+</BODY>
+</HTML>
