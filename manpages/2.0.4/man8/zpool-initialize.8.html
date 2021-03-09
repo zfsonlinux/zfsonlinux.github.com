@@ -1,0 +1,153 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-INITIALIZE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-INITIALIZE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-initialize</B>
+
+ - Write to all unallocated regions of eligible devices in a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>initialize</B>
+
+[-<B>c | -s</B>
+
+
+
+]
+
+[-<B>w</B>
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>initialize</B>
+
+[-<B>c | -s</B>
+
+
+
+]
+
+[-<B>w</B>
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<DD>
+
+<DD>Begins initializing by writing to all unallocated regions on the specified
+devices, or all eligible devices in the pool if no individual devices are
+specified.
+Only leaf data or log devices may be initialized.
+<DL COMPACT>
+<P>
+
+<DT><B>-c, -cancel</B>
+
+
+<DD>
+Cancel initializing on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+initialized, the command will fail and no cancellation will occur on any device.
+<DT><B>-s -suspend</B>
+
+
+<DD>
+Suspend initializing on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+initialized, the command will fail and no suspension will occur on any device.
+Initializing can then be resumed by running
+<B>zpool initialize</B>
+
+
+
+with no flags on the relevant target devices.
+<DT><B>-w, -wait</B>
+
+
+<DD>
+Wait until the devices have finished initializing before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-add8,
+
+
+zpool-attach8,
+
+
+zpool-create8,
+
+
+zpool-online8,
+
+
+zpool-replace8,
+
+
+zpool-trim8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

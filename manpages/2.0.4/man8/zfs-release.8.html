@@ -1,0 +1,218 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-HOLD</TITLE>
+</HEAD><BODY>
+<H1>ZFS-HOLD</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-hold</B>
+
+ - Hold a snapshot to prevent it being removed with the zfs destroy command.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>hold</B>
+
+[-<B>r</B>
+
+]
+
+<I>tag snapshot </I><B>...</B>
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>holds</B>
+
+[-<B>rH</B>
+
+]
+
+<I>snapshot </I><B>...</B>
+
+
+
+<BR><B>zfs</B>
+
+<B>release</B>
+
+[-<B>r</B>
+
+]
+
+<I>tag snapshot </I><B>...</B>
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>hold</B>
+
+[-<B>r</B>
+
+]
+
+<I>tag snapshot </I><B>...</B>
+
+
+
+
+
+<DD>
+
+<DD>Adds a single reference, named with the
+<I>tag</I>
+
+argument, to the specified snapshot or snapshots.
+Each snapshot has its own tag namespace, and tags must be unique within that
+space.
+<P>
+
+If a hold exists on a snapshot, attempts to destroy that snapshot by using the
+<B>zfs destroy</B>
+
+
+
+command return
+Er EBUSY .
+
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Specifies that a hold with the given tag is applied recursively to the snapshots
+of all descendent file systems.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>holds</B>
+
+[-<B>rH</B>
+
+]
+
+<I>snapshot </I><B>...</B>
+
+
+
+<DD>
+
+<DD>Lists all existing user references for the given snapshot or snapshots.
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Lists the holds that are set on the named descendent snapshots, in addition to
+listing the holds on the named snapshot.
+<DT><B>-H</B>
+
+
+<DD>
+Do not print headers, use tab-delimited output.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>release</B>
+
+[-<B>r</B>
+
+]
+
+<I>tag snapshot </I><B>...</B>
+
+
+
+
+
+<DD>
+
+<DD>Removes a single reference, named with the
+<I>tag</I>
+
+argument, from the specified snapshot or snapshots.
+The tag must already exist for each snapshot.
+If a hold exists on a snapshot, attempts to destroy that snapshot by using the
+<B>zfs destroy</B>
+
+
+
+command return
+Er EBUSY .
+
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Recursively releases a hold with the given tag on the snapshots of all
+descendent file systems.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-destroy8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

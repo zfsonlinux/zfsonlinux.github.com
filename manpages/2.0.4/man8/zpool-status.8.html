@@ -1,0 +1,326 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-STATUS</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-STATUS</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-status</B>
+
+ - Display detailed health status for the given ZFS storage pools
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>status</B>
+
+[-<B>c </B><I>SCRIPT </I>]
+
+
+
+
+
+[-<B>DigLpPstvx</B>
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>status</B>
+
+[-<B>c </B>[<I>SCRIPT1 </I><B></B>[, <B></B><I>SCRIPT2 </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+]
+
+[-<B>DigLpPstvx</B>
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<DD>
+
+<DD>Displays the detailed health status for the given pools.
+If no
+<I>pool</I>
+
+is specified, then the status of each pool in the system is displayed.
+For more information on pool and device health, see the
+<I>Device Failure and Recovery</I>
+
+section of
+<A HREF="/man/man2html?8+zpoolconcepts">zpoolconcepts</A>(8).
+
+
+<P>
+
+If a scrub or resilver is in progress, this command reports the percentage done
+and the estimated time to completion.
+Both of these are only approximate, because the amount of data in the pool and
+the other workloads on the system can change.
+<DL COMPACT>
+<P>
+
+<DT><B>-c </B>[<I>SCRIPT1 </I><B></B>[, <B></B><I>SCRIPT2 </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+<DD>
+Run a script (or scripts) on each vdev and include the output as a new column
+in the
+<B>zpool status</B>
+
+
+
+output.  See the
+-<B>c</B>
+
+option of
+<B>zpool iostat</B>
+
+
+
+for complete details.
+<DT><B>-i</B>
+
+
+<DD>
+Display vdev initialization status.
+<DT><B>-g</B>
+
+
+<DD>
+Display vdev GUIDs instead of the normal device names. These GUIDs
+can be used in place of device names for the zpool
+detach/offline/remove/replace commands.
+<DT><B>-L</B>
+
+
+<DD>
+Display real paths for vdevs resolving all symbolic links. This can
+be used to look up the current block device name regardless of the
+/dev/disk/
+
+path used to open it.
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable (exact) values.
+<DT><B>-P</B>
+
+
+<DD>
+Display full paths for vdevs instead of only the last component of
+the path. This can be used in conjunction with the
+-<B>L</B>
+
+flag.
+<DT><B>-D</B>
+
+
+<DD>
+Display a histogram of deduplication statistics, showing the allocated
+(physically present on disk)
+
+and referenced
+(logically referenced in the pool)
+
+block counts and sizes by reference count.
+<DT><B>-s</B>
+
+
+<DD>
+Display the number of leaf VDEV slow IOs.  This is the number of IOs that
+didn't complete in <B>zio_slow_io_ms</B> milliseconds (default 30 seconds).
+This does not necessarily mean the IOs failed to complete, just took an
+unreasonably long amount of time.  This may indicate a problem with the
+underlying storage.
+<DT><B>-t</B>
+
+
+<DD>
+Display vdev TRIM status.
+<DT><B>-T u | d</B>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Display a time stamp.
+Specify
+<B>u</B>
+
+for a printed representation of the internal representation of time.
+See
+<A HREF="/man/man2html?2+time">time</A>(2).
+
+
+Specify
+<B>d</B>
+
+for standard date format.
+See
+<A HREF="/man/man2html?1+date">date</A>(1).
+
+
+<DT><B>-v</B>
+
+
+<DD>
+Displays verbose data error information, printing out a complete list of all
+data errors since the last complete pool scrub.
+<DT><B>-x</B>
+
+
+<DD>
+Only display status for pools that are exhibiting errors or are otherwise
+unavailable.
+Warnings about pools not using the latest on-disk format will not be included.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-events8,
+
+
+zpool-history8,
+
+
+zpool-iostat8,
+
+
+zpool-list8,
+
+
+zpool-resilver8,
+
+
+zpool-scrub8,
+
+
+zpool-wait8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,169 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-CLONE</TITLE>
+</HEAD><BODY>
+<H1>ZFS-CLONE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-clone</B>
+
+ - Creates a clone of the given snapshot.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>clone</B>
+
+[-<B>p</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>snapshot filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>clone</B>
+
+[-<B>p</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+<I>snapshot filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>See the
+<I>Clones</I>
+
+section of
+<A HREF="/man/man2html?8+zfsconcepts">zfsconcepts</A>(8)
+
+
+for details.
+The target dataset can be located anywhere in the ZFS hierarchy, and is created
+as the same type as the original.
+<DL COMPACT>
+<P>
+
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property; see
+<B>zfs create</B>
+
+
+
+for details.
+<DT><B>-p</B>
+
+
+<DD>
+Creates all the non-existing parent datasets.
+Datasets created in this manner are automatically mounted according to the
+<B>mountpoint</B>
+
+property inherited from their parent.
+If the target filesystem or volume already exists, the operation completes
+successfully.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-promote8,
+
+
+zfs-snapshot8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

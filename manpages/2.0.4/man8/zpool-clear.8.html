@@ -1,0 +1,90 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-CLEAR</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-CLEAR</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-clear</B>
+
+ - Clears device errors in a ZFS storage pool.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>clear</B>
+
+<I>pool</I>
+
+[<I>device</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>clear</B>
+
+<I>pool</I>
+
+[<I>device</I>
+
+]
+
+<DD>
+
+<DD>Clears device errors in a pool.
+If no arguments are specified, all device errors within the pool are cleared.
+If one or more devices is specified, only those errors associated with the
+specified device or devices are cleared.
+If multihost is enabled, and the pool has been suspended, this will not
+resume I/O.  While the pool was suspended, it may have been imported on
+another host, and resuming I/O could result in pool damage.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+zdb">zdb</A>(8),
+
+
+zpool-reopen8,
+
+
+zpool-status8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

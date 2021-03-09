@@ -1,0 +1,415 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-PROJECT</TITLE>
+</HEAD><BODY>
+<H1>ZFS-PROJECT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-project</B>
+
+ - List, set, or clear project ID and/or inherit flag on the file(s) or directories.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>project</B>
+
+[-<B>d | -r </B>]
+
+
+
+
+
+
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>project</B>
+
+-<B>C</B>
+
+[-<B>kr </B>]
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>project</B>
+
+-<B>c</B>
+
+[-<B>0 </B>]
+
+
+
+
+
+[-<B>d | -r </B>]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>p </B><I>id</I>
+
+
+
+]
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>project</B>
+
+[-<B>p </B><I>id</I>
+
+
+
+]
+
+[-<B>rs </B>]
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>project</B>
+
+[-<B>d | -r </B>]
+
+
+
+
+
+
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>List project identifier (ID) and inherit flag of file(s) or directories.
+<DL COMPACT>
+<P>
+
+<DT><B>-d</B>
+
+
+<DD>
+Show the directory project ID and inherit flag, not its children. It will
+overwrite the former specified
+-<B>r</B>
+
+option.
+<DT><B>-r</B>
+
+
+<DD>
+Show on subdirectories recursively. It will overwrite the former specified
+-<B>d</B>
+
+option.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>project</B>
+
+-<B>C</B>
+
+[-<B>kr </B>]
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Clear project inherit flag and/or ID on the file(s) or directories.
+<DL COMPACT>
+<P>
+
+<DT><B>-k</B>
+
+
+<DD>
+Keep the project ID unchanged. If not specified, the project ID will be reset
+as zero.
+<DT><B>-r</B>
+
+
+<DD>
+Clear on subdirectories recursively.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>project</B>
+
+-<B>c</B>
+
+[-<B>0 </B>]
+
+
+
+
+
+[-<B>d | -r </B>]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>p </B><I>id</I>
+
+
+
+]
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Check project ID and inherit flag on the file(s) or directories, report the
+entries without project inherit flag or with different project IDs from the
+specified (via
+-<B>p</B>
+
+option) value or the target directory's project ID.
+<DL COMPACT>
+<P>
+
+<DT><B>-0</B>
+
+
+<DD>
+Print file name with a trailing NUL instead of newline (by default), like
+&quot;find -print0&quot;.
+<DT><B>-d</B>
+
+
+<DD>
+Check the directory project ID and inherit flag, not its children. It will
+overwrite the former specified
+-<B>r</B>
+
+option.
+<DT><B>-p</B>
+
+
+<DD>
+Specify the referenced ID for comparing with the target file(s) or directories'
+project IDs. If not specified, the target (top) directory's project ID will be
+used as the referenced one.
+<DT><B>-r</B>
+
+
+<DD>
+Check on subdirectories recursively. It will overwrite the former specified
+-<B>d</B>
+
+option.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>project</B>
+
+[-<B>p </B><I>id</I>
+
+
+
+]
+
+[-<B>rs </B>]
+
+
+
+
+
+<I>file </I><B>| </B><I>directory </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Set project ID and/or inherit flag on the file(s) or directories.
+<DL COMPACT>
+<P>
+
+<DT><B>-p</B>
+
+
+<DD>
+Set the file(s)' or directories' project ID with the given value.
+<DT><B>-r</B>
+
+
+<DD>
+Set on subdirectories recursively.
+<DT><B>-s</B>
+
+
+<DD>
+Set project inherit flag on the given file(s) or directories. It is usually used
+for setup tree quota on the directory target with
+-<B>r</B>
+
+option specified together. When setup tree quota, by default the directory's
+project ID will be set to all its descendants unless you specify the project
+ID via
+-<B>p</B>
+
+option explicitly.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-projectspace8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,180 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-SCRUB</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-SCRUB</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-scrub</B>
+
+ - Begin a scrub or resume a paused scrub of a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>scrub</B>
+
+[-<B>s | -p</B>
+
+
+
+]
+
+[-<B>w</B>
+
+]
+
+<I>pool </I><B>...</B>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>scrub</B>
+
+[-<B>s | -p</B>
+
+
+
+]
+
+[-<B>w</B>
+
+]
+
+<I>pool </I><B>...</B>
+
+
+
+<DD>
+
+<DD>Begins a scrub or resumes a paused scrub.
+The scrub examines all data in the specified pools to verify that it checksums
+correctly.
+For replicated
+(mirror or raidz)
+
+devices, ZFS automatically repairs any damage discovered during the scrub.
+The
+<B>zpool status</B>
+
+
+
+command reports the progress of the scrub and summarizes the results of the
+scrub upon completion.
+<P>
+
+Scrubbing and resilvering are very similar operations.
+The difference is that resilvering only examines data that ZFS knows to be out
+of date
+Po for example, when attaching a new device to a mirror or replacing an existing
+
+device
+Pc ,
+
+whereas scrubbing examines all data to discover silent errors due to hardware
+faults or disk failure.
+<P>
+
+Because scrubbing and resilvering are I/O-intensive operations, ZFS only allows
+one at a time.
+If a scrub is paused, the
+<B>zpool scrub</B>
+
+
+
+resumes it.
+If a resilver is in progress, ZFS does not allow a scrub to be started until the
+resilver completes.
+<P>
+
+Note that, due to changes in pool data on a live system, it is possible for
+scrubs to progress slightly beyond 100% completion. During this period, no
+completion time estimate will be provided.
+<DL COMPACT>
+<P>
+
+<DT><B>-s</B>
+
+
+<DD>
+Stop scrubbing.
+</DL>
+<P>
+
+<DL COMPACT>
+<P>
+
+<DT><B>-p</B>
+
+
+<DD>
+Pause scrubbing.
+Scrub pause state and progress are periodically synced to disk.
+If the system is restarted or pool is exported during a paused scrub,
+even after import, scrub will remain paused until it is resumed.
+Once resumed the scrub will pick up from the place where it was last
+checkpointed to disk.
+To resume a paused scrub issue
+<B>zpool scrub</B>
+
+
+
+again.
+<DT><B>-w</B>
+
+
+<DD>
+Wait until scrub has completed before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-iostat8,
+
+
+zpool-resilver8,
+
+
+zpool-status8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

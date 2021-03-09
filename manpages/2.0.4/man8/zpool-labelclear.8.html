@@ -1,0 +1,109 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-LABELCLEAR</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-LABELCLEAR</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-labelclear</B>
+
+ - Removes ZFS label information from the specified physical device
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>labelclear</B>
+
+[-<B>f</B>
+
+]
+
+<I>device</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>labelclear</B>
+
+[-<B>f</B>
+
+]
+
+<I>device</I>
+
+<DD>
+
+<DD>Removes ZFS label information from the specified
+<I>device</I>
+
+ 
+If the
+<I>device</I>
+
+is a cache device, it also removes the L2ARC header
+(persistent L2ARC). The
+<I>device</I>
+
+must not be part of an active pool configuration.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Treat exported or foreign devices as inactive.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-destroy8,
+
+
+zpool-detach8,
+
+
+zpool-remove8,
+
+
+zpool-replace8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,413 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-DESTROY</TITLE>
+</HEAD><BODY>
+<H1>ZFS-DESTROY</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-destroy</B>
+
+ - Destroys the given dataset(s), snapshot(s), or bookmark.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>destroy</B>
+
+[-<B>Rfnprv</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>destroy</B>
+
+[-<B>Rdnprv</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume </I><B>@ </B><I>snap </I><B></B>[% <B></B><I>snap </I><B></B>[, <B></B><I>snap </I><B></B>[% <B></B><I>snap </I><B>...</B>
+
+]
+]
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>destroy</B>
+
+<I>filesystem </I><B>| </B><I>volume </I><B># </B><I>bookmark</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>destroy</B>
+
+[-<B>Rfnprv</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume</I>
+
+
+
+
+
+
+
+<DD>
+
+<DD>Destroys the given dataset.
+By default, the command unshares any file systems that are currently shared,
+unmounts any file systems that are currently mounted, and refuses to destroy a
+dataset that has active dependents
+(children or clones)
+
+ 
+<DL COMPACT>
+<P>
+
+<DT><B>-R</B>
+
+
+<DD>
+Recursively destroy all dependents, including cloned file systems outside the
+target hierarchy.
+<DT><B>-f</B>
+
+
+<DD>
+Force an unmount of any file systems using the
+<B>unmount -f</B>
+
+
+
+command.
+This option has no effect on non-file systems or unmounted file systems.
+<DT><B>-n</B>
+
+
+<DD>
+Do a dry-run
+(Qq No-op
+
+)
+
+deletion.
+No data will be deleted.
+This is useful in conjunction with the
+-<B>v</B>
+
+or
+-<B>p</B>
+
+flags to determine what data would be deleted.
+<DT><B>-p</B>
+
+
+<DD>
+Print machine-parsable verbose information about the deleted data.
+<DT><B>-r</B>
+
+
+<DD>
+Recursively destroy all children.
+<DT><B>-v</B>
+
+
+<DD>
+Print verbose information about the deleted data.
+</DL>
+<P>
+
+<P>
+
+Extreme care should be taken when applying either the
+-<B>r</B>
+
+or the
+-<B>R</B>
+
+options, as they can destroy large portions of a pool and cause unexpected
+behavior for mounted file systems in use.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>destroy</B>
+
+[-<B>Rdnprv</B>
+
+]
+
+<I>filesystem </I><B>| </B><I>volume </I><B>@ </B><I>snap </I><B></B>[% <B></B><I>snap </I><B></B>[, <B></B><I>snap </I><B></B>[% <B></B><I>snap </I><B>...</B>
+
+]
+]
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>The given snapshots are destroyed immediately if and only if the
+`zfs'
+
+destroy
+command without the
+-<B>d</B>
+
+option would have destroyed it.
+Such immediate destruction would occur, for example, if the snapshot had no
+clones and the user-initiated reference count were zero.
+<P>
+
+If a snapshot does not qualify for immediate destruction, it is marked for
+deferred deletion.
+In this state, it exists as a usable, visible snapshot until both of the
+preconditions listed above are met, at which point it is destroyed.
+<P>
+
+An inclusive range of snapshots may be specified by separating the first and
+last snapshots with a percent sign.
+The first and/or last snapshots may be left blank, in which case the
+filesystem's oldest or newest snapshot will be implied.
+<P>
+
+Multiple snapshots
+(or ranges of snapshots)
+
+of the same filesystem or volume may be specified in a comma-separated list of
+snapshots.
+Only the snapshot's short name
+Po the part after the
+
+<B>@</B>
+
+Pc should be specified when using a range or comma-separated list to identify
+
+multiple snapshots.
+<DL COMPACT>
+<P>
+
+<DT><B>-R</B>
+
+
+<DD>
+Recursively destroy all clones of these snapshots, including the clones,
+snapshots, and children.
+If this flag is specified, the
+-<B>d</B>
+
+flag will have no effect.
+<DT><B>-d</B>
+
+
+<DD>
+Destroy immediately. If a snapshot cannot be destroyed now, mark it for
+deferred destruction.
+<DT><B>-n</B>
+
+
+<DD>
+Do a dry-run
+(Qq No-op
+
+)
+
+deletion.
+No data will be deleted.
+This is useful in conjunction with the
+-<B>p</B>
+
+or
+-<B>v</B>
+
+flags to determine what data would be deleted.
+<DT><B>-p</B>
+
+
+<DD>
+Print machine-parsable verbose information about the deleted data.
+<DT><B>-r</B>
+
+
+<DD>
+Destroy
+(or mark for deferred deletion)
+
+all snapshots with this name in descendent file systems.
+<DT><B>-v</B>
+
+
+<DD>
+Print verbose information about the deleted data.
+<P>
+
+Extreme care should be taken when applying either the
+-<B>r</B>
+
+or the
+-<B>R</B>
+
+options, as they can destroy large portions of a pool and cause unexpected
+behavior for mounted file systems in use.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>destroy</B>
+
+<I>filesystem </I><B>| </B><I>volume </I><B># </B><I>bookmark</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>The given bookmark is destroyed.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-create8,
+
+
+zfs-hold8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,204 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-ATTACH</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-ATTACH</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-attach</B>
+
+ - Attach a new device to an existing ZFS virtual device (vdev).
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>attach</B>
+
+[-<B>fsw</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+<I>pool device new_device</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>attach</B>
+
+[-<B>fsw</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+<I>pool device new_device</I>
+
+<DD>
+
+<DD>Attaches
+<I>new_device</I>
+
+to the existing
+<I>device</I>
+
+ 
+The existing device cannot be part of a raidz configuration.
+If
+<I>device</I>
+
+is not currently part of a mirrored configuration,
+<I>device</I>
+
+automatically transforms into a two-way mirror of
+<I>device</I>
+
+and
+<I>new_device</I>
+
+ 
+If
+<I>device</I>
+
+is part of a two-way mirror, attaching
+<I>new_device</I>
+
+creates a three-way mirror, and so on.
+In either case,
+<I>new_device</I>
+
+begins to resilver immediately and any running scrub is cancelled.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Forces use of
+<I>new_device</I>
+
+ 
+even if it appears to be in use.
+Not all devices can be overridden in this manner.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given pool properties. See the
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8)
+
+
+manual page for a list of valid properties that can be set. The only property
+supported at the moment is ashift.
+<DT><B>-s</B>
+
+
+<DD>
+The
+<I>new_device</I>
+
+is reconstructed sequentially to restore redundancy as quickly as possible.
+Checksums are not verfied during sequential reconstruction so a scrub is
+started when the resilver completes.
+Sequential reconstruction is not supported for raidz configurations.
+<DT><B>-w</B>
+
+
+<DD>
+Waits until
+<I>new_device</I>
+
+has finished resilvering before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-detach8,
+
+
+zpool-add8,
+
+
+zpool-import8,
+
+
+zpool-initialize8,
+
+
+zpool-online8,
+
+
+zpool-replace8,
+
+
+zpool-resilver8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

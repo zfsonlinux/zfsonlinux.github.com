@@ -1,0 +1,220 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-ADD</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-ADD</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-add</B>
+
+ - Adds specified virtual devices to a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>add</B>
+
+[-<B>fgLnP</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+<I>pool vdev </I><B>...</B>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>add</B>
+
+[-<B>fgLnP</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+<I>pool vdev </I><B>...</B>
+
+
+
+<DD>
+
+<DD>Adds the specified virtual devices to the given pool.
+The
+<I>vdev</I>
+
+specification is described in the
+<I>Virtual Devices</I>
+
+section of
+<A HREF="/man/man2html?8+zpoolconcepts">zpoolconcepts</A>(8).
+
+
+The behavior of the
+-<B>f</B>
+
+option, and the device checks performed are described in the
+<B>zpool create</B>
+
+
+
+subcommand.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Forces use of
+<I>vdev </I><B>s</B>
+
+
+
+ 
+even if they appear in use or specify a conflicting replication level.
+Not all devices can be overridden in this manner.
+<DT><B>-g</B>
+
+
+<DD>
+Display
+<I>vdev</I>
+
+ 
+GUIDs instead of the normal device names. These GUIDs can be used in place of
+device names for the zpool detach/offline/remove/replace commands.
+<DT><B>-L</B>
+
+
+<DD>
+Display real paths for
+<I>vdev </I><B>s</B>
+
+
+
+resolving all symbolic links. This can be used to look up the current block
+device name regardless of the /dev/disk/ path used to open it.
+<DT><B>-n</B>
+
+
+<DD>
+Displays the configuration that would be used without actually adding the
+<I>vdev </I><B>s</B>
+
+
+
+ 
+The actual pool creation can still fail due to insufficient privileges or
+device sharing.
+<DT><B>-P</B>
+
+
+<DD>
+Display real paths for
+<I>vdev </I><B>s</B>
+
+
+
+instead of only the last component of the path. This can be used in
+conjunction with the
+-<B>L</B>
+
+flag.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given pool properties. See the
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8)
+
+
+manual page for a list of valid properties that can be set. The only property
+supported at the moment is ashift.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-remove8,
+
+
+zpool-attach8,
+
+
+zpool-import8,
+
+
+zpool-initialize8,
+
+
+zpool-online8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

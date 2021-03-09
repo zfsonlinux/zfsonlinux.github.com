@@ -1,0 +1,602 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ARCSTAT</TITLE>
+</HEAD><BODY>
+<H1>ARCSTAT</H1>
+Section: User Commands  (1)<BR>Updated: Oct 20, 2020<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+arcstat - report ZFS ARC and L2ARC statistics
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<PRE>
+<B>arcstat</B> [<B>-havxp</B>] [<B>-f field[,field]...</B>] [<B>-o file</B>] [<B>-s string</B>] [<B>interval</B> [<B>count</B>]]
+</PRE>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+
+The <B>arcstat</B> utility print various ZFS ARC and L2ARC statistics in
+vmstat-like fashion.
+<P>
+<P>
+<P>
+<P>
+
+The <B>arcstat</B> command reports the following information:
+<P>
+
+<P>
+
+<P>
+
+
+<B>c </B>
+
+<DL COMPACT><DT><DD>
+ARC target size
+</DL>
+
+<P>
+<P>
+
+
+<B>dh% </B>
+
+<DL COMPACT><DT><DD>
+Demand data hit percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>dm% </B>
+
+<DL COMPACT><DT><DD>
+Demand data miss percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>mfu </B>
+
+<DL COMPACT><DT><DD>
+MFU list hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>mh% </B>
+
+<DL COMPACT><DT><DD>
+Metadata hit percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>mm% </B>
+
+<DL COMPACT><DT><DD>
+Metadata miss percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>mru </B>
+
+<DL COMPACT><DT><DD>
+MRU list hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>ph% </B>
+
+<DL COMPACT><DT><DD>
+Prefetch hits percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>pm% </B>
+
+<DL COMPACT><DT><DD>
+Prefetch miss percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>dhit </B>
+
+<DL COMPACT><DT><DD>
+Demand data hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>dmis </B>
+
+<DL COMPACT><DT><DD>
+Demand data misses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>hit% </B>
+
+<DL COMPACT><DT><DD>
+ARC hit percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>hits </B>
+
+<DL COMPACT><DT><DD>
+ARC reads per second
+</DL>
+
+<P>
+<P>
+
+
+<B>mfug </B>
+
+<DL COMPACT><DT><DD>
+MFU ghost list hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>mhit </B>
+
+<DL COMPACT><DT><DD>
+Metadata hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>miss </B>
+
+<DL COMPACT><DT><DD>
+ARC misses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>mmis </B>
+
+<DL COMPACT><DT><DD>
+Metadata misses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>mrug </B>
+
+<DL COMPACT><DT><DD>
+MRU ghost list hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>phit </B>
+
+<DL COMPACT><DT><DD>
+Prefetch hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>pmis </B>
+
+<DL COMPACT><DT><DD>
+Prefetch misses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>read </B>
+
+<DL COMPACT><DT><DD>
+Total ARC accesses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>time </B>
+
+<DL COMPACT><DT><DD>
+Time
+</DL>
+
+<P>
+<P>
+
+
+<B>size </B>
+
+<DL COMPACT><DT><DD>
+ARC size
+</DL>
+
+<P>
+<P>
+
+
+<B>arcsz </B>
+
+<DL COMPACT><DT><DD>
+Alias for <B>size</B>
+</DL>
+
+<P>
+<P>
+
+
+<B>dread </B>
+
+<DL COMPACT><DT><DD>
+Demand data accesses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>eskip </B>
+
+<DL COMPACT><DT><DD>
+evict_skip per second
+</DL>
+
+<P>
+<P>
+
+
+<B>miss% </B>
+
+<DL COMPACT><DT><DD>
+ARC miss percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>mread </B>
+
+<DL COMPACT><DT><DD>
+Metadata accesses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>pread </B>
+
+<DL COMPACT><DT><DD>
+Prefetch accesses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>l2hit% </B>
+
+<DL COMPACT><DT><DD>
+L2ARC access hit percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>l2hits </B>
+
+<DL COMPACT><DT><DD>
+L2ARC hits per second
+</DL>
+
+<P>
+<P>
+
+
+<B>l2miss </B>
+
+<DL COMPACT><DT><DD>
+L2ARC misses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>l2read </B>
+
+<DL COMPACT><DT><DD>
+Total L2ARC accesses per second
+</DL>
+
+<P>
+<P>
+
+
+<B>l2size </B>
+
+<DL COMPACT><DT><DD>
+Size of the L2ARC
+</DL>
+
+<P>
+<P>
+
+
+<B>mtxmis </B>
+
+<DL COMPACT><DT><DD>
+mutex_miss per second
+</DL>
+
+<P>
+<P>
+
+
+<B>l2bytes </B>
+
+<DL COMPACT><DT><DD>
+Bytes read per second from the L2ARC
+</DL>
+
+<P>
+<P>
+
+
+<B>l2miss% </B>
+
+<DL COMPACT><DT><DD>
+L2ARC access miss percentage
+</DL>
+
+<P>
+<P>
+
+
+<B>l2asize </B>
+
+<DL COMPACT><DT><DD>
+Actual (compressed) size of the L2ARC
+</DL>
+
+<P>
+<P>
+
+
+<B>grow </B>
+
+<DL COMPACT><DT><DD>
+ARC grow disabled
+</DL>
+
+<P>
+<P>
+
+
+<B>need </B>
+
+<DL COMPACT><DT><DD>
+ARC reclaim needed
+</DL>
+
+<P>
+<P>
+
+
+<B>free </B>
+
+<DL COMPACT><DT><DD>
+The ARC's idea of how much free memory there is, which includes evictable memory in the page cache.
+Since the ARC tries to keep <B>avail</B> above zero, <B>avail</B> is usually more instructive to observe than <B>free</B>.
+</DL>
+
+<P>
+<P>
+
+
+<B>avail </B>
+
+<DL COMPACT><DT><DD>
+The ARC's idea of how much free memory is available to it, which is a bit less than <B>free</B>.
+May temporarily be negative, in which case the ARC will reduce the target size <B>c</B>.
+</DL>
+
+
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<P>
+
+The following options are supported:
+<P>
+<P>
+
+
+<B>-a</B>
+
+<DL COMPACT><DT><DD>
+Print all possible stats.
+</DL>
+
+<P>
+<P>
+
+
+<B>-f</B>
+
+<DL COMPACT><DT><DD>
+Display only specific fields. See <B>DESCRIPTION</B> for supported statistics.
+</DL>
+
+<P>
+<P>
+
+
+<B>-h</B>
+
+<DL COMPACT><DT><DD>
+Display help message.
+</DL>
+
+<P>
+<P>
+
+
+<B>-o</B>
+
+<DL COMPACT><DT><DD>
+Report statistics to a file instead of the standard output.
+</DL>
+
+<P>
+<P>
+
+
+<B>-p</B>
+
+<DL COMPACT><DT><DD>
+Disable auto-scaling of numerical fields (for raw, machine-parsable values).
+</DL>
+
+<P>
+<P>
+
+
+<B>-s</B>
+
+<DL COMPACT><DT><DD>
+Display data with a specified separator (default: 2 spaces).
+</DL>
+
+<P>
+<P>
+
+
+<B>-x</B>
+
+<DL COMPACT><DT><DD>
+Print extended stats (same as -f time,mfu,mru,mfug,mrug,eskip,mtxmis,dread,pread,read).
+</DL>
+
+<P>
+<P>
+
+
+<B>-v</B>
+
+<DL COMPACT><DT><DD>
+Show field headers and definitions
+</DL>
+
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>OPERANDS</H2>
+
+<P>
+
+The following operands are supported:
+<P>
+
+
+<B></B><I>count</I>
+
+<DL COMPACT><DT><DD>
+Display only <I>count</I> reports.
+</DL>
+
+<P>
+<P>
+
+
+<B></B><I>interval</I>
+
+<DL COMPACT><DT><DD>
+Specify the sampling interval in seconds.
+</DL>
+
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+<P>
+
+arcstat was originally written in Perl by Neelakanth Nadgir and supported only ZFS ARC statistics.
+Mike Harsch updated it to support L2ARC statistics.
+John Hixson ported it to Python for FreeNAS over some beer, after which many individuals from the OpenZFS community continued to maintain and improve it.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">OPERANDS</A><DD>
+<DT><A HREF="#lbAG">AUTHORS</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

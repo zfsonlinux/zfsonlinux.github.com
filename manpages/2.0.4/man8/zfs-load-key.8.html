@@ -1,0 +1,616 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-LOAD-KEY</TITLE>
+</HEAD><BODY>
+<H1>ZFS-LOAD-KEY</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-load-key</B>
+
+ - Load, unload, or change the encryption key used to access a dataset.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>load-key</B>
+
+[-<B>nr</B>
+
+]
+
+[-<B>L </B><I>keylocation</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<BR><B>zfs</B>
+
+<B>unload-key</B>
+
+[-<B>r</B>
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<BR><B>zfs</B>
+
+<B>change-key</B>
+
+[-<B>l</B>
+
+]
+
+[-<B>o </B><I>keylocation </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>keyformat </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>pbkdf2iters </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+<I>filesystem</I>
+
+<BR><B>zfs</B>
+
+<B>change-key</B>
+
+-<B>i</B>
+
+[-<B>l</B>
+
+]
+
+<I>filesystem</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>load-key</B>
+
+[-<B>nr</B>
+
+]
+
+[-<B>L </B><I>keylocation</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<DD>
+
+<DD>Load the key for
+<I>filesystem</I>
+
+ 
+allowing it and all children that inherit the
+<B>keylocation</B>
+
+property to be accessed. The key will be expected in the format specified by the
+<B>keyformat</B>
+
+and location specified by the
+<B>keylocation</B>
+
+property. Note that if the
+<B>keylocation</B>
+
+is set to
+<B>prompt</B>
+
+the terminal will interactively wait for the key to be entered. Loading a key
+will not automatically mount the dataset. If that functionality is desired,
+<B>zfs mount -l</B>
+
+
+
+
+
+will ask for the key and mount the dataset
+Po see
+
+zfs-mount8
+
+
+Pc .
+
+Once the key is loaded the
+<B>keystatus</B>
+
+property will become
+<B>available</B>
+
+ 
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Recursively loads the keys for the specified filesystem and all descendent
+encryption roots.
+<DT><B>-a</B>
+
+
+<DD>
+Loads the keys for all encryption roots in all imported pools.
+<DT><B>-n</B>
+
+
+<DD>
+Do a dry-run
+(Qq No-op
+
+)
+
+load-key. This will cause zfs to simply check that the
+provided key is correct. This command may be run even if the key is already
+loaded.
+<DT><B>-L </B><I>keylocation</I>
+
+
+
+
+<DD>
+Use
+<I>keylocation</I>
+
+instead of the
+<B>keylocation</B>
+
+property. This will not change the value of the property on the dataset. Note
+that if used with either
+-<B>r</B>
+
+or
+-<B>a</B>
+
+ 
+<I>keylocation</I>
+
+may only be given as
+<B>prompt</B>
+
+ 
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unload-key</B>
+
+[-<B>r</B>
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<DD>
+
+<DD>Unloads a key from ZFS, removing the ability to access the dataset and all of
+its children that inherit the
+<B>keylocation</B>
+
+property. This requires that the dataset is not currently open or mounted. Once
+the key is unloaded the
+<B>keystatus</B>
+
+property will become
+<B>unavailable</B>
+
+ 
+<DL COMPACT>
+<P>
+
+<DT><B>-r</B>
+
+
+<DD>
+Recursively unloads the keys for the specified filesystem and all descendent
+encryption roots.
+<DT><B>-a</B>
+
+
+<DD>
+Unloads the keys for all encryption roots in all imported pools.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>change-key</B>
+
+[-<B>l</B>
+
+]
+
+[-<B>o </B><I>keylocation </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>keyformat </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>pbkdf2iters </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+<I>filesystem</I>
+
+<DD>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>change-key</B>
+
+-<B>i</B>
+
+[-<B>l</B>
+
+]
+
+<I>filesystem</I>
+
+<DD>
+
+<DD>Changes the user's key (e.g. a passphrase) used to access a dataset. This
+command requires that the existing key for the dataset is already loaded into
+ZFS. This command may also be used to change the
+<B>keylocation</B>
+
+ 
+<B>keyformat</B>
+
+ 
+and
+<B>pbkdf2iters</B>
+
+properties as needed. If the dataset was not previously an encryption root it
+will become one. Alternatively, the
+-<B>i</B>
+
+flag may be provided to cause an encryption root to inherit the parent's key
+instead.
+<P>
+
+If the user's key is compromised,
+<B>zfs change-key</B>
+
+
+
+does not necessarily protect existing or newly-written data from attack.
+Newly-written data will continue to be encrypted with the same master key as
+the existing data.  The master key is compromised if an attacker obtains a
+user key and the corresponding wrapped master key. Currently,
+<B>zfs change-key</B>
+
+
+
+does not overwrite the previous wrapped master key on disk, so it is
+accessible via forensic analysis for an indeterminate length of time.
+<P>
+
+In the event of a master key compromise, ideally the drives should be securely
+erased to remove all the old data (which is readable using the compromised
+master key), a new pool created, and the data copied back. This can be
+approximated in place by creating new datasets, copying the data
+(e.g. using
+<B>zfs send</B>
+
+
+
+|
+<B>zfs recv ), and then clearing the free space with</B>
+
+
+
+
+
+<B>zpool trim --secure</B>
+
+
+
+if supported by your hardware, otherwise
+<B>zpool initialize </B>
+
+
+
+
+
+<DL COMPACT>
+<P>
+
+<DT><B>-l</B>
+
+
+<DD>
+Ensures the key is loaded before attempting to change the key. This is
+effectively equivalent to
+Qq Nm zfs Cm load-key Ar filesystem ; Nm zfs Cm change-key Ar filesystem
+
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Allows the user to set encryption key properties (
+<B>keyformat</B>
+
+ 
+<B>keylocation</B>
+
+ 
+and
+<B>pbkdf2iters</B>
+
+) while changing the key. This is the only way to alter
+<B>keyformat</B>
+
+and
+<B>pbkdf2iters</B>
+
+after the dataset has been created.
+<DT><B>-i</B>
+
+
+<DD>
+Indicates that zfs should make
+<I>filesystem</I>
+
+inherit the key of its parent. Note that this command can only be run on an
+encryption root that has an encrypted parent.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H3>Encryption</H3>
+
+Enabling the
+<B>encryption</B>
+
+feature allows for the creation of encrypted filesystems and volumes.  ZFS
+will encrypt file and zvol data, file attributes, ACLs, permission bits,
+directory listings, FUID mappings, and
+<B>userused</B>
+
+/
+<B>groupused</B>
+
+data.  ZFS will not encrypt metadata related to the pool structure, including
+dataset and snapshot names, dataset hierarchy, properties, file size, file
+holes, and deduplication tables (though the deduplicated data itself is
+encrypted).
+<P>
+
+Key rotation is managed by ZFS.  Changing the user's key (e.g. a passphrase)
+does not require re-encrypting the entire dataset.  Datasets can be scrubbed,
+resilvered, renamed, and deleted without the encryption keys being loaded (see the
+<B>zfs load-key</B>
+
+
+
+subcommand for more info on key loading).
+<P>
+
+Creating an encrypted dataset requires specifying the
+<B>encryption</B>
+
+and
+<B>keyformat</B>
+
+properties at creation time, along with an optional
+<B>keylocation</B>
+
+and
+<B>pbkdf2iters</B>
+
+ 
+After entering an encryption key, the
+created dataset will become an encryption root. Any descendant datasets will
+inherit their encryption key from the encryption root by default, meaning that
+loading, unloading, or changing the key for the encryption root will implicitly
+do the same for all inheriting datasets. If this inheritance is not desired,
+simply supply a
+<B>keyformat</B>
+
+when creating the child dataset or use
+<B>zfs change-key</B>
+
+
+
+to break an existing relationship, creating a new encryption root on the child.
+Note that the child's
+<B>keyformat</B>
+
+may match that of the parent while still creating a new encryption root, and
+that changing the
+<B>encryption</B>
+
+property alone does not create a new encryption root; this would simply use a
+different cipher suite with the same key as its encryption root. The one
+exception is that clones will always use their origin's encryption key.
+As a result of this exception, some encryption-related properties (namely
+<B>keystatus</B>
+
+ 
+<B>keyformat</B>
+
+ 
+<B>keylocation</B>
+
+ 
+and
+<B>pbkdf2iters</B>
+
+ 
+do not inherit like other ZFS properties and instead use the value determined
+by their encryption root. Encryption root inheritance can be tracked via the
+read-only
+<B>encryptionroot</B>
+
+property.
+<P>
+
+Encryption changes the behavior of a few ZFS
+operations. Encryption is applied after compression so compression ratios are
+preserved. Normally checksums in ZFS are 256 bits long, but for encrypted data
+the checksum is 128 bits of the user-chosen checksum and 128 bits of MAC from
+the encryption suite, which provides additional protection against maliciously
+altered data. Deduplication is still possible with encryption enabled but for
+security, datasets will only dedup against themselves, their snapshots, and
+their clones.
+<P>
+
+There are a few limitations on encrypted datasets. Encrypted data cannot be
+embedded via the
+<B>embedded_data</B>
+
+feature. Encrypted datasets may not have
+<B>copies = </B><I>3</I>
+
+
+
+
+
+
+
+since the implementation stores some encryption metadata where the third copy
+would normally be. Since compression is applied before encryption datasets may
+be vulnerable to a CRIME-like attack if applications accessing the data allow
+for it. Deduplication with encryption will leak information about which blocks
+are equivalent in a dataset and will incur an extra CPU cost per block written.
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-create8,
+
+
+zfs-set8,
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">Encryption</A><DD>
+</DL>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

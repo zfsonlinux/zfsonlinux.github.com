@@ -1,0 +1,90 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-PROMOTE</TITLE>
+</HEAD><BODY>
+<H1>ZFS-PROMOTE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-promote</B>
+
+ - Promotes a clone file system to no longer be dependent on its origin snapshot.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>promote</B>
+
+<I>clone-filesystem</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>promote</B>
+
+<I>clone-filesystem</I>
+
+<DD>
+
+<DD>The
+<B>promote</B>
+
+command makes it possible to destroy the file system that the clone was created
+from.
+The clone parent-child dependency relationship is reversed, so that the origin
+file system becomes a clone of the specified file system.
+<P>
+
+The snapshot that was cloned, and any snapshots previous to this snapshot, are
+now owned by the promoted clone.
+The space they use moves from the origin file system to the promoted clone, so
+enough space must be available to accommodate these snapshots.
+No new space is consumed by this operation, but the space accounting is
+adjusted.
+The promoted clone must not have any conflicting snapshot names of its own.
+The
+zfs-rename8
+
+
+subcommand can be used to rename any conflicting snapshots.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-clone8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

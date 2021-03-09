@@ -1,0 +1,363 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-MOUNT-GENERATOR</TITLE>
+</HEAD><BODY>
+<H1>ZFS-MOUNT-GENERATOR</H1>
+Section: Maintenance Commands (8)<BR>Updated: Aug 24, 2020<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+zfs-mount-generator - generates systemd mount units for ZFS
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>/usr/lib/systemd/system-generators/zfs-mount-generator</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+zfs-mount-generator implements the <B>Generators Specification</B>
+of
+<B><A HREF="/man/man2html?1+systemd">systemd</A></B>(1),
+
+and is called during early boot to generate
+<B><A HREF="/man/man2html?5+systemd.mount">systemd.mount</A></B>(5)
+
+units for automatically mounted datasets. Mount ordering and dependencies
+are created for all tracked pools (see below).
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H3>ENCRYPTION KEYS</H3>
+
+If the dataset is an encryption root, a service that loads the associated key (either from file or through a
+<B><A HREF="/man/man2html?1+systemd-ask-password">systemd-ask-password</A></B>(1)
+
+prompt) will be created. This service
+<B>RequiresMountsFor</B>
+
+the path of the key (if file-based) and also copies the mount unit's
+<B>After</B>,
+
+<B>Before</B>
+
+and
+<B>Requires</B>.
+
+All mount units of encrypted datasets add the key-load service for their encryption root to their
+<B>Wants</B>
+
+and
+<B>After</B>.
+
+The service will not be
+<B>Want</B>ed
+
+or
+<B>Require</B>d
+
+by
+<B>local-fs.target</B>
+
+directly, and so will only be started manually or as a dependency of a started mount unit.
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H3>UNIT ORDERING AND DEPENDENCIES</H3>
+
+mount unit's
+<B>Before</B>
+
+-&gt;
+key-load service (if any)
+-&gt;
+mount unit
+-&gt;
+mount unit's
+<B>After</B>
+
+<P>
+It is worth nothing that when a mount unit is activated, it activates all available mount units for parent paths to its mountpoint, i.e. activating the mount unit for /tmp/foo/1/2/3 automatically activates all available mount units for /tmp, /tmp/foo, /tmp/foo/1, and /tmp/foo/1/2. This is true for any combination of mount units from any sources, not just ZFS.
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H3>CACHE FILE</H3>
+
+Because ZFS pools may not be available very early in the boot process,
+information on ZFS mountpoints must be stored separately. The output of the command
+<P>
+
+<DL COMPACT><DT><DD>
+zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand,encroot,keylocation,org.openzfs.systemd:requires,org.openzfs.systemd:requires-mounts-for,org.openzfs.systemd:before,org.openzfs.systemd:after,org.openzfs.systemd:wanted-by,org.openzfs.systemd:required-by,org.openzfs.systemd:nofail,org.openzfs.systemd:ignore
+<P>
+</DL>
+
+<P>
+
+for datasets that should be mounted by systemd, should be kept
+separate from the pool, at
+<P>
+
+<DL COMPACT><DT><DD>
+/usr/local/etc/zfs/zfs-list.cache/<I>POOLNAME</I>
+
+</DL>
+
+<P>
+
+The cache file, if writeable, will be kept synchronized with the pool
+state by the ZEDLET
+<P>
+
+<DL COMPACT><DT><DD>
+history_event-zfs-list-cacher.sh .
+</DL>
+
+<P>
+
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H3>PROPERTIES</H3>
+
+The behavior of the generator script can be influenced by the following dataset properties:
+<P>
+<DL COMPACT>
+<DT><B>canmount</B>=<B>on</B>|<B>off</B>|<B>noauto</B>
+
+<DD>
+If a dataset has
+<B>mountpoint</B>
+
+set and
+<B>canmount</B>
+
+is not
+<B>off</B>,
+
+a mount unit will be generated.
+Additionally, if
+<B>canmount</B>
+
+is
+<B>on</B>,
+
+<B>local-fs.target</B>
+
+will gain a dependency on the mount unit.
+<P>
+This behavior is equal to the
+<B>auto</B>
+
+and
+<B>noauto</B>
+
+legacy mount options, see
+<B><A HREF="/man/man2html?5+systemd.mount">systemd.mount</A></B>(5).
+
+<P>
+Encryption roots always generate a key-load service, even for
+<B>canmount=off</B>.
+
+<DT><B>org.openzfs.systemd:requires-mounts-for</B>=<B></B><I>path</I>...
+
+<DD>
+Space-separated list of mountpoints to require to be mounted for this mount unit
+<DT><B>org.openzfs.systemd:before</B>=<B></B><I>unit</I>...
+
+<DD>
+The mount unit and associated key-load service will be ordered before this space-separated list of units.
+<DT><B>org.openzfs.systemd:after</B>=<B></B><I>unit</I>...
+
+<DD>
+The mount unit and associated key-load service will be ordered after this space-separated list of units.
+<DT><B>org.openzfs.systemd:wanted-by</B>=<B></B><I>unit</I>...
+
+<DD>
+Space-separated list of units that will gain a
+<B>Wants</B>
+
+dependency on this mount unit.
+Setting this property implies
+<B>noauto</B>.
+
+<DT><B>org.openzfs.systemd:required-by</B>=<B></B><I>unit</I>...
+
+<DD>
+Space-separated list of units that will gain a
+<B>Requires</B>
+
+dependency on this mount unit.
+Setting this property implies
+<B>noauto</B>.
+
+<DT><B>org.openzfs.systemd:nofail</B>=<B>unset</B>|<B>on</B>|<B>off</B>
+
+<DD>
+Toggles between a
+<B>Wants</B>
+
+and
+<B>Requires</B>
+
+type of dependency between the mount unit and
+<B>local-fs.target</B>,
+
+if
+<B>noauto</B>
+
+isn't set or implied.
+<P>
+<B>on</B>:
+
+Mount will be
+<B>WantedBy</B>
+
+local-fs.target
+<P>
+<B>off</B>:
+
+Mount will be
+<B>Before</B>
+
+and
+<B>RequiredBy</B>
+
+local-fs.target
+<P>
+<B>unset</B>:
+
+Mount will be
+<B>Before</B>
+
+and
+<B>WantedBy</B>
+
+local-fs.target
+<DT><B>org.openzfs.systemd:ignore</B>=<B>on</B>|<B>off</B>
+
+<DD>
+If set to
+<B>on</B>,
+
+do not generate a mount unit for this dataset.
+<P>
+
+See also
+<B><A HREF="/man/man2html?5+systemd.mount">systemd.mount</A></B>(5)
+
+<P>
+</DL>
+<P>
+
+<A NAME="lbAI">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+To begin, enable tracking for the pool:
+<P>
+
+<DL COMPACT><DT><DD>
+touch
+/usr/local/etc/zfs/zfs-list.cache/<I>POOLNAME</I>
+
+</DL>
+
+<P>
+
+Then, enable the tracking ZEDLET:
+<P>
+
+<DL COMPACT><DT><DD>
+ln -s &quot;/usr/local/libexec/zfs/zed.d/history_event-zfs-list-cacher.sh&quot; &quot;/usr/local/etc/zfs/zed.d&quot;
+<P>
+systemctl enable zfs-zed.service
+<P>
+systemctl restart zfs-zed.service
+</DL>
+
+<P>
+
+Force the running of the ZEDLET by setting a monitored property, e.g.
+<B>canmount</B>,
+
+for at least one dataset in the pool:
+<P>
+
+<DL COMPACT><DT><DD>
+zfs set canmount=on
+<I>DATASET</I>
+
+</DL>
+
+<P>
+
+This forces an update to the stale cache file.
+<P>
+To test the generator output, run
+<P>
+
+<DL COMPACT><DT><DD>
+/usr/lib/systemd/system-generators/zfs-mount-generator /tmp/zfs-mount-generator . .
+</DL>
+
+<P>
+
+This will generate units and dependencies in
+<I>/tmp/zfs-mount-generator</I>
+
+for you to inspect them. The second and third argument are ignored.
+<P>
+If you're satisfied with the generated units, instruct systemd to re-run all generators:
+<P>
+
+<DL COMPACT><DT><DD>
+systemctl daemon-reload
+</DL>
+
+<P>
+
+<P>
+<P>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B><A HREF="/man/man2html?5+zfs">zfs</A></B>(5)
+
+<B><A HREF="/man/man2html?5+zfs-events">zfs-events</A></B>(5)
+
+<B><A HREF="/man/man2html?8+zed">zed</A></B>(8)
+
+<B><A HREF="/man/man2html?5+zpool">zpool</A></B>(5)
+
+<B><A HREF="/man/man2html?1+systemd">systemd</A></B>(1)
+
+<B><A HREF="/man/man2html?5+systemd.target">systemd.target</A></B>(5)
+
+<B><A HREF="/man/man2html?7+systemd.special">systemd.special</A></B>(7)
+
+<B><A HREF="/man/man2html?7+systemd.mount">systemd.mount</A></B>(7)
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAE">ENCRYPTION KEYS</A><DD>
+<DT><A HREF="#lbAF">UNIT ORDERING AND DEPENDENCIES</A><DD>
+<DT><A HREF="#lbAG">CACHE FILE</A><DD>
+<DT><A HREF="#lbAH">PROPERTIES</A><DD>
+</DL>
+<DT><A HREF="#lbAI">EXAMPLE</A><DD>
+<DT><A HREF="#lbAJ">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

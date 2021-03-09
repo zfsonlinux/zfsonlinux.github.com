@@ -1,0 +1,154 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-CHECKPOINT</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-CHECKPOINT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-checkpoint</B>
+
+ - Checkpoints the current state of a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>checkpoint</B>
+
+[-<B>d, -discard </B>[-<B>w, -wait </B>]
+
+
+
+
+
+]
+
+<I>pool</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>checkpoint</B>
+
+[-<B>d, -discard </B>[-<B>w, -wait </B>]
+
+
+
+
+
+]
+
+<I>pool</I>
+
+<DD>
+
+<DD>Checkpoints the current state of
+<I>pool</I>
+
+, which can be later restored by
+<B>zpool import --rewind-to-checkpoint</B>
+
+
+
+ 
+The existence of a checkpoint in a pool prohibits the following
+<B>zpool</B>
+
+commands:
+<B>remove</B>
+
+ 
+<B>attach</B>
+
+ 
+<B>detach</B>
+
+ 
+<B>split</B>
+
+ 
+and
+<B>reguid</B>
+
+ 
+In addition, it may break reservation boundaries if the pool lacks free
+space.
+The
+<B>zpool status</B>
+
+
+
+command indicates the existence of a checkpoint or the progress of discarding a
+checkpoint from a pool.
+The
+<B>zpool list</B>
+
+
+
+command reports how much space the checkpoint takes from the pool.
+<DL COMPACT>
+<P>
+
+<DT><B>-d, -discard</B>
+
+
+<DD>
+Discards an existing checkpoint from
+<I>pool</I>
+
+ 
+<DT><B>-w, -wait</B>
+
+
+<DD>
+Waits until the checkpoint has finished being discarded before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-import8,
+
+
+zpool-status8,
+
+
+zfs-snapshot8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,981 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-IMPORT</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-IMPORT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-import</B>
+
+ - Lists ZFS storage pools available to import or import the specified pools
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>import</B>
+
+[-<B>D</B>
+
+]
+
+[-<B>d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+]
+
+<BR><B>zpool</B>
+
+<B>import</B>
+
+-<B>a</B>
+
+[-<B>DflmN</B>
+
+]
+
+[-<B>F </B>[-<B>n </B>[-<B>T </B>[-<B>X </B>]
+
+
+
+]
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>-rewind-to-checkpoint</B>
+
+]
+
+[-<B>c </B><I>cachefile </I><B>| -d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>mntopts</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+<BR><B>zpool</B>
+
+<B>import</B>
+
+[-<B>Dflm</B>
+
+]
+
+[-<B>F </B>[-<B>n </B>[-<B>T </B>[-<B>X </B>]
+
+
+
+]
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>-rewind-to-checkpoint</B>
+
+]
+
+[-<B>c </B><I>cachefile </I><B>| -d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>mntopts</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+[-<B>s</B>
+
+]
+
+<I>pool </I><B>| </B><I>id</I>
+
+
+
+
+
+
+
+[<I>newpool </I>[-<B>t </B>]
+
+
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>import</B>
+
+[-<B>D</B>
+
+]
+
+[-<B>d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+]
+
+<DD>
+
+<DD>Lists pools available to import.
+If the
+-<B>d or</B>
+
+-<B>c</B>
+
+options are not specified, this command searches for devices using libblkid
+on Linux and geom on FreeBSD.
+The
+-<B>d</B>
+
+option can be specified multiple times, and all directories are searched.
+If the device appears to be part of an exported pool, this command displays a
+summary of the pool with the name of the pool, a numeric identifier, as well as
+the vdev layout and current health of the device for each device or file.
+Destroyed pools, pools that were previously destroyed with the
+<B>zpool destroy</B>
+
+
+
+command, are not listed unless the
+-<B>D</B>
+
+option is specified.
+<P>
+
+The numeric identifier is unique, and can be used instead of the pool name when
+multiple exported pools of the same name are available.
+<DL COMPACT>
+<P>
+
+<DT><B>-c </B><I>cachefile</I>
+
+
+
+
+<DD>
+Reads configuration from the given
+<I>cachefile</I>
+
+that was created with the
+<B>cachefile</B>
+
+pool property.
+This
+<I>cachefile</I>
+
+is used instead of searching for devices.
+<DT><B>-d </B><I>dir </I><B>| </B><I>device</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Uses
+<I>device</I>
+
+or searches for devices or files in
+<I>dir</I>
+
+ 
+The
+-<B>d</B>
+
+option can be specified multiple times.
+<DT><B>-D</B>
+
+
+<DD>
+Lists destroyed pools only.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>import</B>
+
+-<B>a</B>
+
+[-<B>DflmN</B>
+
+]
+
+[-<B>F </B>[-<B>n </B>[-<B>T </B>[-<B>X </B>]
+
+
+
+]
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>c </B><I>cachefile </I><B>| -d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>mntopts</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+[-<B>s</B>
+
+]
+
+<DD>
+
+<DD>Imports all pools found in the search directories.
+Identical to the previous command, except that all pools with a sufficient
+number of devices available are imported.
+Destroyed pools, pools that were previously destroyed with the
+<B>zpool destroy</B>
+
+
+
+command, will not be imported unless the
+-<B>D</B>
+
+option is specified.
+<DL COMPACT>
+<P>
+
+<DT><B>-a</B>
+
+
+<DD>
+Searches for and imports all pools found.
+<DT><B>-c </B><I>cachefile</I>
+
+
+
+
+<DD>
+Reads configuration from the given
+<I>cachefile</I>
+
+that was created with the
+<B>cachefile</B>
+
+pool property.
+This
+<I>cachefile</I>
+
+is used instead of searching for devices.
+<DT><B>-d </B><I>dir </I><B>| </B><I>device</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Uses
+<I>device</I>
+
+or searches for devices or files in
+<I>dir</I>
+
+ 
+The
+-<B>d</B>
+
+option can be specified multiple times.
+This option is incompatible with the
+-<B>c</B>
+
+option.
+<DT><B>-D</B>
+
+
+<DD>
+Imports destroyed pools only.
+The
+-<B>f</B>
+
+option is also required.
+<DT><B>-f</B>
+
+
+<DD>
+Forces import, even if the pool appears to be potentially active.
+<DT><B>-F</B>
+
+
+<DD>
+Recovery mode for a non-importable pool.
+Attempt to return the pool to an importable state by discarding the last few
+transactions.
+Not all damaged pools can be recovered by using this option.
+If successful, the data from the discarded transactions is irretrievably lost.
+This option is ignored if the pool is importable or already imported.
+<DT><B>-l</B>
+
+
+<DD>
+Indicates that this command will request encryption keys for all encrypted
+datasets it attempts to mount as it is bringing the pool online. Note that if
+any datasets have a
+<B>keylocation</B>
+
+of
+<B>prompt</B>
+
+this command will block waiting for the keys to be entered. Without this flag
+encrypted datasets will be left unavailable until the keys are loaded.
+<DT><B>-m</B>
+
+
+<DD>
+Allows a pool to import when there is a missing log device.
+Recent transactions can be lost because the log device will be discarded.
+<DT><B>-n</B>
+
+
+<DD>
+Used with the
+-<B>F</B>
+
+recovery option.
+Determines whether a non-importable pool can be made importable again, but does
+not actually perform the pool recovery.
+For more details about pool recovery mode, see the
+-<B>F</B>
+
+option, above.
+<DT><B>-N</B>
+
+
+<DD>
+Import the pool without mounting any file systems.
+<DT><B>-o </B><I>mntopts</I>
+
+
+
+
+<DD>
+Comma-separated list of mount options to use when mounting datasets within the
+pool.
+See
+<A HREF="/man/man2html?8+zfs">zfs</A>(8)
+
+
+for a description of dataset properties and mount options.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property on the imported pool.
+See the
+zpoolprops
+
+
+manual page for more information on the available pool properties.
+<DT><B>-R </B><I>root</I>
+
+
+
+
+<DD>
+Sets the
+<B>cachefile</B>
+
+property to
+<B>none</B>
+
+and the
+<B>altroot</B>
+
+property to
+<I>root</I>
+
+ 
+<DT><B>--rewind-to-checkpoint</B>
+
+
+<DD>
+Rewinds pool to the checkpointed state.
+Once the pool is imported with this flag there is no way to undo the rewind.
+All changes and data that were written after the checkpoint are lost!
+The only exception is when the
+<B>readonly</B>
+
+mounting option is enabled.
+In this case, the checkpointed state of the pool is opened and an
+administrator can see how the pool would look like if they were
+to fully rewind.
+<DT><B>-s</B>
+
+
+<DD>
+Scan using the default search path, the libblkid cache will not be
+consulted. A custom search path may be specified by setting the
+ZPOOL_IMPORT_PATH environment variable.
+<DT><B>-X</B>
+
+
+<DD>
+Used with the
+-<B>F</B>
+
+recovery option. Determines whether extreme
+measures to find a valid txg should take place. This allows the pool to
+be rolled back to a txg which is no longer guaranteed to be consistent.
+Pools imported at an inconsistent txg may contain uncorrectable
+checksum errors. For more details about pool recovery mode, see the
+-<B>F</B>
+
+option, above. WARNING: This option can be extremely hazardous to the
+health of your pool and should only be used as a last resort.
+<DT><B>-T</B>
+
+
+<DD>
+Specify the txg to use for rollback. Implies
+-<B>FX</B>
+
+ 
+For more details
+about pool recovery mode, see the
+-<B>X</B>
+
+option, above. WARNING: This option can be extremely hazardous to the
+health of your pool and should only be used as a last resort.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>import</B>
+
+[-<B>Dflm</B>
+
+]
+
+[-<B>F </B>[-<B>n </B>[-<B>t </B>[-<B>T </B>[-<B>X </B>]
+
+
+
+]
+
+
+
+]
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>c </B><I>cachefile </I><B>| -d </B><I>dir </I><B>| device</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>o </B><I>mntopts</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+[-<B>s</B>
+
+]
+
+<I>pool </I><B>| </B><I>id</I>
+
+
+
+
+
+
+
+[<I>newpool</I>
+
+]
+
+<DD>
+
+<DD>Imports a specific pool.
+A pool can be identified by its name or the numeric identifier.
+If
+<I>newpool</I>
+
+is specified, the pool is imported using the name
+<I>newpool</I>
+
+ 
+Otherwise, it is imported with the same name as its exported name.
+<P>
+
+If a device is removed from a system without running
+<B>zpool export</B>
+
+
+
+first, the device appears as potentially active.
+It cannot be determined if this was a failed export, or whether the device is
+really in use from another host.
+To import a pool in this state, the
+-<B>f</B>
+
+option is required.
+<DL COMPACT>
+<P>
+
+<DT><B>-c </B><I>cachefile</I>
+
+
+
+
+<DD>
+Reads configuration from the given
+<I>cachefile</I>
+
+that was created with the
+<B>cachefile</B>
+
+pool property.
+This
+<I>cachefile</I>
+
+is used instead of searching for devices.
+<DT><B>-d </B><I>dir </I><B>| </B><I>device</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Uses
+<I>device</I>
+
+or searches for devices or files in
+<I>dir</I>
+
+ 
+The
+-<B>d</B>
+
+option can be specified multiple times.
+This option is incompatible with the
+-<B>c</B>
+
+option.
+<DT><B>-D</B>
+
+
+<DD>
+Imports destroyed pool.
+The
+-<B>f</B>
+
+option is also required.
+<DT><B>-f</B>
+
+
+<DD>
+Forces import, even if the pool appears to be potentially active.
+<DT><B>-F</B>
+
+
+<DD>
+Recovery mode for a non-importable pool.
+Attempt to return the pool to an importable state by discarding the last few
+transactions.
+Not all damaged pools can be recovered by using this option.
+If successful, the data from the discarded transactions is irretrievably lost.
+This option is ignored if the pool is importable or already imported.
+<DT><B>-l</B>
+
+
+<DD>
+Indicates that this command will request encryption keys for all encrypted
+datasets it attempts to mount as it is bringing the pool online. Note that if
+any datasets have a
+<B>keylocation</B>
+
+of
+<B>prompt</B>
+
+this command will block waiting for the keys to be entered. Without this flag
+encrypted datasets will be left unavailable until the keys are loaded.
+<DT><B>-m</B>
+
+
+<DD>
+Allows a pool to import when there is a missing log device.
+Recent transactions can be lost because the log device will be discarded.
+<DT><B>-n</B>
+
+
+<DD>
+Used with the
+-<B>F</B>
+
+recovery option.
+Determines whether a non-importable pool can be made importable again, but does
+not actually perform the pool recovery.
+For more details about pool recovery mode, see the
+-<B>F</B>
+
+option, above.
+<DT><B>-o </B><I>mntopts</I>
+
+
+
+
+<DD>
+Comma-separated list of mount options to use when mounting datasets within the
+pool.
+See
+<A HREF="/man/man2html?8+zfs">zfs</A>(8)
+
+
+for a description of dataset properties and mount options.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the specified property on the imported pool.
+See the
+zpoolprops
+
+
+manual page for more information on the available pool properties.
+<DT><B>-R </B><I>root</I>
+
+
+
+
+<DD>
+Sets the
+<B>cachefile</B>
+
+property to
+<B>none</B>
+
+and the
+<B>altroot</B>
+
+property to
+<I>root</I>
+
+ 
+<DT><B>-s</B>
+
+
+<DD>
+Scan using the default search path, the libblkid cache will not be
+consulted. A custom search path may be specified by setting the
+ZPOOL_IMPORT_PATH environment variable.
+<DT><B>-X</B>
+
+
+<DD>
+Used with the
+-<B>F</B>
+
+recovery option. Determines whether extreme
+measures to find a valid txg should take place. This allows the pool to
+be rolled back to a txg which is no longer guaranteed to be consistent.
+Pools imported at an inconsistent txg may contain uncorrectable
+checksum errors. For more details about pool recovery mode, see the
+-<B>F</B>
+
+option, above. WARNING: This option can be extremely hazardous to the
+health of your pool and should only be used as a last resort.
+<DT><B>-T</B>
+
+
+<DD>
+Specify the txg to use for rollback. Implies
+-<B>FX</B>
+
+ 
+For more details
+about pool recovery mode, see the
+-<B>X</B>
+
+option, above. WARNING: This option can be extremely hazardous to the
+health of your pool and should only be used as a last resort.
+<DT><B>-t</B>
+
+
+<DD>
+Used with
+<B>newpool</B>
+
+ 
+Specifies that
+<B>newpool</B>
+
+is temporary. Temporary pool names last until export. Ensures that
+the original pool name will be used in all label updates and therefore
+is retained upon export.
+Will also set -o cachefile=none when not explicitly specified.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-export8,
+
+
+zpool-list8,
+
+
+zpool-status8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

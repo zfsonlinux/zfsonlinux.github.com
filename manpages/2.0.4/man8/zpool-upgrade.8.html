@@ -1,0 +1,186 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-UPGRADE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-UPGRADE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-upgrade</B>
+
+ - Manage version and feature flags of ZFS storage pools
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>upgrade</B>
+
+<BR><B>zpool</B>
+
+<B>upgrade</B>
+
+-<B>v</B>
+
+<BR><B>zpool</B>
+
+<B>upgrade</B>
+
+[-<B>V </B><I>version</I>
+
+
+
+]
+
+-<B>a | </B><I>pool </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>upgrade</B>
+
+<DD>
+
+<DD>Displays pools which do not have all supported features enabled and pools
+formatted using a legacy ZFS version number.
+These pools can continue to be used, but some features may not be available.
+Use
+<B>zpool upgrade -a</B>
+
+
+
+
+
+to enable all features on all pools.
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>upgrade</B>
+
+-<B>v</B>
+
+<DD>
+
+<DD>Displays legacy ZFS versions supported by the current software.
+See
+zpool-features5
+
+
+for a description of feature flags features supported by the current software.
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>upgrade</B>
+
+[-<B>V </B><I>version</I>
+
+
+
+]
+
+-<B>a | </B><I>pool </I><B>...</B>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Enables all supported features on the given pool.
+Once this is done, the pool will no longer be accessible on systems that do not
+support feature flags.
+See
+zpool-features5
+
+
+for details on compatibility with systems that support feature flags, but do not
+support all features enabled on the pool.
+<DL COMPACT>
+<P>
+
+<DT><B>-a</B>
+
+
+<DD>
+Enables all supported features on all pools.
+<DT><B>-V </B><I>version</I>
+
+
+
+
+<DD>
+Upgrade to the specified legacy version.
+If the
+-<B>V</B>
+
+flag is specified, no features will be enabled on the pool.
+This option can only be used to increase the version number up to the last
+supported legacy version number.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-features5,
+
+
+<A HREF="/man/man2html?8+zpoolconcepts">zpoolconcepts</A>(8),
+
+
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8),
+
+
+zpool-history8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

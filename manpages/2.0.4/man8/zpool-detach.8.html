@@ -1,0 +1,93 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-DETACH</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-DETACH</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-detach</B>
+
+ - Detaches a device from a ZFS mirror vdev (virtual device)
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>detach</B>
+
+<I>pool device</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>detach</B>
+
+<I>pool device</I>
+
+<DD>
+
+<DD>Detaches
+<I>device</I>
+
+from a mirror.
+The operation is refused if there are no other valid replicas of the data.
+If device may be re-added to the pool later on then consider the
+<B>zpool offline</B>
+
+command instead.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-attach8,
+
+
+zpool-offline8,
+
+
+zpool-labelclear8,
+
+
+zpool-remove8,
+
+
+zpool-replace8,
+
+
+zpool-split8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

@@ -1,0 +1,265 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-MOUNT</TITLE>
+</HEAD><BODY>
+<H1>ZFS-MOUNT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-mount</B>
+
+ - Manage mount state of ZFS file systems.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>mount</B>
+
+<BR><B>zfs</B>
+
+<B>mount</B>
+
+[-<B>Oflv</B>
+
+]
+
+[-<B>o </B><I>options</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<BR><B>zfs</B>
+
+<B>unmount</B>
+
+[-<B>fu</B>
+
+]
+
+-<B>a | </B><I>filesystem </I><B>| </B><I>mountpoint</I>
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>mount</B>
+
+<DD>
+
+<DD>Displays all ZFS file systems currently mounted.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>mount</B>
+
+[-<B>Oflv</B>
+
+]
+
+[-<B>o </B><I>options</I>
+
+
+
+]
+
+-<B>a | </B><I>filesystem</I>
+
+
+
+<DD>
+
+<DD>Mount ZFS filesystem on a path described by its
+<B>mountpoint</B>
+
+property, if the path exists and is empty. If
+<B>mountpoint</B>
+
+is set to
+<I>legacy</I>
+
+ 
+the filesystem should be instead mounted using
+<A HREF="/man/man2html?8+mount">mount</A>(8).
+
+
+<DL COMPACT>
+<P>
+
+<DT><B>-O</B>
+
+
+<DD>
+Perform an overlay mount. Allows mounting in non-empty
+<B>mountpoint</B>
+
+ 
+See
+<A HREF="/man/man2html?8+mount">mount</A>(8)
+
+
+for more information.
+<DT><B>-a</B>
+
+
+<DD>
+Mount all available ZFS file systems.
+Invoked automatically as part of the boot process if configured.
+<DT><B></B><I>filesystem</I>
+
+
+<DD>
+Mount the specified filesystem.
+<DT><B>-o </B><I>options</I>
+
+
+
+
+<DD>
+An optional, comma-separated list of mount options to use temporarily for the
+duration of the mount.
+See the
+<I>Temporary Mount Point Properties</I>
+
+section of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+for details.
+<DT><B>-l</B>
+
+
+<DD>
+Load keys for encrypted filesystems as they are being mounted. This is
+equivalent to executing
+<B>zfs load-key</B>
+
+
+
+on each encryption root before mounting it. Note that if a filesystem has a
+<B>keylocation</B>
+
+of
+<B>prompt</B>
+
+this will cause the terminal to interactively block after asking for the key.
+<DT><B>-v</B>
+
+
+<DD>
+Report mount progress.
+<DT><B>-f</B>
+
+
+<DD>
+Attempt to force mounting of all filesystems, even those that couldn't normally be mounted (e.g. redacted datasets).
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unmount</B>
+
+[-<B>fu</B>
+
+]
+
+-<B>a | </B><I>filesystem </I><B>| </B><I>mountpoint</I>
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>Unmounts currently mounted ZFS file systems.
+<DL COMPACT>
+<P>
+
+<DT><B>-a</B>
+
+
+<DD>
+Unmount all available ZFS file systems.
+Invoked automatically as part of the shutdown process.
+<DT><B>-f</B>
+
+
+<DD>
+Forcefully unmount the file system, even if it is currently in use.
+This option is not supported on Linux.
+<DT><B>-u</B>
+
+
+<DD>
+Unload keys for any encryption roots unmounted by this command.
+<DT><B></B><I>filesystem </I><B>| </B><I>mountpoint</I>
+
+
+
+
+
+
+
+
+<DD>
+Unmount the specified filesystem.
+The command can also be given a path to a ZFS file system mount point on the
+system.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

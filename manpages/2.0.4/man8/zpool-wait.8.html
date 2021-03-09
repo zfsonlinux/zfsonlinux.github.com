@@ -1,0 +1,255 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-WAIT</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-WAIT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-wait</B>
+
+ - Wait for background activity to stop in a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>wait</B>
+
+[-<B>Hp </B>[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>t </B><I>activity </I><B></B>[, <B></B><I>activity </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<I>pool</I>
+
+[<I>interval</I>
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>wait</B>
+
+[-<B>Hp </B>[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+]
+
+[-<B>t </B><I>activity </I><B></B>[, <B></B><I>activity </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+<I>pool</I>
+
+[<I>interval</I>
+
+]
+
+<DD>
+
+<DD>Waits until all background activity of the given types has ceased in the given
+pool.
+The activity could cease because it has completed, or because it has been
+paused or canceled by a user, or because the pool has been exported or
+destroyed.
+If no activities are specified, the command waits until background activity of
+every type listed below has ceased.
+If there is no activity of the given types in progress, the command returns
+immediately.
+<P>
+
+These are the possible values for
+<I>activity</I>
+
+ 
+along with what each one waits for:
+
+<PRE>
+        discard       Checkpoint to be discarded
+        free          'freeing' property to become 0
+        initialize    All initializations to cease
+        replace       All device replacements to cease
+        remove        Device removal to cease
+        resilver      Resilver to cease
+        scrub         Scrub to cease
+        trim          Manual trim to cease
+</PRE>
+
+<P>
+
+If an
+<I>interval</I>
+
+is provided, the amount of work remaining, in bytes, for each activity is
+printed every
+<I>interval</I>
+
+seconds.
+<DL COMPACT>
+<P>
+
+<DT><B>-H</B>
+
+
+<DD>
+Scripted mode.
+Do not display headers, and separate fields by a single tab instead of arbitrary
+space.
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable (exact) values.
+<DT><B>-T u | d</B>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Display a time stamp.
+Specify
+<B>u</B>
+
+for a printed representation of the internal representation of time.
+See
+<A HREF="/man/man2html?2+time">time</A>(2).
+
+
+Specify
+<B>d</B>
+
+for standard date format.
+See
+<A HREF="/man/man2html?1+date">date</A>(1).
+
+
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-status8,
+
+
+zpool-checkpoint8,
+
+
+zpool-initialize8,
+
+
+zpool-replace8,
+
+
+zpool-remove8,
+
+
+zpool-resilver8,
+
+
+zpool-scrub8,
+
+
+zpool-trim8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>

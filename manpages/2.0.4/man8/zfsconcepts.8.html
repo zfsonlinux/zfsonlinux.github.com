@@ -1,0 +1,278 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFSCONCEPTS</TITLE>
+</HEAD><BODY>
+<H1>ZFSCONCEPTS</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfsconcepts</B>
+
+ - An overview of ZFS concepts.
+
+
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<A NAME="lbAD">&nbsp;</A>
+<H3>ZFS File System Hierarchy</H3>
+
+A ZFS storage pool is a logical collection of devices that provide space for
+datasets.
+A storage pool is also the root of the ZFS file system hierarchy.
+<P>
+
+The root of the pool can be accessed as a file system, such as mounting and
+unmounting, taking snapshots, and setting properties.
+The physical storage characteristics, however, are managed by the
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+command.
+<P>
+
+See
+<A HREF="/man/man2html?8+zpool">zpool</A>(8)
+
+
+for more information on creating and administering pools.
+<A NAME="lbAE">&nbsp;</A>
+<H3>Snapshots</H3>
+
+A snapshot is a read-only copy of a file system or volume.
+Snapshots can be created extremely quickly, and initially consume no additional
+space within the pool.
+As data within the active dataset changes, the snapshot consumes more data than
+would otherwise be shared with the active dataset.
+<P>
+
+Snapshots can have arbitrary names.
+Snapshots of volumes can be cloned or rolled back, visibility is determined
+by the
+<B>snapdev</B>
+
+property of the parent volume.
+<P>
+
+File system snapshots can be accessed under the
+.zfs/snapshot
+
+directory in the root of the file system.
+Snapshots are automatically mounted on demand and may be unmounted at regular
+intervals.
+The visibility of the
+.zfs
+
+directory can be controlled by the
+<B>snapdir</B>
+
+property.
+<A NAME="lbAF">&nbsp;</A>
+<H3>Bookmarks</H3>
+
+A bookmark is like a snapshot, a read-only copy of a file system or volume.
+Bookmarks can be created extremely quickly, compared to snapshots, and they
+consume no additional space within the pool. Bookmarks can also have arbitrary
+names, much like snapshots.
+<P>
+
+Unlike snapshots, bookmarks can not be accessed through the filesystem in any
+way. From a storage standpoint a bookmark just provides a way to reference
+when a snapshot was created as a distinct object. Bookmarks are initially
+tied to a snapshot, not the filesystem or volume, and they will survive if the
+snapshot itself is destroyed. Since they are very light weight there's little
+incentive to destroy them.
+<A NAME="lbAG">&nbsp;</A>
+<H3>Clones</H3>
+
+A clone is a writable volume or file system whose initial contents are the same
+as another dataset.
+As with snapshots, creating a clone is nearly instantaneous, and initially
+consumes no additional space.
+<P>
+
+Clones can only be created from a snapshot.
+When a snapshot is cloned, it creates an implicit dependency between the parent
+and child.
+Even though the clone is created somewhere else in the dataset hierarchy, the
+original snapshot cannot be destroyed as long as a clone exists.
+The
+<B>origin</B>
+
+property exposes this dependency, and the
+<B>destroy</B>
+
+command lists any such dependencies, if they exist.
+<P>
+
+The clone parent-child dependency relationship can be reversed by using the
+<B>promote</B>
+
+subcommand.
+This causes the
+Qq origin
+
+file system to become a clone of the specified file system, which makes it
+possible to destroy the file system that the clone was created from.
+<A NAME="lbAH">&nbsp;</A>
+<H3>Mount Points</H3>
+
+Creating a ZFS file system is a simple operation, so the number of file systems
+per system is likely to be numerous.
+To cope with this, ZFS automatically manages mounting and unmounting file
+systems without the need to edit the
+/etc/fstab
+
+file.
+All automatically managed file systems are mounted by ZFS at boot time.
+<P>
+
+By default, file systems are mounted under
+/path
+
+ 
+where
+<I>path</I>
+
+is the name of the file system in the ZFS namespace.
+Directories are created and destroyed as needed.
+<P>
+
+A file system can also have a mount point set in the
+<B>mountpoint</B>
+
+property.
+This directory is created as needed, and ZFS automatically mounts the file
+system when the
+<B>zfs mount -a</B>
+
+
+
+
+
+command is invoked
+Po without editing
+
+/etc/fstab
+
+Pc .
+
+The
+<B>mountpoint</B>
+
+property can be inherited, so if
+<I>pool/home</I>
+
+has a mount point of
+/export/stuff
+
+ 
+then
+<I>pool/home/user</I>
+
+automatically inherits a mount point of
+/export/stuff/user
+
+ 
+<P>
+
+A file system
+<B>mountpoint</B>
+
+property of
+<B>none</B>
+
+prevents the file system from being mounted.
+<P>
+
+If needed, ZFS file systems can also be managed with traditional tools
+Po <B>mount</B>
+
+ 
+
+<B>umount</B>
+
+ 
+/etc/fstab
+
+Pc .
+
+If a file system's mount point is set to
+<B>legacy</B>
+
+ 
+ZFS makes no attempt to manage the file system, and the administrator is
+responsible for mounting and unmounting the file system. Because pools must
+be imported before a legacy mount can succeed, administrators should ensure
+that legacy mounts are only attempted after the zpool import process
+finishes at boot time. For example, on machines using systemd, the mount
+option
+<P>
+
+<B>x-systemd.requires=zfs-import.target</B>
+
+<P>
+
+will ensure that the zfs-import completes before systemd attempts mounting
+the filesystem. See <A HREF="/man/man2html?5+systemd.mount">systemd.mount</A>(5) for details.
+<A NAME="lbAI">&nbsp;</A>
+<H3>Deduplication</H3>
+
+Deduplication is the process for removing redundant data at the block level,
+reducing the total amount of data stored. If a file system has the
+<B>dedup</B>
+
+property enabled, duplicate data blocks are removed synchronously. The result
+is that only unique data is stored and common components are shared among files.
+<P>
+
+Deduplicating data is a very resource-intensive operation. It is generally
+recommended that you have at least 1.25 GiB of RAM per 1 TiB of storage when
+you enable deduplication. Calculating the exact requirement depends heavily
+on the type of data stored in the pool.
+<P>
+
+Enabling deduplication on an improperly-designed system can result in
+performance issues (slow IO and administrative operations). It can potentially
+lead to problems importing a pool due to memory exhaustion. Deduplication
+can consume significant processing power (CPU) and memory as well as generate
+additional disk IO.
+<P>
+
+Before creating a pool with deduplication enabled, ensure that you have planned
+your hardware requirements appropriately and implemented appropriate recovery
+practices, such as regular backups. As an alternative to deduplication
+consider using
+<B>compression=on</B>
+
+ 
+as a less resource-intensive alternative.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">DESCRIPTION</A><DD>
+<DL>
+<DT><A HREF="#lbAD">ZFS File System Hierarchy</A><DD>
+<DT><A HREF="#lbAE">Snapshots</A><DD>
+<DT><A HREF="#lbAF">Bookmarks</A><DD>
+<DT><A HREF="#lbAG">Clones</A><DD>
+<DT><A HREF="#lbAH">Mount Points</A><DD>
+<DT><A HREF="#lbAI">Deduplication</A><DD>
+</DL>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 00:50:20 GMT, March 09, 2021
+</BODY>
+</HTML>
