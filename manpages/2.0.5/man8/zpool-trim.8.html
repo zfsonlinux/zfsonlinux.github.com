@@ -1,0 +1,176 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-TRIM</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-TRIM</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-trim</B>
+
+ - Initiate immediate TRIM operations for all free space in a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>trim</B>
+
+[-<B>dw</B>
+
+]
+
+[-<B>r </B><I>rate</I>
+
+
+
+]
+
+[-<B>c | -s</B>
+
+
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>trim</B>
+
+[-<B>dw</B>
+
+]
+
+[-<B>c | -s</B>
+
+
+
+]
+
+<I>pool</I>
+
+[<I>device </I><B>...</B>
+
+
+
+]
+
+<DD>
+
+<DD>Initiates an immediate on-demand TRIM operation for all of the free space in
+a pool.  This operation informs the underlying storage devices of all blocks
+in the pool which are no longer allocated and allows thinly provisioned
+devices to reclaim the space.
+<P>
+
+A manual on-demand TRIM operation can be initiated irrespective of the
+<B>autotrim</B>
+
+pool property setting.  See the documentation for the
+<B>autotrim</B>
+
+property above for the types of vdev devices which can be trimmed.
+<DL COMPACT>
+<P>
+
+<DT><B>-d -secure</B>
+
+
+<DD>
+Causes a secure TRIM to be initiated.  When performing a secure TRIM, the
+device guarantees that data stored on the trimmed blocks has been erased.
+This requires support from the device and is not supported by all SSDs.
+<DT><B>-r -rate </B><I>rate</I>
+
+
+
+
+<DD>
+Controls the rate at which the TRIM operation progresses.  Without this
+option TRIM is executed as quickly as possible. The rate, expressed in bytes
+per second, is applied on a per-vdev basis and may be set differently for
+each leaf vdev.
+<DT><B>-c, -cancel</B>
+
+
+<DD>
+Cancel trimming on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+trimmed, the command will fail and no cancellation will occur on any device.
+<DT><B>-s -suspend</B>
+
+
+<DD>
+Suspend trimming on the specified devices, or all eligible devices if none
+are specified.
+If one or more target devices are invalid or are not currently being
+trimmed, the command will fail and no suspension will occur on any device.
+Trimming can then be resumed by running
+<B>zpool trim</B>
+
+
+
+with no flags on the relevant target devices.
+<DT><B>-w -wait</B>
+
+
+<DD>
+Wait until the devices are done being trimmed before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-initialize8,
+
+
+zpool-wait8,
+
+
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

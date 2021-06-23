@@ -1,0 +1,183 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-JAIL</TITLE>
+</HEAD><BODY>
+<H1>ZFS-JAIL</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+FreeBSD
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<B>zfs-jail</B>
+
+ - Attaches and detaches ZFS filesystems from FreeBSD jails.
+
+<B>A ZFS</B>
+
+
+
+dataset can be attached to a jail by using the
+Qq Nm zfs jail
+
+subcommand. You cannot attach a dataset to one jail and the children of the
+same dataset to another jail. You can also not attach the root file system
+of the jail or any dataset which needs to be mounted before the zfs rc script
+is run inside the jail, as it would be attached unmounted until it is
+mounted from the rc script inside the jail. To allow management of the
+dataset from within a jail, the
+<B>jailed</B>
+
+property has to be set and the jail needs access to the
+/dev/zfs
+
+device. The
+<B>quota</B>
+
+property cannot be changed from within a jail. See
+<A HREF="/man/man2html?8+jail">jail</A>(8)
+
+
+for information on how to allow mounting
+<B>ZFS</B>
+
+datasets from within a jail.
+<P>
+
+<B>A ZFS</B>
+
+
+
+dataset can be detached from a jail using the
+Qq Nm zfs unjail
+
+subcommand.
+<P>
+
+After a dataset is attached to a jail and the jailed property is set, a jailed
+file system cannot be mounted outside the jail, since the jail administrator
+might have set the mount point to an unacceptable value.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>jail</B>
+
+<I>jailid </I><B>| </B><I>jailname filesystem</I>
+
+
+
+
+
+
+
+<BR><B>zfs</B>
+
+<B>unjail</B>
+
+<I>jailid </I><B>| </B><I>jailname filesystem</I>
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>jail</B>
+
+<I>jailid filesystem</I>
+
+<DD>
+
+<P>
+
+<DD>Attaches the specified
+<I>filesystem</I>
+
+to the jail identified by JID
+<I>jailid</I>
+
+ 
+From now on this file system tree can be managed from within a jail if the
+<B>jailed</B>
+
+property has been set. To use this functuinality, the jail needs the
+<I>allow.mount</I>
+
+and
+<I>allow.mount.zfs</I>
+
+parameters set to 1 and the
+<I>enforce_statfs</I>
+
+parameter set to a value lower than 2.
+<P>
+
+See
+<A HREF="/man/man2html?8+jail">jail</A>(8)
+
+
+for more information on managing jails and configuring the parameters above.
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>unjail</B>
+
+<I>jailid filesystem</I>
+
+<DD>
+
+<P>
+
+<DD>Detaches the specified
+<I>filesystem</I>
+
+from the jail identified by JID
+<I>jailid</I>
+
+ 
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+jail">jail</A>(8),
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

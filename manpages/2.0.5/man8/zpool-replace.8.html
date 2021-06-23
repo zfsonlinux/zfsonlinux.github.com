@@ -1,0 +1,217 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-REPLACE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-REPLACE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-replace</B>
+
+ - Replace one device with another in a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>replace</B>
+
+[-<B>fsw</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+<I>pool device </I>[<I>new_device</I>
+
+]
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>replace</B>
+
+[-<B>fsw</B>
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+]
+
+<I>pool device </I>[<I>new_device</I>
+
+]
+
+
+
+
+
+<DD>
+
+<DD>Replaces
+<I>old_device</I>
+
+with
+<I>new_device</I>
+
+ 
+This is equivalent to attaching
+<I>new_device</I>
+
+ 
+waiting for it to resilver, and then detaching
+<I>old_device</I>
+
+ 
+Any in progress scrub will be cancelled.
+<P>
+
+The size of
+<I>new_device</I>
+
+must be greater than or equal to the minimum size of all the devices in a mirror
+or raidz configuration.
+<P>
+
+<I>new_device</I>
+
+is required if the pool is not redundant.
+If
+<I>new_device</I>
+
+is not specified, it defaults to
+<I>old_device</I>
+
+ 
+This form of replacement is useful after an existing disk has failed and has
+been physically replaced.
+In this case, the new disk may have the same
+/dev
+
+path as the old device, even though it is actually a different disk.
+ZFS recognizes this.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Forces use of
+<I>new_device</I>
+
+ 
+even if it appears to be in use.
+Not all devices can be overridden in this manner.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given pool properties. See the
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8)
+
+
+manual page for a list of valid properties that can be set.
+The only property supported at the moment is
+<B>ashift</B>
+
+ 
+<DT><B>-s</B>
+
+
+<DD>
+The
+<I>new_device</I>
+
+is reconstructed sequentially to restore redundancy as quickly as possible.
+Checksums are not verfied during sequential reconstruction so a scrub is
+started when the resilver completes.
+Sequential reconstruction is not supported for raidz configurations.
+<DT><B>-w</B>
+
+
+<DD>
+Waits until the replacement has completed before returning.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-detach8,
+
+
+zpool-initialize8,
+
+
+zpool-online8,
+
+
+zpool-resilver8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

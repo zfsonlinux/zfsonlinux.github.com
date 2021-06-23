@@ -1,0 +1,177 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-OFFLINE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-OFFLINE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-offline</B>
+
+ - Take a physical device in a ZFS storage pool offline
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>offline</B>
+
+[-<B>f</B>
+
+]
+
+[-<B>t</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<BR><B>zpool</B>
+
+<B>online</B>
+
+[-<B>e</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>offline</B>
+
+[-<B>f</B>
+
+]
+
+[-<B>t</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<DD>
+
+<DD>Takes the specified physical device offline.
+While the
+<I>device</I>
+
+is offline, no attempt is made to read or write to the device.
+This command is not applicable to spares.
+<DL COMPACT>
+<P>
+
+<DT><B>-f</B>
+
+
+<DD>
+Force fault. Instead of offlining the disk, put it into a faulted
+state. The fault will persist across imports unless the
+-<B>t</B>
+
+flag was specified.
+<DT><B>-t</B>
+
+
+<DD>
+Temporary.
+Upon reboot, the specified physical device reverts to its previous state.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>online</B>
+
+[-<B>e</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<DD>
+
+<DD>Brings the specified physical device online.
+This command is not applicable to spares.
+<DL COMPACT>
+<P>
+
+<DT><B>-e</B>
+
+
+<DD>
+Expand the device to use all available space.
+If the device is part of a mirror or raidz then all devices must be expanded
+before the new space will become available to the pool.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-detach8,
+
+
+zpool-remove8,
+
+
+zpool-reopen8,
+
+
+zpool-resilver8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

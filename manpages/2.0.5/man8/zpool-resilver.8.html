@@ -1,0 +1,94 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-RESILVER</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-RESILVER</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-resilver</B>
+
+ - Start a resilver of a device in a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>resilver</B>
+
+<I>pool </I><B>...</B>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>resilver</B>
+
+<I>pool </I><B>...</B>
+
+
+
+<DD>
+
+<DD>Starts a resilver. If an existing resilver is already running it will be
+restarted from the beginning. Any drives that were scheduled for a deferred
+resilver will be added to the new one. This requires the
+<B>resilver_defer</B>
+
+feature.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-iostat8,
+
+
+zpool-online8,
+
+
+zpool-reopen8,
+
+
+zpool-replace8,
+
+
+zpool-scrub8,
+
+
+zpool-status8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

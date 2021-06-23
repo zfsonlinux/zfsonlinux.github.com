@@ -1,0 +1,88 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-SYNC</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-SYNC</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-sync</B>
+
+ - Force data to be written to primary storage of a ZFS storage pool and update reporting data
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>sync</B>
+
+[<I>pool </I><B>...</B>
+
+]
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>sync</B>
+
+[<I>pool ...</I>
+
+]
+
+<DD>
+
+<DD>This command forces all in-core dirty data to be written to the primary
+pool storage and not the ZIL. It will also update administrative
+information including quota reporting. Without arguments,
+<B>zpool sync</B>
+
+will sync all pools on the system. Otherwise, it will sync only the
+specified pool(s).
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="/man/man2html?8+zpoolconcepts">zpoolconcepts</A>(8),
+
+
+zpool-export8,
+
+
+zpool-iostat8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

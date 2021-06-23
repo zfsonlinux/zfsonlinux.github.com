@@ -1,0 +1,198 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-REMOVE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-REMOVE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-remove</B>
+
+ - Remove a device from a ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>remove</B>
+
+[-<B>npw</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<BR><B>zpool</B>
+
+<B>remove</B>
+
+-<B>s</B>
+
+<I>pool</I>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>remove</B>
+
+[-<B>npw</B>
+
+]
+
+<I>pool device </I><B>...</B>
+
+
+
+
+
+<DD>
+
+<DD>Removes the specified device from the pool.
+This command supports removing hot spare, cache, log, and both mirrored and
+non-redundant primary top-level vdevs, including dedup and special vdevs.
+When the primary pool storage includes a top-level raidz vdev only hot spare,
+cache, and log devices can be removed.
+Note that keys for all encrypted datasets must be loaded for top-level vdevs
+to be removed.
+<P>
+Removing a top-level vdev reduces the total amount of space in the storage pool.
+The specified device will be evacuated by copying all allocated space from it to
+the other devices in the pool.
+In this case, the
+<B>zpool remove</B>
+
+
+
+command initiates the removal and returns, while the evacuation continues in
+the background.
+The removal progress can be monitored with
+<B>zpool status</B>
+
+
+
+ 
+If an IO error is encountered during the removal process it will be
+cancelled. The
+<B>device_removal</B>
+
+feature flag must be enabled to remove a top-level vdev, see
+zpool-features5.
+
+
+<P>
+
+A mirrored top-level device (log or data) can be removed by specifying the top-level mirror for the
+same.
+Non-log devices or data devices that are part of a mirrored configuration can be removed using
+the
+<B>zpool detach</B>
+
+
+
+command.
+<DL COMPACT>
+<P>
+
+<DT><B>-n</B>
+
+
+<DD>
+Do not actually perform the removal (&quot;no-op&quot;).
+Instead, print the estimated amount of memory that will be used by the
+mapping table after the removal completes.
+This is nonzero only for top-level vdevs.
+</DL>
+<P>
+
+<DL COMPACT>
+<P>
+
+<DT><B>-p</B>
+
+
+<DD>
+Used in conjunction with the
+-<B>n</B>
+
+flag, displays numbers as parsable (exact) values.
+<DT><B>-w</B>
+
+
+<DD>
+Waits until the removal has completed before returning.
+</DL>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>remove</B>
+
+-<B>s</B>
+
+<I>pool</I>
+
+<DD>
+
+<DD>Stops and cancels an in-progress removal of a top-level vdev.
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-add8,
+
+
+zpool-detach8,
+
+
+zpool-offline8,
+
+
+zpool-labelclear8,
+
+
+zpool-replace8,
+
+
+zpool-split8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

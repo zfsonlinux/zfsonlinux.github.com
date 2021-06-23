@@ -1,0 +1,506 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZFS-LIST</TITLE>
+</HEAD><BODY>
+<H1>ZFS-LIST</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zfs-list</B>
+
+ - Lists the property information for the given datasets in tabular form.
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zfs</B>
+
+<B>list</B>
+
+[-<B>r | -d </B><I>depth</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>Hp </B>[-<B>o </B><I>property </I><B></B>[, <B></B><I>property </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zfs</B>
+
+<B>list</B>
+
+[-<B>r | -d </B><I>depth</I>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>Hp </B>[-<B>o </B><I>property </I><B></B>[, <B></B><I>property </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>s </B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>S </B><I>property </I><B>...</B>
+
+]
+
+
+
+
+
+[-<B>t </B><I>type </I><B></B>[, <B></B><I>type </I><B>... </B>]
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+[<I>filesystem </I><B>| </B><I>volume </I><B>| </B><I>snapshot </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DD>
+
+<DD>If specified, you can list property information by the absolute pathname or the
+relative pathname.
+By default, all file systems and volumes are displayed.
+Snapshots are displayed if the
+<B>listsnapshots</B>
+
+pool property is
+<B>on</B>
+
+Po the default is
+
+<B>off</B>
+
+Pc ,
+
+or if the
+-<B>t snapshot</B>
+
+
+
+or
+-<B>t all</B>
+
+
+
+options are specified.
+The following fields are displayed:
+<B>name , used , available , referenced , mountpoint </B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DL COMPACT>
+<P>
+
+<DT><B>-H</B>
+
+
+<DD>
+Used for scripting mode.
+Do not print headers and separate fields by a single tab instead of arbitrary
+white space.
+<DT><B>-S </B><I>property</I>
+
+
+
+
+<DD>
+Same as the
+-<B>s</B>
+
+option, but sorts by property in descending order.
+<DT><B>-d </B><I>depth</I>
+
+
+
+
+<DD>
+Recursively display any children of the dataset, limiting the recursion to
+<I>depth</I>
+
+ 
+A
+<I>depth</I>
+
+of
+<B>1</B>
+
+will display only the dataset and its direct children.
+<DT><B>-o </B><I>property</I>
+
+
+
+
+<DD>
+A comma-separated list of properties to display.
+The property must be:
+<UL><P>
+
+<LI>
+
+One of the properties described in the
+<I>Native Properties</I>
+
+section of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<LI>
+
+A user property
+<LI>
+
+The value
+<B>name</B>
+
+to display the dataset name
+<LI>
+
+The value
+<B>space</B>
+
+to display space usage properties on file systems and volumes.
+This is a shortcut for specifying
+-<B>o name , avail , used , usedsnap , usedds , usedrefreserv , usedchild -t</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<B>filesystem , volume</B>
+
+
+
+
+
+
+
+syntax.
+</UL><P>
+
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable
+(exact)
+
+values.
+<DT><B>-r</B>
+
+
+<DD>
+Recursively display any children of the dataset on the command line.
+<DT><B>-s </B><I>property</I>
+
+
+
+
+<DD>
+A property for sorting the output by column in ascending order based on the
+value of the property.
+The property must be one of the properties described in the
+<I>Properties</I>
+
+section of
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+or the value
+<B>name</B>
+
+to sort by the dataset name.
+Multiple properties can be specified at one time using multiple
+-<B>s</B>
+
+property options.
+Multiple
+-<B>s</B>
+
+options are evaluated from left to right in decreasing order of importance.
+The following is a list of sorting criteria:
+<UL><P>
+
+<LI>
+
+Numeric types sort in numeric order.
+<LI>
+
+String types sort in alphabetical order.
+<LI>
+
+Types inappropriate for a row sort that row to the literal bottom, regardless of
+the specified ordering.
+</UL><P>
+
+<P>
+
+If no sorting options are specified the existing behavior of
+<B>zfs list</B>
+
+
+
+is preserved.
+<DT><B>-t </B><I>type</I>
+
+
+
+
+<DD>
+A comma-separated list of types to display, where
+<I>type</I>
+
+is one of
+<B>filesystem</B>
+
+ 
+<B>snapshot</B>
+
+ 
+<B>volume</B>
+
+ 
+<B>bookmark</B>
+
+ 
+or
+<B>all</B>
+
+ 
+For example, specifying
+-<B>t snapshot</B>
+
+
+
+displays only snapshots.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zfs-get8,
+
+
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

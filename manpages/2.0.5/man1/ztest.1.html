@@ -1,0 +1,241 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZTEST</TITLE>
+</HEAD><BODY>
+<H1>ZTEST</H1>
+Section: User Commands  (1)<BR>Updated: Aug 24, 2020<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+
+<P>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+<B>ztest</B> - was written by the ZFS Developers as a ZFS unit test.
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<P>
+
+<B>ztest &lt;options&gt;</B>
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<P>
+
+This manual page documents briefly the <B>ztest</B> command.
+<P>
+
+<B>ztest</B> was written by the ZFS Developers as a ZFS unit test. The
+tool was developed in tandem with the ZFS functionality and was
+executed nightly as one of the many regression test against the daily
+build. As features were added to ZFS, unit tests were also added to
+<B>ztest</B>.  In addition, a separate test development team wrote and
+executed more functional and stress tests.
+<P>
+
+By default <B>ztest</B> runs for ten minutes and uses block files
+(stored in /tmp) to create pools rather than using physical disks.
+Block files afford <B>ztest</B> its flexibility to play around with
+zpool components without requiring large hardware configurations.
+However, storing the block files in /tmp may not work for you if you
+have a small tmp directory.
+<P>
+
+By default is non-verbose. This is why entering the command above will
+result in <B>ztest</B> quietly executing for 5 minutes. The -V option
+can be used to increase the verbosity of the tool. Adding multiple -V
+option is allowed and the more you add the more chatty <B>ztest</B>
+becomes.
+<P>
+
+After the <B>ztest</B> run completes, you should notice many ztest.*
+files lying around. Once the run completes you can safely remove these
+files. Note that you shouldn't remove these files during a run. You
+can re-use these files in your next <B>ztest</B> run by using the -E
+option.
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<DL COMPACT>
+<DT>
+<B>-?</B><I></I>
+
+<DT><DD>
+<DD>Print a help summary.
+<DT>
+<B>-v</B><I> vdevs</I><B> (default: 5)</B>
+
+<DT><DD>
+<DD>Number of vdevs.
+<DT>
+<B>-s</B><I> size_of_each_vdev</I><B> (default: 64M)</B>
+
+<DT><DD>
+<DD>Size of each vdev.
+<DT>
+<B>-a</B><I> alignment_shift</I><B> (default: 9) (use 0 for random)</B>
+
+<DT><DD>
+<DD>Used alignment in test.
+<DT>
+<B>-m</B><I> mirror_copies</I><B> (default: 2)</B>
+
+<DT><DD>
+<DD>Number of mirror copies.
+<DT>
+<B>-r</B><I> raidz_disks</I><B> (default: 4)</B>
+
+<DT><DD>
+<DD>Number of raidz disks.
+<DT>
+<B>-R</B><I> raidz_parity</I><B> (default: 1)</B>
+
+<DT><DD>
+<DD>Raidz parity.
+<DT>
+<B>-d</B><I> datasets</I><B> (default: 7)</B>
+
+<DT><DD>
+<DD>Number of datasets.
+<DT>
+<B>-t</B><I> threads</I><B> (default: 23)</B>
+
+<DT><DD>
+<DD>Number of threads.
+<DT>
+<B>-g</B><I> gang_block_threshold</I><B> (default: 32K)</B>
+
+<DT><DD>
+<DD>Gang block threshold.
+<DT>
+<B>-i</B><I> initialize_pool_i_times</I><B> (default: 1)</B>
+
+<DT><DD>
+<DD>Number of pool initialisations.
+<DT>
+<B>-k</B><I> kill_percentage</I><B> (default: 70%)</B>
+
+<DT><DD>
+<DD>Kill percentage.
+<DT>
+<B>-p</B><I> pool_name</I><B> (default: ztest)</B>
+
+<DT><DD>
+<DD>Pool name.
+<DT>
+<B>-V(erbose)</B>
+
+<DT><DD>
+<DD>Verbose (use multiple times for ever more blather).
+<DT>
+<B>-E(xisting)</B>
+
+<DT><DD>
+<DD>Use existing pool (use existing pool instead of creating new one).
+<DT>
+<B>-T</B><I> time</I><B> (default: 300 sec)</B>
+
+<DT><DD>
+<DD>Total test run time.
+<DT>
+<B>-z</B><I> zil_failure_rate</I><B> (default: fail every 2^5 allocs)</B>
+
+<DT><DD>
+<DD>Injected failure rate.
+<DT>
+<B>-G</B>
+
+<DT><DD>
+<DD>Dump zfs_dbgmsg buffer before exiting.
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>EXAMPLES</H2>
+
+<P>
+
+To override /tmp as your location for block files, you can use the -f
+option:
+<DL COMPACT>
+<DT><DD>
+ztest -f /
+</DL>
+<P>
+
+To get an idea of what ztest is actually testing try this:
+<DL COMPACT>
+<DT><DD>
+ztest -f / -VVV
+</DL>
+<P>
+
+Maybe you'd like to run ztest for longer? To do so simply use the -T
+option and specify the runlength in seconds like so:
+<DL COMPACT>
+<DT><DD>
+ztest -f / -V -T 120
+<P>
+</DL>
+<A NAME="lbAG">&nbsp;</A>
+<H2>ENVIRONMENT VARIABLES</H2>
+
+<DL COMPACT>
+<DT><B>ZFS_HOSTID=id</B>
+
+<DD>
+Use <B>id</B> instead of the SPL hostid to identify this host.  Intended for use
+with ztest, but this environment variable will affect any utility which uses
+libzpool, including <B><A HREF="/man/man2html?8+zpool">zpool</A>(8)</B>.  Since the kernel is unaware of this setting
+results with utilities other than ztest are undefined.
+<DT><B>ZFS_STACK_SIZE=stacksize</B>
+
+<DD>
+Limit the default stack size to <B>stacksize</B> bytes for the purpose of
+detecting and debugging kernel stack overflows.  This value defaults to
+<B>32K</B> which is double the default <B>16K</B> Linux kernel stack size.
+<P>
+In practice, setting the stack size slightly higher is needed because
+differences in stack usage between kernel and user space can lead to spurious
+stack overflows (especially when debugging is enabled).  The specified value
+will be rounded up to a floor of PTHREAD_STACK_MIN which is the minimum stack
+required for a NULL procedure in user space.
+<P>
+By default the stack size is limited to 256K.
+</DL>
+<A NAME="lbAH">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<B>spl-module-parameters (5)</B>,
+
+<B>zpool (1)</B>,
+
+<B>zfs (1)</B>,
+
+<B>zdb (1)</B>,
+
+<A NAME="lbAI">&nbsp;</A>
+<H2>AUTHOR</H2>
+
+This manual page was transferred to asciidoc by Michael Gebetsroither
+&lt;<A HREF="mailto:gebi@grml.org">gebi@grml.org</A>&gt; from <A HREF="http://opensolaris.org/os/community/zfs/ztest/">http://opensolaris.org/os/community/zfs/ztest/</A>
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">EXAMPLES</A><DD>
+<DT><A HREF="#lbAG">ENVIRONMENT VARIABLES</A><DD>
+<DT><A HREF="#lbAH">SEE ALSO</A><DD>
+<DT><A HREF="#lbAI">AUTHOR</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

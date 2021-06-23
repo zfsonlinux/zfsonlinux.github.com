@@ -1,0 +1,523 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-CREATE</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-CREATE</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-create</B>
+
+ - Creates a new ZFS storage pool
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>create</B>
+
+[-<B>dfn</B>
+
+]
+
+[-<B>m </B><I>mountpoint</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>o </B><I><A HREF="mailto:feature@feature">feature@feature</A> </I><B>= </B><I>value </I>]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>O </B><I>file-system-property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+<I>pool vdev </I><B>...</B>
+
+
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>create</B>
+
+[-<B>dfn</B>
+
+]
+
+[-<B>m </B><I>mountpoint</I>
+
+
+
+]
+
+[-<B>o </B><I>property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>o </B><I><A HREF="mailto:feature@feature">feature@feature</A> </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>O </B><I>file-system-property </I><B>= </B><I>value </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+
+
+[-<B>R </B><I>root</I>
+
+
+
+]
+
+[-<B>t </B><I>tname</I>
+
+
+
+]
+
+<I>pool vdev </I><B>...</B>
+
+
+
+<DD>
+
+<DD>Creates a new storage pool containing the virtual devices specified on the
+command line.
+The pool name must begin with a letter, and can only contain
+alphanumeric characters as well as underscore
+(Qq <B>_</B>
+
+
+
+)
+
+ 
+dash
+(Qq <B>-</B>
+
+
+
+)
+
+ 
+colon
+(Qq <B>:</B>
+
+
+
+)
+
+ 
+space
+(Qq <B>&nbsp;</B>
+
+
+
+)
+
+ 
+and period
+(Qq <B>.</B>
+
+
+
+)
+
+ 
+The pool names
+<B>mirror</B>
+
+ 
+<B>raidz</B>
+
+ 
+<B>spare</B>
+
+and
+<B>log</B>
+
+are reserved, as are names beginning with
+<B>mirror</B>
+
+ 
+<B>raidz</B>
+
+ 
+<B>spare</B>
+
+ 
+and the pattern
+<B>c[0-9]</B>
+
+ 
+The
+<I>vdev</I>
+
+specification is described in the
+<I>Virtual Devices</I>
+
+section of
+<A HREF="/man/man2html?8+zpoolconcepts">zpoolconcepts</A>(8).
+
+
+<P>
+
+The command attempts to verify that each device specified is accessible and not
+currently in use by another subsystem.  However this check is not robust enough
+to detect simultaneous attempts to use a new device in different pools, even if
+<B>multihost</B>
+
+is
+<B>enabled.</B>
+
+The
+administrator must ensure that simultaneous invocations of any combination of
+<B>zpool replace</B>
+
+ 
+<B>zpool create</B>
+
+ 
+<B>zpool add</B>
+
+ 
+or
+<B>zpool labelclear</B>
+
+ 
+do not refer to the same device.  Using the same device in two pools will
+result in pool corruption.
+<P>
+
+There are some uses, such as being currently mounted, or specified as the
+dedicated dump device, that prevents a device from ever being used by ZFS.
+Other uses, such as having a preexisting UFS file system, can be overridden with
+the
+-<B>f</B>
+
+option.
+<P>
+
+The command also checks that the replication strategy for the pool is
+consistent.
+An attempt to combine redundant and non-redundant storage in a single pool, or
+to mix disks and files, results in an error unless
+-<B>f</B>
+
+is specified.
+The use of differently sized devices within a single raidz or mirror group is
+also flagged as an error unless
+-<B>f</B>
+
+is specified.
+<P>
+
+Unless the
+-<B>R</B>
+
+option is specified, the default mount point is
+/ <B></B><I>pool</I>
+
+
+
+
+
+ 
+The mount point must not exist or must be empty, or else the root dataset
+cannot be mounted.
+This can be overridden with the
+-<B>m</B>
+
+option.
+<P>
+
+By default all supported features are enabled on the new pool unless the
+-<B>d</B>
+
+option is specified.
+<DL COMPACT>
+<P>
+
+<DT><B>-d</B>
+
+
+<DD>
+Do not enable any features on the new pool.
+Individual features can be enabled by setting their corresponding properties to
+<B>enabled</B>
+
+with the
+-<B>o</B>
+
+option.
+See
+zpool-features5
+
+
+for details about feature properties.
+<DT><B>-f</B>
+
+
+<DD>
+Forces use of
+<I>vdev </I><B>s</B>
+
+
+
+ 
+even if they appear in use or specify a conflicting replication level.
+Not all devices can be overridden in this manner.
+<DT><B>-m </B><I>mountpoint</I>
+
+
+
+
+<DD>
+Sets the mount point for the root dataset.
+The default mount point is
+/pool
+
+or
+altroot/pool
+
+if
+<I>altroot</I>
+
+is specified.
+The mount point must be an absolute path,
+<B>legacy</B>
+
+ 
+or
+<B>none</B>
+
+ 
+For more information on dataset mount points, see
+<A HREF="/man/man2html?8+zfs">zfs</A>(8).
+
+
+<DT><B>-n</B>
+
+
+<DD>
+Displays the configuration that would be used without actually creating the
+pool.
+The actual pool creation can still fail due to insufficient privileges or
+device sharing.
+<DT><B>-o </B><I>property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given pool properties.
+See the
+<A HREF="/man/man2html?8+zpoolprops">zpoolprops</A>(8)
+
+
+manual page for a list of valid properties that can be set.
+<DT><B>-o </B><I><A HREF="mailto:feature@feature">feature@feature</A> </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given pool feature. See the
+zpool-features5
+
+
+section for a list of valid features that can be set.
+Value can be either disabled or enabled.
+<DT><B>-O </B><I>file-system-property </I><B>= </B><I>value</I>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Sets the given file system properties in the root file system of the pool.
+See the
+<A HREF="/man/man2html?8+zfsprops">zfsprops</A>(8)
+
+
+manual page for a list of valid properties that can be set.
+<DT><B>-R </B><I>root</I>
+
+
+
+
+<DD>
+Equivalent to
+-<B>o cachefile = none -o altroot = </B><I>root</I>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DT><B>-t </B><I>tname</I>
+
+
+
+
+<DD>
+Sets the in-core pool name to
+<B>tname</B>
+
+while the on-disk name will be the name specified as the pool name
+<B>pool</B>
+
+ 
+This will set the default cachefile property to none. This is intended
+to handle name space collisions when creating pools for other systems,
+such as virtual machines or physical machines whose pools live on network
+block devices.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-destroy8,
+
+
+zpool-export8,
+
+
+zpool-import8
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>

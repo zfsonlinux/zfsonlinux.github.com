@@ -1,0 +1,580 @@
+Content-type: text/html
+
+<HTML><HEAD><TITLE>Manpage of ZPOOL-IOSTAT</TITLE>
+</HEAD><BODY>
+<H1>ZPOOL-IOSTAT</H1>
+Section: Maintenance Commands (8)<BR><A HREF="#index">Index</A>
+<A HREF="/man/man2html">Return to Main Contents</A><HR>
+<BR>BSD mandoc<BR>
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+
+
+<B>zpool-iostat</B>
+
+ - Display logical I/O statistics for the given ZFS storage pools/vdevs
+
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>zpool</B>
+
+<B>iostat</B>
+
+[[[-<B>c </B><I>SCRIPT </I>[-<B>lq | -rw</B>
+
+
+
+
+
+]
+]
+
+
+
+]
+
+
+
+
+
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>ghHLnpPvy</B>
+
+]
+
+[[<I>pool </I><B>... | </B>[<I>pool vdev </I><B>... | </B>[<I>vdev </I><B>... </B>]
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<DL COMPACT>
+<P>
+
+<DT><B>
+</B>
+
+<B>zpool</B>
+
+<B>iostat</B>
+
+[[[-<B>c </B><I>SCRIPT </I>[-<B>lq | -rw</B>
+
+
+
+
+
+]
+]
+
+
+
+]
+
+
+
+
+
+
+]
+
+[-<B>T u | d</B>
+
+
+
+
+
+
+
+
+
+]
+
+[-<B>ghHLnpPvy</B>
+
+]
+
+[[<I>pool </I><B>... | </B>[<I>pool vdev </I><B>... | </B>[<I>vdev </I><B>... </B>]
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+[<I>interval </I>[<I>count</I>
+
+]
+
+
+
+]
+
+<DD>
+
+<DD>Displays logical I/O statistics for the given pools/vdevs. Physical I/Os may
+be observed via
+<A HREF="/man/man2html?1+iostat">iostat</A>(1).
+
+
+If writes are located nearby, they may be merged into a single
+larger operation. Additional I/O may be generated depending on the level of
+vdev redundancy.
+To filter output, you may pass in a list of pools, a pool and list of vdevs
+in that pool, or a list of any vdevs from any pool. If no items are specified,
+statistics for every pool in the system are shown.
+When given an
+<I>interval</I>
+
+ 
+the statistics are printed every
+<I>interval</I>
+
+seconds until ^C is pressed. If
+-<B>n</B>
+
+flag is specified the headers are displayed only once, otherwise they are
+displayed periodically. If count is specified, the command exits
+after count reports are printed. The first report printed is always
+the statistics since boot regardless of whether
+<I>interval</I>
+
+and
+<I>count</I>
+
+are passed. However, this behavior can be suppressed with the
+-<B>y</B>
+
+flag. Also note that the units of
+<B>K</B>
+
+ 
+<B>M</B>
+
+ 
+<B>G ...</B>
+
+that are printed in the report are in base 1024. To get the raw
+values, use the
+-<B>p</B>
+
+flag.
+<DL COMPACT>
+<P>
+
+<DT><B>-c </B>[<I>SCRIPT1 </I><B></B>[, <B></B><I>SCRIPT2 </I><B>...</B>
+
+]
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+<DD>
+Run a script (or scripts) on each vdev and include the output as a new column
+in the
+<B>zpool iostat</B>
+
+
+
+output. Users can run any script found in their
+~/.zpool.d
+
+directory or from the system
+/etc/zfs/zpool.d
+
+directory. Script names containing the slash (/) character are not allowed.
+The default search path can be overridden by setting the
+ZPOOL_SCRIPTS_PATH environment variable. A privileged user can run
+-<B>c</B>
+
+if they have the ZPOOL_SCRIPTS_AS_ROOT
+environment variable set. If a script requires the use of a privileged
+command, like
+<A HREF="/man/man2html?8+smartctl">smartctl</A>(8),
+
+
+then it's recommended you allow the user access to it in
+/etc/sudoers
+
+or add the user to the
+/etc/sudoers.d/zfs
+
+file.
+<P>
+
+If
+-<B>c</B>
+
+is passed without a script name, it prints a list of all scripts.
+-<B>c</B>
+
+also sets verbose mode
+<B>( -v ).</B>
+
+
+
+
+
+
+
+
+
+<P>
+
+Script output should be in the form of &quot;name=value&quot;. The column name is
+set to &quot;name&quot; and the value is set to &quot;value&quot;. Multiple lines can be
+used to output multiple columns. The first line of output not in the
+&quot;name=value&quot; format is displayed without a column title, and no more
+output after that is displayed. This can be useful for printing error
+messages. Blank or NULL values are printed as a '-' to make output
+awk-able.
+<P>
+
+The following environment variables are set before running each script:
+<DL COMPACT>
+<P>
+
+<DT><B>VDEV_PATH</B>
+
+
+<DD>
+Full path to the vdev
+</DL>
+<P>
+
+<DL COMPACT>
+<P>
+
+<DT><B>VDEV_UPATH</B>
+
+
+<DD>
+Underlying path to the vdev (/dev/sd*).  For use with device mapper,
+multipath, or partitioned vdevs.
+</DL>
+<P>
+
+<DL COMPACT>
+<P>
+
+<DT><B>VDEV_ENC_SYSFS_PATH</B>
+
+
+<DD>
+The sysfs path to the enclosure for the vdev (if any).
+</DL>
+<P>
+
+<DT><B>-T u | d</B>
+
+
+
+
+
+
+
+
+
+
+<DD>
+Display a time stamp.
+Specify
+<B>u</B>
+
+for a printed representation of the internal representation of time.
+See
+<A HREF="/man/man2html?2+time">time</A>(2).
+
+
+Specify
+<B>d</B>
+
+for standard date format.
+See
+<A HREF="/man/man2html?1+date">date</A>(1).
+
+
+<DT><B>-g</B>
+
+
+<DD>
+Display vdev GUIDs instead of the normal device names. These GUIDs
+can be used in place of device names for the zpool
+detach/offline/remove/replace commands.
+<DT><B>-H</B>
+
+
+<DD>
+Scripted mode. Do not display headers, and separate fields by a
+single tab instead of arbitrary space.
+<DT><B>-L</B>
+
+
+<DD>
+Display real paths for vdevs resolving all symbolic links. This can
+be used to look up the current block device name regardless of the
+/dev/disk/
+
+path used to open it.
+<DT><B>-n</B>
+
+
+<DD>
+Print headers only once when passed
+<DT><B>-p</B>
+
+
+<DD>
+Display numbers in parsable (exact) values. Time values are in
+nanoseconds.
+<DT><B>-P</B>
+
+
+<DD>
+Display full paths for vdevs instead of only the last component of
+the path. This can be used in conjunction with the
+-<B>L</B>
+
+flag.
+<DT><B>-r</B>
+
+
+<DD>
+Print request size histograms for the leaf vdev's IO. This includes
+histograms of individual IOs (ind) and aggregate IOs (agg). These stats
+can be useful for observing how well IO aggregation is working.  Note
+that TRIM IOs may exceed 16M, but will be counted as 16M.
+<DT><B>-v</B>
+
+
+<DD>
+Verbose statistics Reports usage statistics for individual vdevs within the
+pool, in addition to the pool-wide statistics.
+<DT><B>-y</B>
+
+
+<DD>
+Omit statistics since boot.
+Normally the first line of output reports the statistics since boot.
+This option suppresses that first line of output.
+<I>interval</I>
+
+<DT><B>-w</B>
+
+
+<DD>
+Display latency histograms:
+<P>
+
+<I>total_wait</I>
+
+ 
+Total IO time (queuing + disk IO time).
+<I>disk_wait</I>
+
+ 
+Disk IO time (time reading/writing the disk).
+<I>syncq_wait</I>
+
+ 
+Amount of time IO spent in synchronous priority queues.  Does not include
+disk time.
+<I>asyncq_wait</I>
+
+ 
+Amount of time IO spent in asynchronous priority queues.  Does not include
+disk time.
+<I>scrub</I>
+
+ 
+Amount of time IO spent in scrub queue. Does not include disk time.
+<DT><B>-l</B>
+
+
+<DD>
+Include average latency statistics:
+<P>
+
+<I>total_wait</I>
+
+ 
+Average total IO time (queuing + disk IO time).
+<I>disk_wait</I>
+
+ 
+Average disk IO time (time reading/writing the disk).
+<I>syncq_wait</I>
+
+ 
+Average amount of time IO spent in synchronous priority queues. Does
+not include disk time.
+<I>asyncq_wait</I>
+
+ 
+Average amount of time IO spent in asynchronous priority queues.
+Does not include disk time.
+<I>scrub</I>
+
+ 
+Average queuing time in scrub queue. Does not include disk time.
+<I>trim</I>
+
+ 
+Average queuing time in trim queue. Does not include disk time.
+<DT><B>-q</B>
+
+
+<DD>
+Include active queue statistics. Each priority queue has both
+pending (
+<I>pend</I>
+
+ 
+and active (
+<I>activ</I>
+
+ 
+IOs. Pending IOs are waiting to
+be issued to the disk, and active IOs have been issued to disk and are
+waiting for completion. These stats are broken out by priority queue:
+<P>
+
+<I>syncq_read/write</I>
+
+ 
+Current number of entries in synchronous priority
+queues.
+<I>asyncq_read/write</I>
+
+ 
+Current number of entries in asynchronous priority queues.
+<I>scrubq_read</I>
+
+ 
+Current number of entries in scrub queue.
+<I>trimq_write</I>
+
+ 
+Current number of entries in trim queue.
+<P>
+
+All queue statistics are instantaneous measurements of the number of
+entries in the queues. If you specify an interval, the measurements
+will be sampled from the end of the interval.
+</DL>
+<P>
+
+</DL>
+<P>
+
+<A NAME="lbAE">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+zpool-list8,
+
+
+zpool-status8,
+
+
+<A HREF="/man/man2html?1+iostat">iostat</A>(1),
+
+
+<A HREF="/man/man2html?8+smartctl">smartctl</A>(8)
+
+
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">SEE ALSO</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 20:34:02 GMT, June 23, 2021
+</BODY>
+</HTML>
