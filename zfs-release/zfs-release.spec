@@ -20,6 +20,11 @@ Source10:       RPM-GPG-KEY-zfsonlinux
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
+# RHEL 9 defaults to using zstd for RPM compression.  Unfortunately, CentOS 7
+# does not support zstd, so force gzip compression for compatibility.
+%define _source_payload w9.gzdio
+%define _binary_payload w9.gzdio
+
 %description
 OpenZFS repository for Fedora and RHEL variants.
 
