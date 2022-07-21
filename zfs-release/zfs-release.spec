@@ -6,9 +6,9 @@
 %global osname      el
 %endif
 
-Name:           zfs-release-%{osname}
+Name:           zfs-release
 Version:        2
-Release:        1
+Release:        2%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -16,9 +16,34 @@ License:        BSD
 URL:            http://zfsonlinux.org
 Source0:        zfs-el.repo
 Source1:        zfs-fedora.repo
-Source10:       RPM-GPG-KEY-zfsonlinux
+Source10:       RPM-GPG-KEY-openzfs-key1
+Source11:       RPM-GPG-KEY-openzfs-key2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+Obsoletes:      zfs-release <= %{version}-%{release}
+Obsoletes:      zfs-release-%{osname} <= %{version}-%{release}
+Provides:       zfs-release = %{version}-%{release}
+
+# We have two GPG keys -
+#
+# RPM-GPG-KEY-openzfs-key1:
+#     Older, SHA1-encoded key used on RHEL 6-8 and Fedora 36 and older.
+#
+# RPM-GPG-KEY-openzfs-key2:
+#     Newer, SHA512-encoded key used on RHEL 9+ and Fedora 37+.  RHEL 9
+#     no longer allows SHA1 RPM keys by default.
+#
+# We install the correct one depending on the distro version.
+#
+%if 0%{?rhel} && 0%{?rhel} < 9
+%global rpmkey  %{SOURCE10}
+%else
+%if 0%{?fedora} && 0%{?fedora} < 37
+%global rpmkey  %{SOURCE10}
+%else
+%global rpmkey  %{SOURCE11}
+%endif
+%endif
 
 # RHEL 9 defaults to using zstd for RPM compression.  Unfortunately, CentOS 7
 # does not support zstd, so force gzip compression for compatibility.
@@ -44,9 +69,8 @@ install -d -m755 \
   $RPM_BUILD_ROOT%{_sysconfdir}/yum.repos.d
 
 # GPG Key
-%{__install} -Dp -m644 \
-    %{SOURCE10} \
-    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg
+%{__install} -Dp -m644 %{rpmkey} \
+    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs
 
 # Yum .repo files
 %{__install} -p -m644 zfs-%{osname}.repo \
@@ -61,13 +85,11 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %{_sysconfdir}/yum.repos.d/*
 
 %post
-# We only need to import the key on RHEL 7 and below
-# https://github.com/zfsonlinux/zfsonlinux.github.com/pull/63
-%if 0%{?rhel} && 0%{?rhel} < 8
-rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
-%endif
 
 %changelog
+* Mon Jul 25 2022 Tony Hutter <hutter2@llnl.gov> - 2-2
+- Add newer, SHA512-encoded, RPM-GPG-KEY-openzfs-key2 key.
+- Add "Obsoletes" and "Provides" sections.
 * Wed Jun 22 2022 Todd Zullinger <tmz@pobox.com> - 2-1
 - Build Fedora and EL packages from the same source
 * Wed Jun 22 2022 Tony Hutter <hutter2@llnl.gov> - 2-1
