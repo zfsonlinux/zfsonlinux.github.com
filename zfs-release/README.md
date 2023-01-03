@@ -13,6 +13,11 @@ The released zfs-release RPMs should be checked into the top level
 the Fedora RPMs on Fedora, and the EPEL RPMs on a RHEL derivative, as
 the SPEC file does different things depending on the OS it's built upon.
 
+### Updating ###
+Whenever a new Fedora (or EL) release is near, the `zfs-release` package
+should be rebuilt to include the proper symlink for the new release,
+pointing to the proper key.
+
 ### Keys ###
 `RPM-GPG-KEY-openzfs-key1` - Older key used to sign packages for Fedora 36
 (and older) and EL 6-8.  It's header is encoded with SHA1, and thus is not

@@ -4,14 +4,14 @@ baseurl=http://download.zfsonlinux.org/fedora/$releasever/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
 
 [zfs-source]
 name=ZFS on Linux for Fedora $releasever - Source
 baseurl=http://download.zfsonlinux.org/fedora/$releasever/SRPMS/
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
 
 [zfs-testing]
 name=ZFS on Linux for Fedora $releasever - Testing
@@ -19,11 +19,11 @@ baseurl=http://download.zfsonlinux.org/fedora-testing/$releasever/$basearch/
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
 
 [zfs-testing-source]
 name=ZFS on Linux for Fedora $releasever - Testing Source
 baseurl=http://download.zfsonlinux.org/fedora-testing/$releasever/SRPMS/
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
