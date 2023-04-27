@@ -4,7 +4,7 @@ baseurl=http://download.zfsonlinux.org/epel/$releasever/$basearch/
 enabled=1
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
 
 [zfs-kmod]
 name=ZFS on Linux for EL$releasever - kmod
@@ -12,14 +12,14 @@ baseurl=http://download.zfsonlinux.org/epel/$releasever/kmod/$basearch/
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
 
 [zfs-source]
 name=ZFS on Linux for EL$releasever - Source
 baseurl=http://download.zfsonlinux.org/epel/$releasever/SRPMS/
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
 
 [zfs-testing]
 name=ZFS on Linux for EL$releasever - dkms - Testing
@@ -27,7 +27,7 @@ baseurl=http://download.zfsonlinux.org/epel-testing/$releasever/$basearch/
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
 
 [zfs-testing-kmod]
 name=ZFS on Linux for EL$releasever - kmod - Testing
@@ -35,11 +35,11 @@ baseurl=http://download.zfsonlinux.org/epel-testing/$releasever/kmod/$basearch/
 enabled=0
 metadata_expire=7d
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
 
 [zfs-testing-source]
 name=ZFS on Linux for EL$releasever - Testing Source
 baseurl=http://download.zfsonlinux.org/epel-testing/$releasever/SRPMS/
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-$releasever
