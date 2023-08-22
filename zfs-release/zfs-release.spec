@@ -8,7 +8,7 @@
 
 Name:           zfs-release
 Version:        2
-Release:        3%{dist}
+Release:        4%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -74,13 +74,13 @@ ln -s RPM-GPG-KEY-openzfs-2022 \
 %endif
 %if 0%{?fedora}
 ln -s RPM-GPG-KEY-openzfs-2013 \
-    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-35
-ln -s RPM-GPG-KEY-openzfs-2013 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-36
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-37
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-38
+ln -s RPM-GPG-KEY-openzfs-2022 \
+    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-39
 %endif
 
 # Yum .repo files
@@ -98,6 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Thu Jul 27 2023 Ralf Ertzinger <ralf@skytale.net> - 2-4
+- Add signing key for Fedora 39, drop link for Fedora 35
 * Tue Jan 03 2023 Ralf Ertzinger <ralf@skytale.net> - 2-3
 - Rework key and repo files to allow dynamic (by $releasever variable)
   selection of correct signing keys. This allows major version upgrades
