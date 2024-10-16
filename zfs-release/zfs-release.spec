@@ -8,7 +8,7 @@
 
 Name:           zfs-release
 Version:        2
-Release:        5%{dist}
+Release:        6%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -74,13 +74,13 @@ ln -s RPM-GPG-KEY-openzfs-2022 \
 %endif
 %if 0%{?fedora}
 ln -s RPM-GPG-KEY-openzfs-2022 \
-    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-37
-ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-38
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-39
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-40
+ln -s RPM-GPG-KEY-openzfs-2022 \
+    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-41
 %endif
 
 # Yum .repo files
@@ -98,6 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Wed Oct 16 2024 Ralf Ertzinger <ralf@skytale.net> - 2-6
+- Add signing key for Fedora 41, drop link for Fedora 37
 * Thu Mar 28 2024 Ralf Ertzinger <ralf@skytale.net> - 2-5
 - Add signing key for Fedora 40, drop link for Fedora 36
 * Thu Jul 27 2023 Ralf Ertzinger <ralf@skytale.net> - 2-4
