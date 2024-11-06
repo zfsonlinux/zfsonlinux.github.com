@@ -1,0 +1,72 @@
+name: zfs-qemu
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  test-config:
+    name: Setup
+    runs-on: ubuntu-24.04
+    outputs:
+      test_os: ${{ steps.os.outputs.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+  qemu-vm:
+    name: qemu-x86
+    needs: [ test-config ]
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["almalinux9", "fedora40"]
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Setup QEMU
+      timeout-minutes: 10
+      run: .github/workflows/scripts/qemu-1-setup.sh
+
+    - name: Start build machine
+      timeout-minutes: 10
+      run: .github/workflows/scripts/qemu-2-start.sh ${{ matrix.os }}
+
+    - name: Install dependencies
+      timeout-minutes: 5
+      run: |
+        echo "Install dependencies in QEMU machine"
+        IP=192.168.122.10
+        while pidof /usr/bin/qemu-system-x86_64 >/dev/null; do
+          ssh 2>/dev/null zfs@$IP "uname -a" && break
+        done
+        scp .github/workflows/scripts/qemu-3-deps.sh zfs@$IP:qemu-3-deps.sh
+        rm -f $HOME/.ssh/known_hosts
+
+    - name: Build RPMs
+      timeout-minutes: 5
+      run: |
+        IP=192.168.122.10 
+        rsync -ar ../zfsonlinux.github.com zfs@$IP:
+        ssh zfs@$IP '$HOME/zfsonlinux.github.com/.github/workflows/scripts/qemu-4-build.sh' ${{ matrix.os }}
+        rsync -a zfs@$IP:rpmbuild .
+
+        mkdir ~/rpms
+        echo "rpmbuild:"
+        cp rpmbuild/RPMS/noarch/* ~/rpms
+        cp rpmbuild/SRPMS/* ~/rpms
+    - uses: actions/upload-artifact@v4
+      id: artifact-upload
+      if: always()
+      with:
+        name: zfs-release-${{ matrix.os }}
+        path: ~/rpms/*
+        if-no-files-found: ignore
