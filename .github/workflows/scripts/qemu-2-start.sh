@@ -44,6 +44,12 @@ case "$OS" in
     OSNAME="CentOS Stream 9"
     URL="https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-latest.x86_64.qcow2"
     ;;
+  centos-stream10)
+    OSNAME="CentOS Stream 10"
+    # TODO: https://github.com/openzfs/zfs/issues/16903 Overwrite OSv to stream9 for virt-install until it's added to osinfo
+    OSv="centos-stream9"
+    URL="https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-latest.x86_64.qcow2"
+    ;;
   debian11)
     OSNAME="Debian 11"
     URL="https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2"
