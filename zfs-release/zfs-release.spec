@@ -71,6 +71,8 @@ ln -s RPM-GPG-KEY-openzfs-2013 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-8
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-9
+ln -s RPM-GPG-KEY-openzfs-2022 \
+    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-el-10
 %endif
 %if 0%{?fedora}
 ln -s RPM-GPG-KEY-openzfs-2022 \
@@ -98,6 +100,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Thu Dec 26 2024 James Reilly <jreilly1821@gmail.com> - 2-7
+- Add signing key for EL10
 * Wed Oct 16 2024 Ralf Ertzinger <ralf@skytale.net> - 2-6
 - Add signing key for Fedora 41, drop link for Fedora 37
 * Thu Mar 28 2024 Ralf Ertzinger <ralf@skytale.net> - 2-5
