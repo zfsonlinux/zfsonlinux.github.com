@@ -1,3 +1,25 @@
+# OpenZFS provides a number of repos for users to choose from:
+#
+# [zfs] (enabled by default)
+# Provides DKMS packages that OpenZFS thinks are appropriate for your OS.
+# Typically these are same packages as 'zfs-latest' on Fedora.
+#
+# [zfs-latest]
+# Provides DKMS packages for the latest released version of ZFS.
+#
+# [zfs-legacy]
+# Provides DKMS packages from the previous ZFS major version that is still
+# being actively updated.
+#
+# [zfs-x.y]
+# Provides DKMS packages from the zfs-x.y branch.
+#
+# [zfs-testing]
+# DEPRECATED in favor of 'zfs-latest'.
+#
+# [zfs-*source]
+# Corresponding source repos for the other repos.
+
 [zfs]
 name=ZFS on Linux for Fedora $releasever
 baseurl=http://download.zfsonlinux.org/fedora/$releasever/$basearch/
@@ -14,7 +36,7 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
 
 [zfs-testing]
-name=ZFS on Linux for Fedora $releasever - Testing
+name=ZFS on Linux for Fedora $releasever - Testing (DEPRECATED)
 baseurl=http://download.zfsonlinux.org/fedora-testing/$releasever/$basearch/
 enabled=0
 metadata_expire=7d
@@ -22,8 +44,158 @@ gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
 
 [zfs-testing-source]
-name=ZFS on Linux for Fedora $releasever - Testing Source
+name=ZFS on Linux for Fedora $releasever - Testing Source (DEPRECATED)
 baseurl=http://download.zfsonlinux.org/fedora-testing/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-latest]
+name=OpenZFS latest for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/latest/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-latest-source]
+name=OpenZFS latest for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/latest/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-legacy]
+name=OpenZFS legacy for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/legacy/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-legacy-source]
+name=OpenZFS legacy for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/legacy/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.6]
+name=OpenZFS 0.6.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/0.6/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.6-source]
+name=OpenZFS 0.6.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/0.6/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.7]
+name=OpenZFS 0.7.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/0.7/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.7-source]
+name=OpenZFS 0.7.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/0.7/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.8]
+name=OpenZFS 0.8.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/0.8/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-0.8-source]
+name=OpenZFS 0.8.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/0.8/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.0]
+name=OpenZFS 2.0.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/2.0/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.0-source]
+name=OpenZFS 2.0.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/2.0/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.1]
+name=OpenZFS 2.1.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/2.1/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.1-source]
+name=OpenZFS 2.1.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/2.1/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.2]
+name=OpenZFS 2.2.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/2.2/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.2-source]
+name=OpenZFS 2.2.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/2.2/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.3]
+name=OpenZFS 2.3.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/2.3/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.3-source]
+name=OpenZFS 2.3.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/2.3/fedora/$releasever/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.4]
+name=OpenZFS 2.4.x for Fedora $releasever
+baseurl=http://download.zfsonlinux.org/2.4/fedora/$releasever/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
+
+[zfs-2.4-source]
+name=OpenZFS 2.4.x for Fedora $releasever - Source
+baseurl=http://download.zfsonlinux.org/2.4/fedora/$releasever/SRPMS/
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-$releasever
