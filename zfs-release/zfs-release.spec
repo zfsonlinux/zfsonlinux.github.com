@@ -8,7 +8,7 @@
 
 Name:           zfs-release
 Version:        2
-Release:        8%{dist}
+Release:        9%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -85,6 +85,8 @@ ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-41
 ln -s RPM-GPG-KEY-openzfs-2022 \
     $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-42
+ln -s RPM-GPG-KEY-openzfs-2022 \
+    $RPM_BUILD_ROOT%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-openzfs-fedora-43
 %endif
 
 # Yum .repo files
@@ -102,6 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Wed Oct 01 2025 Ralf Ertzinger <ralf@skytale.net> - 2-9
+- Add signing key for Fedora 43
 * Sat Mar 22 2025 Ralf Ertzinger <ralf@skytale.net> - 2-8
 - Add signing key for Fedora 42
 * Thu Dec 26 2024 James Reilly <jreilly1821@gmail.com> - 2-7
