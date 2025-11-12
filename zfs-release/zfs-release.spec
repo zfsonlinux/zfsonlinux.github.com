@@ -7,8 +7,8 @@
 %endif
 
 Name:           zfs-release
-Version:        2
-Release:        9%{dist}
+Version:        3
+Release:        0%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -104,6 +104,8 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Wed Nov 12 2025 Tony Hutter <hutter2@llnl.gov> - 3-0
+- Add new repos for specific versions
 * Wed Oct 01 2025 Ralf Ertzinger <ralf@skytale.net> - 2-9
 - Add signing key for Fedora 43
 * Sat Mar 22 2025 Ralf Ertzinger <ralf@skytale.net> - 2-8
