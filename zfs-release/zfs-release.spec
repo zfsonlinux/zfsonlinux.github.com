@@ -8,7 +8,7 @@
 
 Name:           zfs-release
 Version:        3
-Release:        2%{dist}
+Release:        3%{dist}
 Summary:        OpenZFS Repository Configuration
 
 Group:          System Environment/Base
@@ -97,6 +97,15 @@ ln -s RPM-GPG-KEY-openzfs-2022 \
 %{__install} -p -m644 zfs-%{osname}.repo \
     $RPM_BUILD_ROOT%{_sysconfdir}/yum.repos.d/zfs.repo
 
+%if 0%{?rhel} >= 10
+# EL10 has an x86-64-v2 variant (AlmaLinux) whose packages cannot be installed
+# alongside the x86-64-v3 ones, so it gets its own repo directory.  Replace
+# $basearch with a dnf variable that the %post scriptlet sets to the right
+# architecture for the host.
+sed -i 's|\$basearch/|$zfs_basearch/|g' \
+    $RPM_BUILD_ROOT%{_sysconfdir}/yum.repos.d/zfs.repo
+%endif
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,10 +113,29 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_sysconfdir}/pki/rpm-gpg/*
 %config(noreplace) %{_sysconfdir}/yum.repos.d/*
+%if 0%{?rhel} >= 10
+%ghost %attr(0644,root,root) %{_sysconfdir}/yum/vars/zfs_basearch
+%endif
 
+%if 0%{?rhel} >= 10
 %post
+# Set $zfs_basearch, the architecture zfs.repo uses for this host.  This is
+# normally the system architecture, but the AlmaLinux 10 x86-64-v2 variant
+# needs 'x86_64_v2'.  That variant's almalinux-release package defines the
+# %%x86_64_v2 macro, so use that to detect it.
+arch="$(rpm --eval '%%{_arch}' 2>/dev/null)"
+if [ "$(rpm --eval '%%{?x86_64_v2}' 2>/dev/null)" = "1" ] ; then
+    arch="x86_64_v2"
+fi
+mkdir -p %{_sysconfdir}/yum/vars
+echo "$arch" > %{_sysconfdir}/yum/vars/zfs_basearch
+%endif
 
 %changelog
+* Tue Nov 10 2026 FingerlessGlov3s <me@fingerlessgloves.me> - 3-3
+- Add support for the AlmaLinux 10 x86-64-v2 variant.  On EL10, zfs.repo now
+  uses a $zfs_basearch dnf variable in place of $basearch, which is set to
+  'x86_64_v2' on x86-64-v2 hosts and to the normal architecture otherwise.
 * Tue Nov 03 2026 Tony Hutter <hutter2@llnl.gov> - 3-2
 - Add signing key for Fedora 45
 * Fri May 01 2026 Tony Hutter <hutter2@llnl.gov> - 3-1
